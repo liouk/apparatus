@@ -136,3 +136,7 @@ let g:syntastic_check_on_wq = 0
 nmap <leader>y :Yanks<CR>
 nmap <leader>c <Plug>yankstack_substitute_older_paste
 nmap <leader>C <Plug>yankstack_substitute_newer_paste
+
+" startify
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
