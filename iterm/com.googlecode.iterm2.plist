@@ -2092,6 +2092,13 @@
 			<key>Text</key>
 			<string>0x01 0x6e</string>
 		</dict>
+		<key>0x6d-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x01 0x7a</string>
+		</dict>
 		<key>0x6f-0x100000</key>
 		<dict>
 			<key>Action</key>
@@ -2286,7 +2293,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAc7AAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -2320,11 +2327,11 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>242 60 1450 1098 0 0 1920 1200 </string>
+	<string>0 100 1450 1077 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 123 1450 1077 0 0 1920 1200 </string>
+	<string>0 363 1465 1077 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>364 123 1450 1077 0 0 1920 1200 </string>
+	<string>668 113 1252 930 0 0 1920 1177 </string>
 	<key>NeverWarnAboutShortLivedSessions_9270BAB8-B4BC-405A-8259-5D7E5E64F547</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -3320,9 +3327,10 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.2.8</string>
 		<string>3.3.1</string>
+		<string>3.2.8</string>
 		<string>3.3.3</string>
+		<string>3.3.6</string>
 	</array>
 	<key>NoSyncConfirmBeta</key>
 	<true/>
@@ -3338,9 +3346,9 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {2560, 1440}}</string>
+		<string>{{0, 0}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{958, 1115}</string>
+		<string>{357, 869}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3351,7 +3359,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>8EAA7380-F7BD-4113-8789-CFCB34D6C4D0</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>4</integer>
+	<integer>7</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3857,6 +3865,22 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
 				<string>tmuxWindowTitle</string>
@@ -4060,6 +4084,9 @@
 	</array>
 	<key>NoSyncSearchHistory2</key>
 	<array>
+		<string>"status"</string>
+		<string>stat</string>
+		<string>futurae</string>
 		<string>lang</string>
 		<string>8605</string>
 		<string>GetProfileResponse</string>
@@ -4067,9 +4094,6 @@
 		<string>STATE</string>
 		<string>State</string>
 		<string>response</string>
-		<string>Swiss</string>
-		<string>NO_SUCH</string>
-		<string>NO_SUCK</string>
 	</array>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>489010467.75512999</real>
@@ -4145,7 +4169,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-09-17T18:34:15Z</date>
+	<date>2019-10-21T11:34:44Z</date>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -4205,7 +4229,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.3</string>
+	<string>3.3.6</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>7</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
