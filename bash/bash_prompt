@@ -88,6 +88,12 @@ function set_user () {
     fi
 }
 
+# Display blackbox info in the prompt if it exists
+function set_blackbox() {
+    BLACKBOX=
+    [[ "${BLACKBOX_STATUS:-}" ]] && BLACKBOX="${BLACKBOX_STATUS} "
+}
+
 # Set the full bash prompt.
 function set_bash_prompt () {
     # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the
@@ -103,9 +109,13 @@ function set_bash_prompt () {
     # Set the BRANCH variable.
     set_git_branch
 
+    # Set the blackbox status
+    set_blackbox
+
     # Set the bash prompt variable.
-    PS1="\n${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}\w${COLOR_NONE}\n${PYTHON_VIRTUALENV}${BRANCH}${PROMPT_SYMBOL} "
+    PS1="\n${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}\w${COLOR_NONE}\n${PYTHON_VIRTUALENV}${BRANCH}${BLACKBOX}${PROMPT_SYMBOL} "
 }
+
 
 # Tell bash to execute this function just before displaying its prompt.
 PROMPT_COMMAND=set_bash_prompt

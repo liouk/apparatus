@@ -19,10 +19,13 @@ eval "$(rbenv init -)"
 # Futurae
 export PATH="$GOPATH/bin:$PATH"
 export FUTURAE_CI_TOKEN=
+export FUTURAE_MARVIN_CI_TOKEN=
 export FUTURAE="/Users/ilias/Workspace/futurae"
 
 # direnv
 eval "$(direnv hook bash)"
+
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 [[ -s "/Users/ilias/.gvm/scripts/gvm" ]] && source "/Users/ilias/.gvm/scripts/gvm"
 

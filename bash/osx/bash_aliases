@@ -34,3 +34,11 @@ alias be='bundle exec'
 
 # fun
 alias coin='coinmon -c eur -H -f btc,eth,xrp,trx,dash,bch,ltc,icx,xmr'
+
+# blackbox
+alias blapd='blackbox_postdeploy'
+alias blac='blackbox_cat'
+alias blae='blackbox_edit'
+alias blaes='blackbox_edit_start'
+alias blaee='blackbox_edit_end'
+alias blash='blackbox_shred_all_files'
