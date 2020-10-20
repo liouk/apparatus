@@ -18,8 +18,6 @@ eval "$(rbenv init -)"
 
 # Futurae
 export PATH="$GOPATH/bin:$PATH"
-export FUTURAE_CI_TOKEN=
-export FUTURAE_MARVIN_CI_TOKEN=
 export FUTURAE="/Users/ilias/Workspace/futurae"
 
 # direnv
