@@ -18,6 +18,7 @@ alias utmp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
 # git
 alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
+alias of='onefetch'
 
 # virtualenv
 venv_activate() {

@@ -49,6 +49,7 @@
 
     # rebase
     ri = rebase --interactive
+    ria = rebase --interactive --autosquash
     rc = rebase --continue
     ra = rebase --abort
 
