@@ -17,3 +17,5 @@ Tools Used
 - [gvm](https://github.com/moovweb/gvm)
 - [rbenv](https://github.com/rbenv/rbenv)
 - [tig](https://github.com/jonas/tig)
+- [bash-completion](https://github.com/scop/bash-completion)
+- [git-zsh-completion](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)

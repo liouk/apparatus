@@ -1,14 +1,14 @@
 # Configure zsh prompt
-source ~/.zsh_prompt
+source ~/.zsh/.zsh_prompt
 
 # Aliases
-source ~/.zsh_aliases
+source ~/.zsh/.zsh_aliases
 
 # Plugins and Extras
-source ~/.zsh_extras
+source ~/.zsh/.zsh_extras
 
 # Display archey
-archey -o
+#archey -o
 
 # PATH definitions
 export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
@@ -23,14 +23,9 @@ export FUTURAE="/Users/ilias/Workspace/futurae"
 # direnv
 eval "$(direnv hook zsh)"
 
-[[ -r "/usr/local/etc/profile.d/zsh_completion.sh" ]] && . "/usr/local/etc/profile.d/zsh_completion.sh"
+#[[ -r "/usr/local/etc/profile.d/zsh_completion.sh" ]] && . "/usr/local/etc/profile.d/zsh_completion.sh"
 
 [[ -s "/Users/ilias/.gvm/scripts/gvm" ]] && source "/Users/ilias/.gvm/scripts/gvm"
-
-## nvm
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
 
 # Misc
 export LC_ALL=en_US.UTF-8
