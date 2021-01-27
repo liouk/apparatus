@@ -4,9 +4,6 @@ source ~/.bash_prompt
 # Aliases
 source ~/.bash_aliases
 
-# Plugins and Extras
-source ~/.bash_extras
-
 # Display archey
 archey -o
 
@@ -34,3 +31,6 @@ eval "$(direnv hook bash)"
 
 # Misc
 export LC_ALL=en_US.UTF-8
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

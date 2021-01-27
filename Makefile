@@ -8,7 +8,6 @@ bash.osx:
 	$(info *** bash ***)
 	test -e $(HOME)/.apparatus/bash/bash_prompt      && ln -fs $(HOME)/.apparatus/bash/bash_prompt      $(HOME)/.bash_prompt
 	test -e $(HOME)/.apparatus/bash/bash_aliases     && ln -fs $(HOME)/.apparatus/bash/bash_aliases     $(HOME)/.bash_aliases
-	test -e $(HOME)/.apparatus/bash/bash_extras      && ln -fs $(HOME)/.apparatus/bash/bash_extras      $(HOME)/.bash_extras
 	test -e $(HOME)/.apparatus/bash/bash_profile     && ln -fs $(HOME)/.apparatus/bash/bash_profile     $(HOME)/.bash_profile
 
 zsh.osx:
@@ -16,7 +15,6 @@ zsh.osx:
 	mkdir -p ~/.zsh
 	test -e $(HOME)/.apparatus/bash/bash_prompt      && ln -fs $(HOME)/.apparatus/bash/bash_prompt      $(HOME)/.zsh/.zsh_prompt
 	test -e $(HOME)/.apparatus/bash/bash_aliases     && ln -fs $(HOME)/.apparatus/bash/bash_aliases     $(HOME)/.zsh/.zsh_aliases
-	test -e $(HOME)/.apparatus/bash/bash_extras      && ln -fs $(HOME)/.apparatus/bash/bash_extras      $(HOME)/.zsh/.zsh_extras
 	test -e $(HOME)/.apparatus/bash/zprofile         && ln -fs $(HOME)/.apparatus/bash/zprofile         $(HOME)/.zprofile
 
 git.osx:

@@ -4,9 +4,6 @@ source ~/.zsh/.zsh_prompt
 # Aliases
 source ~/.zsh/.zsh_aliases
 
-# Plugins and Extras
-source ~/.zsh/.zsh_extras
-
 # Display archey
 #archey -o
 
@@ -23,9 +20,16 @@ export FUTURAE="/Users/ilias/Workspace/futurae"
 # direnv
 eval "$(direnv hook zsh)"
 
-#[[ -r "/usr/local/etc/profile.d/zsh_completion.sh" ]] && . "/usr/local/etc/profile.d/zsh_completion.sh"
-
 [[ -s "/Users/ilias/.gvm/scripts/gvm" ]] && source "/Users/ilias/.gvm/scripts/gvm"
 
 # Misc
 export LC_ALL=en_US.UTF-8
+
+# Load Git completion
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit && compinit
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
