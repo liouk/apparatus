@@ -11,6 +11,13 @@ bash.osx:
 	test -e $(HOME)/.apparatus/bash/bash_extras      && ln -fs $(HOME)/.apparatus/bash/bash_extras      $(HOME)/.bash_extras
 	test -e $(HOME)/.apparatus/bash/bash_profile     && ln -fs $(HOME)/.apparatus/bash/bash_profile     $(HOME)/.bash_profile
 
+zsh.osx:
+	$(info *** zsh ***)
+	test -e $(HOME)/.apparatus/bash/bash_prompt      && ln -fs $(HOME)/.apparatus/bash/bash_prompt      $(HOME)/.zsh_prompt
+	test -e $(HOME)/.apparatus/bash/bash_aliases     && ln -fs $(HOME)/.apparatus/bash/bash_aliases     $(HOME)/.zsh_aliases
+	test -e $(HOME)/.apparatus/bash/bash_extras      && ln -fs $(HOME)/.apparatus/bash/bash_extras      $(HOME)/.zsh_extras
+	test -e $(HOME)/.apparatus/bash/zprofile         && ln -fs $(HOME)/.apparatus/bash/zprofile         $(HOME)/.zprofile
+
 git.osx:
 	$(info *** git ***)
 	test -e $(HOME)/.apparatus/git/gitconfig         && ln -fs $(HOME)/.apparatus/git/gitconfig         $(HOME)/.gitconfig
