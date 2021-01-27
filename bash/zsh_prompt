@@ -1,18 +1,22 @@
 #!/bin/bash
 
-# The various escape codes that we can use to color our prompt.
-        RED="\[\033[0;31m\]"
-     YELLOW="\[\033[0;33m\]"
-      GREEN="\[\033[0;32m\]"
-       BLUE="\[\033[0;34m\]"
-     PURPLE="\[\033[0;35m\]"
-  LIGHT_RED="\[\033[1;31m\]"
-LIGHT_GREEN="\[\033[1;32m\]"
-      WHITE="\[\033[1;37m\]"
- LIGHT_GRAY="\[\033[0;37m\]"
- COLOR_NONE="\[\e[0m\]"
-     BG_RED="\[\e[41m\]"
-    BG_BLUE="\[\e[44m\]"
+# Escape codes
+
+        RED="%F{red}"
+     YELLOW="%F{yellow}"
+      GREEN="%F{green}"
+       BLUE="%F{blue}"
+     PURPLE="%F{magenta}"
+  LIGHT_RED="%F{9}"
+LIGHT_GREEN="%F{10}"
+      WHITE="%F{white}"
+ LIGHT_GRAY="%F{15}"
+ COLOR_NONE="%f"
+     BG_RED="%K{red}"
+    BG_BLUE="%K{blue}"
+    BG_NONE="%k"
+    NEWLINE=$'\n'
+    PATH_SH=%~
 
 # determine git branch name
 function parse_git_branch(){
@@ -52,9 +56,9 @@ function set_prompt_symbol () {
 
 # Set the hostname, highlighting the background if in ssh
 function set_host () {
-    P_HOST=$HOSTNAME
+    P_HOST=%m
     if test -n "$SSH_TTY" || test -n "$SSH_CLIENT" ; then
-        P_HOST="${BG_BLUE}${WHITE}${P_HOST}${COLOR_NONE}"
+        P_HOST="${BG_BLUE}${WHITE}${P_HOST}${COLOR_NONE}${BG_NONE}"
     fi
 }
 
@@ -63,7 +67,7 @@ function set_user () {
     P_USER=`whoami`
     P_USER="${P_USER}@"
     if [[ ${P_USER} == "root@" ]] ; then
-        P_USER="${BG_RED}${WHITE}${P_USER}${COLOR_NONE}"
+        P_USER="${BG_RED}${WHITE}${P_USER}${COLOR_NONE}${BG_NONE}"
     fi
 }
 
@@ -92,7 +96,7 @@ function set_bash_prompt () {
     set_blackbox
 
     # Set the bash prompt variable.
-    PS1="\n${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}\w${COLOR_NONE}\n${PYTHON_VIRTUALENV}${BRANCH}${BLACKBOX}${PROMPT_SYMBOL} "
+    PS1="${NEWLINE}${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}${PATH_SH}${COLOR_NONE}${NEWLINE}${PYTHON_VIRTUALENV}${BRANCH}${BLACKBOX}${PROMPT_SYMBOL} "
 }
 
 

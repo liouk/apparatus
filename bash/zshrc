@@ -1,24 +1,15 @@
 # Configure zsh prompt
 source ~/.zsh/.zsh_prompt
+precmd() { eval "$PROMPT_COMMAND" }
+
+export EDITOR="vim"
 
 # Aliases
 source ~/.zsh/.zsh_aliases
 
-# Display archey
-#archey -o
-
-# PATH definitions
-export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
-export EDITOR="vim"
-
-eval "$(rbenv init -)"
-
 # Futurae
 export PATH="$GOPATH/bin:$PATH"
 export FUTURAE="/Users/ilias/Workspace/futurae"
-
-# direnv
-eval "$(direnv hook zsh)"
 
 [[ -s "/Users/ilias/.gvm/scripts/gvm" ]] && source "/Users/ilias/.gvm/scripts/gvm"
 
@@ -32,4 +23,14 @@ fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
 
 # fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# brew
+eval $(/opt/homebrew/bin/brew shellenv)
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
+eval "$(rbenv init -)"
+
+# direnv
+eval "$(direnv hook zsh)"
