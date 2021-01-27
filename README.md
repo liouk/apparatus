@@ -19,3 +19,4 @@ Tools Used
 - [tig](https://github.com/jonas/tig)
 - [bash-completion](https://github.com/scop/bash-completion)
 - [git-zsh-completion](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)
+- [bat](https://github.com/sharkdp/bat)
