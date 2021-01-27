@@ -1,7 +1,7 @@
 install:
 	git submodule update --init --recursive
 
-osx: bash.osx git.osx vim.osx tmux gpsdate.osx
+osx: bash.osx git.osx vim.osx tmux
 	$(info osx done!)
 
 bash.osx:
@@ -37,9 +37,5 @@ screen:
 	$(info *** screen ***)
 	test -e $(HOME)/.apparatus/screen/screenrc       && ln -fs $(HOME)/.apparatus/screen/screenrc       $(HOME)/.screenrc
 
-gpsdate.osx:
-	$(info *** gpsdate ***)
-	test -e $(HOME)/.apparatus/gpsdate/gpsdate       && cp -f $(HOME)/.apparatus/gpsdate/gpsdate        /usr/local/bin/gpsdate
-
 # Prevents rules from appearing as 'nothing to change'
-.PHONY: bash.osx git.osx vim tmux screen gpsdate tig
+.PHONY: bash.osx git.osx vim tmux screen tig
