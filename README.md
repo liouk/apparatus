@@ -16,3 +16,4 @@ Tools Used
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [gvm](https://github.com/moovweb/gvm)
 - [rbenv](https://github.com/rbenv/rbenv)
+- [tig](https://github.com/jonas/tig)
