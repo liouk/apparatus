@@ -7,14 +7,13 @@ osx: bash.osx git.osx vim.osx tmux gpsdate.osx
 bash.osx:
 	$(info *** bash ***)
 	test -e $(HOME)/.apparatus/bash/bash_prompt      && ln -fs $(HOME)/.apparatus/bash/bash_prompt      $(HOME)/.bash_prompt
-	test -e $(HOME)/.apparatus/bash/osx/bash_aliases && ln -fs $(HOME)/.apparatus/bash/osx/bash_aliases $(HOME)/.bash_aliases
-	test -e $(HOME)/.apparatus/bash/osx/bash_extras  && ln -fs $(HOME)/.apparatus/bash/osx/bash_extras  $(HOME)/.bash_extras
+	test -e $(HOME)/.apparatus/bash/bash_aliases     && ln -fs $(HOME)/.apparatus/bash/bash_aliases     $(HOME)/.bash_aliases
+	test -e $(HOME)/.apparatus/bash/bash_extras      && ln -fs $(HOME)/.apparatus/bash/bash_extras      $(HOME)/.bash_extras
 	test -e $(HOME)/.apparatus/bash/bash_profile     && ln -fs $(HOME)/.apparatus/bash/bash_profile     $(HOME)/.bash_profile
 
 git.osx:
 	$(info *** git ***)
 	test -e $(HOME)/.apparatus/git/gitconfig         && ln -fs $(HOME)/.apparatus/git/gitconfig         $(HOME)/.gitconfig
-	test -e $(HOME)/.apparatus/git/osx/git.author    && ln -fs $(HOME)/.apparatus/git/osx/git.author    $(HOME)/.git.author
 
 tig:
 	$(info *** tig ***)
