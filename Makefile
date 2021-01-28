@@ -27,7 +27,7 @@ tig:
 
 vim.osx:
 	$(info *** vim ***)
-	test -e $(HOME)/.apparatus/vim/vimrcs/vimrc.osx  && ln -fs $(HOME)/.apparatus/vim/vimrcs/vimrc.osx  $(HOME)/.vimrc
+	test -e $(HOME)/.apparatus/vim/vimrc             && ln -fs $(HOME)/.apparatus/vim/vimrc             $(HOME)/.vimrc
 
 tmux:
 	$(info *** tmux ***)
