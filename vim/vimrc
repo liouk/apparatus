@@ -78,7 +78,6 @@ let NERDTreeShowHidden=1
 let g:NERDTreeDirArrows=0
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
-" autocmd vimenter * NERDTree " open automatically
 
 " vim-commentary
 nnoremap <C-/> <Plug>CommentaryLine
@@ -97,15 +96,15 @@ set signcolumn=yes
 let g:gitgutter_max_signs = 200
 autocmd BufWritePost * GitGutter
 
-" fzf
-set rtp+=/usr/local/opt/fzf
-nnoremap <C-p> :FZF<CR>
-nmap <leader>e :Buffers<CR>
-
 " rg
 nmap <leader>f :Rg<CR>
 
+" fzf
+set rtp+=/usr/local/opt/fzf
+nnoremap <C-p> :Files<CR>
+nmap <leader>e :Buffers<CR>
 let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_preview_window = []
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -132,11 +131,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['go', 'java'] }
-
-" yankstack
-nmap <leader>y :Yanks<CR>
-nmap <leader>c <Plug>yankstack_substitute_older_paste
-nmap <leader>C <Plug>yankstack_substitute_newer_paste
 
 " startify
 let g:startify_change_to_dir = 0
