@@ -15,6 +15,7 @@ export FUTURAE="/Users/ilias/Workspace/futurae"
 
 # Misc
 export LC_ALL=en_US.UTF-8
+KEYTIMEOUT=1
 
 # Load Git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash

@@ -19,6 +19,9 @@ set tabstop=2
 set encoding=utf8
 set fillchars=vert:│
 
+" key timeouts
+set ttimeoutlen=0
+
 " colors
 set background=dark
 colorscheme gruvbox
