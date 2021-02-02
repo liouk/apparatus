@@ -43,3 +43,6 @@ alias blae='blackbox_edit'
 alias blaes='blackbox_edit_start'
 alias blaee='blackbox_edit_end'
 alias blash='blackbox_shred_all_files'
+
+# cmatrix
+alias cmatrix='cmatrix -Bas'

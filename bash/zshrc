@@ -36,3 +36,5 @@ eval "$(direnv hook zsh)"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fortune -s
