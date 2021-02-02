@@ -16,15 +16,13 @@ export FUTURAE="/Users/ilias/Workspace/futurae"
 # Misc
 export LC_ALL=en_US.UTF-8
 KEYTIMEOUT=1
+bindkey -e
 
 # Load Git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
 
 autoload -Uz compinit && compinit
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # brew
 eval $(/opt/homebrew/bin/brew shellenv)
@@ -36,4 +34,5 @@ eval "$(rbenv init -)"
 # direnv
 eval "$(direnv hook zsh)"
 
-bindkey -e
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
