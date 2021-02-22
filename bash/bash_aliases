@@ -46,3 +46,6 @@ alias blash='blackbox_shred_all_files'
 
 # cmatrix
 alias cmatrix='cmatrix -Bas'
+
+# local network/nas
+alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
