@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LEAPSECS=18
 SECS_IN_WEEK=604800
