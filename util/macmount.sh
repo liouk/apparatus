@@ -6,4 +6,5 @@ function nas_mount {
 EOF
 }
 
+echo "mounting 'smb://ilias@readynas/ilias' onto '/Volumes/ilias/'"
 nas_mount > /dev/null
