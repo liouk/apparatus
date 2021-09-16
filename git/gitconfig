@@ -111,3 +111,5 @@
     default = current
 [init]
 	templatedir = ~/.apparatus/git/templates
+[pull]
+	rebase = true
