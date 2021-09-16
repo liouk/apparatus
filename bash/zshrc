@@ -34,6 +34,9 @@ eval "$(rbenv init -)"
 # direnv
 eval "$(direnv hook zsh)"
 
+# GNU make
+export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
