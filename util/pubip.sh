@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-known_ip=$(cat ./known_ip)
+workdir=$(dirname "$0")
+known_ip=$(cat $workdir/known_ip)
 ip=$(curl -s icanhazip.com)
 
 echo -n "${ip}"
