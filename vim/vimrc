@@ -104,6 +104,10 @@ let g:gitgutter_max_signs = 200
 autocmd BufWritePost * GitGutter
 
 " rg
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
 nmap <leader>f :Rg<CR>
 
 " fzf
