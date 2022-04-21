@@ -25,3 +25,4 @@ Tools Used
 - [kitty](https://sw.kovidgoyal.net/kitty/)
 - [GNU stow](https://www.gnu.org/software/stow/)
 - [iTerm2](https://iterm2.com/)
+- [karabiner](https://karabiner-elements.pqrs.org/)
