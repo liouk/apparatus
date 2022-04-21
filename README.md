@@ -9,14 +9,18 @@ The `Makefile` contains useful rules to apply configurations.
 
 Tools Used
 ----------
-- zsh
+- [zsh](https://www.zsh.org/)
 - [zsh completions](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)
+- [oh my zsh!](https://ohmyz.sh/)
+- [git-zsh-completion](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)
+- [bash-completion](https://github.com/scop/bash-completion)
 - [direnv](https://direnv.net/)
 - [fzf](https://github.com/junegunn/fzf)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
-- [gvm](https://github.com/moovweb/gvm)
-- [rbenv](https://github.com/rbenv/rbenv)
 - [tig](https://github.com/jonas/tig)
-- [bash-completion](https://github.com/scop/bash-completion)
-- [git-zsh-completion](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)
 - [bat](https://github.com/sharkdp/bat)
+- [jq](https://stedolan.github.io/jq/)
+- [visidata](https://www.visidata.org/)
+- [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
+- [kitty](https://sw.kovidgoyal.net/kitty/)
+- [GNU stow](https://www.gnu.org/software/stow/)
