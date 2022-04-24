@@ -1,48 +1,48 @@
 [submodule "vim/bundle/gruvbox"]
-	path = vim/bundle/gruvbox
+	path = vim/.vim/bundle/gruvbox
 	url = git@github.com:morhetz/gruvbox.git
 [submodule "vim/bundle/fzf.vim"]
-	path = vim/bundle/fzf.vim
+	path = vim/.vim/bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
 [submodule "vim/bundle/fzf"]
-	path = vim/bundle/fzf
+	path = vim/.vim/bundle/fzf
 	url = https://github.com/junegunn/fzf
 [submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
+	path = vim/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
 [submodule "vim/bundle/vim-airline"]
-	path = vim/bundle/vim-airline
+	path = vim/.vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
 [submodule "vim/bundle/vim-airline-themes"]
-	path = vim/bundle/vim-airline-themes
+	path = vim/.vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
 [submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
+	path = vim/.vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim/bundle/vim-commentary"]
-	path = vim/bundle/vim-commentary
+	path = vim/.vim/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "vim/bundle/vim-startify"]
-	path = vim/bundle/vim-startify
+	path = vim/.vim/bundle/vim-startify
 	url = https://github.com/mhinz/vim-startify
 [submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
+	path = vim/.vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
 [submodule "vim/bundle/vim-expand-region"]
-	path = vim/bundle/vim-expand-region
+	path = vim/.vim/bundle/vim-expand-region
 	url = https://github.com/terryma/vim-expand-region
 [submodule "vim/bundle/vim-bufkill"]
-	path = vim/bundle/vim-bufkill
+	path = vim/.vim/bundle/vim-bufkill
 	url = https://github.com/qpkorr/vim-bufkill
 [submodule "vim/bundle/vim-json"]
-	path = vim/bundle/vim-json
+	path = vim/.vim/bundle/vim-json
 	url = https://github.com/elzr/vim-json
 [submodule "vim/bundle/vim-puppet"]
-	path = vim/bundle/vim-puppet
+	path = vim/.vim/bundle/vim-puppet
 	url = https://github.com/rodjek/vim-puppet
 [submodule "vim/bundle/vim-go"]
-	path = vim/bundle/vim-go
+	path = vim/.vim/bundle/vim-go
 	url = https://github.com/fatih/vim-go
 [submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
+	path = vim/.vim/bundle/fugitive
 	url = https://tpope.io/vim/fugitive.git
