@@ -40,5 +40,6 @@ export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='find .'
 
 fortune -s
