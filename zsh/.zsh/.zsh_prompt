@@ -27,10 +27,17 @@ function parse_git_branch(){
 
 # Determine the branch/state information for this git repository.
 function set_git_branch() {
-    # Get the name of the branch.
-    branch=$(parse_git_branch)
+    local branch=$(parse_git_branch)
+    local ellipsis_utf8
+    local -i maxlen
 
-    # Set the final branch string.
+    ellipsis_utf8=$'\u2026'
+    maxlen=15
+
+    if [[ "${#branch}" -gt $maxlen ]]; then
+      branch="${branch:0:$maxlen}${ellipsis_utf8}} "
+    fi
+
     BRANCH="${RED}${branch}${COLOR_NONE}"
 }
 
@@ -71,34 +78,15 @@ function set_user () {
     fi
 }
 
-# Display blackbox info in the prompt if it exists
-function set_blackbox() {
-    BLACKBOX=
-    [[ "${BLACKBOX_STATUS:-}" ]] && BLACKBOX="${BLACKBOX_STATUS} "
-}
-
 # Set the full bash prompt.
-function set_bash_prompt () {
-    # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the
-    # return value of the last command.
+function set_prompt () {
     set_prompt_symbol $?
-
-    # Set the P_HOST variable.
     set_host
-
-    # Set the P_USER variable.
     set_user
-
-    # Set the BRANCH variable.
     set_git_branch
 
-    # Set the blackbox status
-    set_blackbox
-
     # Set the bash prompt variable.
-    PS1="${NEWLINE}${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}${PATH_SH}${COLOR_NONE}${NEWLINE}${PYTHON_VIRTUALENV}${BRANCH}${BLACKBOX}${PROMPT_SYMBOL} "
+    PS1="${NEWLINE}${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}${PATH_SH}${COLOR_NONE}${NEWLINE}${BRANCH}${PROMPT_SYMBOL} "
 }
 
-
-# Tell bash to execute this function just before displaying its prompt.
-PROMPT_COMMAND=set_bash_prompt
+PROMPT_COMMAND=set_prompt
