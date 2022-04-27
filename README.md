@@ -40,3 +40,13 @@ You can run `tool.sh` to get a list of all the tools that are installed and thei
 ### Old configurations
 - [iTerm2](https://iterm2.com/)
 - tmux
+
+## Configuration
+### Fonts
+```
+$ brew tap homebrew/cask-fonts
+$ brew install --cask font-jetbrains-mono-nerd-font
+$ brew install --cask font-fira-code-nerd-font
+```
+
+Here are all the casks: https://github.com/Homebrew/homebrew-cask-fonts/tree/master/Casks
