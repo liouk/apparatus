@@ -31,6 +31,7 @@ syntax on
 "set cursorline
 "set colorcolumn=80
 highlight ColorColumn ctermbg=DarkGrey
+highlight Comment cterm=italic gui=italic
 set hlsearch
 
 " show trailing whitespace
