@@ -50,3 +50,5 @@ $ brew install --cask font-fira-code-nerd-font
 ```
 
 Here are all the casks: https://github.com/Homebrew/homebrew-cask-fonts/tree/master/Casks
+### kitty
+To choose a theme, use `kitty +kitten themes`.
