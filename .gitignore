@@ -4,3 +4,4 @@ vim/bundle/*
 vim/.netrwhist
 util/known_ip
 *.bak
+automatic_backups/
