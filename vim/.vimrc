@@ -34,6 +34,12 @@ highlight ColorColumn ctermbg=DarkGrey
 highlight Comment cterm=italic gui=italic
 set hlsearch
 
+" cursor
+" steady underline in insert mode
+let &t_SI = "\e[4 q"
+" block everywhere else
+let &t_EI = "\e[2 q"
+
 " show trailing whitespace
 highlight ExtraWhitespace ctermbg=darkblue guibg=#344011
 autocmd BufEnter * exe ':2match ExtraWhitespace /\s\+$\| \+\ze\t\|\t\+\ze /'
