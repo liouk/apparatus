@@ -21,13 +21,15 @@ LIGHT_GREEN="%F{10}"
 # determine git branch name
 function parse_git_branch(){
     if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 ; then
-        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/{\1} /'
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
     fi
 }
 
 # Determine the branch/state information for this git repository.
 function set_git_branch() {
     local branch=$(parse_git_branch)
+    [[ -z "$branch" ]] && { BRANCH=""; return; }
+
     local ellipsis_utf8
     local -i maxlen
 
@@ -38,7 +40,7 @@ function set_git_branch() {
       branch="${branch:0:$maxlen}${ellipsis_utf8}} "
     fi
 
-    BRANCH="${RED}${branch}${COLOR_NONE}"
+    BRANCH="${RED}{${branch}}${COLOR_NONE} "
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
