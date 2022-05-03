@@ -10,3 +10,6 @@ set main-view = \
 
 # Copy Commit SHA to clipboard
 bind generic 9 !@bash -c "echo -n %(commit) | pbcopy"
+
+# fix cursor colour for gruvbox
+color cursor default green
