@@ -16,6 +16,27 @@
                 },
                 "rules": [
                     {
+                        "description": "Open kitty quick window with ctrl+;",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/bin/sh ~/.config/kitty/kitty_launch.sh"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "description": "Change right_command+hjkl to arrow keys",
                         "manipulators": [
                             {
