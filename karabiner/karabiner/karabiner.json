@@ -24,7 +24,7 @@
                                     "key_code": "semicolon",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_control"
+                                            "left_command"
                                         ]
                                     }
                                 },
