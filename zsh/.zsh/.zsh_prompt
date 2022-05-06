@@ -34,10 +34,10 @@ function set_git_branch() {
     local -i maxlen
 
     ellipsis_utf8=$'\u2026'
-    maxlen=15
+    maxlen=18
 
     if [[ "${#branch}" -gt $maxlen ]]; then
-      branch="${branch:0:$maxlen}${ellipsis_utf8}} "
+      branch="${branch:0:$maxlen}${ellipsis_utf8}"
     fi
 
     BRANCH="${RED}{${branch}}${COLOR_NONE} "
