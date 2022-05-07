@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Escape codes
-
+# Prompt Colors
         RED="%F{red}"
      YELLOW="%F{yellow}"
       GREEN="%F{green}"
@@ -15,8 +14,10 @@ LIGHT_GREEN="%F{10}"
      BG_RED="%K{red}"
     BG_BLUE="%K{blue}"
     BG_NONE="%k"
-    NEWLINE=$'\n'
-    PATH_SH=%~
+
+USER_COLOR="$GREEN"
+PATH_COLOR="$YELLOW"
+BRANCH_COLOR="$RED"
 
 # determine git branch name
 function parse_git_branch(){
@@ -40,7 +41,7 @@ function set_git_branch() {
       branch="${branch:0:$maxlen}${ellipsis_utf8}"
     fi
 
-    BRANCH="${RED}{${branch}}${COLOR_NONE} "
+    BRANCH="$branch"
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
@@ -87,8 +88,15 @@ function set_prompt () {
     set_user
     set_git_branch
 
+    PATH_SH=%~
+
     # Set the bash prompt variable.
-    PS1="${NEWLINE}${GREEN}${P_USER}${P_HOST}${COLOR_NONE}:${YELLOW}${PATH_SH}${COLOR_NONE}${NEWLINE}${BRANCH}${PROMPT_SYMBOL} "
+    PS1=$(printf "\n%s:%s\n%s %s " \
+      "${USER_COLOR}${P_USER}${P_HOST}${COLOR_NONE}" \
+      "${PATH_COLOR}${PATH_SH}${COLOR_NONE}" \
+      "${BRANCH_COLOR}{${BRANCH}}${COLOR_NONE}" \
+      "${PROMPT_SYMBOL}"
+    )
 }
 
 PROMPT_COMMAND=set_prompt
