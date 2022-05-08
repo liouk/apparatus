@@ -9,6 +9,7 @@ stow:
 	stow --restow --target="$(HOME)" tmux --ignore=crontab-tmux-resurrect
 	stow --restow --target="$(HOME)/.config" kitty
 	stow --restow --target="$(HOME)/.config" karabiner
+	stow --restow --target="$(HOME)/.config" nvim
 
 unstow:
 	stow --delete --target="$(HOME)" zsh
@@ -21,6 +22,7 @@ unstow:
 	stow --delete --target="$(HOME)" tmux --ignore=crontab-tmux-resurrect
 	stow --delete --target="$(HOME)/.config" kitty
 	stow --delete --target="$(HOME)/.config" karabiner
+	stow --delete --target="$(HOME)/.config" nvim
 
 install:
 	git submodule update --init --recursive
