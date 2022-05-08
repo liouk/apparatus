@@ -101,7 +101,7 @@ vnoremap <C-/> <Plug>Commentary
 let g:airline_extensions = [ "tabline", "branch" ]
 let g:airline_detect_modified=1
 set laststatus=2
-let g:airline_theme='base16_eighties'
+let g:airline_theme='gruvbox'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
