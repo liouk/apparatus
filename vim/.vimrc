@@ -123,20 +123,22 @@ nnoremap <C-p> :Files<CR>
 nmap <leader>e :Buffers<CR>
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_preview_window = []
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+
+" fzf gruvbox scheme
+let g:fzf_colors = {}
+let g:fzf_colors.fg      = ['fg', 'GruvboxFg1']
+let g:fzf_colors.bg      = ['fg', 'GruvboxBg0']
+let g:fzf_colors.hl      = ['fg', 'GruvboxRed']
+let g:fzf_colors['fg+']  = ['fg', 'GruvboxGreen']
+let g:fzf_colors['bg+']  = ['fg', 'GruvboxBg1']
+let g:fzf_colors['hl+']  = ['fg', 'GruvboxRed']
+let g:fzf_colors.info    = ['fg', 'GruvboxOrange']
+let g:fzf_colors.border  = ['fg', 'GruvboxBg0']
+let g:fzf_colors.prompt  = ['fg', 'GruvboxAqua']
+let g:fzf_colors.pointer = ['fg', 'GruvboxOrange']
+let g:fzf_colors.marker  = ['fg', 'GruvboxYellow']
+let g:fzf_colors.spinner = ['fg', 'GruvboxGreen']
+let g:fzf_colors.header  = ['fg', 'GruvboxBlue']
 
 " syntastic
 nnoremap <leader>s :SyntasticCheck<CR>
