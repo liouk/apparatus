@@ -3,10 +3,10 @@
     email = iliasr@gmail.com
 
 [core]
-    editor = vim
+    editor = nvim
 
 [diff]
-    tool = vimdiff
+    tool = nvim -d
 
 [color]
     ui = true

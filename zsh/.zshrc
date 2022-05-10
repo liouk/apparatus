@@ -2,7 +2,8 @@
 source ~/.zsh/.zsh_prompt
 precmd() { eval "$PROMPT_COMMAND" }
 
-export EDITOR="vim"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
 # Aliases
 source ~/.zsh/.zsh_aliases
