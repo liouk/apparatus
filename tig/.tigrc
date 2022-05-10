@@ -3,10 +3,12 @@ set wrap-lines   = yes
 
 # Specify the main view
 set main-view = \
-    date:default \
+    date:custom \
     author:email-user \
     id:yes \
     commit-title:yes,graph:v2,refs:yes
+
+set main-view-date-format = "%Y-%m-%d %H:%M"
 
 # Copy Commit SHA to clipboard
 bind generic 9 !@bash -c "echo -n %(commit) | pbcopy"
