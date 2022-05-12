@@ -43,4 +43,17 @@ export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='find .'
 
+# convenience function to jump between futurae repos
+function fu () {
+  local futurae_dir="$HOME/Workspace/futurae"
+  case $1 in
+    "ls"|"-l"|"--ls")
+      ls -lah $futurae_dir
+      ;;
+    *)
+      cd "$futurae_dir/$1"
+      ;;
+  esac
+}
+
 fortune -s
