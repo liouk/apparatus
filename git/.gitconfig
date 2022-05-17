@@ -109,7 +109,7 @@
 [push]
     default = current
 [init]
-	templatedir = ~/.apparatus/git/templates
+	templatedir = ~/.git-templates/
 [pull]
 	rebase = true
 [url "git@git.futurae.com:"]
