@@ -16,10 +16,9 @@
                 },
                 "rules": [
                     {
-                        "description": "Open kitty quick window with ctrl+;",
+                        "description": "Open kitty quick window with cmd+;",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "semicolon",
                                     "modifiers": {
@@ -32,7 +31,8 @@
                                     {
                                         "shell_command": "/bin/sh ~/.config/kitty/kitty_launch.sh"
                                     }
-                                ]
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -201,28 +201,7 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "key_code": "caps_lock"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "left_control"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "left_control"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_command"
-                                }
-                            ]
-                        }
-                    ]
+                    "simple_modifications": []
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -233,7 +212,7 @@
                         "product_id": 833,
                         "vendor_id": 1452
                     },
-                    "ignore": true,
+                    "ignore": false,
                     "manipulate_caps_lock_led": true,
                     "simple_modifications": []
                 },
@@ -391,7 +370,28 @@
                 "delay_milliseconds_before_open_device": 1000
             },
             "selected": true,
-            "simple_modifications": [],
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "caps_lock"
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_control"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "left_control"
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_command"
+                        }
+                    ]
+                }
+            ],
             "virtual_hid_keyboard": {
                 "country_code": 0,
                 "indicate_sticky_modifier_keys_state": true,
