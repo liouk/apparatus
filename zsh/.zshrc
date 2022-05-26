@@ -56,4 +56,6 @@ function fu () {
   esac
 }
 
+bindkey \^U backward-kill-line
+
 fortune -s
