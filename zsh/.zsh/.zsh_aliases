@@ -17,12 +17,6 @@ alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
 alias of='onefetch'
 
-# virtualenv
-venv_activate() {
-    source "$1/bin/activate"
-}
-alias venv=venv_activate
-
 # docker
 alias doc='docker-compose'
 alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
