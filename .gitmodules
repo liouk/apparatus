@@ -49,3 +49,6 @@
 [submodule "vim/.vim/bundle/lightspeed.nvim"]
 	path = vim/.vim/bundle/lightspeed.nvim
 	url = git@github.com:ggandor/lightspeed.nvim.git
+[submodule "vim/.vim/bundle/vim-cool"]
+	path = vim/.vim/bundle/vim-cool
+	url = git@github.com:romainl/vim-cool.git
