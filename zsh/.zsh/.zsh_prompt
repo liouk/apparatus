@@ -42,11 +42,15 @@ function set_git_branch() {
     if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 ; then
         local branch_v=$(git branch -v 2>/dev/null | grep "^* ")
         local branch
-        if [[ "$branch_v" == *"no branch, rebasing"* ]]; then
-          branch="($(echo -n $branch_v | cut -d"(" -f2 | cut -d")" -f1))"
-        else
-          branch=$(echo -n $branch_v | cut -d" " -f2)
-        fi
+
+        case "$branch_v" in
+          *"no branch, rebasing"* | *"(HEAD detached at"*)
+            branch="($(echo -n $branch_v | cut -d"(" -f2 | cut -d")" -f1))"
+            ;;
+          *)
+            branch=$(echo -n $branch_v | cut -d" " -f2)
+            ;;
+        esac
 
         local git_status=
         [[ $(git status --short 2>/dev/null) ]] && git_status="${git_status}!"
