@@ -96,11 +96,14 @@ function set_venv_bbox () {
   local venv=
   local sep=
   local bbox=
+  local bbox_keyring=
+
+  [[ "${BLACKBOXDATA:-}" ]] && bbox_keyring=":${BLACKBOXDATA/keyrings\//}"
 
   [[ "${VIRTUAL_ENV:-}" ]] && venv="venv"
 
   # PROMPT_BLACKBOX needs to be set and exported in the .envrc (direnv) file of a repo's root dir
-  [[ "${PROMPT_BLACKBOX:-}" ]] && bbox="bbox"
+  [[ "${PROMPT_BLACKBOX:-}" ]] && bbox="bbox$bbox_keyring"
 
   [[ "${venv:-}" || "${bbox:-}" ]] && { prefix=" "; venv_bbox_symbol=""; }
   [[ "${venv:-}" && "${bbox:-}" ]] && sep="|"

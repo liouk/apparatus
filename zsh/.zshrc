@@ -59,3 +59,20 @@ function fu () {
 bindkey \^U backward-kill-line
 
 fortune -s
+
+# blackbox convenience func
+function bbox () {
+  local rootdir="keyrings"
+  case $1 in
+    "-l"|"--list")
+      echo "available keyrings:"
+      /bin/ls -1 $rootdir
+      return
+      ;;
+  esac
+
+  local keyring="$rootdir/$1"
+  [ -d "$keyring" ] || { echo "unknown keyring: $keyring"; return 1; }
+  export BLACKBOXDATA="$keyring"
+  echo "now using keyring: $keyring"
+}
