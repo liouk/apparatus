@@ -63,7 +63,19 @@ fortune -s
 # blackbox convenience func
 function bbox () {
   local rootdir="keyrings"
+  local keyring="$rootdir/$1"
+
   case $1 in
+    "")
+      echo "using keyring: $BLACKBOXDATA"
+      if command -v gum &> /dev/null
+      then
+        keyring=$(/bin/ls -1 $rootdir | gum choose)
+        keyring="$rootdir/$keyring"
+      else
+        return
+      fi
+      ;;
     "-l"|"--list")
       echo "available keyrings:"
       /bin/ls -1 $rootdir
@@ -71,7 +83,6 @@ function bbox () {
       ;;
   esac
 
-  local keyring="$rootdir/$1"
   [ -d "$keyring" ] || { echo "unknown keyring: $keyring"; return 1; }
   export BLACKBOXDATA="$keyring"
   echo "now using keyring: $keyring"
