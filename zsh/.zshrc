@@ -67,7 +67,7 @@ function bbox () {
 
   case $1 in
     "")
-      echo "using keyring: $BLACKBOXDATA"
+      echo "current keyring: $BLACKBOXDATA"
       if command -v gum &> /dev/null
       then
         keyring=$(/bin/ls -1 $rootdir | gum choose)
