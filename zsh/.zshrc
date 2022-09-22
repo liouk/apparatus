@@ -43,47 +43,12 @@ export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='find .'
 
-# convenience function to jump between futurae repos
-function fu () {
-  local futurae_dir="$HOME/Workspace/futurae"
-  case $1 in
-    "ls"|"-l"|"--ls")
-      ls -lah $futurae_dir
-      ;;
-    *)
-      cd "$futurae_dir/$1"
-      ;;
-  esac
-}
+# navi (widget used with ctrl+G)
+eval "$(navi widget zsh)"
 
+# keybindings
 bindkey \^U backward-kill-line
 
+source ~/.zsh/.zsh_funcs
+
 fortune -s
-
-# blackbox convenience func
-function bbox () {
-  local rootdir="keyrings"
-  local keyring="$rootdir/$1"
-
-  case $1 in
-    "")
-      echo "current keyring: $BLACKBOXDATA"
-      if command -v gum &> /dev/null
-      then
-        keyring=$(/bin/ls -1 $rootdir | gum choose)
-        keyring="$rootdir/$keyring"
-      else
-        return
-      fi
-      ;;
-    "-l"|"--list")
-      echo "available keyrings:"
-      /bin/ls -1 $rootdir
-      return
-      ;;
-  esac
-
-  [ -d "$keyring" ] || { echo "unknown keyring: $keyring"; return 1; }
-  export BLACKBOXDATA="$keyring"
-  echo "now using keyring: $keyring"
-}
