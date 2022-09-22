@@ -1,0 +1,4 @@
+% find, shell
+
+# find and delete files
+find . -type f -name "SEARCH-REGEX" -exec rm -rf {} \;
