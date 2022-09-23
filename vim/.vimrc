@@ -121,7 +121,7 @@ nmap <leader>f :Rg<CR>
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-p> :Files<CR>
 nmap <leader>e :Buffers<CR>
-let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment', 'border': 'rounded' } }
 let g:fzf_preview_window = []
 
 " fzf gruvbox scheme
