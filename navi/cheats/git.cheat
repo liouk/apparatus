@@ -1,0 +1,7 @@
+% git
+
+# get short commit hash
+git rev-parse --short HEAD
+
+# get abbreviated ref name
+git rev-parse --abbrev-ref HEAD
