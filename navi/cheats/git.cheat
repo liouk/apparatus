@@ -5,3 +5,6 @@ git rev-parse --short HEAD
 
 # get abbreviated ref name
 git rev-parse --abbrev-ref HEAD
+
+# interactive rebase onto the first commit
+git rebase -i --root master
