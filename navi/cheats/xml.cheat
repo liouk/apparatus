@@ -1,0 +1,4 @@
+% xml
+
+# pretty print from clipboard
+pbpaste | xmllint --format -
