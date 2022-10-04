@@ -1,0 +1,4 @@
+% docker
+
+# purge all container logs
+truncate -s 0 $(docker inspect --format='{{.LogPath}}' CONTAINER_NAME_OR_ID)

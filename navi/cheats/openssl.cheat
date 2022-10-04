@@ -1,0 +1,7 @@
+% openssl
+
+# print cert expiration date
+openssl x509 -enddate -noout -in CERT_FILE
+
+# print cert serial number
+openssl x509 -noout -serial -in CERT_FILE
