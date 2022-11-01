@@ -9,7 +9,7 @@ stow:
 	stow --restow --target="$(HOME)/.config" karabiner
 	stow --restow --target="$(HOME)/.config" nvim
 	stow --restow --target="$(HOME)/Library/Application Support/navi" navi
-	stow --restow --target="$(HOME)/Documents/Notes" obsidian
+	stow --restow --target="$(HOME)/Google Drive/Notes" obsidian
 
 unstow:
 	stow --delete --target="$(HOME)" zsh
@@ -22,7 +22,7 @@ unstow:
 	stow --delete --target="$(HOME)/.config" karabiner
 	stow --delete --target="$(HOME)/.config" nvim
 	stow --delete --target="$(HOME)/Library/Application Support/navi" navi
-	stow --delete --target="$(HOME)/Documents/Notes" obsidian
+	stow --delete --target="$(HOME)/Google Drive/Notes" obsidian
 
 install:
 	git submodule update --init --recursive
