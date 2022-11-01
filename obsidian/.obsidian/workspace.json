@@ -1,0 +1,144 @@
+{
+  "main": {
+    "id": "000d992f6d551ff8",
+    "type": "split",
+    "children": [
+      {
+        "id": "49174daf6d676cbd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4175e096bda45141",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3f7664a307b2c3b7",
+    "type": "split",
+    "children": [
+      {
+        "id": "43c4bd00cbfd0153",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "47143aa8768a8b12",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "10aee4ded85183e2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "403b2ca398eab994",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d8aa524e69a976e5",
+    "type": "split",
+    "children": [
+      {
+        "id": "36a251c4c03ad02e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cc067ecdbc0f8679",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "265315f604a78348",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8604c836ad46d7b7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "9a1549e3669497d6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "active": "4175e096bda45141",
+  "lastOpenFiles": [
+    "opa.md",
+    "Untitled.md",
+    "Job search/Job applications/Crowdhouse — Team Lead Software Engineering.md",
+    "Job search/Job applications/Red Hat - OpenShift Authentication.md",
+    "Job search/Job applications/VMWare reference.md",
+    "Job search/About the next gig.md",
+    "Daily notes/2022-11-01 Tue.md",
+    "Job search/Leaving Futurae (16 Dec 2022).md",
+    "Job search/Prep/Kubernetes.md",
+    "Work/bartendr.md"
+  ]
+}

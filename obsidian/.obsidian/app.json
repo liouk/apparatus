@@ -1,0 +1,9 @@
+{
+  "promptDelete": false,
+  "defaultViewMode": "preview",
+  "spellcheck": true,
+  "vimMode": false,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "readableLineLength": true
+}
