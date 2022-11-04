@@ -9,5 +9,6 @@
   "showFrontmatter": false,
   "showIndentGuide": false,
   "foldIndent": true,
-  "foldHeading": true
+  "foldHeading": true,
+  "tabSize": 2
 }
