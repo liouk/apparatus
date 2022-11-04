@@ -1,10 +1,13 @@
 {
   "accentColor": "",
-  "cssTheme": "Dracula Official",
-  "theme": "system",
-  "baseFontSize": 17,
+  "cssTheme": "Minimal",
+  "theme": "obsidian",
+  "baseFontSize": 16,
   "translucency": false,
   "interfaceFontFamily": "JetBrainsMono Nerd Font",
   "textFontFamily": "JetBrainsMono Nerd Font",
-  "monospaceFontFamily": "JetBrainsMono Nerd Font"
+  "monospaceFontFamily": "JetBrainsMono Nerd Font",
+  "enabledCssSnippets": [
+    "obsidian"
+  ]
 }
