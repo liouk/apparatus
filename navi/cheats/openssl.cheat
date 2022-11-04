@@ -5,3 +5,6 @@ openssl x509 -enddate -noout -in CERT_FILE
 
 # print cert serial number
 openssl x509 -noout -serial -in CERT_FILE
+
+# generate securely random bytes
+openssl rand -hex 32
