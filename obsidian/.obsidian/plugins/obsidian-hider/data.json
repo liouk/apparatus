@@ -2,7 +2,7 @@
   "hideRibbon": true,
   "hideStatus": false,
   "hideTabs": false,
-  "hideScroll": true,
+  "hideScroll": false,
   "hideSidebarButtons": false,
   "hideTooltips": false,
   "hideSearchSuggestions": false,

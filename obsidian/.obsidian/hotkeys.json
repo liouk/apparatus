@@ -24,5 +24,23 @@
       ],
       "key": "P"
     }
+  ],
+  "outline:open": [],
+  "outline:open-for-current": [],
+  "app:toggle-right-sidebar": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "]"
+    }
+  ],
+  "app:toggle-left-sidebar": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "["
+    }
   ]
 }
