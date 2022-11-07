@@ -10,5 +10,6 @@
   "showIndentGuide": false,
   "foldIndent": true,
   "foldHeading": true,
-  "tabSize": 2
+  "tabSize": 2,
+  "livePreview": false
 }
