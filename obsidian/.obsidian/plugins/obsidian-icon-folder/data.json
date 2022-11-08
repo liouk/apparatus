@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "migrated": true,
+    "iconPacksPath": ".obsidian/plugins/obsidian-icon-folder/icons",
+    "fontSize": 16,
+    "iconColor": null,
+    "recentlyUsedIcons": [
+      "FasClipboardList",
+      "FasPenNib",
+      "FasSquarePlus",
+      "FasBriefcase",
+      "FasPlane"
+    ],
+    "recentlyUsedIconsSize": 5,
+    "rules": [],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    }
+  },
+  "Engineering": "FasScrewdriverWrench",
+  "Travel": "FasPlane",
+  "Work": "FasBriefcase",
+  "kreta-schweiz": "FasSquarePlus",
+  "Other": "FasPenNib",
+  "Job search": "FasClipboardList"
+}
