@@ -2,10 +2,10 @@
   "accentColor": "",
   "cssTheme": "Minimal",
   "theme": "obsidian",
-  "baseFontSize": 16,
+  "baseFontSize": 15,
   "translucency": false,
-  "interfaceFontFamily": "JetBrainsMono Nerd Font",
-  "textFontFamily": "JetBrainsMono Nerd Font",
+  "interfaceFontFamily": "PT Sans Caption",
+  "textFontFamily": "PT Serif",
   "monospaceFontFamily": "JetBrainsMono Nerd Font",
   "enabledCssSnippets": [
     "obsidian"
