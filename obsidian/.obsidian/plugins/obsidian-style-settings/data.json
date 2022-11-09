@@ -17,5 +17,8 @@
   "minimal-style@@tag-border-width": "2px",
   "minimal-style@@tag-background@@dark": "#569D79",
   "minimal-style@@tag-color@@dark": "#22282C",
-  "minimal-style@@minimal-unstyled-tags": false
+  "minimal-style@@minimal-unstyled-tags": false,
+  "minimal-advanced@@styled-scrollbars": true,
+  "minimal-advanced@@cursor": "default",
+  "minimal-style@@window-title-off": false
 }
