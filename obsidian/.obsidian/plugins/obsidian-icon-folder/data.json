@@ -5,11 +5,11 @@
     "fontSize": 16,
     "iconColor": null,
     "recentlyUsedIcons": [
+      "FarClipboard",
+      "FasChalkboardUser",
       "FasClipboardList",
       "FasPenNib",
-      "FasSquarePlus",
-      "FasBriefcase",
-      "FasPlane"
+      "FasSquarePlus"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -25,5 +25,6 @@
   "Work": "FasBriefcase",
   "kreta-schweiz": "FasSquarePlus",
   "Other": "FasPenNib",
-  "Job search": "FasClipboardList"
+  "Job search": "FasClipboardList",
+  "Conferences & Events": "FasChalkboardUser"
 }

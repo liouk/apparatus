@@ -42,5 +42,23 @@
       ],
       "key": "["
     }
+  ],
+  "app:go-back": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "H"
+    }
+  ],
+  "app:go-forward": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "L"
+    }
   ]
 }
