@@ -5,11 +5,11 @@
     "fontSize": 16,
     "iconColor": null,
     "recentlyUsedIcons": [
+      "FasCheese",
+      "FasGamepad",
+      "FasHouseChimney",
       "FarClipboard",
-      "FasChalkboardUser",
-      "FasClipboardList",
-      "FasPenNib",
-      "FasSquarePlus"
+      "FasChalkboardUser"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -23,8 +23,9 @@
   "Engineering": "FasScrewdriverWrench",
   "Travel": "FasPlane",
   "Work": "FasBriefcase",
-  "kreta-schweiz": "FasSquarePlus",
-  "Other": "FasPenNib",
   "Job search": "FasClipboardList",
-  "Conferences & Events": "FasChalkboardUser"
+  "Conferences & Events": "FasChalkboardUser",
+  "Home": "FasHouseChimney",
+  "Hobbies": "FasGamepad",
+  "Switzerland": "FasCheese"
 }
