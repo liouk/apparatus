@@ -25,7 +25,15 @@
       "key": "P"
     }
   ],
-  "outline:open": [],
+  "outline:open": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
+  ],
   "outline:open-for-current": [],
   "app:toggle-right-sidebar": [
     {
@@ -68,6 +76,33 @@
         "Mod"
       ],
       "key": "F"
+    }
+  ],
+  "file-explorer:open": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "E"
+    }
+  ],
+  "starred:open": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "S"
+    }
+  ],
+  "tag-pane:open": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "I"
     }
   ]
 }
