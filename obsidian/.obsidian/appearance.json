@@ -2,12 +2,13 @@
   "accentColor": "",
   "cssTheme": "Minimal",
   "theme": "obsidian",
-  "baseFontSize": 15,
+  "baseFontSize": 16,
   "translucency": false,
   "interfaceFontFamily": "PT Sans Caption",
   "textFontFamily": "PT Serif",
   "monospaceFontFamily": "JetBrainsMono Nerd Font",
   "enabledCssSnippets": [
-    "obsidian"
+    "obsidian",
+    "inline-code-everforest"
   ]
 }
