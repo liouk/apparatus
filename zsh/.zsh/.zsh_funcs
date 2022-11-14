@@ -1,12 +1,23 @@
-# jump between futurae repos
+# __jump to ~/Workspace/futurae
 function fu () {
-  local futurae_dir="$HOME/Workspace/futurae"
+  __jump "$HOME/Workspace/futurae" $1
+}
+
+# __jump to ~/Workspace/personal/github.com/liouk
+function gl () {
+  __jump "$HOME/Workspace/personal/github.com/liouk" $1
+}
+
+# jump between subdirs of a base dir
+function __jump () {
+  local jump_basedir=$1
+  shift
   case $1 in
     "ls"|"-l"|"--ls")
-      ls -lah $futurae_dir
+      ls -lah $jump_basedir
       ;;
     *)
-      cd "$futurae_dir/$1"
+      cd "$jump_basedir/$1"
       ;;
   esac
 }
