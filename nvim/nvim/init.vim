@@ -5,12 +5,11 @@ source ~/.vimrc
 
 "---[ neovim specifics ]------------------------------------------------------
 
+" lua configurations
+lua require('plugins')
+lua require('config.plugins.alpha')
+
 " block cursor everywhere
 set guicursor=a:block
 " underline in insert mode
 set guicursor=i:hor50
-
-"---[ plugins ]---------------------------------------------------------------
-
-" leap.nvim
-lua require('leap').add_default_mappings()

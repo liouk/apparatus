@@ -153,10 +153,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['go', 'java'] }
 let g:gruvbox_contrast_dark = "hard"
 
-" startify
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 1
-
 " kitty
 " vim hardcodes background color erase even if the terminfo file does
 " not contain bce (not to mention that libvte based terminals

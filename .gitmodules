@@ -22,9 +22,6 @@
 [submodule "vim/bundle/vim-commentary"]
 	path = vim/.vim/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary
-[submodule "vim/bundle/vim-startify"]
-	path = vim/.vim/bundle/vim-startify
-	url = https://github.com/mhinz/vim-startify
 [submodule "vim/bundle/syntastic"]
 	path = vim/.vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
@@ -49,6 +46,3 @@
 [submodule "vim/.vim/bundle/vim-cool"]
 	path = vim/.vim/bundle/vim-cool
 	url = git@github.com:romainl/vim-cool.git
-[submodule "vim/.vim/bundle/leap.nvim"]
-	path = vim/.vim/bundle/leap.nvim
-	url = git@github.com:ggandor/leap.nvim.git
