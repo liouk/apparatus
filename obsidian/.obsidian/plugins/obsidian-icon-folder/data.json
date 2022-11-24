@@ -5,11 +5,11 @@
     "fontSize": 16,
     "iconColor": null,
     "recentlyUsedIcons": [
+      "FasBasketball",
       "FasCheese",
       "FasGamepad",
       "FasHouseChimney",
-      "FarClipboard",
-      "FasChalkboardUser"
+      "FarClipboard"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -26,6 +26,6 @@
   "Job search": "FasClipboardList",
   "Conferences & Events": "FasChalkboardUser",
   "Home": "FasHouseChimney",
-  "Hobbies": "FasGamepad",
+  "Hobbies": "FasBasketball",
   "Schwiiz und Tsüri": "FasCheese"
 }
