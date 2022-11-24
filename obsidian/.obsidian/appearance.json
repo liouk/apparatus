@@ -11,6 +11,7 @@
     "obsidian",
     "tag-font-monospace",
     "inline-code-everforest",
-    "disable-ligatures"
+    "disable-ligatures",
+    "code-customizations"
   ]
 }
