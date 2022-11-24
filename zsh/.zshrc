@@ -42,6 +42,7 @@ export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='find .'
+export FZF_CTRL_T_COMMAND='find .'
 
 # navi (widget used with ctrl+G)
 eval "$(navi widget zsh)"
