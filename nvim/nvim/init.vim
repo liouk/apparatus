@@ -6,7 +6,7 @@ source ~/.vimrc
 "---[ neovim specifics ]------------------------------------------------------
 
 " lua configurations
-lua require('plugins')
+lua require('config.plugins.init')
 lua require('config.plugins.alpha')
 
 " block cursor everywhere
