@@ -11,5 +11,6 @@
   "foldIndent": true,
   "foldHeading": true,
   "tabSize": 2,
-  "livePreview": false
+  "livePreview": false,
+  "attachmentFolderPath": "_attachments"
 }
