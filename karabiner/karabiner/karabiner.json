@@ -44,7 +44,7 @@
                                     "key_code": "quote",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_command"
+                                            "command"
                                         ]
                                     }
                                 },
