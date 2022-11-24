@@ -52,14 +52,17 @@ function set_git_branch() {
             ;;
         esac
 
+        local enable_git_status=0
         local git_status=
-        [[ $(git status --short 2>/dev/null) ]] && git_status="${git_status}!"
+        if [[ $enable_git_status -eq 1 ]]; then
+          [[ $(git status --short 2>/dev/null) ]] && git_status="${git_status}!"
 
-        echo -n $branch_v | grep -qs "behind"
-        [[ $? -eq 0 ]] && git_status="${git_status}<"
+          echo -n $branch_v | grep -qs "behind"
+          [[ $? -eq 0 ]] && git_status="${git_status}<"
 
-        echo -n $branch_v | grep -qs "ahead"
-        [[ $? -eq 0 ]] && git_status="${git_status}>"
+          echo -n $branch_v | grep -qs "ahead"
+          [[ $? -eq 0 ]] && git_status="${git_status}>"
+        fi
 
         local git_symbol=""
         BRANCH=" ${BRANCH_COLOR}${git_symbol} $branch${BRANCH_STATUS_COLOR}${git_status}${COLOR_NONE}"
