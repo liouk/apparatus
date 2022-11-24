@@ -9,7 +9,8 @@
   "monospaceFontFamily": "JetBrainsMono Nerd Font",
   "enabledCssSnippets": [
     "obsidian",
+    "tag-font-monospace",
     "inline-code-everforest",
-    "tag-font-monospace"
+    "disable-ligatures"
   ]
 }
