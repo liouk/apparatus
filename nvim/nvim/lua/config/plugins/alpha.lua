@@ -12,6 +12,7 @@ dashboard.section.header.val = '---=[ nvim ' .. version() .. ' ]=---'
 -- menu
 dashboard.section.buttons.val = {
     dashboard.button( "e", "  > new buffer" , ":enew <BAR> startinsert <CR>"),
+    dashboard.button( "d", "  > explore dir", ":NERDTreeToggle<CR>"),
     dashboard.button( "p", "  > find", ":FZF<CR>"),
     dashboard.button( "f", "  > grep", ":Rg<CR>"),
     dashboard.button( "r", "  > recent"   , ":History<CR>"),
