@@ -1,17 +1,3 @@
-local plugin_declarations = function(use)
-
-  use {
-    'ggandor/leap.nvim',
-    config = function () require('leap').add_default_mappings() end
-  }
-
-  use {
-    'goolord/alpha-nvim',
-    config = function () require('alpha').setup(require('alpha.themes.dashboard').config) end
-  }
-
-end
-
 -- install packer automatically
 local ensure_packer = function()
   local fn = vim.fn
@@ -28,8 +14,11 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use "nvim-lua/plenary.nvim"
 
-  plugin_declarations(use)
+  use { 'ggandor/leap.nvim', config = function () require('leap').add_default_mappings() end }
+  -- use my own fork until https://github.com/goolord/alpha-nvim/pull/160 gets merged
+  use { 'liouk/alpha-nvim', branch = 'theta-mru', requires = { 'kyazdani42/nvim-web-devicons' } }
 
   -- automatically set up configuration after cloning packer.nvim
   -- keep after all plugins

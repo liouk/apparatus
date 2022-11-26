@@ -6,8 +6,8 @@ source ~/.vimrc
 "---[ neovim specifics ]------------------------------------------------------
 
 " lua configurations
-lua require('config.plugins.init')
-lua require('config.plugins.alpha')
+lua require('plugins')
+lua require('config.alpha')
 
 set guicursor=a:block " block cursor everywhere
 set guicursor=i:hor50 " underline in insert mode
