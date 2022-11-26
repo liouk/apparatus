@@ -11,13 +11,14 @@ dashboard.section.header.val = '---=[ nvim ' .. version() .. ' ]=---'
 
 -- menu
 dashboard.section.buttons.val = {
-    dashboard.button( "e", "  > new buffer" , ":enew <BAR> startinsert <CR>"),
-    dashboard.button( "d", "  > explore dir", ":NERDTreeToggle<CR>"),
-    dashboard.button( "p", "  > find", ":FZF<CR>"),
-    dashboard.button( "f", "  > grep", ":Rg<CR>"),
-    dashboard.button( "r", "  > recent"   , ":History<CR>"),
-    dashboard.button( "s", "  > vim config" , ":e $MYVIMRC<CR>"),
-    dashboard.button( "q", "  > quit", ":qa<CR>"),
+    dashboard.button( "e", " > new buffer",  ":enew <BAR> startinsert <CR>"),
+    dashboard.button( "d", " > explore dir", ":NERDTreeToggle<CR>"),
+    dashboard.button( "p", " > find",        ":FZF<CR>"),
+    dashboard.button( "f", " > grep",        ":Rg<CR>"),
+    dashboard.button( "r", " > recent",      ":History<CR>"),
+    dashboard.button( "l", " > latest file", ":e #<1<CR>"),
+    dashboard.button( "s", " > vim config" , ":e $MYVIMRC<CR>"),
+    dashboard.button( "q", " > quit",        ":qa<CR>"),
 }
 
 -- footer
