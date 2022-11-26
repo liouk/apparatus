@@ -9,7 +9,5 @@ source ~/.vimrc
 lua require('config.plugins.init')
 lua require('config.plugins.alpha')
 
-" block cursor everywhere
-set guicursor=a:block
-" underline in insert mode
-set guicursor=i:hor50
+set guicursor=a:block " block cursor everywhere
+set guicursor=i:hor50 " underline in insert mode
