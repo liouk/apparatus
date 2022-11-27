@@ -6,6 +6,7 @@ source ~/.vimrc
 "---[ neovim specifics ]------------------------------------------------------
 
 " lua configurations
+lua require('impatient')
 lua require('plugins')
 lua require('config.alpha')
 
