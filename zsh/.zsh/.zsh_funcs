@@ -5,7 +5,7 @@ function fu () {
 
 # __jump to ~/Workspace/personal/github.com/liouk
 function gl () {
-  __jump "$HOME/Workspace/personal/github.com/liouk" $1
+  __jump "$HOME/Workspace/github.com/liouk" $1
 }
 
 # jump between subdirs of a base dir
