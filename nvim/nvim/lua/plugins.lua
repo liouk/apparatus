@@ -19,7 +19,7 @@ return require('packer').startup(function(use)
 
   use { 'ggandor/leap.nvim', config = function () require('leap').add_default_mappings() end }
   -- use my own fork until https://github.com/goolord/alpha-nvim/pull/160 gets merged
-  use { 'liouk/alpha-nvim', branch = 'theta-mru', requires = { 'kyazdani42/nvim-web-devicons' } }
+  use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
   -- automatically set up configuration after cloning packer.nvim
   -- keep after all plugins
