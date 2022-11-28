@@ -83,7 +83,6 @@ local function fn_short(fn)
   local plenary_path = require("plenary.path")
   local target_width = 70
   local short_fn = vim.fn.fnamemodify(fn, ":~")
-  short_fn = vim.fn.fnamemodify(short_fn, ":s?\\~/Workspace/personal/github.com/?<github>/?")
 
   return short_fn
 end
