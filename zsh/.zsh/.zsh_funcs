@@ -1,15 +1,13 @@
-# __jump to ~/Workspace/futurae
 function fu () {
-  __jump "$HOME/Workspace/futurae" $1
+  __jumpfunc "$HOME/Workspace/futurae" $1
 }
 
-# __jump to ~/Workspace/personal/github.com/liouk
 function gl () {
-  __jump "$HOME/Workspace/github.com/liouk" $1
+  __jumpfunc "$HOME/Workspace/github.com/liouk" $1
 }
 
 # jump between subdirs of a base dir
-function __jump () {
+function __jumpfunc () {
   local jump_basedir=$1
   shift
   case $1 in
