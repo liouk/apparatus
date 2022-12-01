@@ -54,3 +54,6 @@ alias vim='nvim'
 # k8s
 alias kc=kubectl
 alias kcs=kubectl -n kube-system
+
+# osx
+alias xargs='gxargs'
