@@ -4,7 +4,7 @@ alias grep='grep --color'
 alias fgrep='fgrep --color'
 
 # directory shortcuts
-alias xpert='cd ~/Workspace/personal/github.com/liouk/x11-squad'
+alias xpert='cd ~/Workspace/github.com/liouk/x11-squad'
 alias ..='cd ..'
 alias ...='cd ../../'
 
@@ -39,7 +39,7 @@ alias blash='blackbox_shred_all_files'
 alias cmatrix='cmatrix -Bas'
 
 # local network/nas
-alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
+alias nas='test -d /Volumes/ilias || . ~/Workspace/github.com/liouk/apparatus/util/macmount.sh; cd /Volumes/ilias'
 
 # kitty SSH compatibility
 # https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
