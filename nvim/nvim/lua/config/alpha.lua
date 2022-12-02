@@ -9,7 +9,7 @@ local header = {
   "    l  μ   r   t   =       λ  i  |",
   " A  4  V   Y   3   T   @   ?  .  _",
   " y  *  -   $   r   <   ω   8  ?  Q",
-  " .  :  n   e   o   v   i   m  :  .",
+  " .  :  n   e   o      i   m  :  .",
   " b  ;  {   f   ]   h   X   <  v  k",
   "    o  &   f   d   H       0  θ  E",
   "           D       %          ¢  0",
