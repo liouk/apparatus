@@ -5,9 +5,6 @@ precmd() { eval "$PROMPT_COMMAND" }
 export VISUAL="nvim"
 export EDITOR="nvim"
 
-# Aliases
-source ~/.zsh/.zsh_aliases
-
 # Futurae
 export PATH="$GOPATH/bin:$PATH"
 export FUTURAE="/Users/ilias/Workspace/futurae"
@@ -50,6 +47,10 @@ eval "$(navi widget zsh)"
 # keybindings
 bindkey \^U backward-kill-line
 
+# Aliases
+source ~/.zsh/.zsh_aliases
+
+# helper funcs
 source ~/.zsh/.zsh_funcs
 
 fortune -s

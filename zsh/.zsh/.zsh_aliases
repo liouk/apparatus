@@ -43,10 +43,7 @@ alias nas='test -d /Volumes/ilias || . ~/Workspace/github.com/liouk/apparatus/ut
 
 # kitty SSH compatibility
 # https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
-if [[ "$TERM" == "xterm-kitty" ]]
-then
-  alias ssh='env TERM=xterm-256color ssh'
-fi
+[[ "$TERM" == "xterm-kitty" ]] && { alias ssh='env TERM=xterm-256color ssh' }
 
 # nvim
 alias vim='nvim'
@@ -56,4 +53,4 @@ alias kc=kubectl
 alias kcs=kubectl -n kube-system
 
 # osx
-alias xargs='gxargs'
+command -v gxargs 2>&1 >/dev/null && { alias xargs='gxargs' }
