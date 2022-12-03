@@ -19,6 +19,7 @@ return require("packer").startup(function(use)
 
   use "ggandor/leap.nvim"
   use "romainl/vim-cool"
+  use "elzr/vim-json"
 
   use { "goolord/alpha-nvim", requires = { "kyazdani42/nvim-web-devicons" } }
 
