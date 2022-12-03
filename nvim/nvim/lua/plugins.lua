@@ -18,6 +18,8 @@ return require("packer").startup(function(use)
   use "lewis6991/impatient.nvim"
 
   use "ggandor/leap.nvim"
+  use "romainl/vim-cool"
+
   use { "goolord/alpha-nvim", requires = { "kyazdani42/nvim-web-devicons" } }
 
   -- automatically set up configuration after cloning packer.nvim

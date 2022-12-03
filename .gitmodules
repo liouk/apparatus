@@ -43,6 +43,3 @@
 [submodule "vim/bundle/fugitive"]
 	path = vim/.vim/bundle/fugitive
 	url = https://tpope.io/vim/fugitive.git
-[submodule "vim/.vim/bundle/vim-cool"]
-	path = vim/.vim/bundle/vim-cool
-	url = git@github.com:romainl/vim-cool.git
