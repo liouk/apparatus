@@ -1,12 +1,6 @@
 [submodule "vim/bundle/gruvbox"]
 	path = vim/.vim/bundle/gruvbox
 	url = git@github.com:morhetz/gruvbox.git
-[submodule "vim/bundle/fzf.vim"]
-	path = vim/.vim/bundle/fzf.vim
-	url = git@github.com:junegunn/fzf.vim.git
-[submodule "vim/bundle/fzf"]
-	path = vim/.vim/bundle/fzf
-	url = https://github.com/junegunn/fzf
 [submodule "vim/bundle/vim-airline"]
 	path = vim/.vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline

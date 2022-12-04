@@ -70,9 +70,9 @@ local buttons = config.layout[6]
 buttons.val = {
   dashboard.button("e", "  new buffer",     "<cmd>enew <BAR> startinsert <CR>"),
   dashboard.button("d", "  explore dir",    "<cmd>BW<CR><cmd>NvimTreeFocus<CR>"),
-  dashboard.button("p", "  find here",      "<cmd>FZF<CR>"),
-  dashboard.button("f", "  grep here",      "<cmd>Rg<CR>"),
-  dashboard.button("r", "  search recent",  "<cmd>History<CR>"),
+  dashboard.button("p", "  find here",      "<cmd>Telescope find_files<CR>"),
+  dashboard.button("f", "  grep here",      "<cmd>Telescope live_grep<CR>"),
+  dashboard.button("r", "  search recent",  "<cmd>Telescope oldfiles<CR>"),
   dashboard.button("s", "  vim config" ,    "<cmd>e $MYVIMRC<CR>"),
   dashboard.button("u", "  update plugins", "<cmd>PackerSync<CR>"),
   dashboard.button("q", "  quit",           "<cmd>qa<CR>"),

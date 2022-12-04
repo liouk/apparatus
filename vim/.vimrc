@@ -114,36 +114,6 @@ set signcolumn=yes
 let g:gitgutter_max_signs = 200
 autocmd BufWritePost * GitGutter
 
-" rg
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
-    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-
-nmap <leader>f :Rg<CR>
-
-" fzf
-set rtp+=/usr/local/opt/fzf
-nnoremap <C-p> :Files<CR>
-nmap <leader>e :Buffers<CR>
-let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.5, 'highlight': 'Comment', 'border': 'rounded' } }
-let g:fzf_preview_window = []
-
-" fzf gruvbox scheme
-let g:fzf_colors = {}
-let g:fzf_colors.fg      = ['fg', 'GruvboxFg1']
-let g:fzf_colors.bg      = ['fg', 'GruvboxBg0']
-let g:fzf_colors.hl      = ['fg', 'GruvboxRed']
-let g:fzf_colors['fg+']  = ['fg', 'GruvboxGreen']
-let g:fzf_colors['bg+']  = ['fg', 'GruvboxBg1']
-let g:fzf_colors['hl+']  = ['fg', 'GruvboxRed']
-let g:fzf_colors.info    = ['fg', 'GruvboxOrange']
-let g:fzf_colors.border  = ['fg', 'GruvboxBg0']
-let g:fzf_colors.prompt  = ['fg', 'GruvboxAqua']
-let g:fzf_colors.pointer = ['fg', 'GruvboxOrange']
-let g:fzf_colors.marker  = ['fg', 'GruvboxYellow']
-let g:fzf_colors.spinner = ['fg', 'GruvboxGreen']
-let g:fzf_colors.header  = ['fg', 'GruvboxBlue']
-
 " syntastic
 nnoremap <leader>s :SyntasticCheck<CR>
 set statusline+=%#warningmsg#
