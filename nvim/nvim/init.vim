@@ -6,8 +6,7 @@ source ~/.vimrc
 "---[ neovim specifics ]------------------------------------------------------
 
 " lua configurations
+lua require("config")
 lua require("plugins")
 lua require("plugin_config")
-
-set guicursor=a:block " block cursor everywhere
-set guicursor=i:hor50 " underline in insert mode
+lua require("keymaps")

@@ -21,6 +21,7 @@ return require("packer").startup(function(use)
   use "romainl/vim-cool"
   use "elzr/vim-json"
 
+  use {"nvim-tree/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons"} }
   use { "goolord/alpha-nvim", requires = { "kyazdani42/nvim-web-devicons" } }
 
   -- automatically set up configuration after cloning packer.nvim

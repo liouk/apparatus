@@ -86,12 +86,12 @@ nnoremap N Nzz
 "
 
 " NERDTree
-nnoremap <leader>d :NERDTreeToggle<cr>
-let NERDTreeMinimalUI=1
-let NERDTreeShowHidden=1
-let g:NERDTreeDirArrows=0
-let g:NERDTreeDirArrowExpandable="+"
-let g:NERDTreeDirArrowCollapsible="~"
+"nnoremap <leader>d :NERDTreeToggle<cr>
+"let NERDTreeMinimalUI=1
+"let NERDTreeShowHidden=1
+"let g:NERDTreeDirArrows=0
+"let g:NERDTreeDirArrowExpandable="+"
+"let g:NERDTreeDirArrowCollapsible="~"
 
 " vim-commentary
 nnoremap <C-/> <Plug>CommentaryLine

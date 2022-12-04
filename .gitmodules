@@ -7,9 +7,6 @@
 [submodule "vim/bundle/fzf"]
 	path = vim/.vim/bundle/fzf
 	url = https://github.com/junegunn/fzf
-[submodule "vim/bundle/nerdtree"]
-	path = vim/.vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
 [submodule "vim/bundle/vim-airline"]
 	path = vim/.vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
