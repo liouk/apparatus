@@ -15,7 +15,17 @@ require("telescope").setup({
 })
 
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.find_files)
+
+local function find_files_with_hidden()
+  builtin.find_files {
+    find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
+  }
+end
+
+vim.keymap.set("n", "<C-p>", find_files_with_hidden)
 vim.keymap.set("n", "<leader>r", builtin.oldfiles)
 vim.keymap.set("n", "<leader>e", builtin.buffers)
 vim.keymap.set("n", "<leader>f", builtin.live_grep)
+
+-- use fzf native plugin
+require("telescope").load_extension("fzf")
