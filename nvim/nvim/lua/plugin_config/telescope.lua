@@ -5,6 +5,7 @@ require("telescope").setup({
         ["<C-k>"] = "move_selection_previous",
         ["<C-j>"] = "move_selection_next",
         ["<Esc>"] = "close",
+        ["<C-u>"] = false
       },
       n = {
         ["<C-k>"] = "move_selection_previous",
@@ -22,10 +23,16 @@ local function find_files_with_hidden()
   }
 end
 
+local function live_grep_no_flepaths()
+  builtin.live_grep {
+    only_sort_text = true,
+  }
+end
+
 vim.keymap.set("n", "<C-p>", find_files_with_hidden)
 vim.keymap.set("n", "<leader>r", builtin.oldfiles)
 vim.keymap.set("n", "<leader>e", builtin.buffers)
-vim.keymap.set("n", "<leader>f", builtin.live_grep)
+vim.keymap.set("n", "<leader>f", live_grep_no_flepaths)
 
 -- use fzf native plugin
 require("telescope").load_extension("fzf")
