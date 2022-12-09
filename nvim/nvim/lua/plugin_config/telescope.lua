@@ -19,6 +19,7 @@ local builtin = require("telescope.builtin")
 
 local function find_files_with_hidden()
   builtin.find_files {
+    previewer = false,
     find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
   }
 end
