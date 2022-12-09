@@ -1,5 +1,47 @@
+local layouts = {
+  small = {
+    prompt_position = "bottom",
+    width = function(_, max_columns, _)
+      return math.min(max_columns-10, 80)
+    end,
+    height = function(_, _, max_lines)
+      return math.min(max_lines, 15)
+    end,
+  },
+
+  standard = {
+    prompt_position = "bottom",
+    width = function(_, max_columns, _)
+      return math.min(max_columns-10, 90)
+    end,
+    height = function(_, _, max_lines)
+      return math.min(max_lines, 20)
+    end,
+  },
+
+  wide = {
+    prompt_position = "bottom",
+    width = function(_, max_columns, _)
+      return math.min(max_columns-10, 110)
+    end,
+    height = function(_, _, max_lines)
+      return math.min(max_lines, 20)
+    end,
+  },
+}
+
 require("telescope").setup({
   defaults = {
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim",
+    },
     mappings = {
       i = {
         ["<C-k>"] = "move_selection_previous",
@@ -15,12 +57,29 @@ require("telescope").setup({
   },
   pickers = {
     find_files = {
+      theme = "dropdown",
       previewer = false,
-      find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
+      find_command = { "rg", "--files", "--iglob", "!.git", "--hidden" },
+      layout_config = layouts.standard,
     },
-    oldfiles = { previewer = false },
-    buffers = { previewer = false },
-    live_grep = { only_sort_text = true },
+
+    oldfiles = {
+      previewer = false,
+      theme = "dropdown",
+      layout_config = layouts.standard,
+    },
+
+    buffers = {
+      previewer = false,
+      theme = "dropdown",
+      layout_config = layouts.small,
+    },
+
+    live_grep = {
+      only_sort_text = true,
+      theme = "dropdown",
+      layout_config = layouts.wide,
+    },
   },
 })
 
