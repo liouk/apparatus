@@ -6,7 +6,7 @@ source ~/.vimrc
 "---[ neovim specifics ]------------------------------------------------------
 
 " lua configurations
-lua require("config")
-lua require("plugins")
-lua require("plugin_config")
-lua require("keymaps")
+lua require('config')
+lua require('plugins')
+lua require('plugin_config')
+lua require('keymaps')

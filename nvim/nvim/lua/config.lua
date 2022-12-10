@@ -6,7 +6,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- cursor: block everywhere, underline in insert
-vim.opt.guicursor = "a:block,i:hor50"
+vim.opt.guicursor = 'a:block,i:hor50'
 
 -- leader key
 vim.g.mapleader = ','
