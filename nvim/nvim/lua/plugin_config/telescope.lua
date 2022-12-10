@@ -57,11 +57,11 @@ require("telescope").setup({
   },
   pickers = {
     find_files = {
-      theme = "dropdown",
       previewer = false,
-      find_command = { "rg", "--files", "--iglob", "!.git", "--hidden" },
+      theme = "dropdown",
       sorting_strategy = "descending",
       layout_config = layouts.standard,
+      find_command = { "rg", "--files", "--iglob", "!.git", "--hidden" },
     },
 
     oldfiles = {
@@ -79,18 +79,18 @@ require("telescope").setup({
     },
 
     live_grep = {
-      only_sort_text = true,
       theme = "dropdown",
       sorting_strategy = "descending",
       layout_config = layouts.wide,
+      only_sort_text = true,
     },
 
     grep_string = {
-      search = "",
-      only_sort_text = true,
       theme = "dropdown",
       sorting_strategy = "descending",
       layout_config = layouts.wide,
+      only_sort_text = true,
+      search = "",
     },
 
     current_buffer_fuzzy_find = {
