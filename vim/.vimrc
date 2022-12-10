@@ -54,18 +54,6 @@ set noswapfile
 nnoremap <C-/> <Plug>CommentaryLine
 vnoremap <C-/> <Plug>Commentary
 
-" vim-airline
-let g:airline_extensions = [ "branch" ]
-let g:airline_detect_modified=1
-set laststatus=2
-let g:airline_theme='gruvbox'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = ''
-
 " syntastic
 nnoremap <leader>s :SyntasticCheck<CR>
 set statusline+=%#warningmsg#
