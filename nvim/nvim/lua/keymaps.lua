@@ -15,19 +15,6 @@ vim.keymap.set("v", "<right>", "<nop>")
 -- highlight all occurences of current word without moving
 vim.keymap.set("n", "<C-b>", "*``")
 
--- buffers
-vim.opt.hidden = true
-vim.keymap.set("n", "<C-j>", ":bnext<CR>")
-vim.keymap.set("n", "<C-k>", ":bprevious<CR>")
-vim.keymap.set("n", "<C-o>", ":edit ")
-vim.keymap.set("i", "<C-j>", "<Esc>:bnext<CR>i")
-vim.keymap.set("i", "<C-k>", "<Esc>:bprevious<CR>i")
-vim.keymap.set("i", "<C-e>", "<Esc>:edit ")
-
--- vim-buffkill
-vim.keymap.set("n", "<C-w>", ":BW<CR>")
-vim.keymap.set("i", "<C-w>", "<Esc>:BW<CR>")
-
 -- splits
 vim.keymap.set("n", "<C-e>", ":vsplit<CR>")
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>")

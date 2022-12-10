@@ -24,6 +24,8 @@ return require("packer").startup(function(use)
   use "APZelos/blamer.nvim"
   use "airblade/vim-gitgutter"
 
+  use { "romgrk/barbar.nvim", requires = { "kyazdani42/nvim-web-devicons" } }
+
   use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } }
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 

@@ -46,9 +46,6 @@ set incsearch
 set backspace=indent,eol,start
 set noswapfile
 
-" tabline
-set showtabline=2
-
 "
 " Plugin specific configuration
 "
@@ -58,7 +55,7 @@ nnoremap <C-/> <Plug>CommentaryLine
 vnoremap <C-/> <Plug>Commentary
 
 " vim-airline
-let g:airline_extensions = [ "tabline", "branch" ]
+let g:airline_extensions = [ "branch" ]
 let g:airline_detect_modified=1
 set laststatus=2
 let g:airline_theme='gruvbox'
