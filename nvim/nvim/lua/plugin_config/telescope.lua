@@ -84,6 +84,14 @@ require("telescope").setup({
       sorting_strategy = "descending",
       layout_config = layouts.wide,
     },
+
+    grep_string = {
+      search = "",
+      only_sort_text = true,
+      theme = "dropdown",
+      sorting_strategy = "descending",
+      layout_config = layouts.wide,
+    },
   },
 })
 
@@ -91,7 +99,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files)
 vim.keymap.set("n", "<leader>r", builtin.oldfiles)
 vim.keymap.set("n", "<leader>e", builtin.buffers)
-vim.keymap.set("n", "<leader>f", builtin.live_grep)
+vim.keymap.set("n", "<leader>f", builtin.grep_string)
 
 -- use fzf native plugin
 require("telescope").load_extension("fzf")
