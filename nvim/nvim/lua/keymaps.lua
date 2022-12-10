@@ -16,15 +16,15 @@ vim.keymap.set('v', '<right>', '<nop>')
 vim.keymap.set('n', '<C-b>', '*``')
 
 -- splits
-vim.keymap.set('n', '<C-e>', ':vsplit<CR>')
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>')
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>')
-vim.keymap.set('i', '<C-s>', '<Esc>:vsplit<CR>i')
-vim.keymap.set('i', '<C-l>', '<Esc>:wincmd l<CR>i')
-vim.keymap.set('i', '<C-h>', '<Esc>:wincmd h<CR>i')
+vim.keymap.set('n', '<C-e>', '<cmd>vsplit<CR>')
+vim.keymap.set('n', '<C-l>', '<cmd>wincmd l<CR>')
+vim.keymap.set('n', '<C-h>', '<cmd>wincmd h<CR>')
+vim.keymap.set('i', '<C-s>', '<Esc><cmd>vsplit<CR>i')
+vim.keymap.set('i', '<C-l>', '<Esc><cmd>wincmd l<CR>i')
+vim.keymap.set('i', '<C-h>', '<Esc><cmd>wincmd h<CR>i')
 
 -- dismiss popup windows
-vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>')
+vim.keymap.set('n', '<leader>a', '<cmd>cclose<CR><cmd>lclose<CR>')
 
 -- copy to clipboard
 vim.keymap.set('v', '<leader>y', '"*y')
@@ -40,12 +40,12 @@ vim.keymap.set('i', '{{', '{')
 vim.keymap.set('i', '{}', '{}')
 
 -- replace all occurences of selected text in visual mode
-vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>')
+vim.keymap.set('v', '<C-r>', '"hy<cmd>%s/<C-r>h//g<left><left>')
 
 -- paste mode
-vim.keymap.set('n', '<F2>', ':set invpaste paste?<CR>')
+vim.keymap.set('n', '<F2>', '<cmd>set invpaste paste?<CR>')
 vim.opt.pastetoggle = '<F2>'
 
 -- use ctrl+/ to toggle comment
-vim.keymap.set('n', '<C-_>', ':Commentary<CR>')
-vim.keymap.set('v', '<C-_>', ":'<,'>Commentary<CR>")
+vim.keymap.set('n', '<C-_>', '<cmd>Commentary<CR>')
+vim.keymap.set('v', '<C-_>', "<cmd>'<,'>Commentary<CR>")
