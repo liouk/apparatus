@@ -7,9 +7,6 @@
 [submodule "vim/bundle/vim-expand-region"]
 	path = vim/.vim/bundle/vim-expand-region
 	url = https://github.com/terryma/vim-expand-region
-[submodule "vim/bundle/vim-bufkill"]
-	path = vim/.vim/bundle/vim-bufkill
-	url = https://github.com/qpkorr/vim-bufkill
 [submodule "vim/bundle/vim-puppet"]
 	path = vim/.vim/bundle/vim-puppet
 	url = https://github.com/rodjek/vim-puppet
