@@ -92,6 +92,12 @@ require("telescope").setup({
       sorting_strategy = "descending",
       layout_config = layouts.wide,
     },
+
+    current_buffer_fuzzy_find = {
+      theme = "dropdown",
+      sorting_strategy = "descending",
+      layout_config = layouts.small,
+    }
   },
 })
 
@@ -100,6 +106,7 @@ vim.keymap.set("n", "<C-p>", builtin.find_files)
 vim.keymap.set("n", "<leader>r", builtin.oldfiles)
 vim.keymap.set("n", "<leader>e", builtin.buffers)
 vim.keymap.set("n", "<leader>f", builtin.grep_string)
+vim.keymap.set("n", "<C-f>", builtin.current_buffer_fuzzy_find)
 
 -- use fzf native plugin
 require("telescope").load_extension("fzf")
