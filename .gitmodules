@@ -7,9 +7,6 @@
 [submodule "vim/bundle/vim-airline-themes"]
 	path = vim/.vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
-[submodule "vim/bundle/vim-commentary"]
-	path = vim/.vim/bundle/vim-commentary
-	url = https://github.com/tpope/vim-commentary
 [submodule "vim/bundle/syntastic"]
 	path = vim/.vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic

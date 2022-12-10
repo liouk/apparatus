@@ -23,6 +23,7 @@ return require("packer").startup(function(use)
   use "elzr/vim-json"
   use "APZelos/blamer.nvim"
   use "airblade/vim-gitgutter"
+  use "tpope/vim-commentary"
 
   use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } }
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
