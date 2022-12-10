@@ -60,24 +60,28 @@ require("telescope").setup({
       theme = "dropdown",
       previewer = false,
       find_command = { "rg", "--files", "--iglob", "!.git", "--hidden" },
+      sorting_strategy = "descending",
       layout_config = layouts.standard,
     },
 
     oldfiles = {
       previewer = false,
       theme = "dropdown",
+      sorting_strategy = "descending",
       layout_config = layouts.standard,
     },
 
     buffers = {
       previewer = false,
       theme = "dropdown",
+      sorting_strategy = "descending",
       layout_config = layouts.small,
     },
 
     live_grep = {
       only_sort_text = true,
       theme = "dropdown",
+      sorting_strategy = "descending",
       layout_config = layouts.wide,
     },
   },
