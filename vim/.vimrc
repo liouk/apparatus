@@ -34,19 +34,9 @@ highlight ColorColumn ctermbg=DarkGrey
 highlight Comment cterm=italic gui=italic
 set hlsearch
 
-" cursor
-" steady underline in insert mode
-let &t_SI = "\e[4 q"
-" block everywhere else
-let &t_EI = "\e[2 q"
-
 " show trailing whitespace
 highlight ExtraWhitespace ctermbg=darkblue guibg=#344011
 autocmd BufEnter * exe ':2match ExtraWhitespace /\s\+$\| \+\ze\t\|\t\+\ze /'
-
-" define leader key
-let mapleader = ","
-nnoremap <leader>a :cclose<CR>:lclose<CR>
 
 " misc
 set showcmd
@@ -56,30 +46,8 @@ set incsearch
 set backspace=indent,eol,start
 set noswapfile
 
-" copy to clipboard
-nmap <leader>y "*y
-
-" paste
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-
 " tabline
 set showtabline=2
-
-" Ctrl+R replaces all occurences of selected text in visual mode
-vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
-
-" auto-complete brackets
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-
-" insert new line at the cursor without entering insert mode
-nnoremap <S-Enter> i<CR><Esc>
-
-" bring search result to mid screen
-nnoremap n nzz
-nnoremap N Nzz
 
 "
 " Plugin specific configuration
