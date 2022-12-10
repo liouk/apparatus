@@ -101,11 +101,6 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.branch = ''
 
-" gitgutter
-set signcolumn=yes
-let g:gitgutter_max_signs = 200
-autocmd BufWritePost * GitGutter
-
 " syntastic
 nnoremap <leader>s :SyntasticCheck<CR>
 set statusline+=%#warningmsg#
