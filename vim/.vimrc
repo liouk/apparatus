@@ -46,25 +46,6 @@ set incsearch
 set backspace=indent,eol,start
 set noswapfile
 
-"
-" Plugin specific configuration
-"
-
-" vim-commentary
-nnoremap <C-/> <Plug>CommentaryLine
-vnoremap <C-/> <Plug>Commentary
-
-" syntastic
-nnoremap <leader>s :SyntasticCheck<CR>
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'passive_filetypes': ['go', 'java'] }
 let g:gruvbox_contrast_dark = "hard"
 
 " kitty

@@ -1,9 +1,6 @@
 [submodule "vim/bundle/gruvbox"]
 	path = vim/.vim/bundle/gruvbox
 	url = git@github.com:morhetz/gruvbox.git
-[submodule "vim/bundle/syntastic"]
-	path = vim/.vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic
 [submodule "vim/bundle/vim-expand-region"]
 	path = vim/.vim/bundle/vim-expand-region
 	url = https://github.com/terryma/vim-expand-region
