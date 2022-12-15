@@ -61,7 +61,7 @@ require('telescope').setup({
       theme = 'dropdown',
       sorting_strategy = 'descending',
       layout_config = layouts.standard,
-      find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
+      find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', '--no-ignore-vcs' },
     },
 
     oldfiles = {
