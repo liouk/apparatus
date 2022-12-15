@@ -68,14 +68,14 @@ mru_files.val[3] = {
 -- buttons
 local buttons = config.layout[6]
 buttons.val = {
-  dashboard.button('e', '  new buffer',     '<cmd>enew <BAR> startinsert <CR>'),
-  dashboard.button('d', '  explore dir',    '<cmd>BW<CR><cmd>NvimTreeFocus<CR>'),
-  dashboard.button('p', '  find here',      '<cmd>Telescope find_files<CR>'),
-  dashboard.button('f', '  grep here',      '<cmd>Telescope grep_string<CR>'),
-  dashboard.button('r', '  search recent',  '<cmd>Telescope oldfiles<CR>'),
-  dashboard.button('s', '  vim config' ,    '<cmd>e $MYVIMRC<CR>'),
-  dashboard.button('u', '  update plugins', '<cmd>PackerSync<CR>'),
-  dashboard.button('q', '  quit',           '<cmd>qa<CR>'),
+  dashboard.button('e',         '  new buffer',     '<cmd>enew <BAR> startinsert <CR>'),
+  dashboard.button('<leader>d', '  explore dir'  ),
+  dashboard.button('<C-p>',     '  find here'    ),
+  dashboard.button('<leader>f', '  grep here'    ),
+  dashboard.button('<leader>r', '  search recent'),
+  dashboard.button('s',         '  vim config' ,    '<cmd>e $MYVIMRC<CR>'),
+  dashboard.button('u',         '  update plugins', '<cmd>PackerSync<CR>'),
+  dashboard.button('q',         '  quit',           '<cmd>qa<CR>'),
 }
 
 -- footer
