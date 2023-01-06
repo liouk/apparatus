@@ -23,12 +23,12 @@ fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
 
 # brew
-eval $(/opt/homebrew/bin/brew shellenv)
-export PATH="/opt/homebrew/bin:$PATH"
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
-eval "$(rbenv init -)"
+BREW_PATH=/usr/local/Homebrew
+if [[ $(uname -m) == 'arm64' ]]; then
+  BREW_PATH=/opt/homebrew
+fi
+eval $($BREW_PATH/bin/brew shellenv)
+export PATH="BREW_PATH/bin:$PATH"
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -52,5 +52,3 @@ source ~/.zsh/.zsh_aliases
 
 # helper funcs
 source ~/.zsh/.zsh_funcs
-
-fortune -s
