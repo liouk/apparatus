@@ -21,7 +21,8 @@ function install_macos {
     direnv \
     bat \
     jq \
-    navi
+    navi \
+    romkatv/powerlevel10k/powerlevel10k
 
   # fonts
   brew tap homebrew/cask-fonts
@@ -38,6 +39,7 @@ function stow_macos {
   stow --restow --target="$HOME" zsh
   stow --restow --target="$HOME" git
   stow --restow --target="$HOME" tig
+  stow --restow --target="$HOME" powerlevel10k
   stow --restow --target="$HOME/.config" kitty
   stow --restow --target="$HOME/.config" karabiner
   stow --restow --target="$HOME/.config" nvim
@@ -52,7 +54,7 @@ function unstow_macos {
   stow --delete --target="$HOME" zsh
   stow --delete --target="$HOME" git
   stow --delete --target="$HOME" tig
-  stow --delete --target="$HOME" vim
+  stow --delete --target="$HOME" powerlevel10k
   stow --delete --target="$HOME/.config" kitty
   stow --delete --target="$HOME/.config" karabiner
   stow --delete --target="$HOME/.config" nvim
