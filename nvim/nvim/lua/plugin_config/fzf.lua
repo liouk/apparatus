@@ -1,10 +1,22 @@
 -- Rg command with preview window
 -- source: https://github.com/junegunn/fzf.vim#example-rg-command-with-preview-window
--- vim.api.nvim_create_user_command(
---   'Rg',
---   "call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)",
---   { bang = true, nargs = '*' }
--- )
+local function vim_grep(qargs, bang)
+  local query = '""'
+  if qargs ~= nil then
+    query = vim.fn.shellescape(qargs)
+  end
+
+  local sh = 'rg --column --line-number --no-heading --color=always --smart-case -- ' .. query
+  vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'right:50%', 'ctrl-/'), bang)
+end
+
+vim.api.nvim_create_user_command(
+  'Rg',
+  function(arg)
+    vim_grep(arg.qargs, arg.bang)
+  end,
+  { bang = true, nargs = '*' }
+)
 
 vim.g.fzf_preview_window = {}
 vim.g.fzf_layout = {
