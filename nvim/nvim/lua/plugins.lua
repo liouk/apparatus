@@ -26,8 +26,8 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'terryma/vim-expand-region'
 
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use 'junegunn/fzf'
+  use 'junegunn/fzf.vim'
 
   use { 'nvim-tree/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
   use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
