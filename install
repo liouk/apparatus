@@ -22,7 +22,9 @@ function install_macos {
     bat \
     jq \
     navi \
-    romkatv/powerlevel10k/powerlevel10k
+    romkatv/powerlevel10k/powerlevel10k \
+    zsh-syntax-highlighting \
+    zsh-autosuggestions
 
   # fonts
   brew tap homebrew/cask-fonts

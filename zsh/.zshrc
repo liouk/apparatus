@@ -59,7 +59,11 @@ source ~/.zsh/.zsh_aliases
 
 # helper funcs
 source ~/.zsh/.zsh_funcs
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# zsh syntax highlighting and autosuggestions
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# powerlevel10k
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
