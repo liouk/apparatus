@@ -47,7 +47,6 @@ function stow_macos {
 
   mkdir -p "$HOME/Library/Application Support/navi"
   stow --restow --target="$HOME/Library/Application Support/navi" navi
-  stow --restow --target="$HOME" vim
 }
 
 function unstow_macos {
@@ -60,8 +59,6 @@ function unstow_macos {
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$HOME/Library/Application Support/navi" navi
   stow --delete --target="$HOME/Google Drive/Notes" obsidian
-
-  stow --delete --target="$HOME" vim
 }
 
 function apparatus {
@@ -74,7 +71,6 @@ function apparatus {
   mkdir -p $APPARATUS_INSTALLDIR
   cd $APPARATUS_INSTALLDIR
   git clone git@github.com:liouk/apparatus.git
-  git submodule update --init --recursive
   popd >/dev/null
 }
 
