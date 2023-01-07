@@ -22,10 +22,6 @@ set fillchars=vert:│
 " key timeouts
 set ttimeoutlen=0
 
-" colors
-set background=dark
-colorscheme gruvbox
-
 " highlighting
 syntax on
 "set cursorline
@@ -45,8 +41,6 @@ set nocompatible
 set incsearch
 set backspace=indent,eol,start
 set noswapfile
-
-let g:gruvbox_contrast_dark = "hard"
 
 " kitty
 " vim hardcodes background color erase even if the terminfo file does
