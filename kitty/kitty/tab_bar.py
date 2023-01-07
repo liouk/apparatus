@@ -35,8 +35,8 @@ def _draw_icon(screen: Screen, index: int, symbol: str = "") -> int:
         return 0
 
     fg, bg = screen.cursor.fg, screen.cursor.bg
-    screen.cursor.fg = as_rgb(color_as_int(Color(235, 219, 178))) # gruvbox dark fg
-    screen.cursor.bg = as_rgb(color_as_int(Color(60, 56, 54))) # gruvbox dark bg1
+    screen.cursor.fg = as_rgb(color_as_int(Color(205, 214, 244))) # catppuccin-mocha text
+    screen.cursor.bg = as_rgb(color_as_int(Color(49, 50, 68))) # catppuccin-mocha surface0
     screen.draw(symbol)
     screen.cursor.fg, screen.cursor.bg = fg, bg
     screen.cursor.x = len(symbol)
