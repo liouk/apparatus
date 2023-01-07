@@ -29,6 +29,8 @@ return require('packer').startup(function(use)
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
 
+  use { "catppuccin/nvim", as = "catppuccin" }
+
   use { 'nvim-tree/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
   use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
   use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }

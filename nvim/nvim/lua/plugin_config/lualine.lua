@@ -1,6 +1,6 @@
 require('lualine').setup({
   options = {
-    theme = 'gruvbox',
+    theme = 'catppuccin',
     disabled_filetypes = { 'packer', 'NvimTree' },
   },
   sections = {
