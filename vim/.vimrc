@@ -5,9 +5,6 @@ execute pathogen#infect()
 filetype plugin on
 filetype on
 
-" haproxy vim syntax
-autocmd BufRead,BufNewFile haproxy*.cfg* set ft=haproxy
-
 " indentation
 set autoindent
 set smartindent
