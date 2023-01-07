@@ -1,4 +1,5 @@
 vim.opt.ttimeoutlen = 0
+vim.opt.swapfile = false
 vim.wo.number = true
 
 -- identation
