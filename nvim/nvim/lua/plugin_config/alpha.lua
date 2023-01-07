@@ -94,14 +94,14 @@ local plugins_count = vim.fn.len(vim.fn.globpath('~/.local/share/nvim/site/pack/
 config.layout = {
   -- header
   { type = 'padding', val = 2 },
-  { type = 'text', val = header[1], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[2], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[3], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[4], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[5], opts = { hl = 'htmlBold', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[6], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[7], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
-  { type = 'text', val = header[8], opts = { hl = 'GruvboxGreen', shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[1], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[2], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[3], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[4], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[5], opts = { hl = 'ModeMsg', shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[6], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[7], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+  { type = 'text', val = header[8], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
 
   -- recent files
   { type = 'padding', val = 2 },
@@ -115,9 +115,9 @@ config.layout = {
 
   -- footer
   { type = 'padding', val = 2 },
-  { type = 'text', val = ' nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = { hl = 'GruvboxBg4', shrink_margin = false, position = 'center', } },
-  { type = 'text', val = ' '..plugins_count..' plugins', opts = { hl = 'GruvboxBg4', shrink_margin = false, position = 'center', } },
-  { type = 'text', val = ' '..fn_short(cwd), opts = { position = 'center', hl = 'GruvboxBg4', } },
+  { type = 'text', val = ' nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = { hl = 'SignColumn', shrink_margin = false, position = 'center', } },
+  { type = 'text', val = ' '..plugins_count..' plugins', opts = { hl = 'SignColumn', shrink_margin = false, position = 'center', } },
+  { type = 'text', val = ' '..fn_short(cwd), opts = { position = 'center', hl = 'SignColumn', } },
 }
 
 require('alpha').setup(config)
