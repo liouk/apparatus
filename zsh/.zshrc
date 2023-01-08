@@ -5,10 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Configure zsh prompt
-source ~/.zsh/.zsh_prompt
-precmd() { eval "$PROMPT_COMMAND" }
-
 export VISUAL="nvim"
 export EDITOR="nvim"
 
