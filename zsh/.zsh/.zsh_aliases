@@ -4,7 +4,7 @@ alias grep='grep --color'
 alias fgrep='fgrep --color'
 
 # directory shortcuts
-alias xpert='cd ~/Workspace/github.com/liouk/x11-squad'
+alias xpert='cd ~/Workspace/personal/x11-squad'
 alias ..='cd ..'
 alias ...='cd ../../'
 
