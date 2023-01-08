@@ -8,12 +8,6 @@ fi
 export VISUAL="nvim"
 export EDITOR="nvim"
 
-# Futurae
-export PATH="$GOPATH/bin:$PATH"
-export FUTURAE="/Users/ilias/Workspace/futurae"
-
-[[ -s "/Users/ilias/.gvm/scripts/gvm" ]] && source "/Users/ilias/.gvm/scripts/gvm"
-
 # Misc
 export LC_ALL=en_US.UTF-8
 KEYTIMEOUT=1
