@@ -37,14 +37,14 @@ local function alpha_config()
   -- buttons
   local buttons = config.layout[6]
   buttons.val = {
-    dashboard.button('e',         '  new buffer',     '<cmd>enew <BAR> startinsert <CR>'),
+    dashboard.button('e',         '  new buffer',     ':enew <BAR> startinsert <CR>'),
     dashboard.button('<leader>d', '  explore dir'  ),
     dashboard.button('<C-p>',     '  find here'    ),
     dashboard.button('<leader>f', '  grep here'    ),
     dashboard.button('<leader>r', '  search recent'),
-    dashboard.button('s',         '  vim config' ,    '<cmd>e $MYVIMRC<CR>'),
-    dashboard.button('z',         '  manage plugins', '<cmd>Lazy<CR>'),
-    dashboard.button('q',         '  quit',           '<cmd>qa<CR>'),
+    dashboard.button('s',         '  vim config' ,    ':e $MYVIMRC<CR>'),
+    dashboard.button('z',         '  manage plugins', ':Lazy<CR>'),
+    dashboard.button('q',         '  quit',           ':qa<CR>'),
   }
 
   -- footer

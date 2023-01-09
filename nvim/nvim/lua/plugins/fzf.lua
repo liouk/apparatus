@@ -35,9 +35,9 @@ return {
     }
 
     -- keymaps
-    vim.keymap.set('n', '<C-p>', '<cmd>Files<CR>')
-    vim.keymap.set('n', '<leader>f', '<cmd>Rg<CR>')
-    vim.keymap.set('n', '<leader>e', '<cmd>Buffers<CR>')
-    vim.keymap.set('n', '<leader>r', '<cmd>History<CR>')
+    vim.keymap.set('n', '<C-p>', ':Files<CR>')
+    vim.keymap.set('n', '<leader>f', ':Rg<CR>')
+    vim.keymap.set('n', '<leader>e', ':Buffers<CR>')
+    vim.keymap.set('n', '<leader>r', ':History<CR>')
   end,
 }
