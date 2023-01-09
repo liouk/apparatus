@@ -27,7 +27,7 @@ vim.keymap.set('v', '<leader>y', '"*y')
 vim.keymap.set('n', '<leader>y', '"*y')
 
 -- indent file
-vim.keymap.set('n', '<leader>t', 'gg=G')
+vim.keymap.set('n', '<leader>t', 'gg=G``')
 
 -- bring search result to mid screen
 vim.keymap.set('n', 'n', 'nzz')
