@@ -24,7 +24,8 @@ function install_macos {
     navi \
     romkatv/powerlevel10k/powerlevel10k \
     zsh-syntax-highlighting \
-    zsh-autosuggestions
+    zsh-autosuggestions \
+    btop
 
   # fonts
   brew tap homebrew/cask-fonts
