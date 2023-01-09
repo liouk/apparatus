@@ -1,6 +1,7 @@
 return {
   'romgrk/barbar.nvim',
   dependencies = { 'kyazdani42/nvim-web-devicons' },
+  event = 'BufEnter',
 
   config = function()
     require('bufferline').setup({

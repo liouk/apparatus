@@ -16,10 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   spec = {
     -- 'plugins' module contains all plugin definitions and configs
-    -- lua/plugins/init.lua defines all plugins that don't require a config
-    -- lua/plugins/<plugin>.lua contains the definition and config for every plugin that requires one
     import = "plugins",
   },
-  defaults = { lazy = false },
+  defaults = { lazy = true },
   install = { colorscheme = { "catppuccin" } },
 })

@@ -1,5 +1,6 @@
 return {
   'airblade/vim-gitgutter',
+  event = 'BufEnter',
 
   config = function()
     vim.opt.signcolumn = 'yes'
