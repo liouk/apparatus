@@ -8,6 +8,7 @@
   "lazy.nvim": { "branch": "main", "commit": "e6ee0fa6103e9514e85a96fc16902ad7f777b53f" },
   "leap.nvim": { "branch": "main", "commit": "a968ab4250840dc879e805f918b4f3b892310a12" },
   "lualine.nvim": { "branch": "master", "commit": "d8c392dd75778d6258da4e7c55522e94ac389732" },
+  "neoscroll.nvim": { "branch": "master", "commit": "54c5c419f6ee2b35557b3a6a7d631724234ba97a" },
   "nvim-tree.lua": { "branch": "master", "commit": "87961d38a7b6cd799ebe193946e86a1037ba66e8" },
   "nvim-treesitter": { "branch": "master", "commit": "ed021ac3affdfd04a26325896d221f5f519e5971" },
   "nvim-web-devicons": { "branch": "master", "commit": "7f55bc36eddec87597167a97de5b690997edaf7d" },
