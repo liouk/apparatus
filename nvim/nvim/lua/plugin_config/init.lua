@@ -1,8 +1,0 @@
-require('plugin_config.alpha')
-require('plugin_config.leap')
-require('plugin_config.nvim-tree')
-require('plugin_config.blamer')
-require('plugin_config.gitgutter')
-require('plugin_config.barbar')
-require('plugin_config.lualine')
-require('plugin_config.fzf')

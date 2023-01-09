@@ -15,7 +15,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- colors
 vim.opt.termguicolors = true
-vim.cmd.colorscheme "catppuccin-macchiato"
 vim.cmd([[
 highlight ExtraWhitespace ctermbg=darkblue guibg=#494d64
 autocmd BufEnter * exe ':2match ExtraWhitespace /\s\+$\| \+\ze\t\|\t\+\ze /'
