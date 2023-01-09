@@ -1,5 +1,6 @@
 {
   "alpha-nvim": { "branch": "main", "commit": "21a0f2520ad3a7c32c0822f943368dc063a569fb" },
+  "auto-pairs": { "branch": "master", "commit": "39f06b873a8449af8ff6a3eee716d3da14d63a76" },
   "barbar.nvim": { "branch": "master", "commit": "c1b5d351ccd8f88fd2729b90ade2ef5d333463de" },
   "catppuccin": { "branch": "main", "commit": "3020af75aae098a77737d91ee37c7147c8450d99" },
   "fzf": { "branch": "master", "commit": "e0f0984da7ecb0132a1744220d1d96c32583c0b8" },

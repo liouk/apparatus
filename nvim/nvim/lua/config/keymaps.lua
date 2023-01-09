@@ -34,11 +34,6 @@ vim.keymap.set('n', '<leader>y', '"*y')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
--- auto-complete brackets
-vim.keymap.set('i', '{<CR>', '{<CR>}<Esc>O')
-vim.keymap.set('i', '{{', '{')
-vim.keymap.set('i', '{}', '{}')
-
 -- replace all occurences of selected text in visual mode
 vim.keymap.set('v', '<C-r>', '"hy<cmd>%s/<C-r>h//g<left><left>')
 
