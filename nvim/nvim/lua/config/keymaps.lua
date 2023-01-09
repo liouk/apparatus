@@ -43,7 +43,3 @@ vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>')
 -- paste mode
 vim.keymap.set('n', '<F2>', ':set invpaste paste?<CR>')
 vim.opt.pastetoggle = '<F2>'
-
--- use ctrl+/ to toggle comment
-vim.keymap.set('n', '<C-_>', ':Commentary<CR>')
-vim.keymap.set('v', '<C-_>', ":'<,'>Commentary<CR>")
