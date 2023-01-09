@@ -7,10 +7,6 @@ vim.keymap.set('i', '<up>', '<nop>')
 vim.keymap.set('i', '<down>', '<nop>')
 vim.keymap.set('i', '<left>', '<nop>')
 vim.keymap.set('i', '<right>', '<nop>')
-vim.keymap.set('v', '<up>', '<nop>')
-vim.keymap.set('v', '<down>', '<nop>')
-vim.keymap.set('v', '<left>', '<nop>')
-vim.keymap.set('v', '<right>', '<nop>')
 
 -- highlight all occurences of current word without moving
 vim.keymap.set('n', '<C-b>', '*``')
