@@ -76,6 +76,8 @@ function apparatus {
   cd $APPARATUS_INSTALLDIR
   git clone git@github.com:liouk/apparatus.git
   popd >/dev/null
+
+  ln -s "$APPARATUS_INSTALLDIR/apparatus" "$HOME/.apparatus"
 }
 
 function main {
