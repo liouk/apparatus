@@ -1,2 +1,0 @@
-# delete tmux-resurrect session files older than 3d
-0 12 * * * find ~/.tmux/resurrect/tmux_resurrect_*.txt -mtime +3d -print0 | xargs -0 rm
