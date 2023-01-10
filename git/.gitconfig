@@ -1,6 +1,7 @@
 [user]
     name = Ilias Rinis
     email = iliasr@gmail.com
+	signingkey = 6350313EDE6D4E66
 
 [core]
     editor = nvim
@@ -112,3 +113,5 @@
 #	templatedir = ~/.git-templates/
 [pull]
 	rebase = true
+[commit]
+	gpgsign = true
