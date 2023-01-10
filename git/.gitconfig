@@ -112,5 +112,3 @@
 	templatedir = ~/.git-templates/
 [pull]
 	rebase = true
-[url "git@git.futurae.com:"]
-    insteadOf = https://git.futurae.com
