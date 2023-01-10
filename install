@@ -27,7 +27,8 @@ function install_macos {
     zsh-syntax-highlighting \
     zsh-autosuggestions \
     btop \
-    gnupg pinentry-mac
+    gnupg pinentry-mac \
+    itchyny/tap/mmv
 
   # fonts
   brew tap homebrew/cask-fonts
