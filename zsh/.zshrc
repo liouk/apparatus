@@ -13,13 +13,6 @@ export LC_ALL=en_US.UTF-8
 KEYTIMEOUT=1
 bindkey -e
 
-# bring vim to foreground with Ctrl-z if suspended
-function fg-nvim() {
-  fg %nvim
-}
-zle -N fg-nvim
-bindkey '^Z' fg-nvim
-
 # Load Git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
@@ -48,8 +41,18 @@ export FZF_CTRL_T_COMMAND='find .'
 # navi (widget used with ctrl+G)
 eval "$(navi widget zsh)"
 
+# gpg
+export GPG_TTY=$(tty)
+
 # keybindings
 bindkey \^U backward-kill-line
+
+# bring vim to foreground with Ctrl-z if suspended
+function fg-nvim() {
+  fg %nvim
+}
+zle -N fg-nvim
+bindkey '^Z' fg-nvim
 
 # Aliases
 source ~/.zsh/.zsh_aliases
