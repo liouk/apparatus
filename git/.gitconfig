@@ -108,7 +108,7 @@
 
 [push]
     default = current
-[init]
-	templatedir = ~/.git-templates/
+#[init]
+#	templatedir = ~/.git-templates/
 [pull]
 	rebase = true
