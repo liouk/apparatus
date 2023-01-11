@@ -23,18 +23,27 @@ vim.keymap.set('i', '<C-h>', '<Esc>:wincmd h<CR>i')
 vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>')
 
 -- copy to clipboard
-vim.keymap.set('v', '<leader>y', '"*y')
-vim.keymap.set('n', '<leader>y', '"*y')
+vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>y', '"+y')
 
 -- indent file
 vim.keymap.set('n', '<leader>t', 'gg=G``')
 
--- bring search result to mid screen
+-- stay in the middle of the screen when moving/searching
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
 -- replace all occurences of selected text in visual mode
 vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>')
+
+-- move selected line(s)
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- cursor stays in place when joining lines with J
+vim.keymap.set('n', 'J', 'mzJ`z')
 
 -- paste mode
 vim.keymap.set('n', '<F2>', ':set invpaste paste?<CR>')
