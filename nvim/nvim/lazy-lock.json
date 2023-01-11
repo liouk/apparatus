@@ -7,7 +7,7 @@
   "fzf.vim": { "branch": "master", "commit": "9c37e6801b432a4046511b14414f488487b61973" },
   "lazy.nvim": { "branch": "main", "commit": "8756c0950ca9053713262abd1092f6d100adc9a5" },
   "leap.nvim": { "branch": "main", "commit": "a968ab4250840dc879e805f918b4f3b892310a12" },
-  "lualine.nvim": { "branch": "master", "commit": "d8c392dd75778d6258da4e7c55522e94ac389732" },
+  "lualine.nvim": { "branch": "master", "commit": "0050b308552e45f7128f399886c86afefc3eb988" },
   "neoscroll.nvim": { "branch": "master", "commit": "54c5c419f6ee2b35557b3a6a7d631724234ba97a" },
   "nvim-tree.lua": { "branch": "master", "commit": "3ce0a8e770f70a135ef969e0a640bd8d05baf42c" },
   "nvim-treesitter": { "branch": "master", "commit": "be0b3ba1b90b2aa5c78ff7a5798d477a744e5cbe" },
