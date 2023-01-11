@@ -1,9 +1,13 @@
 vim.opt.ttimeoutlen = 0
-vim.opt.nu = true
+vim.wo.number = true
 vim.opt.scrolloff = 8
+vim.wo.signcolumn = 'yes'
+vim.o.updatetime = 250
 
+-- utility files
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.o.undofile = true
 
 -- identation
 vim.opt.tabstop = 2
@@ -12,9 +16,11 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
--- search highlighting
+-- search
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- disable netrw
 vim.g.loaded_netrw = 1
@@ -31,5 +37,5 @@ autocmd BufEnter * exe ':2match ExtraWhitespace /\s\+$\| \+\ze\t\|\t\+\ze /'
 -- cursor: block everywhere, underline in insert
 vim.opt.guicursor = 'a:block,i:hor50'
 
--- leader key
 vim.g.mapleader = ','
+vim.g.maplocalleader = ','
