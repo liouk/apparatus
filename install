@@ -16,6 +16,7 @@ function install_macos {
     git \
     tig \
     neovim \
+    node \ # required to get npm and install some neovim LSPs
     stow \
     fzf \
     ripgrep \
