@@ -1,6 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
-  lazy = false,
+  event = 'BufEnter',
   dependencies = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -63,7 +63,6 @@ return {
       vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
       vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
       vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end, opts)
-      vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
       vim.keymap.set('n', 'gn', function() vim.lsp.buf.rename() end, opts)
       vim.keymap.set('n', 'ga', function() vim.lsp.buf.code_action() end, opts)
       vim.keymap.set('x', 'ga', function() vim.lsp.buf.range_code_action() end, opts)
