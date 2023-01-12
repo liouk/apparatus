@@ -42,7 +42,6 @@ return {
       }
     })
 
-    local lspconfig = require('lspconfig')
     local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
     local lsp_attach = function(_, bufnr)
       local opts = { buffer = bufnr, noremap = true, silent = true }
@@ -61,22 +60,28 @@ return {
       vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
     end
 
+    local lspconfig = require('lspconfig')
     require('mason-lspconfig').setup_handlers({
       function(server_name)
-        lspconfig[server_name].setup({
+
+        -- settings for all servers
+        local server_setup = {
           on_attach = lsp_attach,
           capabilities = lsp_capabilities,
-        })
-      end
-    })
+        }
 
-    lspconfig.sumneko_lua.setup({
-      settings = {
-        Lua = {
-          diagnostics = { globals = { 'vim' } },
-          telemetry = { enable = false },
-        },
-      },
+        -- server-specific setup
+        if server_name == 'sumneko_lua' then
+          server_setup.settings = {
+            Lua = {
+              diagnostics = { globals = { 'vim' } },
+              telemetry = { enable = false },
+            },
+          }
+        end
+
+        lspconfig[server_name].setup(server_setup)
+      end
     })
 
   end,
