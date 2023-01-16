@@ -7,6 +7,7 @@ return {
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
+    'hrsh7th/vim-vsnip',
   },
 
   config = function()
@@ -22,8 +23,20 @@ return {
           reason = cmp.ContextReason.Auto,
         }), {'i', 'c'}),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-y>'] = cmp.mapping.confirm({ select = false }),
+        ['<CR>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
+        ['<Tab>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
       }),
+      snippet = {
+        expand = function(args)
+          vim.fn['vsnip#anonymous'](args.body)
+        end,
+      },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'buffer' },
