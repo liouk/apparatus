@@ -3,3 +3,4 @@ vim.opt.expandtab = false
 
 -- invoke gofmt+goimport from go.nvim instead of simply retabbing
 vim.keymap.set('n', '<leader>t', ':GoImport<CR>')
+vim.keymap.set('n', '<leader>b', ':GoBuild<CR>')
