@@ -10,7 +10,9 @@ return {
     'zb',
   },
   config = function()
-    require('neoscroll').setup()
+    require('neoscroll').setup({
+      mappings = {},
+    })
 
     local t = {}
     t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '50'}}
