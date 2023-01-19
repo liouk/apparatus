@@ -1,6 +1,4 @@
 local function fn_short(fn)
-  local plenary_path = require('plenary.path')
-  local target_width = 70
   local short_fn = vim.fn.fnamemodify(fn, ':~')
 
   return short_fn
