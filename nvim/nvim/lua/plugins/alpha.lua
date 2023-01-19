@@ -42,7 +42,6 @@ local function alpha_config()
     dashboard.button('<C-p>',     '  find here'    ),
     dashboard.button('<leader>f', '  grep here'    ),
     dashboard.button('<leader>r', '  search recent'),
-    dashboard.button('s',         '  vim config' ,    ':e $MYVIMRC<CR>'),
     dashboard.button('z',         '  manage plugins', ':Lazy<CR>'),
     dashboard.button('q',         '  quit',           ':qa<CR>'),
   }
