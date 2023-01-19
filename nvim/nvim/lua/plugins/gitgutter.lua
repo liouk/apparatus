@@ -1,6 +1,6 @@
 return {
   'airblade/vim-gitgutter',
-  event = 'BufEnter',
+  event = 'BufReadPre',
 
   config = function()
     vim.g.gitgutter_sign_priority = 0

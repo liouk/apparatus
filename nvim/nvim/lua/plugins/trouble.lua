@@ -1,6 +1,13 @@
 return {
   'folke/trouble.nvim',
-  event = 'BufEnter',
+  cmd = { 'Trouble', 'TroubleToggle' },
+  keys = {
+    '<leader>md',
+    '<leader>mw',
+    '<leader>ml',
+    '<leader>mq',
+    'gr',
+  },
   dependencies = { 'kyazdani42/nvim-web-devicons' },
   config = function()
     require('trouble').setup({
