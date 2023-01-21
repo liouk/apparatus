@@ -2,7 +2,7 @@
   "promptDelete": false,
   "defaultViewMode": "preview",
   "spellcheck": true,
-  "vimMode": false,
+  "vimMode": true,
   "alwaysUpdateLinks": true,
   "newFileLocation": "current",
   "readableLineLength": true,
