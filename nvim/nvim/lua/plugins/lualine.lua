@@ -8,6 +8,8 @@ return {
       options = {
         theme = 'catppuccin',
         disabled_filetypes = { 'packer', 'NvimTree' },
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
       },
       sections = {
         lualine_a = {'mode'},
