@@ -84,18 +84,72 @@ function apparatus {
   ln -s "$APPARATUS_INSTALLDIR/apparatus" "$HOME/.apparatus"
 }
 
+function detect_os {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    DETECTED_OS="macos"
+    return
+  fi
+
+  if [[ -f "/etc/os-release" ]]; then
+    source "/etc/os-release"
+    if [[ "$ID" == "fedora" ]] && [[ "$PRETTY_NAME" == *Fedora*Server* ]]; then
+      DETECTED_OS="fedora-server"
+      return
+    fi
+  fi
+}
+
+function parse_opts {
+  while :
+  do
+    case "$1" in
+      --check-support)
+        CHECK_SUPPORT=1
+        shift
+        ;;
+      "")
+        # no (more) options found
+        break
+        ;;
+      *)
+        echo "unexpected option: $1"
+        exit 1
+        ;;
+    esac
+  done
+}
+
 function main {
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    install_macos "$@"
-    apparatus "$@"
-    stow_macos "$@"
+  detect_os
+  parse_opts "$@"
 
-  else
-    echo "error: unexpected os"
-    exit 1
+  if [ -n "$CHECK_SUPPORT" ]; then
+    if [[ "$DETECTED_OS" == "" ]]; then
+      echo "unsupported operating system (supported: macos, fedora-server)"
+      exit 1
+    fi
 
+    echo "operating system supported ($DETECTED_OS)"
+    exit 0
   fi
+
+  case $DETECTED_OS in
+
+    macos)
+      install_macos "$@"
+      apparatus "$@"
+      stow_macos "$@"
+      ;;
+
+    fedora-server)
+      ;;
+
+    *)
+      echo "unsupported operating system (supported: macos, fedora-server)"
+      exit 1
+      ;;
+  esac
 }
 
 main "$@"
