@@ -6,6 +6,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "59224771f91b86d1de12570b4070fe4ad7cd1eeb" },
   "fzf": { "branch": "master", "commit": "a79de11af78d98f3f1931870d2866012cc6e962a" },
   "fzf.vim": { "branch": "master", "commit": "bdf48c282ad2174c25c059b3cdb7956427b07a99" },
+  "gitsigns.nvim": { "branch": "main", "commit": "7b37bd5c2dd4d7abc86f2af096af79120608eeca" },
   "go.nvim": { "branch": "master", "commit": "735c1d4c23aef8a7ad66a42b4d53ea35e89162f4" },
   "lazy.nvim": { "branch": "main", "commit": "4739c2d95af17acb786ed33445f59b7b13671417" },
   "leap.nvim": { "branch": "main", "commit": "a968ab4250840dc879e805f918b4f3b892310a12" },
@@ -24,7 +25,6 @@
   "trouble.nvim": { "branch": "main", "commit": "b2a0afac2c319a481f0f0318963a74d672ba5766" },
   "vim-commentary": { "branch": "master", "commit": "e87cd90dc09c2a203e13af9704bd0ef79303d755" },
   "vim-expand-region": { "branch": "master", "commit": "966513543de0ddc2d673b5528a056269e7917276" },
-  "vim-gitgutter": { "branch": "master", "commit": "00df1089b6267f47c7c0f13536789feb9db1e65b" },
   "vim-json": { "branch": "master", "commit": "3727f089410e23ae113be6222e8a08dd2613ecf2" },
   "vim-vsnip": { "branch": "master", "commit": "8dde8c0ef10bb1afdbb301e2bd7eb1c153dd558e" }
 }
