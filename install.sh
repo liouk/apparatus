@@ -3,8 +3,6 @@
 set -e
 set -o pipefail
 
-APPARATUS_INSTALLDIR="${HOME}/Workspace/personal"
-
 function install_macos {
 
   # install brew
@@ -70,18 +68,16 @@ function unstow_macos {
 }
 
 function apparatus {
-  if [ -d "${APPARATUS_INSTALLDIR}" ]; then
-    echo "will not clone apparatus; it already exists in $APPARATUS_INSTALLDIR"
+  local installdir="$1"
+  local link="$2"
+
+  if [ -d "${installdir}" ]; then
+    echo "will not clone apparatus; it already exists in $installdir"
     return
   fi
 
-  pushd . >/dev/null
-  mkdir -p $APPARATUS_INSTALLDIR
-  cd $APPARATUS_INSTALLDIR
-  git clone git@github.com:liouk/apparatus.git
-  popd >/dev/null
-
-  ln -s "$APPARATUS_INSTALLDIR/apparatus" "$HOME/.apparatus"
+  git clone git@github.com:liouk/apparatus.git "$installdir"
+  [ -e "$link" ] || { ln -s "$installdir" "$link"; }
 }
 
 function detect_os {
@@ -138,7 +134,7 @@ function main {
 
     macos)
       install_macos "$@"
-      apparatus "$@"
+      apparatus "$HOME/Workspace/personal/apparatus" "$HOME/.apparatus"
       stow_macos "$@"
       ;;
 
