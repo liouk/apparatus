@@ -9,6 +9,6 @@ return {
         adaptive_size = true,
       },
     })
-    vim.keymap.set('n', '<leader>d', ':NvimTreeToggle<CR>')
+    vim.keymap.set('n', '<leader>d', ':NvimTreeToggle<CR>', { desc = 'Toggle nvim-tree' })
   end,
 }
