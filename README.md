@@ -1,53 +1,53 @@
-# apparatus
-All of my dotfiles in a single repo.
+# :nut_and_bolt: apparatus
+Apparatus is a monorepo containing all the dotfiles for my setup, which is based on zsh, neovim and kitty, among other tools.
 
-Using `make`, `git` and `stow` for easy installation.
+You can use the installation script to install every tool of the toolchain and place the dotfiles where they need to be. The install script performs the following:
+- it detects the platform/OS that executes it
+- it will install all the necessary tools, fonts, etc. for the supported platforms
+- it will place the dotfiles where they need to be, depending on the platform
 
-This repo uses `stow` to manage the dotfiles and create symbolic links to the required dirs.
+The script currently only supports MacOS, and Fedora Server and Workstation are work in progress.
 
+## Requirements
+The script requires `bash` and `curl` only; it will install everything else it needs (e.g. `brew`, `git`).
 
-1. Install `make`, `git` and `stow`
-1. Install any of the tools of this repo
-1. If you're using `vim`, run the following to install all of its submodules (plugins):
-   ```zsh
-   $ git submodule update --init --recursive
-   ```
+## Installation
+To check if your platform is supported, run the following command:
+```
+curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/install.sh | bash /dev/stdin --check-support
+```
+The script will print whether the current OS is supported or not.
 
-1. Run the following command to put every dotfile in place:
-   ```zsh
-   $ make stow
-   ```
+To install everything, run the following command:
+```
+curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/install.sh | bash /dev/stdin
+```
 
-1. Have fun!
-
-If you just want to stow specific dotfiles, have a look at the Makefile and invoke `stow` for the specific package.
-
-## Tools Used
+## Toolchain
+#### Terminal & Shell
 - [zsh](https://www.zsh.org/)
-  - [zsh completions](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)
-  - [oh my zsh!](https://ohmyz.sh/)
-  - [git-zsh-completion](https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc)
-- [direnv](https://direnv.net/)
+- [kitty](https://sw.kovidgoyal.net/kitty/)
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+
+#### CLI Tools
 - [fzf](https://github.com/junegunn/fzf)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
-- [tig](https://github.com/jonas/tig)
+- [direnv](https://direnv.net/)
 - [bat](https://github.com/sharkdp/bat)
 - [jq](https://stedolan.github.io/jq/)
 - [visidata](https://www.visidata.org/)
-- [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
-- [kitty](https://sw.kovidgoyal.net/kitty/)
 - [GNU stow](https://www.gnu.org/software/stow/)
+- [navi](https://github.com/denisidoro/navi)
+- [btop](https://github.com/aristocratos/btop)
+- [mmv](https://github.com/itchyny/mmv)
+
+#### Editor
+- [neovim](https://neovim.io/)
+
+#### VCS
+- [git](https://git-scm.com/)
+- [tig](https://github.com/jonas/tig)
+
+#### MacOS
+- [Homebrew](https://brew.sh/)
 - [karabiner](https://karabiner-elements.pqrs.org/)
-
-You can run `tool.sh` to get a list of all the tools that are installed and their versions.
-
-## Configuration
-### Fonts
-```
-$ brew tap homebrew/cask-fonts
-$ brew install --cask font-jetbrains-mono-nerd-font
-$ brew install --cask font-fira-code-nerd-font
-```
-Here are all the casks: https://github.com/Homebrew/homebrew-cask-fonts/tree/master/Casks
-### kitty
-To choose a theme, use `kitty +kitten themes`.
