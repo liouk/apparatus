@@ -11,7 +11,7 @@ alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
 
 # docker
-alias doc='docker-compose'
+alias doc='docker compose'
 alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
 
 # kitty SSH compatibility
