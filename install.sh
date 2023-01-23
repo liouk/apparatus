@@ -132,12 +132,9 @@ function detect_os {
     return
   fi
 
-  if [[ -f "/etc/os-release" ]]; then
-    source "/etc/os-release"
-    if [[ "$ID" == "fedora" ]] && [[ "$PRETTY_NAME" == *Fedora*Server* ]]; then
-      DETECTED_OS="fedora-server"
-      return
-    fi
+  if grep -q "PRETTY_NAME=.*Fedora.*Server.*" "/etc/os-release" 2>/dev/null; then
+    DETECTED_OS="fedora-server"
+    return
   fi
 }
 
