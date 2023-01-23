@@ -2,6 +2,7 @@
 
 set -e
 set -o pipefail
+[ -n "$TRACE" ] && { set -x; }
 
 function install_macos {
 
@@ -14,7 +15,7 @@ function install_macos {
     git \
     tig \
     neovim \
-    node \ # required to get npm and install some neovim LSPs
+    node \
     stow \
     fzf \
     ripgrep \
@@ -42,6 +43,9 @@ function install_macos {
 }
 
 function stow_macos {
+  local apparatus_dir="$1"
+  pushd . > /dev/null
+  cd $apparatus_dir
   stow --restow --target="$HOME" zsh
   stow --restow --target="$HOME" git
   stow --restow --target="$HOME" tig
@@ -53,9 +57,13 @@ function stow_macos {
 
   mkdir -p "$HOME/Library/Application Support/navi"
   stow --restow --target="$HOME/Library/Application Support/navi" navi
+  popd > /dev/null
 }
 
 function unstow_macos {
+  local apparatus_dir="$1"
+  pushd . > /dev/null
+  cd $apparatus_dir
   stow --delete --target="$HOME" zsh
   stow --delete --target="$HOME" git
   stow --delete --target="$HOME" tig
@@ -65,6 +73,48 @@ function unstow_macos {
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$HOME/Library/Application Support/navi" navi
   stow --delete --target="$HOME/Google Drive/Notes" obsidian
+  popd > /dev/null
+}
+
+function install_fedora_server {
+  sudo dnf install -y \
+    zsh \
+    zsh-syntax-highlighting \
+    zsh-autosuggestions \
+    git \
+    tig \
+    stow \
+    fzf \
+    ripgrep \
+    btop
+
+  # change to zsh as default shell
+  chsh -s $(which zsh)
+
+  # TODO: fzf key bindings
+  $(brew --prefix)/opt/fzf/install --key-bindings --no-completion --no-bash --no-fish --no-update-rc
+}
+
+function stow_fedora_server {
+  local apparatus_dir="$1"
+  pushd . > /dev/null
+  cd $apparatus_dir
+  stow --restow --target="$HOME" zsh
+  stow --restow --target="$HOME" git
+  stow --restow --target="$HOME" tig
+  stow --restow --target="$HOME" powerlevel10k
+  popd > /dev/null
+}
+
+function unstow_fedora_server {
+  local apparatus_dir="$1"
+  pushd . > /dev/null
+  stow --delete --target="$HOME" zsh
+  stow --delete --target="$HOME" git
+  stow --delete --target="$HOME" tig
+  stow --delete --target="$HOME" powerlevel10k
+  cd $apparatus_dir
+  popd > /dev/null
 }
 
 function apparatus {
@@ -77,7 +127,9 @@ function apparatus {
   fi
 
   git clone git@github.com:liouk/apparatus.git "$installdir"
-  [ -e "$link" ] || { ln -s "$installdir" "$link"; }
+  if [ -n "$link" ]; then
+    [ -e "$link" ] || { ln -s "$installdir" "$link"; }
+  fi
 }
 
 function detect_os {
@@ -130,21 +182,25 @@ function main {
     exit 0
   fi
 
-  case $DETECTED_OS in
+  case "$DETECTED_OS" in
 
     macos)
-      install_macos "$@"
+      install_macos
       apparatus "$HOME/Workspace/personal/apparatus" "$HOME/.apparatus"
-      stow_macos "$@"
+      stow_macos "$HOME/Workspace/personal/apparatus"
       ;;
 
     fedora-server)
+      install_fedora_server
+      apparatus "$HOME/.apparatus"
+      stow_fedora_server "$HOME/.apparatus"
       ;;
 
     *)
       echo "unsupported operating system (supported: macos, fedora-server)"
       exit 1
       ;;
+
   esac
 }
 
