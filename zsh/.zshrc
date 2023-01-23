@@ -66,6 +66,7 @@ fi
 # Platform specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
   POWERLEVEL10K_DIR="/usr/local/opt/powerlevel10k"
+  ZSH_PLUGINS_DIR="/usr/local/share"
 
   # brew
   BREW_PATH=/usr/local/Homebrew
@@ -87,20 +88,27 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # keybindings
   bindkey \^U backward-kill-line
 
-  # zsh syntax highlighting and autosuggestions
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # macos specific aliases
+  alias ls='ls -Glahp'
+  alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
+  command -v gxargs 2>&1 >/dev/null && { alias xargs='gxargs' }
 
 elif grep -q "ID=fedora" "/etc/os-release" 2>/dev/null; then
   POWERLEVEL10K_DIR="/opt/powerlevel10k"
-
-  # zsh syntax highlighting and autosuggestions
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  ZSH_PLUGINS_DIR="/usr/share"
 
   # fzf keybindings
   source /usr/share/fzf/shell/key-bindings.zsh
+
+  # fedora specific aliases
+  alias ls='ls -lahp --color'
 fi
+
+# plugins
+
+# zsh syntax highlighting and autosuggestions
+source "${ZSH_PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "${ZSH_PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # powerlevel10k
 source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"

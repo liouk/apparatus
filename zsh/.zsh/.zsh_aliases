@@ -1,5 +1,4 @@
 # general
-alias ls='ls -Glahp'
 alias grep='grep --color'
 alias fgrep='fgrep --color'
 
@@ -10,14 +9,10 @@ alias ...='cd ../../'
 # git
 alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
-alias of='onefetch'
 
 # docker
 alias doc='docker-compose'
 alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
-
-# local network/nas
-alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
 
 # kitty SSH compatibility
 # https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
@@ -26,6 +21,3 @@ alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volume
 # k8s
 alias kc=kubectl
 alias kcs=kubectl -n kube-system
-
-# osx
-command -v gxargs 2>&1 >/dev/null && { alias xargs='gxargs' }
