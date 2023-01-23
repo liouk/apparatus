@@ -87,6 +87,9 @@ function install_fedora_server {
 
   # change to zsh as default shell
   chsh -s $(which zsh)
+
+  # powerlevel10k
+  sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /opt/powerlevel10k
 }
 
 function stow_fedora_server {

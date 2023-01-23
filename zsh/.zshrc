@@ -65,6 +65,8 @@ fi
 
 # Platform specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  POWERLEVEL10K_DIR="/usr/local/opt/powerlevel10k"
+
   # brew
   BREW_PATH=/usr/local/Homebrew
   if [[ $(uname -m) == 'arm64' ]]; then
@@ -89,11 +91,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-  # powerlevel10k
-  source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 elif grep -q "ID=fedora" "/etc/os-release" 2>/dev/null; then
+  POWERLEVEL10K_DIR="/opt/powerlevel10k"
+
   # zsh syntax highlighting and autosuggestions
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -101,3 +101,7 @@ elif grep -q "ID=fedora" "/etc/os-release" 2>/dev/null; then
   # fzf keybindings
   source /usr/share/fzf/shell/key-bindings.zsh
 fi
+
+# powerlevel10k
+source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
