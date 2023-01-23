@@ -35,9 +35,6 @@ function install_macos {
   brew tap homebrew/cask-fonts
   brew install --cask font-jetbrains-mono-nerd-font
 
-  # fzf key bindings
-  $(brew --prefix)/opt/fzf/install --key-bindings --no-completion --no-bash --no-fish --no-update-rc
-
   # kitty
   curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
 }
@@ -90,9 +87,6 @@ function install_fedora_server {
 
   # change to zsh as default shell
   chsh -s $(which zsh)
-
-  # TODO: fzf key bindings
-  $(brew --prefix)/opt/fzf/install --key-bindings --no-completion --no-bash --no-fish --no-update-rc
 }
 
 function stow_fedora_server {

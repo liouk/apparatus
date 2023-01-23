@@ -7,10 +7,6 @@ alias fgrep='fgrep --color'
 alias ..='cd ..'
 alias ...='cd ../../'
 
-# youtube-dl
-alias ut='youtube-dl'
-alias utmp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
-
 # git
 alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
@@ -20,32 +16,12 @@ alias of='onefetch'
 alias doc='docker-compose'
 alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
 
-# bundle
-alias be='bundle exec'
-
-# fun
-alias coin='coinmon -c eur -H -f btc,eth,xrp,trx,dash,bch,ltc,icx,xmr'
-
-# blackbox
-alias blapd='blackbox_postdeploy'
-alias blac='blackbox_cat'
-alias blae='blackbox_edit'
-alias blaes='blackbox_edit_start'
-alias blaee='blackbox_edit_end'
-alias blash='blackbox_shred_all_files'
-
-# cmatrix
-alias cmatrix='cmatrix -Bas'
-
 # local network/nas
 alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
 
 # kitty SSH compatibility
 # https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
 [[ "$TERM" == "xterm-kitty" ]] && { alias ssh='env TERM=xterm-256color ssh' }
-
-# nvim
-alias vim='nvim'
 
 # k8s
 alias kc=kubectl
