@@ -50,5 +50,6 @@ return {
     vim.keymap.set('n', '<leader>ml', ':Trouble loclist<cr>', { desc = 'Open loclist [trouble]' })
     vim.keymap.set('n', '<leader>mq', ':Trouble quickfix<cr>', { desc = 'Open quickfix [trouble]' })
     vim.keymap.set('n', 'gr', ':Trouble lsp_references<cr>', { desc = 'Inspect LSP references [trouble]' })
+    vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>:TroubleClose<CR>', { desc = 'Dismiss loclist, quickfix and trouble' })
   end
 }
