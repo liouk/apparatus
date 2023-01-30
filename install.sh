@@ -86,7 +86,12 @@ function install_fedora_server {
     btop
 
   # powerlevel10k
-  sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /opt/powerlevel10k
+  local p10k_dir="/opt/powerlevel10k"
+  if [ -d "$p10k_dir" ]; then
+    echo "will not clone powerlevel10k; it already exists in $p10k_dir"
+  else
+    sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /opt/powerlevel10k
+  fi
 }
 
 function wrapup_fedora_server {
