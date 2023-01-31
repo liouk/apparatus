@@ -15,13 +15,14 @@ return {
       current_line_blame = false,
       current_line_blame_opts = {
         virt_text = true,
-        virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+        virt_text_pos = 'right_align',
         delay = 0,
         ignore_whitespace = false,
       },
       current_line_blame_formatter = '<abbrev_sha> <author>, <author_time:%Y-%m-%d> - <summary>',
     })
 
-    vim.keymap.set('n', '<leader>mb', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Show current line gitblame [gitsigns]' })
+    vim.keymap.set('n', '<leader>mb', ':Gitsigns toggle_current_line_blame<CR>')
+    vim.keymap.set('n', '<leader>mr', ':Gitsigns reset_hunk<CR>')
   end,
 }

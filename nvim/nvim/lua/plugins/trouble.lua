@@ -45,12 +45,10 @@ return {
       },
     })
 
-    vim.keymap.set('n', '<leader>md', ':Trouble document_diagnostics<cr>', { desc = 'Inspect document diagnostics [trouble]' })
-    vim.keymap.set('n', '<leader>mw', ':Trouble workspace_diagnostics<cr>', { desc = 'Inspect workspace diagnostics [trouble]' })
-    vim.keymap.set('n', '<leader>ma', ':Trouble<cr>', { desc = 'Open trouble [trouble]' })
-    vim.keymap.set('n', '<leader>ml', ':Trouble loclist<cr>', { desc = 'Open loclist [trouble]' })
-    vim.keymap.set('n', '<leader>mq', ':Trouble quickfix<cr>', { desc = 'Open quickfix [trouble]' })
-    vim.keymap.set('n', 'gr', ':Trouble lsp_references<cr>', { desc = 'Inspect LSP references [trouble]' })
-    vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>:TroubleClose<CR>', { desc = 'Dismiss loclist, quickfix and trouble' })
+    vim.keymap.set('n', '<leader>md', ':Trouble document_diagnostics<cr>')
+    vim.keymap.set('n', '<leader>mw', ':Trouble workspace_diagnostics<cr>')
+    vim.keymap.set('n', '<leader>ma', ':Trouble<cr>')
+    vim.keymap.set('n', 'gr', ':Trouble lsp_references<cr>')
+    vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>:TroubleClose<CR>')
   end
 }

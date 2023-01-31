@@ -35,9 +35,9 @@ return {
     }
 
     -- keymaps
-    vim.keymap.set('n', '<C-p>', ':Files<CR>', { desc = 'Fuzzy find files' })
-    vim.keymap.set('n', '<leader>f', ':Rg<CR>', { desc = 'Fuzzy ripgrep' })
-    vim.keymap.set('n', '<leader>e', ':Buffers<CR>', { desc = 'Fuzzy find buffers by name' })
-    vim.keymap.set('n', '<leader>r', ':History<CR>', { desc = 'Fuzzy find recent files' })
+    vim.keymap.set('n', '<C-p>', ':Files<CR>')
+    vim.keymap.set('n', '<leader>f', ':Rg<CR>')
+    vim.keymap.set('n', '<leader>e', ':Buffers<CR>')
+    vim.keymap.set('n', '<leader>r', ':History<CR>')
   end,
 }

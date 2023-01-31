@@ -6,7 +6,7 @@ return {
   },
 
   config = function()
-    vim.keymap.set('n', '<leader>c', ':Commentary<CR>', { desc = 'Toggle-comment line' })
-    vim.keymap.set('v', '<leader>c', ":'<,'>Commentary<CR>", { desc = 'Toggle-comment visual selection' })
+    vim.keymap.set('n', '<leader>c', ':Commentary<CR>')
+    vim.keymap.set('v', '<leader>c', ":'<,'>Commentary<CR>")
   end,
 }
