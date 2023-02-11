@@ -6,7 +6,7 @@ return {
   config = function()
     require('lualine').setup({
       options = {
-        theme = 'catppuccin',
+        theme = 'auto',
         disabled_filetypes = { 'packer', 'NvimTree' },
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},

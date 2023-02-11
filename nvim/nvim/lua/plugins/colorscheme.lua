@@ -4,26 +4,18 @@
 -- {})
 
 return {
-  'catppuccin/nvim',
-  name = 'catppuccin',
+  'rebelot/kanagawa.nvim',
+  name = 'kanagawa',
   lazy = false,
   priority = 1000,
 
   config = function()
-    require('catppuccin').setup({
-      flavour = 'macchiato',
-      styles = {
-        comments = { 'italic' },
-        conditionals = {},
-      },
-      custom_highlights = function(colors)
-        return {
-          ['@parameter'] = { fg = colors.maroon, style = {} },
-          ['@namespace'] = { fg = colors.blue, style = {} },
-        }
-      end,
+    require('kanagawa').setup({
+      undercurl = false,
+      keywordStyle = {},
+      variablebuiltinStyle = {},
     })
 
-    vim.cmd.colorscheme 'catppuccin'
-  end,
+    vim.cmd.colorscheme 'kanagawa'
+  end
 }
