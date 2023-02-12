@@ -69,7 +69,7 @@ function unstow_macos {
   stow --delete --target="$HOME/.config" karabiner
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$HOME/Library/Application Support/navi" navi
-  stow --delete --target="$HOME/Google Drive/Notes" obsidian
+  stow --delete --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
 
@@ -148,11 +148,22 @@ function detect_os {
 }
 
 function parse_opts {
+  ALL=1
   while :
   do
     case "$1" in
       --check-support)
         CHECK_SUPPORT=1
+        shift
+        ;;
+      --stow-only)
+        STOW_ONLY=1
+        ALL=
+        shift
+        ;;
+      --unstow-only)
+        UNSTOW_ONLY=1
+        ALL=
         shift
         ;;
       "")
@@ -185,16 +196,20 @@ function main {
   case "$DETECTED_OS" in
 
     macos)
-      install_macos
-      apparatus "$HOME/Workspace/personal/apparatus" "$HOME/.apparatus"
-      stow_macos "$HOME/Workspace/personal/apparatus"
+      APPARATUS_DIR="$HOME/Workspace/github.com/liouk/apparatus"
+      [[ -n "$ALL" ]] && install_macos
+      [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR" "$HOME/.apparatus"
+      [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_macos "$APPARATUS_DIR"
+      [[ -n "$ALL" || -n "$UNSTOW_ONLY" ]] && unstow_macos "$APPARATUS_DIR"
       ;;
 
     fedora-server)
-      install_fedora_server
-      apparatus "$HOME/.apparatus"
-      stow_fedora_server "$HOME/.apparatus"
-      wrapup_fedora_server
+      APPARATUS_DIR="$HOME/.apparatus"
+      [[ -n "$ALL" ]] && install_fedora_server
+      [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
+      [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_fedora_server "$APPARATUS_DIR"
+      [[ -n "$ALL" ]] && wrapup_fedora_server
+      [[ -n "$ALL" || -n "$UNSTOW_ONLY" ]] && unstow_fedora_server "$APPARATUS_DIR"
       ;;
 
     *)

@@ -1,5 +1,5 @@
 function gl () {
-  __jumpfunc "$HOME/Workspace/personal" $1
+  __jumpfunc "$HOME/Workspace/github.com/liouk" $1
 }
 
 # jump between subdirs of a base dir
