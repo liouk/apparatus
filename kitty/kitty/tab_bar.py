@@ -35,8 +35,8 @@ def _draw_icon(screen: Screen, index: int, symbol: str = "") -> int:
         return 0
 
     fg, bg = screen.cursor.fg, screen.cursor.bg
-    screen.cursor.fg = as_rgb(color_as_int(Color(205, 214, 244))) # catppuccin-mocha text
-    screen.cursor.bg = as_rgb(color_as_int(Color(49, 50, 68))) # catppuccin-mocha surface0
+    screen.cursor.fg = as_rgb(color_as_int(Color(220, 215, 186))) # kanagawa fujiWhite (default foreground)
+    screen.cursor.bg = as_rgb(color_as_int(Color(22, 22, 29))) # kanagawa sumiInk0 (dark background statuslines)
     screen.draw(symbol)
     screen.cursor.fg, screen.cursor.bg = fg, bg
     screen.cursor.x = len(symbol)
@@ -100,8 +100,8 @@ def _draw_right_status(screen: Screen, is_last: bool) -> int:
         screen.draw(" " * draw_spaces)
 
     cells = [
-        (Color(142, 192, 124), time), # gruvbox dark aqua
-        (Color(213, 196, 161), date), # gruvbox dark fg2
+        (Color(122, 168, 159), time), # kanagawa waveAqua2 (types)
+        (Color(200, 192, 147), date), # kanagawa oldWhite (dark foreground, statuslines)
     ]
 
     screen.cursor.fg = 0
