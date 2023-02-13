@@ -1,5 +1,5 @@
 {
-  "format": "[opa]",
-  "folder": "/",
+  "format": "YYYY-MM-DD ddd",
+  "folder": "Work/Red Hat/Dailies",
   "autorun": false
 }
