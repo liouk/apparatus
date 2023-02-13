@@ -12,6 +12,7 @@
     "tag-font-monospace",
     "inline-code-everforest",
     "disable-ligatures",
-    "code-customizations"
+    "code-customizations",
+    "readmode-font-size"
   ]
 }

@@ -1,0 +1,4 @@
+/* Increase font size for read mode only */
+.markdown-preview-section {
+  font-size: 18px;
+}
