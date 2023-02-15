@@ -1,5 +1,6 @@
 {
   "format": "YYYY-MM-DD ddd",
   "folder": "Work/Red Hat/Dailies",
-  "autorun": false
+  "autorun": false,
+  "template": "Work/Red Hat/Dailies/_template"
 }

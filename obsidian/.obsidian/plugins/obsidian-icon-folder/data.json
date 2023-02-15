@@ -5,11 +5,11 @@
     "fontSize": 16,
     "iconColor": null,
     "recentlyUsedIcons": [
+      "FabRedhat",
       "FasBasketball",
       "FasCheese",
       "FasGamepad",
-      "FasHouseChimney",
-      "FarClipboard"
+      "FasHouseChimney"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -27,5 +27,6 @@
   "Conferences & Events": "FasChalkboardUser",
   "Home": "FasHouseChimney",
   "Hobbies": "FasBasketball",
-  "Schwiiz und Tsüri": "FasCheese"
+  "Schwiiz und Tsüri": "FasCheese",
+  "Work/Red Hat": "FabRedhat"
 }
