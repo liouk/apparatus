@@ -50,7 +50,7 @@ return {
         'dockerls',
         'golangci_lint_ls',
         'gopls',
-        'sumneko_lua',
+        'lua_ls',
         'yamlls',
       }
     })
@@ -83,7 +83,7 @@ return {
         }
 
         -- server-specific setup
-        if server_name == 'sumneko_lua' then
+        if server_name == 'lua_ls' then
           server_setup.settings = {
             Lua = {
               diagnostics = { globals = { 'vim' } },
