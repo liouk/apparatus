@@ -12,6 +12,7 @@ function install_macos {
   # install brew packages
   brew install \
     findutils \
+    coreutils \
     git \
     tig \
     neovim \
