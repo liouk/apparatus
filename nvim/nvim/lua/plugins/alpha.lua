@@ -64,7 +64,7 @@ local function alpha_config()
     { type = 'text', val = header[2], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
     { type = 'text', val = header[3], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
     { type = 'text', val = header[4], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[5], opts = { hl = 'ModeMsg', shrink_margin = false, position = 'center' } },
+    { type = 'text', val = header[5], opts = { shrink_margin = false, position = 'center' } },
     { type = 'text', val = header[6], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
     { type = 'text', val = header[7], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
     { type = 'text', val = header[8], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
