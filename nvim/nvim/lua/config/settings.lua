@@ -27,7 +27,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- colors
-vim.opt.colorcolumn = '80'
 vim.opt.termguicolors = true
 vim.cmd([[
 highlight ExtraWhitespace ctermbg=darkblue guibg=#494d64
