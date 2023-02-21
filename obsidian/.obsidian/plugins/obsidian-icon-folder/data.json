@@ -22,11 +22,11 @@
   },
   "Engineering": "FasScrewdriverWrench",
   "Travel": "FasPlane",
-  "Work": "FasBriefcase",
   "Job search": "FasClipboardList",
   "Conferences & Events": "FasChalkboardUser",
   "Home": "FasHouseChimney",
   "Hobbies": "FasBasketball",
   "Schwiiz und Tsüri": "FasCheese",
-  "Work/Red Hat": "FabRedhat"
+  "Red Hat": "FabRedhat",
+  "Other Work": "FasBriefcase"
 }

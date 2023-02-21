@@ -1,6 +1,6 @@
 {
-  "format": "YYYY-MM-DD ddd",
-  "folder": "Work/Red Hat/Dailies",
+  "format": "[opa]",
+  "folder": "/",
   "autorun": false,
-  "template": "Work/Red Hat/Dailies/_template"
+  "template": ""
 }
