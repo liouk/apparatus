@@ -16,6 +16,28 @@
                 },
                 "rules": [
                     {
+                        "description": "Run rhtok with ctrl+cmd+t",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/bin/sh ~/.config/kitty/kitty_rhtok.sh"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Open kitty quick window with cmd+;",
                         "manipulators": [
                             {
