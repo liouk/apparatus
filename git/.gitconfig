@@ -18,6 +18,8 @@
 [alias]
   ci = commit
   fix = commit --fixup
+  ciam = commit --amend
+  ciamno = commit --amend --no-edit
   cp = cherry-pick
   st = status -s
   co = checkout
@@ -78,5 +80,5 @@
 [commit]
   gpgsign = true
 
-#[init]
-#	templatedir = ~/.git-templates/
+[includeIf "gitdir:~/Workspace/redhat/"]
+  path = .gitconfig-redhat
