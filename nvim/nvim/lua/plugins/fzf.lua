@@ -7,7 +7,7 @@ local function vim_grep(qargs, bang)
   end
 
   local sh = 'rg --column --line-number --no-heading --color=always --smart-case -- ' .. query
-  vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'right:50%', 'ctrl-/'), bang)
+  vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'up:40%', 'ctrl-/'), bang)
 end
 
 return {
@@ -28,7 +28,7 @@ return {
     vim.g.fzf_layout = {
       window= {
         width= 0.7,
-        height= 0.5,
+        height= 0.7,
         highlight= 'Comment',
         border= 'rounded',
       }
