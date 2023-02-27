@@ -1,0 +1,2 @@
+# place any additional config files that live outside apparatus here
+# they'll be sourced by .zshrc automagically

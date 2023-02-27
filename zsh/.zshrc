@@ -113,3 +113,8 @@ source "${ZSH_PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # powerlevel10k
 source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# additional config files that live outside apparatus
+for conf in $(find -L "$HOME/.zsh/conf.d" -type f); do
+  source $conf
+done

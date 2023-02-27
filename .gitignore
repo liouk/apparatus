@@ -7,6 +7,9 @@ util/known_ip
 *.bak
 automatic_backups/
 
+# external zsh configs
+zsh/.zsh/conf.d/*
+
 # obsidian
 obsidian/.obsidian/workspace.json
 obsidian/.obsidian/plugins/remember-cursor-position/cursor-positions.json
