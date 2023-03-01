@@ -95,7 +95,7 @@ function install_fedora_server {
   fi
 }
 
-function wrapup_fedora_server {
+function wrapup_linux {
   echo -e "\nSetup complete! Change your shell to zsh by running:\n\tchsh -s \$(which zsh)"
 }
 
@@ -118,6 +118,65 @@ function unstow_fedora_server {
   stow --delete --target="$HOME" tig
   stow --delete --target="$HOME" powerlevel10k
   cd $apparatus_dir
+  popd > /dev/null
+}
+
+function install_arch {
+  sudo pacman -S --noconfirm --needed \
+    git \
+    tig \
+    neovim \
+    npm \
+    stow \
+    fzf \
+    ripgrep \
+    direnv \
+    bat \
+    jq \
+    zsh \
+    zsh-syntax-highlighting \
+    zsh-autosuggestions \
+    zsh-theme-powerlevel10k \
+    btop \
+    kitty \
+    unzip
+
+  yay -S --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
+    navi ttf-jetbrains-mono-nerd
+}
+
+function stow_arch {
+  local apparatus_dir="$1"
+  local navi_dir=$(navi info config-path)
+  navi_dir=${navi_dir%config.yaml}
+  mkdir -p $navi_dir
+  pushd . > /dev/null
+  cd $apparatus_dir
+  stow --restow --target="$HOME" zsh
+  stow --restow --target="$HOME" git
+  stow --restow --target="$HOME" tig
+  stow --restow --target="$HOME" powerlevel10k
+  stow --restow --target="$HOME/.config" kitty
+  stow --restow --target="$HOME/.config" nvim
+  stow --restow --target="$navi_dir" navi
+  # stow --restow --target="$HOME/Google Drive/My Drive/Notes" obsidian
+  popd > /dev/null
+}
+
+function unstow_arch {
+  local apparatus_dir="$1"
+  local navi_dir=$(navi info config-path)
+  navi_dir=${navi_dir%config.yaml}
+  pushd . > /dev/null
+  cd $apparatus_dir
+  stow --delete --target="$HOME" zsh
+  stow --delete --target="$HOME" git
+  stow --delete --target="$HOME" tig
+  stow --delete --target="$HOME" powerlevel10k
+  stow --delete --target="$HOME/.config" kitty
+  stow --delete --target="$HOME/.config" nvim
+  stow --delete --target="$navi_dir" navi
+  # stow --delete --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
 
@@ -144,6 +203,11 @@ function detect_os {
 
   if grep -q "PRETTY_NAME=.*Fedora.*Server.*" "/etc/os-release" 2>/dev/null; then
     DETECTED_OS="fedora-server"
+    return
+  fi
+
+  if [ -f "/etc/arch-release" ]; then
+    DETECTED_OS="arch"
     return
   fi
 }
@@ -201,7 +265,7 @@ function main {
       [[ -n "$ALL" ]] && install_macos
       [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR" "$HOME/.apparatus"
       [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_macos "$APPARATUS_DIR"
-      [[ -n "$ALL" || -n "$UNSTOW_ONLY" ]] && unstow_macos "$APPARATUS_DIR"
+      [[ -n "$UNSTOW_ONLY" ]] && unstow_macos "$APPARATUS_DIR"
       ;;
 
     fedora-server)
@@ -209,8 +273,17 @@ function main {
       [[ -n "$ALL" ]] && install_fedora_server
       [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
       [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_fedora_server "$APPARATUS_DIR"
-      [[ -n "$ALL" ]] && wrapup_fedora_server
-      [[ -n "$ALL" || -n "$UNSTOW_ONLY" ]] && unstow_fedora_server "$APPARATUS_DIR"
+      [[ -n "$ALL" ]] && wrapup_linux
+      [[ -n "$UNSTOW_ONLY" ]] && unstow_fedora_server "$APPARATUS_DIR"
+      ;;
+
+    arch)
+      APPARATUS_DIR="$HOME/.apparatus"
+      [[ -n "$ALL" ]] && install_arch
+      [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
+      [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_arch "$APPARATUS_DIR"
+      [[ -n "$ALL" ]] && wrapup_linux
+      [[ -n "$UNSTOW_ONLY" ]] && unstow_arch "$APPARATUS_DIR"
       ;;
 
     *)
