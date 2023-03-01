@@ -128,3 +128,5 @@ source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"
 for conf in $(find -L "$HOME/.zsh/conf.d" -type f); do
   source $conf
 done
+
+export HOST="${HOST%.local}"
