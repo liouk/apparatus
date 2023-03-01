@@ -265,7 +265,7 @@ function main {
       [[ -n "$ALL" ]] && install_macos
       [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR" "$HOME/.apparatus"
       [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_macos "$APPARATUS_DIR"
-      [[ -n "$UNSTOW_ONLY" ]] && unstow_macos "$APPARATUS_DIR"
+      [[ -n "$UNSTOW_ONLY" ]] && unstow_macos "$APPARATUS_DIR" || :
       ;;
 
     fedora-server)
@@ -274,7 +274,7 @@ function main {
       [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
       [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_fedora_server "$APPARATUS_DIR"
       [[ -n "$ALL" ]] && wrapup_linux
-      [[ -n "$UNSTOW_ONLY" ]] && unstow_fedora_server "$APPARATUS_DIR"
+      [[ -n "$UNSTOW_ONLY" ]] && unstow_fedora_server "$APPARATUS_DIR" || :
       ;;
 
     arch)
@@ -283,7 +283,7 @@ function main {
       [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
       [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_arch "$APPARATUS_DIR"
       [[ -n "$ALL" ]] && wrapup_linux
-      [[ -n "$UNSTOW_ONLY" ]] && unstow_arch "$APPARATUS_DIR"
+      [[ -n "$UNSTOW_ONLY" ]] && unstow_arch "$APPARATUS_DIR" || :
       ;;
 
     *)
