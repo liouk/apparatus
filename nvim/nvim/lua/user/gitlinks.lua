@@ -76,9 +76,10 @@ local function git(args, cwd)
 end
 
 function G.git_root(filepath)
+  local fp = filepath or vim.api.nvim_buf_get_name(0)
   local res = git(
     {'rev-parse', '--show-toplevel'},
-    tostring(Path:new(filepath):parent())
+    tostring(Path:new(fp):parent())
   )[1]
 
   return res
