@@ -6,10 +6,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Aliases
-source ~/.zsh/.zsh_aliases
+source ~/.zsh/aliases.zsh
 
 # helper funcs
-source ~/.zsh/.zsh_funcs
+source ~/.zsh/funcs.zsh
+
+# Host specific
+export HOST="${HOST%.local}"
+source ~/.zsh/host_${HOST}.zsh
 
 # History
 HISTFILE="$HOME/.zsh_history"
@@ -63,57 +67,6 @@ if type "navi" > /dev/null; then
   eval "$(navi widget zsh)"
 fi
 
-# Platform specific
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  POWERLEVEL10K_DIR="/usr/local/opt/powerlevel10k"
-  ZSH_PLUGINS_DIR="/usr/local/share"
-
-  # brew
-  BREW_PATH=/usr/local/Homebrew
-  if [[ $(uname -m) == 'arm64' ]]; then
-    BREW_PATH=/opt/homebrew
-  fi
-  eval $($BREW_PATH/bin/brew shellenv)
-  export PATH="BREW_PATH/bin:$PATH"
-
-  # fzf
-  if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-    PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
-  fi
-  source "/usr/local/opt/fzf/shell/key-bindings.zsh"
-
-  # gpg
-  export GPG_TTY=$(tty)
-
-  # keybindings
-  bindkey \^U backward-kill-line
-
-  # macos specific aliases
-  alias ls='ls -Glahp'
-  alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
-  command -v gxargs 2>&1 >/dev/null && { alias xargs='gxargs' }
-
-elif grep -q "ID=fedora" "/etc/os-release" 2>/dev/null; then
-  POWERLEVEL10K_DIR="/opt/powerlevel10k"
-  ZSH_PLUGINS_DIR="/usr/share"
-
-  # fzf keybindings
-  source /usr/share/fzf/shell/key-bindings.zsh
-
-  # fedora specific aliases
-  alias ls='ls -lahp --color'
-
-elif [ -f "/etc/arch-release" ]; then
-  POWERLEVEL10K_DIR="/usr/share/zsh-theme-powerlevel10k"
-  ZSH_PLUGINS_DIR="/usr/share/zsh/plugins"
-
-  # fzf keybindings
-  source /usr/share/fzf/key-bindings.zsh
-
-  # arch specific aliases
-  alias ls='ls -lahp --color'
-fi
-
 # plugins
 
 # zsh syntax highlighting and autosuggestions
@@ -128,5 +81,3 @@ source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"
 for conf in $(find -L "$HOME/.zsh/conf.d" -type f); do
   source $conf
 done
-
-export HOST="${HOST%.local}"
