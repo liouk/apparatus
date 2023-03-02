@@ -53,6 +53,8 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 input "type:keyboard" {
     xkb_layout us,gr
     xkb_options "ctrl:nocaps,grp:win_space_toggle"
+    repeat_delay 250
+    repeat_rate 30
 }
 
 input "type:touchpad" {
