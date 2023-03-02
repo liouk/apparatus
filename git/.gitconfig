@@ -86,5 +86,5 @@
 [includeIf "gitdir:/home/ilias/redhat/"]
   path = .gitconfig-redhat-redarch
 
-[includeIf "gitdir:~/Workspace/redhat/"]
-  path = .gitconfig-redhat
+[includeIf "gitdir:/Users/ilias/Workspace/redhat/"]
+  path = .gitconfig-redhat-stingray
