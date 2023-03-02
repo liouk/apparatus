@@ -6,5 +6,6 @@ source /usr/share/fzf/key-bindings.zsh
 
 # arch specific aliases
 alias ls='ls -lahp --color'
+alias open=xdg-open
 
 export GPG_TTY=$TTY
