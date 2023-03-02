@@ -159,6 +159,7 @@ function stow_arch {
   stow --restow --target="$HOME/.config" kitty
   stow --restow --target="$HOME/.config" nvim
   stow --restow --target="$navi_dir" navi
+  stow --restow --target="$HOME/.config/sway" sway
   # stow --restow --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
@@ -176,6 +177,7 @@ function unstow_arch {
   stow --delete --target="$HOME/.config" kitty
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$navi_dir" navi
+  stow --delete --target="$HOME/.config/sway" sway
   # stow --delete --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
