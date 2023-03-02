@@ -80,5 +80,11 @@
 [commit]
   gpgsign = true
 
+[includeIf "gitdir:/home/ilias/.apparatus/"]
+  path = .gitconfig-apparatus-redarch
+
+[includeIf "gitdir:/home/ilias/redhat/"]
+  path = .gitconfig-redhat-redarch
+
 [includeIf "gitdir:~/Workspace/redhat/"]
   path = .gitconfig-redhat
