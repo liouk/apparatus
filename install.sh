@@ -141,10 +141,10 @@ function install_arch {
     kitty \
     unzip
 
-  pacman -S --needed git base-devel
+  sudo pacman -S --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
   cd yay-bin
-  makepkg -si
+  makepkg -si --noconfirm
   cd ..
   rm -rf yay-bin
   yay -S --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
@@ -156,6 +156,7 @@ function stow_arch {
   local navi_dir=$(navi info config-path)
   navi_dir=${navi_dir%config.yaml}
   mkdir -p $navi_dir
+  mkdir -p "$HOME/.config/sway"
   pushd . > /dev/null
   cd $apparatus_dir
   stow --restow --target="$HOME" zsh
