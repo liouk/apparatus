@@ -1,8 +1,0 @@
-/* Inline code & code block customizations */
-.markdown-rendered code, /* for preview/reading view */
-.HyperMD-codeblock /* for editing view */,
-.cm-s-obsidian span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) /* for editing view */
-{
-    color: #E69875; /* Theme: Minimal/Everforest */
-    font-variant-ligatures: none;
-}

@@ -9,9 +9,3 @@ automatic_backups/
 
 # external zsh configs
 zsh/.zsh/conf.d/*
-
-# obsidian
-obsidian/.obsidian/workspace.json
-obsidian/.obsidian/plugins/remember-cursor-position/cursor-positions.json
-obsidian/.obsidian/plugins/obsidian-icon-folder/icons/
-obsidian/.obsidian/starred.json

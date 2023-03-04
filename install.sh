@@ -51,7 +51,6 @@ function stow_macos {
   stow --restow --target="$HOME/.config" kitty
   stow --restow --target="$HOME/.config" karabiner
   stow --restow --target="$HOME/.config" nvim
-  stow --restow --target="$HOME/Google Drive/My Drive/Notes" obsidian
 
   mkdir -p "$HOME/Library/Application Support/navi"
   stow --restow --target="$HOME/Library/Application Support/navi" navi
@@ -70,7 +69,6 @@ function unstow_macos {
   stow --delete --target="$HOME/.config" karabiner
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$HOME/Library/Application Support/navi" navi
-  stow --delete --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
 
@@ -167,7 +165,6 @@ function stow_arch {
   stow --restow --target="$HOME/.config" nvim
   stow --restow --target="$navi_dir" navi
   stow --restow --target="$HOME/.config/sway" sway
-  # stow --restow --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
 
@@ -185,7 +182,6 @@ function unstow_arch {
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$navi_dir" navi
   stow --delete --target="$HOME/.config/sway" sway
-  # stow --delete --target="$HOME/Google Drive/My Drive/Notes" obsidian
   popd > /dev/null
 }
 
