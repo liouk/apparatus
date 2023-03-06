@@ -83,6 +83,9 @@
 [includeIf "gitdir:/home/ilias/.apparatus/"]
   path = .gitconfig-apparatus-redarch
 
+[includeIf "gitdir:/home/ilias/.toolshed/"]
+  path = .gitconfig-apparatus-redarch
+
 [includeIf "gitdir:/home/ilias/redhat/"]
   path = .gitconfig-redhat-redarch
 
