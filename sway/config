@@ -211,6 +211,7 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # screen lock
 bindsym $mod+End exec swaylock -i /usr/share/backgrounds/bg.png
+bindsym Hyper_L+Home exec swaylock -i /usr/share/backgrounds/bg.png
 
 #
 # Status Bar:
