@@ -12,8 +12,11 @@ return {
   config = function()
     require('kanagawa').setup({
       undercurl = false,
-      keywordStyle = {},
-      variablebuiltinStyle = {},
+      commentStyle = { italic = true },
+      functionStyle = {},
+      keywordStyle = { italic = false },
+      statementStyle = {},
+      typeStyle = {},
     })
 
     vim.cmd.colorscheme 'kanagawa'
