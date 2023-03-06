@@ -1,7 +1,3 @@
-function gl () {
-  __jumpfunc "$HOME/Workspace/github.com/liouk" $1
-}
-
 # jump between subdirs of a base dir
 function __jumpfunc () {
   local jump_basedir=$1

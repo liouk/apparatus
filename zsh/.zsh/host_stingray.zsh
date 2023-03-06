@@ -25,3 +25,8 @@ bindkey \^U backward-kill-line
 alias ls='ls -Glahp'
 alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
 command -v gxargs 2>&1 >/dev/null && { alias xargs='gxargs' }
+
+# funcs
+function gl () {
+  __jumpfunc "$HOME/Workspace/github.com/liouk" $1
+}

@@ -8,4 +8,9 @@ source /usr/share/fzf/key-bindings.zsh
 alias ls='ls -lahp --color'
 alias open=xdg-open
 
+# funcs
+function rh () {
+  __jumpfunc "$HOME/redhat" $1
+}
+
 export GPG_TTY=$TTY
