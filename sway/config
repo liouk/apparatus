@@ -18,7 +18,13 @@ bindsym $mod+Shift+n exec swaync-client -t -sw
 
 ### Output configuration
 # wallpaper
-output * bg /usr/share/backgrounds/bg.png fill
+output * {
+  bg /usr/share/backgrounds/bg.png fill
+}
+
+output 'Samsung Electric Company LF32TU87 HNTT100830' {
+  mode 2560x1440@59.951Hz
+}
 #
 # Example configuration:
 #
