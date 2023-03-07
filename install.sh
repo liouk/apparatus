@@ -165,6 +165,7 @@ function stow_arch {
   stow --restow --target="$HOME/.config" nvim
   stow --restow --target="$navi_dir" navi
   stow --restow --target="$HOME/.config/sway" sway
+  stow --restow --target="$HOME/.config/mako" mako
   popd > /dev/null
 }
 
@@ -182,6 +183,7 @@ function unstow_arch {
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$navi_dir" navi
   stow --delete --target="$HOME/.config/sway" sway
+  stow --delete --target="$HOME/.config/mako" mako
   popd > /dev/null
 }
 
