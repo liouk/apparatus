@@ -221,10 +221,7 @@ bindsym Hyper_L+Home exec swaylock -i /usr/share/backgrounds/bg.png
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
