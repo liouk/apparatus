@@ -14,6 +14,12 @@ set $term kitty
 font JetBrainsMono Nerd Font 10
 
 #
+# Window configuration
+#
+default_border pixel 2
+default_floating_border pixel 2
+
+#
 # App launcher
 #
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
@@ -221,6 +227,15 @@ set $border1 #2D4F67
 set $border2 #658594
 set $border3 #363646
 
+# class                  border    background  text    indicator child_border
+client.focused           $border2  $back1      $text1  $back1    $back1
+client.unfocused         $border3  $back3      $text3  $text3    $text3
+client.focused_inactive  $border3  $back3      $text3  $text3    $text3
+
+#
+# Swaybar
+#
+
 bar {
     position top
     status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
@@ -234,10 +249,5 @@ bar {
         inactive_workspace $back3   $back3 $text3
     }
 }
-
-# class                  border    background  text    indicator child_border
-client.focused           $border2  $back1      $text1  $back1    $back1
-client.unfocused         $border3  $back3      $text3  $text3    $text3
-client.focused_inactive  $border3  $back3      $text3  $text3    $text3
 
 include /etc/sway/config.d/*
