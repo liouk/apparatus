@@ -18,8 +18,8 @@
 [alias]
   ci = commit
   fix = commit --fixup
-  ciam = commit --amend
-  ciamno = commit --amend --no-edit
+  amend = commit --amend
+  amno = commit --amend --no-edit
   cp = cherry-pick
   st = status -s
   co = checkout
