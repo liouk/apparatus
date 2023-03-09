@@ -50,7 +50,7 @@ local function alpha_config()
     type = 'text',
     val = ' ',
     opts = {
-      hl = 'SignColumn',
+      hl = 'Comment',
       shrink_margin = false,
       position = 'center',
     },
@@ -81,9 +81,9 @@ local function alpha_config()
 
     -- footer
     { type = 'padding', val = 2 },
-    { type = 'text', val = ' nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = { hl = 'SignColumn', shrink_margin = false, position = 'center', } },
+    { type = 'text', val = ' nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = { hl = 'Comment', shrink_margin = false, position = 'center', } },
     plugins_stats,
-    { type = 'text', val = ' '..fn_short(cwd), opts = { position = 'center', hl = 'SignColumn', } },
+    { type = 'text', val = ' '..fn_short(cwd), opts = { position = 'center', hl = 'Comment', } },
   }
 
   -- update startup time when completed
