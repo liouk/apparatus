@@ -38,7 +38,7 @@ output * {
   bg /usr/share/backgrounds/bg.png fill
 }
 
-output 'Samsung Electric Company LF32TU87 HNTT100830' {
+output "Samsung Electric Company LF32TU87 HNTT100830" {
   mode 2560x1440@59.951Hz
 }
 
@@ -49,22 +49,27 @@ output 'Samsung Electric Company LF32TU87 HNTT100830' {
 # displays after another 300 seconds, and turn screens back on when
 # resumed. Also lock screen before computer goes to sleep.
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         timeout 600 "swaylock -f -c 000000" \
+         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep "swaylock -f -c 000000"
 
 #
 # Inputs
 #
 input "type:keyboard" {
-    xkb_layout us,gr
-    xkb_options "ctrl:nocaps,grp:win_space_toggle"
-    repeat_delay 250
-    repeat_rate 30
+  xkb_layout us,gr
+  xkb_options "ctrl:nocaps,grp:win_space_toggle"
+  repeat_delay 250
+  repeat_rate 30
 }
 
 input "type:touchpad" {
-    natural_scroll enabled
+  natural_scroll enabled
+}
+
+input "type:pointer" {
+  accel_profile "flat"
+  pointer_accel 0.9
 }
 
 #
@@ -172,24 +177,24 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+  # left will shrink the containers width
+  # right will grow the containers width
+  # up will shrink the containers height
+  # down will grow the containers height
+  bindsym $left resize shrink width 10px
+  bindsym $down resize grow height 10px
+  bindsym $up resize shrink height 10px
+  bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+  # Ditto, with arrow keys
+  bindsym Left resize shrink width 10px
+  bindsym Down resize grow height 10px
+  bindsym Up resize shrink height 10px
+  bindsym Right resize grow width 10px
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+  # Return to default mode
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -237,17 +242,17 @@ client.focused_inactive  $border3  $back3      $text3  $text3    $text3
 #
 
 bar {
-    position top
-    status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
+  position top
+  status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 
-    colors {
-        statusline $text2
-        background $back2
+  colors {
+    statusline $text2
+    background $back2
 
-        # class            border   background text
-        focused_workspace  $border1 $back1 $text2
-        inactive_workspace $back3   $back3 $text3
-    }
+    # class            border   background text
+    focused_workspace  $border1 $back1 $text2
+    inactive_workspace $back3   $back3 $text3
+  }
 }
 
 include /etc/sway/config.d/*
