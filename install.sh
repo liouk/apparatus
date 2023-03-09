@@ -154,11 +154,15 @@ function stow_arch {
   local navi_dir=$(navi info config-path)
   navi_dir=${navi_dir%config.yaml}
   mkdir -p $navi_dir
+  mkdir -p "$HOME/.config/git"
   mkdir -p "$HOME/.config/sway"
+  mkdir -p "$HOME/.config/mako"
   pushd . > /dev/null
   cd $apparatus_dir
   stow --restow --target="$HOME" zsh
-  stow --restow --target="$HOME" git
+  stow --restow --target="$HOME" git --ignore "conf.d"
+  # special stow so that apparatus/git/conf.d ends up in ~/.config/git/
+  stow --restow --target="$HOME/.config/git" --dir="git" conf.d
   stow --restow --target="$HOME" tig
   stow --restow --target="$HOME" powerlevel10k
   stow --restow --target="$HOME/.config" kitty

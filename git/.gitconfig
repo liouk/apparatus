@@ -81,13 +81,13 @@
   gpgsign = true
 
 [includeIf "gitdir:/home/ilias/.apparatus/"]
-  path = .gitconfig-apparatus-redarch
+  path = .config/git/liouk-redarch
 
 [includeIf "gitdir:/home/ilias/.toolshed/"]
-  path = .gitconfig-apparatus-redarch
+  path = .config/git/liouk-redarch
 
 [includeIf "gitdir:/home/ilias/redhat/"]
-  path = .gitconfig-redhat-redarch
+  path = .config/git/redhat-redarch
 
 [includeIf "gitdir:/Users/ilias/Workspace/redhat/"]
   path = .gitconfig-redhat-stingray
