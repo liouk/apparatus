@@ -156,6 +156,7 @@ function stow_arch {
   mkdir -p $navi_dir
   mkdir -p "$HOME/.config/git"
   mkdir -p "$HOME/.config/sway"
+  mkdir -p "$HOME/.config/swaylock"
   mkdir -p "$HOME/.config/mako"
   pushd . > /dev/null
   cd $apparatus_dir
@@ -169,6 +170,7 @@ function stow_arch {
   stow --restow --target="$HOME/.config" nvim
   stow --restow --target="$navi_dir" navi
   stow --restow --target="$HOME/.config/sway" sway
+  stow --restow --target="$HOME/.config/swaylock" swaylock
   stow --restow --target="$HOME/.config/mako" mako
   popd > /dev/null
 }

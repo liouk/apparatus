@@ -23,7 +23,7 @@ default_floating_border pixel 2
 # App launcher
 #
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu exec foot -a launcher -e sway-launcher-desktop
+set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
 
 #
 # Notifications
@@ -49,9 +49,9 @@ output "Samsung Electric Company LF32TU87 HNTT100830" {
 # displays after another 300 seconds, and turn screens back on when
 # resumed. Also lock screen before computer goes to sleep.
 exec swayidle -w \
-         timeout 600 "swaylock -f -c 000000" \
+         timeout 600 "swaylock -f" \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep "swaylock -f -c 000000"
+         before-sleep "swaylock -f"
 
 #
 # Inputs
@@ -69,7 +69,7 @@ input "type:touchpad" {
 
 input "type:pointer" {
   accel_profile "flat"
-  pointer_accel 0.9
+  pointer_accel 0.7
 }
 
 #
@@ -214,8 +214,7 @@ bindsym Cancel exec playerctl play-pause
 bindsym XF86Favorites exec playerctl next
 
 # screen lock
-bindsym $mod+End exec swaylock -i /usr/share/backgrounds/bg.png
-bindsym Hyper_L+Home exec swaylock -i /usr/share/backgrounds/bg.png
+bindsym $mod+End exec swaylock
 
 #
 # Colors
