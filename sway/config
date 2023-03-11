@@ -14,12 +14,6 @@ set $term kitty
 font JetBrainsMono Nerd Font 10
 
 #
-# Window configuration
-#
-default_border pixel 2
-default_floating_border pixel 2
-
-#
 # App launcher
 #
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
@@ -200,24 +194,43 @@ bindsym XF86Favorites exec playerctl next
 bindsym $mod+End exec swaylock
 
 #
+# Window configuration
+#
+default_border pixel 2
+default_floating_border pixel 2
+
+#
 # Colors
 #
 
 # tailored to kanagawa
-set $text1   #DCD7BA
-set $text2   #C8C093
-set $text3   #54546D
-set $back1   #2D4F67
-set $back2   #2A2A37
-set $back3   #1F1F28
-set $border1 #2D4F67
-set $border2 #658594
-set $border3 #363646
+set $fujiWhite  #DCD7BA
+set $fujiGray   #727169
+set $waveBlue1  #223249
+set $dragonBlue #658594
+set $lightBlue  #A3D4D5
+set $sumiInk3   #1F1F28
+set $sumiInk4   #2A2A37
+set $sumiInk5   #363646
+set $oniViolet2 #B8B4D0
+
+set $text1   $fujiWhite
+set $back1   $waveBlue1
+set $border1 $dragonBlue
+set $hl1     $lightBlue
+
+set $text2   $fujiGray
+set $back2   $sumiInk4
+set $border2 $sumiInk5
+
+set $text3   $oniViolet2
+set $back3   $sumiInk3
+set $border3 $sumiInk5
 
 # class                  border    background  text    indicator child_border
-client.focused           $border2  $back1      $text1  $back1    $back1
-client.unfocused         $border3  $back3      $text3  $text3    $text3
-client.focused_inactive  $border3  $back3      $text3  $text3    $text3
+client.focused           $border1  $back1      $text1  $hl1      $border1
+client.unfocused         $border2  $back2      $text2  $back2    $border2
+client.focused_inactive  $border2  $back2      $text2  $back2    $border2
 
 #
 # Swaybar
@@ -228,12 +241,13 @@ bar {
   status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 
   colors {
-    statusline $text2
-    background $back2
+    statusline $text3
+    background $back3
 
-    # class            border   background text
-    focused_workspace  $border1 $back1 $text2
-    inactive_workspace $back3   $back3 $text3
+    # class            border    background  text
+    focused_workspace  $border1  $back1      $text1
+    active_workspace   $border2  $back2      $text2
+    inactive_workspace $back3    $back3      $text2
   }
 }
 
