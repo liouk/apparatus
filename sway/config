@@ -251,4 +251,24 @@ bar {
   }
 }
 
+#
+# Applications
+#
+
+# startup
+workspace 1
+exec $term
+workspace 2
+exec google-chrome-stable
+workspace 3
+exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
+workspace 4
+exec /usr/bin/obsidian %U --enable-features=UseOzonePlatform --ozone-platform=wayland
+
+# assign workspaces to outputs
+workspace 1 output "Dell Inc. DELL U2520D JMZKGZ2" "Samsung Electric Company LF32TU87 HNTT100830"
+workspace 2 output "Dell Inc. DELL U2520D JMZKGZ2" "Samsung Electric Company LF32TU87 HNTT100830"
+workspace 3 output "Chimei Innolux Corporation 0x14F2 Unknown"
+workspace 4 output "Chimei Innolux Corporation 0x14F2 Unknown"
+
 include /etc/sway/config.d/*
