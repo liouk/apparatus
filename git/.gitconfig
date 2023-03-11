@@ -80,6 +80,9 @@
 [commit]
   gpgsign = true
 
+[includeIf "gitdir:/home/ilias/Dropbox/Notes/.obsidian/"]
+  path = .config/git/liouk-redarch
+
 [includeIf "gitdir:/home/ilias/.apparatus/"]
   path = .config/git/liouk-redarch
 
