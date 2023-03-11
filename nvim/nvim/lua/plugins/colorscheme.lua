@@ -4,21 +4,28 @@
 -- {})
 
 return {
-  'rebelot/kanagawa.nvim',
-  name = 'kanagawa',
-  lazy = false,
-  priority = 1000,
+  {
+    'norcalli/nvim-colorizer.lua',
+    lazy = false,
+    enabled = false,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    lazy = false,
+    priority = 1000,
 
-  config = function()
-    require('kanagawa').setup({
-      undercurl = false,
-      commentStyle = { italic = true },
-      functionStyle = {},
-      keywordStyle = { italic = false },
-      statementStyle = {},
-      typeStyle = {},
-    })
+    config = function()
+      require('kanagawa').setup({
+        undercurl = false,
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = false },
+        statementStyle = {},
+        typeStyle = {},
+      })
 
-    vim.cmd.colorscheme 'kanagawa'
-  end
+      vim.cmd.colorscheme 'kanagawa'
+    end
+  }
 }
