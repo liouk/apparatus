@@ -57,6 +57,13 @@ input "type:keyboard" {
   repeat_rate 30
 }
 
+input "13364:544:Keychron_K2_Pro_Keyboard" {
+  xkb_layout us,gr
+  xkb_options "ctrl:nocaps,altwin:swap_lalt_lwin,grp:win_space_toggle"
+  repeat_delay 250
+  repeat_rate 30
+}
+
 input "type:touchpad" {
   natural_scroll enabled
 }
@@ -189,6 +196,9 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86Go exec playerctl previous
 bindsym Cancel exec playerctl play-pause
 bindsym XF86Favorites exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
 
 # screen lock
 bindsym $mod+End exec swaylock
