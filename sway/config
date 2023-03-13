@@ -256,6 +256,9 @@ bar {
 #
 
 # startup
+exec kitty --class=scratchpad_terminal
+for_window [app_id="scratchpad_terminal"] move scratchpad
+
 workspace 1
 exec $term
 workspace 2
