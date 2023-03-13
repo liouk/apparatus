@@ -176,7 +176,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # screenshots with grim
-bindsym Print exec grim -g "$(slurp)" - | wl-copy -p
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Print exec grim -g "$(slurp)"
 
 # audio

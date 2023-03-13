@@ -11,4 +11,4 @@ set main-view = \
 set main-view-date-format = "%Y-%m-%d %H:%M"
 
 # Copy Commit SHA to clipboard
-bind generic 9 !@bash -c "echo -n %(commit) | wl-copy -p"
+bind generic 9 !@bash -c "echo -n %(commit) | wl-copy"

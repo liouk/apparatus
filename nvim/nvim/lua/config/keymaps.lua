@@ -17,8 +17,8 @@ vim.keymap.set('i', '<C-l>', '<Esc>:wincmd l<CR>i')
 vim.keymap.set('i', '<C-h>', '<Esc>:wincmd h<CR>i')
 
 -- clipboard
-vim.keymap.set('v', '<leader>y', '"*y', { desc = 'Copy to system clipboard' })
-vim.keymap.set('n', '<leader>y', '"*y', { desc = 'Copy to system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
+vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 
 -- cursor movements
 vim.keymap.set('n', '<C-b>', '*``', { desc = 'Highlight word without moving' })
