@@ -39,7 +39,7 @@ local function endswith(str, suffix)
 end
 
 local function open_url(url)
-  local cmd = vim.fn.has('macunix') and "open" or "xdg-open"
+  local cmd = vim.fn.has('macunix') == 1 and 'open' or 'xdg-open'
   Job:new({ command = cmd, args = { url } }):start()
 end
 
