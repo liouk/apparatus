@@ -165,13 +165,6 @@ bindsym $mod+Shift+space floating toggle
 # move focus to the parent container
 bindsym $mod+a focus parent
 
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# show the next scratchpad window or hide the focused scratchpad window
-# if there are multiple scratchpad windows, this command cycles through them
-bindsym $mod+minus scratchpad show, resize set 50 ppt 75 ppt, move position center
-
 mode "resize" {
   # left will shrink the containers width
   # right will grow the containers width
@@ -269,13 +262,41 @@ bar {
 }
 
 #
+# Scratchpad
+#
+
+set $spotify_app_id pjibgclleladliembfgfagdaldikeohf
+set $scratch_spotify google-chrome-stable --app-id=$spotify_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
+set $scratch_term kitty --class=scratch_term
+set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
+for_window {
+
+  # kitty
+  [app_id="scratch_term"] {
+    move scratchpad
+    [app_id="scratch_term"] scratchpad show
+    $scratch_pos
+  }
+
+  # spotify
+  [app_id=$spotify_app_id] {
+    move scratchpad
+    [app_id=$spotify_app_id] scratchpad show
+    $scratch_pos
+  }
+}
+
+bindsym --to-code {
+  $mod+minus exec swaymsg [app_id="scratch_term"] scratchpad show || exec $scratch_term, $scratch_pos
+  $mod+equal exec swaymsg [app_id=$spotify_app_id] scratchpad show || exec $scratch_spotify, $scratch_pos
+  $mod+Shift+equal move scratchpad
+}
+
+#
 # Applications
 #
 
 # startup
-for_window [app_id="scratchterm"] move scratchpad
-exec kitty --class=scratchterm
-
 workspace 1
 exec $term
 workspace 2
