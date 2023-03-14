@@ -194,7 +194,7 @@ function G.gitlinks(linktype, action, args)
   G.i.git.branch = G.git_branch()
   G.i.file.path_full = vim.api.nvim_buf_get_name(0)
   G.i.file.root = G.git_root(G.i.file.path_full) .. '/'
-  G.i.file.path_relative = G.i.file.path_full:gsub(G.i.file.root, '', 1)
+  G.i.file.path_relative = G.i.file.path_full:sub(G.i.file.root:len()+1)
   if args.range > 0 then
     G.i.range.vstart = args.line1
     G.i.range.vend = args.line2
