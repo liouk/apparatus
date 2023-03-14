@@ -28,6 +28,9 @@ bindsym $mod+Shift+n exec swaync-client -t -sw
 #
 # Outputs
 #
+set $laptop eDP-1
+set $homedisplay DP-3
+
 output * {
   bg /usr/share/backgrounds/bg.png fill
 }
@@ -36,8 +39,10 @@ output "Samsung Electric Company LF32TU87 HNTT100830" {
   mode 2560x1440@59.951Hz
 }
 
+output $laptop pos 0 0 res 1920x1080
+output $homedisplay pos 1920 -360 res 2560x1440
+
 # clamshell mode
-set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 
