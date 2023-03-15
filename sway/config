@@ -20,12 +20,6 @@ for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 p
 set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
 
 #
-# Notifications
-#
-exec swaync
-bindsym $mod+Shift+n exec swaync-client -t -sw
-
-#
 # Outputs
 #
 set $laptop eDP-1
@@ -62,14 +56,14 @@ exec swayidle -w \
 #
 input "type:keyboard" {
   xkb_layout us,gr
-  xkb_options "ctrl:nocaps,grp:win_space_toggle"
+  xkb_options "ctrl:nocaps"
   repeat_delay 250
   repeat_rate 30
 }
 
 input "13364:544:Keychron_K2_Pro_Keyboard" {
   xkb_layout us,gr
-  xkb_options "ctrl:nocaps,altwin:swap_lalt_lwin,grp:win_space_toggle"
+  xkb_options "ctrl:nocaps,altwin:swap_lalt_lwin"
   repeat_delay 250
   repeat_rate 30
 }
@@ -86,6 +80,9 @@ input "type:pointer" {
 #
 # Key bindings
 #
+
+# switch to next keyboard layout
+bindsym Mod4+Space exec swaymsg input "type:keyboard" xkb_switch_layout next
 
 # start a terminal
 bindsym $mod+Return exec $term
