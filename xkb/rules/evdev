@@ -1,0 +1,3 @@
+! option = symbols
+  custom:caps_lctrl_hjkl = +custom(caps_lctrl_hjkl)
+! include %S/evdev

@@ -158,6 +158,7 @@ function stow_arch {
   mkdir -p "$HOME/.config/sway"
   mkdir -p "$HOME/.config/swaylock"
   mkdir -p "$HOME/.config/mako"
+  mkdir -p "$HOME/.config/xkb"
   pushd . > /dev/null
   cd $apparatus_dir
   stow --restow --target="$HOME" zsh
@@ -172,6 +173,7 @@ function stow_arch {
   stow --restow --target="$HOME/.config/sway" sway
   stow --restow --target="$HOME/.config/swaylock" swaylock
   stow --restow --target="$HOME/.config/mako" mako
+  stow --restow --target="$HOME/.config/xkb" xkb
   popd > /dev/null
 }
 
@@ -190,6 +192,7 @@ function unstow_arch {
   stow --delete --target="$navi_dir" navi
   stow --delete --target="$HOME/.config/sway" sway
   stow --delete --target="$HOME/.config/mako" mako
+  stow --delete --target="$HOME/.config/xkb" xkb
   popd > /dev/null
 }
 

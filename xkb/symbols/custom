@@ -1,0 +1,13 @@
+// Replace CapsLock with Left Ctrl
+// Assign the arrow keys to the 3rd layer of hjkl keys
+// Switch to the 3rd layer with Left Ctrl
+// see https://xkbcommon.org/doc/current/md_doc_user_configuration.html
+xkb_symbols "caps_lctrl_hjkl" {
+    key <AC06>	{[	 h,	 H, Left	]};
+    key <AC07>	{[	 j,	 J, Down	]};
+    key <AC08>	{[	 k,	 K, Up		]};
+    key <AC09>	{[	 l,	 L, Right	]};
+    replace key <LCTL>	{[	 ISO_Level3_Shift	]};
+    replace key <CAPS> { [ Control_L, Control_L ] };
+    modifier_map  Control { <CAPS> };
+};
