@@ -128,7 +128,6 @@ bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -140,7 +139,6 @@ bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
 
 # you can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
@@ -264,6 +262,8 @@ bar {
 
 set $spotify_app_id pjibgclleladliembfgfagdaldikeohf
 set $scratch_spotify google-chrome-stable --app-id=$spotify_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
+set $cal_app_id kjbdgfilnfhdoflbpgamdcdgpehopbep
+set $scratch_cal google-chrome-stable --app-id=$cal_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
 set $scratch_term kitty --class=scratch_term
 set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
 for_window {
@@ -281,12 +281,19 @@ for_window {
     [app_id=$spotify_app_id] scratchpad show
     $scratch_pos
   }
+
+  # google calendar
+  [app_id=$cal_app_id] {
+    move scratchpad
+    [app_id=$cal_app_id] scratchpad show
+    $scratch_pos
+  }
 }
 
 bindsym --to-code {
-  $mod+minus exec swaymsg [app_id="scratch_term"] scratchpad show || exec $scratch_term, $scratch_pos
+  $mod+minus exec swaymsg [app_id="scratch_term"]  scratchpad show || exec $scratch_term, $scratch_pos
   $mod+equal exec swaymsg [app_id=$spotify_app_id] scratchpad show || exec $scratch_spotify, $scratch_pos
-  $mod+Shift+equal move scratchpad
+  $mod+0     exec swaymsg [app_id=$cal_app_id]     scratchpad show || exec $scratch_cal, $scratch_pos
 }
 
 #
