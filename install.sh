@@ -45,15 +45,14 @@ function stow_macos {
   pushd . > /dev/null
   cd $apparatus_dir
   stow --restow --target="$HOME" zsh
-  stow --restow --target="$HOME" git
-  stow --restow --target="$HOME" tig
   stow --restow --target="$HOME" powerlevel10k
+  stow --restow --target="$HOME" tig
+  stow --restow --target="$HOME" git --ignore "git"
+  stow --restow --target="$HOME/.config" git --ignore ".gitconfig"
   stow --restow --target="$HOME/.config" kitty
   stow --restow --target="$HOME/.config" karabiner
   stow --restow --target="$HOME/.config" nvim
-
-  mkdir -p "$HOME/Library/Application Support/navi"
-  stow --restow --target="$HOME/Library/Application Support/navi" navi
+  stow --restow --target="$HOME/Library/Application Support" navi
   popd > /dev/null
 }
 
@@ -62,13 +61,14 @@ function unstow_macos {
   pushd . > /dev/null
   cd $apparatus_dir
   stow --delete --target="$HOME" zsh
-  stow --delete --target="$HOME" git
-  stow --delete --target="$HOME" tig
   stow --delete --target="$HOME" powerlevel10k
+  stow --delete --target="$HOME" tig
+  stow --restow --target="$HOME" git --ignore "git"
+  stow --restow --target="$HOME/.config" git --ignore ".gitconfig"
   stow --delete --target="$HOME/.config" kitty
   stow --delete --target="$HOME/.config" karabiner
   stow --delete --target="$HOME/.config" nvim
-  stow --delete --target="$HOME/Library/Application Support/navi" navi
+  stow --delete --target="$HOME/Library/Application Support" navi
   popd > /dev/null
 }
 
@@ -152,28 +152,22 @@ function install_arch {
 function stow_arch {
   local apparatus_dir="$1"
   local navi_dir=$(navi info config-path)
-  navi_dir=${navi_dir%config.yaml}
-  mkdir -p $navi_dir
-  mkdir -p "$HOME/.config/git"
-  mkdir -p "$HOME/.config/sway"
-  mkdir -p "$HOME/.config/swaylock"
-  mkdir -p "$HOME/.config/mako"
-  mkdir -p "$HOME/.config/xkb"
+  navi_dir=${navi_dir%navi/config.yaml}
+  mkdir -p "$HOME/.config"
   pushd . > /dev/null
   cd $apparatus_dir
   stow --restow --target="$HOME" zsh
-  stow --restow --target="$HOME" git --ignore "conf.d"
-  # special stow so that apparatus/git/conf.d ends up in ~/.config/git/
-  stow --restow --target="$HOME/.config/git" --dir="git" conf.d
-  stow --restow --target="$HOME" tig
   stow --restow --target="$HOME" powerlevel10k
+  stow --restow --target="$HOME" tig
+  stow --restow --target="$HOME" git --ignore "git"
+  stow --restow --target="$HOME/.config" git --ignore ".gitconfig"
   stow --restow --target="$HOME/.config" kitty
   stow --restow --target="$HOME/.config" nvim
+  stow --restow --target="$HOME/.config" sway
+  stow --restow --target="$HOME/.config" swaylock
+  stow --restow --target="$HOME/.config" mako
+  stow --restow --target="$HOME/.config" xkb
   stow --restow --target="$navi_dir" navi
-  stow --restow --target="$HOME/.config/sway" sway
-  stow --restow --target="$HOME/.config/swaylock" swaylock
-  stow --restow --target="$HOME/.config/mako" mako
-  stow --restow --target="$HOME/.config/xkb" xkb
   popd > /dev/null
 }
 
@@ -184,15 +178,17 @@ function unstow_arch {
   pushd . > /dev/null
   cd $apparatus_dir
   stow --delete --target="$HOME" zsh
-  stow --delete --target="$HOME" git
-  stow --delete --target="$HOME" tig
   stow --delete --target="$HOME" powerlevel10k
+  stow --delete --target="$HOME" tig
+  stow --delete --target="$HOME" git --ignore "git"
+  stow --delete --target="$HOME/.config" git --ignore ".gitconfig"
   stow --delete --target="$HOME/.config" kitty
   stow --delete --target="$HOME/.config" nvim
+  stow --delete --target="$HOME/.config" sway
+  stow --delete --target="$HOME/.config" swaylock
+  stow --delete --target="$HOME/.config" mako
+  stow --delete --target="$HOME/.config" xkb
   stow --delete --target="$navi_dir" navi
-  stow --delete --target="$HOME/.config/sway" sway
-  stow --delete --target="$HOME/.config/mako" mako
-  stow --delete --target="$HOME/.config/xkb" xkb
   popd > /dev/null
 }
 
