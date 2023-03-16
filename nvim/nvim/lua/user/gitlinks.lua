@@ -133,7 +133,8 @@ function G.git_file_exists()
 end
 
 function G.git_file_dirty()
-  return git({'status', '-s', G.i.file.path_relative})[1] ~= ''
+  local res = git({'status', '-s', G.i.file.path_relative})
+  return res[1] ~= nil and res[1] ~= ''
 end
 
 function G.git_range_uncommitted()
