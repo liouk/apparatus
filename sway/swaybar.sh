@@ -17,8 +17,9 @@ else
 fi
 
 # audio & media
-audio_volume=$(pactl get-sink-volume @DEFAULT_SINK@ | cut -d'/' -f2 | head -1 | xargs)
-audio_is_muted=$(pactl get-sink-mute @DEFAULT_SINK@ | cut -d' ' -f2)
+volctl="$HOME/.config/sway/volctl.sh"
+audio_volume=$(eval "$volctl get-vol")
+audio_is_muted=$(eval "$volctl get-mute")
 media_artist=$(playerctl metadata artist)
 media_song=$(playerctl metadata title)
 player_status=$(playerctl status)

@@ -182,9 +182,9 @@ bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Print exec grim -g "$(slurp)"
 
 # audio
-bindsym XF86AudioMute exec ~/.config/sway/vol-notify.sh mute
-bindsym XF86AudioRaiseVolume exec ~/.config/sway/vol-notify.sh up
-bindsym XF86AudioLowerVolume exec ~/.config/sway/vol-notify.sh down
+bindsym XF86AudioMute exec ~/.config/sway/volctl.sh mute
+bindsym XF86AudioRaiseVolume exec ~/.config/sway/volctl.sh up
+bindsym XF86AudioLowerVolume exec ~/.config/sway/volctl.sh down
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # playback
