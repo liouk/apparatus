@@ -2,35 +2,6 @@
 
 set -e
 
-vol_notify () {
-  if [ $audio_is_muted = "yes" ]; then
-    msg=" 󰖁 [                    ] 0%"
-  else
-    num_stars=$((${audio_volume%"%"}/5))
-    num_spaces=$((20-$num_stars))
-    stars=$(printf "*%.0s" $(seq 1 $num_stars))
-    spaces=$(printf " %.0s" $(seq 1 $num_spaces))
-
-    if [ $num_stars -ge 20 ]; then
-      stars="********************"
-      spaces=""
-    elif [ $num_stars -eq 0 ]; then
-      stars=""
-      spaces="                    "
-    fi
-
-    msg="  [$stars$spaces] $audio_volume"
-  fi
-
-  statefile="$HOME/.config/sway/.${0%'.sh'}.state"
-  nid=$(cat "$statefile" 2>/dev/null)
-  old_nid="$nid"
-  nid=$(notify-send "$msg" -p -r ${nid:=99999})
-  if [[ "$nid" -ne "$old_nid" ]]; then
-    echo $nid > "$statefile"
-  fi
-}
-
 dp3="alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_5__sink"
 dp2="alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_4__sink"
 dp1="alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_3__sink"
@@ -88,8 +59,6 @@ main () {
       exit 1
       ;;
   esac
-
-  vol_notify
 }
 
 main "$@"
