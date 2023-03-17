@@ -137,7 +137,8 @@ function install_arch {
     zsh-theme-powerlevel10k \
     btop \
     kitty \
-    unzip
+    unzip \
+    sway
 
   sudo pacman -S --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
@@ -146,7 +147,9 @@ function install_arch {
   cd ..
   rm -rf yay-bin
   yay -S --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
-    navi ttf-jetbrains-mono-nerd
+    navi \
+    ttf-jetbrains-mono-nerd \
+    waybar
 }
 
 function stow_arch {
@@ -165,6 +168,7 @@ function stow_arch {
   stow --restow --target="$HOME/.config" nvim
   stow --restow --target="$HOME/.config" sway
   stow --restow --target="$HOME/.config" swaylock
+  stow --restow --target="$HOME/.config" waybar
   stow --restow --target="$HOME/.config" mako
   stow --restow --target="$HOME/.config" xkb
   stow --restow --target="$navi_dir" navi
@@ -186,6 +190,7 @@ function unstow_arch {
   stow --delete --target="$HOME/.config" nvim
   stow --delete --target="$HOME/.config" sway
   stow --delete --target="$HOME/.config" swaylock
+  stow --delete --target="$HOME/.config" waybar
   stow --delete --target="$HOME/.config" mako
   stow --delete --target="$HOME/.config" xkb
   stow --delete --target="$navi_dir" navi

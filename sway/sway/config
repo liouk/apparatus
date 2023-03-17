@@ -238,22 +238,10 @@ client.unfocused         $border2  $back2      $text2  $back2    $border2
 client.focused_inactive  $border2  $back2      $text2  $back2    $border2
 
 #
-# Swaybar
+# Waybar
 #
-
 bar {
-  position top
-  status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
-
-  colors {
-    statusline $text3
-    background $back3
-
-    # class            border    background  text
-    focused_workspace  $border1  $back1      $text1
-    active_workspace   $border2  $back2      $text2
-    inactive_workspace $back3    $back3      $text2
-  }
+  swaybar_command waybar
 }
 
 #
