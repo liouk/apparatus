@@ -1,8 +1,9 @@
-[mode=default]
 default-timeout=5000
 width=300
 height=100
 font=JetBrainsMonoNL Nerd Font 11
-background-color=#223249DD
-border-color=#2D4F67DD
+
+# kanagawa
+background-color=#2A2A37DD
+border-color=#DCD7BADD
 text-color=#DCD7BA
