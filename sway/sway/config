@@ -218,6 +218,7 @@ set $sumiInk3   #1F1F28
 set $sumiInk4   #2A2A37
 set $sumiInk5   #363646
 set $oniViolet2 #B8B4D0
+set $peachRed   #FF5D62
 
 set $text1   $fujiWhite
 set $back1   $waveBlue1
@@ -231,11 +232,13 @@ set $border2 $sumiInk5
 set $text3   $oniViolet2
 set $back3   $sumiInk3
 set $border3 $sumiInk5
+set $border4 $peachRed
 
 # class                  border    background  text    indicator child_border
 client.focused           $border1  $back1      $text1  $hl1      $border1
 client.unfocused         $border2  $back2      $text2  $back2    $border2
 client.focused_inactive  $border2  $back2      $text2  $back2    $border2
+client.urgent            $border1  $back1      $text1  $hl1      $border4
 
 #
 # Waybar
