@@ -86,7 +86,7 @@
 [includeIf "gitdir:/home/ilias/.apparatus/"]
   path = .config/git/liouk-redarch
 
-[includeIf "gitdir:/home/ilias/.toolshed/"]
+[includeIf "gitdir:/home/ilias/liouk/"]
   path = .config/git/liouk-redarch
 
 [includeIf "gitdir:/home/ilias/redhat/"]
