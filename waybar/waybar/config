@@ -3,7 +3,7 @@
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
   "modules-center": ["sway/window"],
-  "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "sway/language", "clock", "battery"],
+  "modules-right": ["tray", "pulseaudio", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "battery", "custom/powerbutton"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -33,7 +33,7 @@
     "format-charging": " {capacity}% ",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": [" ", " ", " ", " ", " "]
   },
   "network": {
     "format-wifi": "  {essid} ({signalStrength}%)",
@@ -77,5 +77,17 @@
     "on-click-right": "playerctl next",
     "return-type": "json",
     "exec": "$HOME/.config/waybar/now-playing.sh 2> /dev/null"
+  },
+  "custom/vpn": {
+    "format": "󱄛",
+    "interval": "once",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/vpn.sh statusjson",
+    "on-click": "$HOME/.config/waybar/vpn.sh down",
+    "signal": 1
+  },
+  "custom/powerbutton": {
+    "format": "",
+    "on-click": "shutdown now"
   }
 }

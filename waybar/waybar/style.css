@@ -76,6 +76,8 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
+#custom-powerbutton,
+#custom-vpn,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -168,4 +170,12 @@ label:focus {
 }
 
 #scratchpad.empty {
+}
+
+#custom-vpn.disconnected {
+  opacity: 0.4
+}
+
+#custom-vpn.connected {
+  opacity: 1.0
 }
