@@ -24,12 +24,13 @@ set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/swa
 #
 set $laptop eDP-1
 set $homedisplay DP-3
+set $officedisplay "Samsung Electric Company LF32TU87 HNTT100830"
 
 output * {
   bg /usr/share/backgrounds/bg.png fill
 }
 
-output "Samsung Electric Company LF32TU87 HNTT100830" {
+output $officedisplay {
   mode 2560x1440@59.951Hz
 }
 
@@ -292,6 +293,7 @@ bindsym --to-code {
 #
 
 # startup
+set $whatsapp_app_id hnpfjngllnobngcgfapefoaidbinmjnm
 workspace 1
 exec $term
 workspace 2
@@ -300,11 +302,15 @@ workspace 3
 exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 4
 exec /usr/bin/obsidian %U --enable-features=UseOzonePlatform --ozone-platform=wayland
+workspace 9
+exec /usr/bin/viber
+exec google-chrome-stable --app-id=$whatsapp_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
 
 # assign workspaces to outputs
-workspace 1 output "Dell Inc. DELL U2520D JMZKGZ2" "Samsung Electric Company LF32TU87 HNTT100830"
-workspace 2 output "Dell Inc. DELL U2520D JMZKGZ2" "Samsung Electric Company LF32TU87 HNTT100830"
-workspace 3 output "Chimei Innolux Corporation 0x14F2 Unknown"
-workspace 4 output "Chimei Innolux Corporation 0x14F2 Unknown"
+workspace 1 output $homedisplay $officedisplay
+workspace 2 output $homedisplay $officedisplay
+workspace 3 output $laptop
+workspace 4 output $laptop
+workspace 9 output $laptop
 
 include /etc/sway/config.d/*
