@@ -36,6 +36,7 @@ local function alpha_config()
   local buttons = config.layout[6]
   buttons.val = {
     dashboard.button('e',         '  new buffer',     ':enew <BAR> startinsert <CR>'),
+    dashboard.button('s',         '  sessions',       ':LoadSession<CR>'),
     dashboard.button('<leader>d', '  explore dir'  ),
     dashboard.button('<C-p>',     '  find here'    ),
     dashboard.button('<leader>f', '  grep here'    ),
