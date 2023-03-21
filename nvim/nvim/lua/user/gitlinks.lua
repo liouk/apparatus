@@ -22,21 +22,8 @@ Inspired by tpope/vim-fugitive and ruifm/gitlinker.nvim ]]--
 
 local G = {}
 local Job = require('plenary.job')
-local Path = require('plenary.path')
-
-local function err(msg) vim.notify('gitlinks: '..msg, vim.log.levels.ERROR) end
-local function inf(msg) vim.notify('gitlinks: '..msg, vim.log.levels.INFO) end
-local function wrn(msg) vim.notify('gitlinks: '..msg, vim.log.levels.WARN) end
-
-local function startswith(str, prefix)
-  return string.sub(str, 1, prefix:len()) == prefix
-end
-
-local function endswith(str, suffix)
-  local lstr = str:len()
-  local lsuf = suffix:len()
-  return str:sub(lstr-lsuf+1, lstr) == suffix
-end
+local Utils = require('user.utils')
+local Git = require('user.gitutils')
 
 local function open_url(url)
   local cmd = vim.fn.has('macunix') == 1 and 'open' or 'xdg-open'
@@ -57,89 +44,39 @@ end
 
 local function copy_url(url)
   vim.api.nvim_command("let @+ = '" .. url .. "'")
-  inf("copied url '" .. url .. "'")
-end
-
-local function git(args, cwd)
-  local output
-  local exitcode
-  Job:new({
-    command = 'git',
-    args = args,
-    cwd = cwd or G.git_root(),
-    on_exit = function(j, code)
-      output = j:result()
-      exitcode = code
-    end,
-  }):sync()
-  return output, exitcode
-end
-
-function G.git_root(filepath)
-  local fp = filepath or vim.api.nvim_buf_get_name(0)
-  local res = git(
-    {'rev-parse', '--show-toplevel'},
-    tostring(Path:new(fp):parent())
-  )[1]
-
-  return res
+  Utils.inf("copied url '" .. url .. "'")
 end
 
 function G.git_remote()
-  return git({'remote'})[1]
-end
-
-function G.git_remote_url()
-  local remote = git({'ls-remote', '--get-url'})[1]
-  if remote then
-  else
-    return '', 'dir is not a git repo'
-  end
-
-  if startswith(remote, 'https://') then
-    if endswith(remote, '.git') then
-      remote = remote:sub(1, remote:len()-4)
-    end
-    return remote
-
-  elseif startswith(remote, 'git@') then
-    remote = remote:gsub(':', '/', 1)
-    remote = remote:gsub('git@', 'https://', 1)
-    if endswith(remote, '.git') then
-      remote = remote:sub(1, remote:len()-4)
-    end
-    return remote
-  end
-
-  return '', 'could not determine git remote: ' .. remote
+  return Git.git({'remote'})[1]
 end
 
 function G.git_branch()
-  return git({'rev-parse', '--abbrev-ref', 'HEAD'})[1]
+  return Git.git({'rev-parse', '--abbrev-ref', 'HEAD'})[1]
 end
 
 function G.git_file_untracked()
-  return G.i.file.path_full == '' or git({'ls-files', G.i.file.path_full}) == ''
+  return G.i.file.path_full == '' or Git.git({'ls-files', G.i.file.path_full}) == ''
 end
 
 function G.git_branch_untracked()
-  local res = git({'config', '--get', 'branch.' .. G.i.git.branch .. '.remote'})[1]
+  local res = Git.git({'config', '--get', 'branch.' .. G.i.git.branch .. '.remote'})[1]
   return res == nil or res == ''
 end
 
 function G.git_file_exists()
-  local _, exitcode = git({'cat-file', '-e', G.i.git.remote..'/'..G.i.git.branch..':'..G.i.file.path_relative})
+  local _, exitcode = Git.git({'cat-file', '-e', G.i.git.remote..'/'..G.i.git.branch..':'..G.i.file.path_relative})
   return exitcode == 0
 end
 
 function G.git_file_dirty()
-  local res = git({'status', '-s', G.i.file.path_relative})
+  local res = Git.git({'status', '-s', G.i.file.path_relative})
   return res[1] ~= nil and res[1] ~= ''
 end
 
 function G.git_range_uncommitted()
   local range = G.i.range.vstart .. ',' .. G.i.range.vend
-  local output = table.concat(git({'blame', G.i.file.path_full, '-L', range}), '')
+  local output = table.concat(Git.git({'blame', G.i.file.path_full, '-L', range}), '')
   return output:find('Not Committed Yet') ~= nil
 end
 
@@ -175,18 +112,18 @@ function G.gitlinks(linktype, action, args)
   }
 
   if linktype ~= 'blob' and linktype ~= 'blame' then
-    err("unknown linktype '" .. action .. "'")
+    Utils.err("unknown linktype '" .. action .. "'")
     return
   end
 
   if action ~= 'copy' and action ~= 'open' then
-    err("unknown action '" .. action .. "'")
+    Utils.err("unknown action '" .. action .. "'")
     return
   end
 
-  local remote_url, error = G.git_remote_url()
+  local remote_url, error = Git.git_remote_url()
   if remote_url == '' then
-    err(error)
+    Utils.err(error)
     return
   end
 
@@ -194,7 +131,7 @@ function G.gitlinks(linktype, action, args)
   G.i.git.remote = G.git_remote()
   G.i.git.branch = G.git_branch()
   G.i.file.path_full = vim.api.nvim_buf_get_name(0)
-  G.i.file.root = G.git_root(G.i.file.path_full) .. '/'
+  G.i.file.root = Git.git_root(G.i.file.path_full) .. '/'
   G.i.file.path_relative = G.i.file.path_full:sub(G.i.file.root:len()+1)
   if args.range > 0 then
     G.i.range.vstart = args.line1
@@ -202,28 +139,28 @@ function G.gitlinks(linktype, action, args)
   end
 
   if G.git_file_untracked() then
-    err('cannot get link; file is untracked')
+    Utils.err('cannot get link; file is untracked')
     return
   end
 
   if G.git_branch_untracked() then
-    err('cannot get link; branch is untracked')
+    Utils.err('cannot get link; branch is untracked')
     return
   end
 
   if not G.git_file_exists() then
-    err('file does not exist on remote and branch')
+    Utils.err('file does not exist on remote and branch')
     return
   end
 
   if G.i.range.vstart > 0 and G.i.range.vend > 0 then
     if G.git_range_uncommitted() then
-      err('selected range is uncommitted')
+      Utils.err('selected range is uncommitted')
       return
     end
 
     if G.git_file_dirty() then
-      wrn('file is dirty; selected ranges may be off')
+      Utils.wrn('file is dirty; selected ranges may be off')
     end
   end
 
