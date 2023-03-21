@@ -7,6 +7,9 @@
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
+  "sway/window": {
+    "max-length": 100
+  },
   "sway/scratchpad": {
     "format": "{icon}  {count}",
     "show-empty": false,
