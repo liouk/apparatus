@@ -1,6 +1,6 @@
 ignore-empty-password
 disable-caps-lock-text
-hide-keyboard-layout
+show-keyboard-layout
 
 font=JetBrainsMono Nerd Font
 image=/usr/share/backgrounds/bg.png
@@ -26,3 +26,7 @@ inside-wrong-color=#C34043DD
 line-wrong-color=#1F1F28
 ring-wrong-color=#C34043
 text-wrong-color=#1F1F28
+
+layout-bg-color=#1F1F28
+layout-border-color=#1F1F28
+layout-text-color=#DCD7BA
