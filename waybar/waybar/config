@@ -15,7 +15,8 @@
     "tooltip-format": "{app}: {title}"
   },
   "sway/language": {
-    "format": "{shortDescription}"
+    "format": "{shortDescription}",
+    "tooltip": "false"
   },
   "clock": {
     "format": " {:%a %d/%m %H:%M}"
@@ -80,6 +81,7 @@
   },
   "custom/vpn": {
     "format": "󱄛",
+    "tooltip": false,
     "interval": "once",
     "return-type": "json",
     "exec": "$HOME/.config/waybar/vpn.sh statusjson",
@@ -88,6 +90,7 @@
   },
   "custom/powerbutton": {
     "format": "",
-    "on-click": "shutdown now"
+    "on-click": "shutdown now",
+    "tooltip": false
   }
 }
