@@ -298,8 +298,6 @@ bindsym --to-code {
 set $whatsapp_app_id hnpfjngllnobngcgfapefoaidbinmjnm
 workspace 1
 exec $term
-workspace 2
-exec google-chrome-stable
 workspace 3
 exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 4
@@ -307,6 +305,8 @@ exec /usr/bin/obsidian %U --enable-features=UseOzonePlatform --ozone-platform=wa
 workspace 9
 exec /usr/bin/viber
 exec google-chrome-stable --app-id=$whatsapp_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
+workspace 2
+exec google-chrome-stable
 
 # assign workspaces to outputs
 workspace 1 output $homedisplay $officedisplay
