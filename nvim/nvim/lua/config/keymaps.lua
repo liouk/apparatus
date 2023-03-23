@@ -10,11 +10,9 @@ vim.keymap.set('i', '<right>', '<nop>')
 
 -- splits
 vim.keymap.set('n', '<C-e>', ':vsplit<CR>')
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>')
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>')
+vim.keymap.set('n', '<C-h>', ':wincmd w<CR>')
 vim.keymap.set('i', '<C-s>', '<Esc>:vsplit<CR>i')
-vim.keymap.set('i', '<C-l>', '<Esc>:wincmd l<CR>i')
-vim.keymap.set('i', '<C-h>', '<Esc>:wincmd h<CR>i')
+vim.keymap.set('i', '<C-h>', '<Esc>:wincmd w<CR>i')
 
 -- clipboard
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
