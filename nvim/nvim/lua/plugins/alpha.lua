@@ -1,10 +1,7 @@
-local function fn_short(fn)
-  local short_fn = vim.fn.fnamemodify(fn, ':~')
-
-  return short_fn
-end
-
 local function alpha_config()
+  local Job = require('plenary.job')
+  local Path = require('plenary.path')
+
   local dashboard = require('alpha.themes.dashboard')
   local theta = require('alpha.themes.theta')
   local config = theta.config
@@ -24,6 +21,7 @@ local function alpha_config()
 
   -- mru_files
   local mru_files = config.layout[4]
+  mru_files.val[2] = { type = 'padding', val = 0 }
   mru_files.val[3] = {
     type = 'group',
     val = function()
@@ -32,18 +30,48 @@ local function alpha_config()
     opts = { shrink_margin = false },
   }
 
-  -- buttons
-  local buttons = config.layout[6]
-  buttons.val = {
-    dashboard.button('e',         '  new buffer',     ':enew <BAR> startinsert <CR>'),
-    dashboard.button('s',         '  sessions',       ':LoadSession<CR>'),
-    dashboard.button('<leader>d', '  explore dir'  ),
-    dashboard.button('<C-p>',     '  find here'    ),
-    dashboard.button('<leader>f', '  grep here'    ),
-    dashboard.button('<leader>r', '  search recent'),
-    dashboard.button('z',         '  manage plugins', ':Lazy<CR>'),
-    dashboard.button('q',         '  quit',           ':qa<CR>'),
+  -- quick links
+  local quick_links = {
+    type = 'group',
+    position = 'center',
+    val = {
+      { type = 'text', val = 'Quick links', opts = { hl = 'SpecialComment', position = 'center' } },
+      dashboard.button('e', '  new buffer',     ':enew <BAR> startinsert <CR>'),
+      dashboard.button('s', '  sessions',       ':LoadSession<CR>'),
+      dashboard.button('z', '  manage plugins', ':Lazy<CR>'),
+      dashboard.button('q', '  quit',           ':qa<CR>'),
+    },
   }
+
+  -- recent sessions
+  local sessions_path = tostring(Path:new(vim.fn.stdpath('data'), 'sessions')) -- see user/sessions.lua
+  local sessions
+  Job:new({
+    command = '/bin/ls',
+    args = {'-t', '--time=mtime'},
+    cwd = sessions_path,
+    on_exit = function(j)
+      sessions = j:result()
+    end,
+  }):sync()
+
+  local mru_sessions = {
+    type = 'group',
+    position = 'center',
+    val = {
+      { type = 'text', val = 'Recent sessions', opts = { hl = 'SpecialComment', position = 'center' } },
+    },
+  }
+
+  local offset = #mru_sessions.val
+  local mru_sessions_shortcuts = {'j', 'k', 'l'}
+  for i = 1, (#sessions <= 3 and #sessions or 3) do
+    mru_sessions.val[offset+i] = dashboard.button(
+      mru_sessions_shortcuts[i],
+      ' ' .. sessions[i],
+      ':source ' .. tostring(Path:new(sessions_path, sessions[i])) .. '<CR>'
+    )
+  end
 
   -- footer
   local v = vim.version()
@@ -76,15 +104,16 @@ local function alpha_config()
 
     -- quick links
     { type = 'padding', val = 1 },
-    { type = 'text', val = 'Quick links', opts = { hl = 'SpecialComment', position = 'center' } },
+    quick_links,
+
     { type = 'padding', val = 1 },
-    buttons,
+    mru_sessions,
 
     -- footer
     { type = 'padding', val = 2 },
     { type = 'text', val = ' nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = { hl = 'Comment', shrink_margin = false, position = 'center', } },
     plugins_stats,
-    { type = 'text', val = ' '..fn_short(cwd), opts = { position = 'center', hl = 'Comment', } },
+    { type = 'text', val = ' '..vim.fn.fnamemodify(cwd, ':~'), opts = { position = 'center', hl = 'Comment', } },
   }
 
   -- update startup time when completed
