@@ -44,12 +44,11 @@ local function alpha_config()
   }
 
   -- recent sessions
-  local sessions_path = tostring(Path:new(vim.fn.stdpath('data'), 'sessions')) -- see user/sessions.lua
   local sessions
   Job:new({
     command = '/bin/ls',
     args = {'-t', '--time=mtime'},
-    cwd = sessions_path,
+    cwd = vim.g.sessions_path,
     on_exit = function(j)
       sessions = j:result()
     end,
@@ -69,7 +68,7 @@ local function alpha_config()
     mru_sessions.val[offset+i] = dashboard.button(
       mru_sessions_shortcuts[i],
       ' ' .. sessions[i],
-      ':source ' .. tostring(Path:new(sessions_path, sessions[i])) .. '<CR>'
+      ':source ' .. tostring(Path:new(vim.g.sessions_path, sessions[i])) .. '<CR>'
     )
   end
 

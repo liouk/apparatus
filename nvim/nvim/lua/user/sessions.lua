@@ -1,8 +1,6 @@
 local Utils = require('user.utils')
 local Gitutils = require('user.gitutils')
 local Path = require('plenary.path')
-
-local sessions_path = tostring(Path:new(vim.fn.stdpath('data'), 'sessions'))
 local tag = 'sessions'
 
 local function cwd_basename()
@@ -21,6 +19,7 @@ local function get_session_name()
 end
 
 local function save_session(args)
+  local sessions_path = vim.g.sessions_path
   vim.fn.mkdir(sessions_path, 'p')
 
   local filename = ''
