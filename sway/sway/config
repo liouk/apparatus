@@ -44,13 +44,10 @@ bindswitch --reload --locked lid:off output $laptop enable
 #
 # Idle configuration
 #
-# Lock your screen after 300 seconds of inactivity, then turn off
-# displays after another 300 seconds, and turn screens back on when
-# resumed. Also lock screen before computer goes to sleep.
 exec swayidle -w \
-         timeout 600 "swaylock -f" \
+         timeout 600 "swaymsg input '*' xkb_switch_layout 0 && swaylock -f" \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep "swaylock -f"
+         before-sleep "swaymsg input '*' xkb_switch_layout 0 && swaylock -f"
 
 #
 # Inputs
@@ -199,7 +196,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 
 # screen lock
-bindsym $mod+End exec swaylock
+bindsym $mod+End exec swaymsg input '*' xkb_switch_layout 0 && swaylock -f
 
 #
 # Window configuration
