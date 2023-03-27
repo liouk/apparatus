@@ -1,3 +1,5 @@
+PATH=$PATH:~/go/bin
+
 POWERLEVEL10K_DIR="/usr/share/zsh-theme-powerlevel10k"
 ZSH_PLUGINS_DIR="/usr/share/zsh/plugins"
 
