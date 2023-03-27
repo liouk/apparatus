@@ -92,7 +92,7 @@
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
     "return-type": "json",
-    "exec": "$HOME/.config/waybar/now-playing.sh 2> /dev/null"
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
   },
   "custom/vpn": {
     "format": "󱄛",
