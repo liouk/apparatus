@@ -1,9 +1,9 @@
 {
   "position": "top",
   "spacing": 0,
-  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
+  "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
   "modules-center": ["sway/window"],
-  "modules-right": ["tray", "cpu", "memory", "pulseaudio", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "battery", "custom/powerbutton"],
+  "modules-right": ["tray", "pulseaudio", "cpu", "memory", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "battery", "custom/powerbutton"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -51,12 +51,12 @@
     "format-icons": [" ", " ", " ", " ", " "]
   },
   "network": {
-    "format-wifi": "  {essid} ({signalStrength}%)",
+    "format-wifi": "  {signalStrength}%",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}",
     "format-ethernet": " {ipaddr}/{cidr}",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
     "format-linked": "{ifname} (No IP)",
-    "format-disconnected": "⚠ No network",
+    "format-disconnected": "⚠ disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "bluetooth": {
@@ -82,7 +82,7 @@
     "on-click": "pavucontrol"
   },
   "custom/media": {
-    "format": "{icon} {}",
+    "format": "<span color=\"#87A987\">{icon} {}</span>",
     "format-icons": {
       "spotify": "",
       "default": ""

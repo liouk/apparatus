@@ -6,6 +6,7 @@
 @define-color surimiOrange #FFA066;
 @define-color dragonBlue   #658594;
 @define-color lightBlue    #A3D4D5;
+@define-color redhatRed    #EE0000;
 
 * {
   border: none;
@@ -173,9 +174,10 @@ label:focus {
 }
 
 #custom-vpn.disconnected {
-  opacity: 0.4
+  opacity: 0.4;
 }
 
 #custom-vpn.connected {
-  opacity: 1.0
+  opacity: 1.0;
+  color: @redhatRed;
 }
