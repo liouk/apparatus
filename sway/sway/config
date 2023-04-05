@@ -260,6 +260,7 @@ set $cal_app_id kjbdgfilnfhdoflbpgamdcdgpehopbep
 set $scratch_cal google-chrome-stable --app-id=$cal_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
 set $scratch_term kitty --class=scratch_term
 set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
+set $whatsapp_app_id hnpfjngllnobngcgfapefoaidbinmjnm
 for_window {
 
   # kitty
@@ -282,6 +283,11 @@ for_window {
     [app_id=$cal_app_id] scratchpad show
     $scratch_pos
   }
+
+  # whatsapp
+  [app_id=$whatsapp_app_id] {
+    move to workspace number 9
+  }
 }
 
 bindsym --to-code {
@@ -295,7 +301,6 @@ bindsym --to-code {
 #
 
 # startup
-set $whatsapp_app_id hnpfjngllnobngcgfapefoaidbinmjnm
 workspace 1
 exec $term
 workspace 3
