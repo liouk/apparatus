@@ -62,3 +62,7 @@ end
 vim.api.nvim_create_user_command('SaveSession', save_session, {force = true, nargs = '?'})
 vim.api.nvim_create_user_command('LoadSession', load_session, {force = true})
 vim.api.nvim_create_user_command('DeleteSession', delete_session, {force = true})
+
+vim.keymap.set('n', '<leader>ss', ':SaveSession<CR>')
+vim.keymap.set('n', '<leader>sl', ':LoadSession<CR>')
+vim.keymap.set('n', '<leader>sd', ':DeleteSession<CR>')

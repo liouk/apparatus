@@ -4,8 +4,6 @@ return {
   keys = {
     '<leader>md',
     '<leader>mw',
-    '<leader>ml',
-    '<leader>mq',
     'gr',
   },
   dependencies = { 'kyazdani42/nvim-web-devicons' },

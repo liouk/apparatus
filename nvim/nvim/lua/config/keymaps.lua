@@ -15,19 +15,19 @@ vim.keymap.set('i', '<C-s>', '<Esc>:vsplit<CR>i')
 vim.keymap.set('i', '<C-h>', '<Esc>:wincmd w<CR>i')
 
 -- clipboard
-vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
-vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to clipboard' })
+vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Copy to clipboard' })
 
 -- cursor movements
 vim.keymap.set('n', '<C-b>', '*``', { desc = 'Highlight word without moving' })
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move down keeping cursor at the middle of the screen' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move up keeping cursor at the middle of the screen' })
-vim.keymap.set('n', 'n', 'nzz', { desc = 'Search forward keeping cursor at the middle of the screen' })
-vim.keymap.set('n', 'N', 'Nzz', { desc = 'Search backward keeping cursror at the middle of the screen' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move down; cursor at middle' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move up; cursor at middle' })
+vim.keymap.set('n', 'n', 'nzz', { desc = 'Search forward; cursor at middle' })
+vim.keymap.set('n', 'N', 'Nzz', { desc = 'Search backward; cursor at middle' })
 
 -- move selected line(s)
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected line(s) downwards' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected line(s) upwards' })
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected lines up' })
 
 -- paste mode
 vim.keymap.set('n', '<F2>', ':set invpaste paste?<CR>', { desc = 'Toggle paste mode' })
@@ -35,6 +35,6 @@ vim.opt.pastetoggle = '<F2>'
 
 -- misc
 vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>', { desc = 'Dismiss loclist and quickfix' })
-vim.keymap.set('n', '<leader>t', 'gg=G``', { desc = 'Indent current file top to bottom' })
-vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines keeping cursor at original place' })
-vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>', { desc = 'Replace all occurences of selected text in visual mode' })
+vim.keymap.set('n', '<leader>t', 'gg=G``', { desc = 'Reindent buffer' })
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines (preserve cursor)' })
+vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>', { desc = 'Replace visual selection' })
