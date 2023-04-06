@@ -65,7 +65,8 @@
     "format-connected": " {num_connections}",
     "tooltip-format": "",
     "tooltip-format-connected": "{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}"
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias} ({device_battery_percentage}%)"
   },
   "pulseaudio": {
     "scroll-step": 5,
@@ -96,7 +97,7 @@
   },
   "custom/vpn": {
     "format": "󱄛",
-    "tooltip": false,
+    "tooltip": true,
     "interval": "once",
     "return-type": "json",
     "exec": "$HOME/.config/waybar/vpn.sh statusjson",
