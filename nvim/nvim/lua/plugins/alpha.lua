@@ -1,6 +1,5 @@
 local function alpha_config()
-  local Job = require('plenary.job')
-  local Path = require('plenary.path')
+  local Scan = require('plenary.scandir')
 
   local dashboard = require('alpha.themes.dashboard')
   local theta = require('alpha.themes.theta')
@@ -44,15 +43,10 @@ local function alpha_config()
   }
 
   -- recent sessions
-  local sessions
-  Job:new({
-    command = '/bin/ls',
-    args = {'-t', '--time=mtime'},
-    cwd = vim.g.sessions_path,
-    on_exit = function(j)
-      sessions = j:result()
-    end,
-  }):sync()
+  local sessions = Scan.scan_dir(vim.g.sessions_path, {
+    hidden = true,
+    add_dirs = false,
+  })
 
   local mru_sessions = {
     type = 'group',
@@ -65,10 +59,11 @@ local function alpha_config()
   local offset = #mru_sessions.val
   local mru_sessions_shortcuts = {'j', 'k', 'l'}
   for i = 1, (#sessions <= 3 and #sessions or 3) do
+    local session_name = string.gsub(sessions[i], vim.g.sessions_path..'/', '')
     mru_sessions.val[offset+i] = dashboard.button(
       mru_sessions_shortcuts[i],
-      ' ' .. sessions[i],
-      ':source ' .. tostring(Path:new(vim.g.sessions_path, sessions[i])) .. '<CR>'
+      ' ' .. session_name,
+      ':source ' .. sessions[i] .. '<CR>'
     )
   end
 
