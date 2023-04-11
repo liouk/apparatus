@@ -7,6 +7,7 @@
   "fzf.vim": { "branch": "master", "commit": "dc71692255b62d1f67dc55c8e51ab1aa467b1d46" },
   "gitsigns.nvim": { "branch": "main", "commit": "b1f9cf7c5c5639c006c937fc1819e09f358210fc" },
   "go.nvim": { "branch": "master", "commit": "397992cefc193bd7bfb4a6d353e2932f10fc6d1d" },
+  "jam-sessions.nvim": { "branch": "main", "commit": "4853faf07fc945c596c9ebbb9726ec7d8d3bd088" },
   "kanagawa": { "branch": "master", "commit": "d8800c36a7f3bcec953288926b00381c028ed97f" },
   "lazy.nvim": { "branch": "main", "commit": "b3eca0c3fb4ef5e547f70c571b8cd27688db83bb" },
   "leap.nvim": { "branch": "main", "commit": "f74473d23ebf60957e0db3ff8172349a82e5a442" },
