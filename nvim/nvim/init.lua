@@ -5,4 +5,3 @@ vim.g.sessions_path = vim.fn.stdpath('data') .. '/sessions'
 require('config.settings')
 require('config.keymaps')
 require('config.lazy')
-require('user.gitlinks')

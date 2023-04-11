@@ -5,6 +5,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
   "fzf": { "branch": "master", "commit": "3c34dd82750ca61a1ee7f329ed47fe01e6d1ee30" },
   "fzf.vim": { "branch": "master", "commit": "dc71692255b62d1f67dc55c8e51ab1aa467b1d46" },
+  "gitlinks.nvim": { "branch": "main", "commit": "7c63fd41b7ca32379cb3e32123d0e924dae5f70c" },
   "gitsigns.nvim": { "branch": "main", "commit": "b1f9cf7c5c5639c006c937fc1819e09f358210fc" },
   "go.nvim": { "branch": "master", "commit": "397992cefc193bd7bfb4a6d353e2932f10fc6d1d" },
   "jam-sessions.nvim": { "branch": "main", "commit": "4853faf07fc945c596c9ebbb9726ec7d8d3bd088" },
