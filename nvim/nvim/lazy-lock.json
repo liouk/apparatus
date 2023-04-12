@@ -3,6 +3,7 @@
   "barbar.nvim": { "branch": "master", "commit": "de5682f7b7de872d1bfd02aa1368cd0c34d13b49" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
+  "diffview.nvim": { "branch": "main", "commit": "63720aa5a70ce4aa386be407d0e612cd9e63861a" },
   "fzf": { "branch": "master", "commit": "3c34dd82750ca61a1ee7f329ed47fe01e6d1ee30" },
   "fzf.vim": { "branch": "master", "commit": "dc71692255b62d1f67dc55c8e51ab1aa467b1d46" },
   "gitlinks.nvim": { "branch": "main", "commit": "7c63fd41b7ca32379cb3e32123d0e924dae5f70c" },
