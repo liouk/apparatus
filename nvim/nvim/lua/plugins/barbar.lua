@@ -8,9 +8,13 @@ return {
       animation = false,
       auto_hide = false,
       tabpages = false,
-      closable = false,
       clickable = false,
-      icons = 'numbers',
+      icons = {
+        button = '',
+        buffer_index = true,
+        filetype = { enabled = false },
+        modified = { button = '' },
+      },
       maximum_padding = 1,
       minimum_padding = 1,
     })
