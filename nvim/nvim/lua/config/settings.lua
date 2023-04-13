@@ -1,8 +1,11 @@
 vim.opt.ttimeoutlen = 0
-vim.wo.number = true
 vim.opt.scrolloff = 8
-vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
+
+-- status column
+vim.wo.number = true
+vim.wo.numberwidth = 3
+vim.wo.signcolumn = 'yes'
 
 -- utility files
 vim.opt.swapfile = false
