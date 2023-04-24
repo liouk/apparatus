@@ -38,6 +38,6 @@ return {
     vim.keymap.set('n', '<C-p>', ':Files<CR>')
     vim.keymap.set('n', '<leader>f', ':Rg<CR>')
     vim.keymap.set('n', '<leader>e', ':Buffers<CR>')
-    vim.keymap.set('n', '<leader>r', ':History<CR>')
+    vim.keymap.set('n', '<leader>h', ':History<CR>')
   end,
 }
