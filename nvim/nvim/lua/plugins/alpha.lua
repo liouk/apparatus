@@ -38,7 +38,7 @@ local function alpha_config()
       dashboard.button('e', '  new buffer',     ':enew <BAR> startinsert <CR>'),
       dashboard.button('s', '  sessions',       ':LoadSession<CR>'),
       dashboard.button('z', '  manage plugins', ':Lazy<CR>'),
-      dashboard.button('q', '  quit',           ':qa<CR>'),
+      dashboard.button('q', '  quit',           ':qa<CR>'),
     },
   }
 
