@@ -11,7 +11,7 @@ set $term kitty
 #
 # Fonts
 #
-font JetBrainsMono Nerd Font 10
+font JetBrains Mono SemiBold 10
 
 #
 # App launcher

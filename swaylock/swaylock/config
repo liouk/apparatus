@@ -2,7 +2,7 @@ ignore-empty-password
 disable-caps-lock-text
 show-keyboard-layout
 
-font=JetBrainsMono Nerd Font
+font=JetBrains Mono SemiBold
 image=/usr/share/backgrounds/bg.png
 
 bs-hl-color=#FF5D62

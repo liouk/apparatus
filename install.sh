@@ -138,7 +138,7 @@ function install_arch {
     btop \
     kitty \
     unzip \
-    ttf-jetbrains-mono-nerd \
+    ttf-jetbrains-mono \
     sway
 
   sudo pacman -Sy --noconfirm --needed git base-devel
@@ -150,6 +150,12 @@ function install_arch {
   yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
     navi \
     waybar
+
+  sudo mkdir -p /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
+  curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/NerdFontsSymbolsOnly.zip --output NerdFontsSymbolsOnly.zip
+  sudo unzip NerdFontsSymbolsOnly.zip -d /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
+  rm NerdFontsSymbolsOnly.zip
+  fc-cache -r
 }
 
 function stow_arch {
