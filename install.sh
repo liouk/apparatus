@@ -120,7 +120,7 @@ function unstow_fedora_server {
 }
 
 function install_arch {
-  sudo pacman -S --noconfirm --needed \
+  sudo pacman -Syu --noconfirm --needed \
     git \
     tig \
     neovim \
@@ -138,17 +138,17 @@ function install_arch {
     btop \
     kitty \
     unzip \
+    ttf-jetbrains-mono-nerd \
     sway
 
-  sudo pacman -S --noconfirm --needed git base-devel
+  sudo pacman -Sy --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
   cd yay-bin
   makepkg -si --noconfirm
   cd ..
   rm -rf yay-bin
-  yay -S --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
+  yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
     navi \
-    ttf-jetbrains-mono-nerd \
     waybar
 }
 
