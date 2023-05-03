@@ -132,7 +132,7 @@ end
 return {
   {
     'goolord/alpha-nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' },
     event = 'VimEnter',
     config = alpha_config,
   }

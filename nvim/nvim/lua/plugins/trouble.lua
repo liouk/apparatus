@@ -6,7 +6,7 @@ return {
     '<leader>mw',
     'gr',
   },
-  dependencies = { 'kyazdani42/nvim-web-devicons' },
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require('trouble').setup({
       icons = false,
