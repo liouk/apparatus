@@ -181,3 +181,7 @@ label:focus {
   opacity: 1.0;
   color: @redhatRed;
 }
+
+#custom-powerbutton {
+  font-size: 16pt;
+}
