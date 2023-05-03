@@ -12,6 +12,6 @@ return {
     vim.keymap.set('n', '<leader>ss', ':SaveSession<CR>')
     vim.keymap.set('n', '<leader>sl', ':LoadSession<CR>')
     vim.keymap.set('n', '<leader>sd', ':DeleteSession<CR>')
-    vim.keymap.set('n', '<leader>sq', ":exec 'SaveSession' <Bar> quit<CR>")
+    vim.keymap.set('n', '<leader>sq', ":exec 'SaveSession' <Bar> qall<CR>")
   end,
 }
