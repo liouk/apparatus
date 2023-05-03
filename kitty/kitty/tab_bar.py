@@ -133,12 +133,11 @@ def draw_tab(
     is_last: bool,
     extra_data: ExtraData,
 ) -> int:
-    icon = "\ue7bb"
+
     if platform == "darwin":
         icon = "\ue711"
+        _draw_icon(screen, index, symbol="  "+icon+"  ")
 
-    _draw_icon(screen, index, symbol="  "+icon+"  ")
-    # _draw_left_status(
     draw_tab_with_separator(
         draw_data,
         screen,
@@ -149,9 +148,8 @@ def draw_tab(
         is_last,
         extra_data,
     )
-    _draw_right_status(
-        screen,
-        is_last,
-    )
+
+    if platform == "darwin":
+        _draw_right_status(screen, is_last)
 
     return screen.cursor.x
