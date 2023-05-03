@@ -133,7 +133,7 @@ def draw_tab(
     is_last: bool,
     extra_data: ExtraData,
 ) -> int:
-    icon = "\uf490"
+    icon = "\ue7bb"
     if platform == "darwin":
         icon = "\ue711"
 
