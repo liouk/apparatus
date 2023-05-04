@@ -44,14 +44,14 @@
   },
   "battery": {
     "states": {"good": 80, "warning": 30, "critical": 15},
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}% ",
+    "format": "{icon}{capacity}%",
+    "format-charging": "{capacity}% ",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
     "format-icons": [" ", " ", " ", " ", " "]
   },
   "network": {
-    "format-wifi": "  {signalStrength}%",
+    "format-wifi": " ",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}",
     "format-ethernet": " {ipaddr}/{cidr}",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
@@ -60,8 +60,8 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": " off",
+    "format": "",
+    "format-disabled": "󰂲",
     "format-connected": " {num_connections}",
     "tooltip-format": "",
     "tooltip-format-connected": "{device_enumerate}",
