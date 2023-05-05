@@ -8,6 +8,8 @@ You can use the installation script to install every tool of the toolchain and p
 
 The script currently only supports MacOS, and Fedora Server and Workstation are work in progress.
 
+Originally forked from [michailpanagiotis/apparatus](https://github.com/michailpanagiotis/apparatus).
+
 ## Requirements
 The script requires `bash` and `curl` only; it will install everything else it needs (e.g. `brew`, `git`).
 
