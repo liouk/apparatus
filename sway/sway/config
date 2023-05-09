@@ -313,6 +313,9 @@ exec google-chrome-stable --app-id=$whatsapp_app_id --user-data-dir=$HOME/.confi
 workspace 2
 exec google-chrome-stable
 
+# always start pavucontrol as a floating window
+for_window [app_id="pavucontrol"] floating enable, resize set width 50 ppt height 75 ppt
+
 # assign workspaces to outputs
 workspace 1 output $homedisplay $officedisplay
 workspace 2 output $homedisplay $officedisplay
