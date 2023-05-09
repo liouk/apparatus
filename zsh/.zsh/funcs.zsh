@@ -11,3 +11,9 @@ function __jumpfunc () {
       ;;
   esac
 }
+
+# choose a kube namespace using fzf and set it in the current kube context
+function kns () {
+  chosen=$(kubectl get ns --no-headers -o custom-columns=":metadata.name" | fzf)
+  kubectl config set-context --current --namespace="$chosen"
+}
