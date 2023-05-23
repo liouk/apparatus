@@ -59,6 +59,13 @@ input "type:keyboard" {
   repeat_rate 30
 }
 
+input "13364:544:Keychron_Keychron_K2_Pro" {
+  xkb_layout us,gr
+  xkb_options "altwin:swap_lalt_lwin,custom:caps_lctrl_hjkl"
+  repeat_delay 250
+  repeat_rate 30
+}
+
 input "13364:544:Keychron_K2_Pro_Keyboard" {
   xkb_layout us,gr
   xkb_options "altwin:swap_lalt_lwin,custom:caps_lctrl_hjkl"
