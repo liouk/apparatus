@@ -9,6 +9,9 @@
 [diff]
   tool = nvim -d
 
+[merge]
+  conflictstyle = diff3
+
 [color "diff"]
   meta = yellow bold
   frag = cyan
