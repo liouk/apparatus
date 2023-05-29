@@ -15,4 +15,8 @@ function rh () {
   __jumpfunc "$HOME/redhat" $1
 }
 
+function occ () {
+  xdg-open $(oc whoami --show-console)
+}
+
 export GPG_TTY=$TTY
