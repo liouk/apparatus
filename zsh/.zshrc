@@ -5,17 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Aliases
+# aliases
 source ~/.zsh/aliases.zsh
 
 # helper funcs
 source ~/.zsh/funcs.zsh
 
-# Host specific
+# host specific
 export HOST="${HOST%.local}"
 source ~/.zsh/host_${HOST}.zsh
 
-# History
+# history
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
@@ -29,7 +29,7 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt SHARE_HISTORY
 
-# Default editor
+# default editor
 export VISUAL="vim"
 export EDITOR="vim"
 if type "nvim" > /dev/null; then
@@ -43,12 +43,14 @@ if type "nvim" > /dev/null; then
   bindkey '^Z' fg-nvim
 fi
 
-# Misc
+# keybindings
 export LC_ALL=en_US.UTF-8
 KEYTIMEOUT=1
 bindkey -e
+bindkey '^[' backward-word
+bindkey '^]' forward-word
 
-# Load Git completion
+# git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
