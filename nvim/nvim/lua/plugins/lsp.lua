@@ -70,6 +70,7 @@ return {
       vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end,     opts(bufnr, 'diagnostic.open_float'))
       vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end,      opts(bufnr, 'diagnostic.goto_next'))
       vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end,      opts(bufnr, 'diagnostic.goto_prev'))
+      vim.keymap.set('n', '<leader>t', function() vim.lsp.buf.format() end,     opts(bufnr, 'lsp.buf.format'))
     end
 
     local lspconfig = require('lspconfig')

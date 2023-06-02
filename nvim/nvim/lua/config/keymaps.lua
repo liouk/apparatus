@@ -35,6 +35,5 @@ vim.opt.pastetoggle = '<F2>'
 
 -- misc
 vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>', { desc = 'Dismiss loclist and quickfix' })
-vim.keymap.set('n', '<leader>t', 'gg=G``', { desc = 'Reindent buffer' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines (preserve cursor)' })
 vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>', { desc = 'Replace visual selection' })
