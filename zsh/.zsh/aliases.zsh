@@ -18,6 +18,8 @@ alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
 # https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
 [[ "$TERM" == "xterm-kitty" ]] && { alias ssh='env TERM=xterm-256color ssh' }
 
+alias icat="kitty +kitten icat"
+
 # k8s
 alias kc=kubectl
 alias kcs=kubectl -n kube-system
