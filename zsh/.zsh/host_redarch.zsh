@@ -17,6 +17,10 @@ if command -v oc &> /dev/null; then
 fi
 
 # funcs
+function lk () {
+  __jumpfunc "$HOME/liouk" $1
+}
+
 function rh () {
   __jumpfunc "$HOME/redhat" $1
 }
