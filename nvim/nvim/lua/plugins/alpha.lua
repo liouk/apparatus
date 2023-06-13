@@ -1,5 +1,5 @@
 local function alpha_config()
-  local Scan = require('plenary.scandir')
+  local Job = require('plenary.job')
 
   local dashboard = require('alpha.themes.dashboard')
   local theta = require('alpha.themes.theta')
@@ -43,10 +43,24 @@ local function alpha_config()
   }
 
   -- recent sessions
-  local sessions = Scan.scan_dir(vim.g.sessions_path, {
-    hidden = true,
-    add_dirs = false,
-  })
+  local list_sessions = function()
+    local sessions = {}
+    local output
+    Job:new({
+      command = 'ls',
+      args = {'-at1'},
+      on_exit = function(j)
+        output = j:result()
+      end,
+    }):sync()
+    for i = 1, #output do
+      if (output[i] ~= '.' and output[i] ~= '..') then
+        table.insert(sessions, output[i])
+      end
+    end
+    return sessions
+  end
+  local sessions = list_sessions()
 
   local mru_sessions = {
     type = 'group',
