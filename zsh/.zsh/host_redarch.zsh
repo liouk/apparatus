@@ -9,6 +9,7 @@ source /usr/share/fzf/key-bindings.zsh
 # arch specific aliases
 alias ls='ls -lahp --color'
 alias open=xdg-open
+alias vlc='QT_QPA_PLATFORM=wayland vlc'
 
 # oc completion
 if command -v oc &> /dev/null; then
