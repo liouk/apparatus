@@ -2,7 +2,12 @@ return {
   'liouk/gitlinks.nvim',
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = { 'GitlinkFileOpen', 'GitlinkFileCopy', 'GitlinkBlameOpen', 'GitlinkBlameCopy' },
-  keys = { '<leader>gf', '<leader>gc', '<leader>gb', '<leader>gv' },
+  keys = {
+    { '<leader>gf', mode = { 'n', 'v' }, },
+    { '<leader>gc', mode = { 'n', 'v' }, },
+    { '<leader>gb', mode = { 'n', 'v' }, },
+    { '<leader>gv', mode = { 'n', 'v' }, },
+  },
 
   config = function()
     require('gitlinks').setup()
