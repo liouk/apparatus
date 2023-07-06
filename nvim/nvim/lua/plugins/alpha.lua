@@ -132,6 +132,7 @@ local function alpha_config()
       local stats = require('lazy').stats()
       local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
       plugins_stats.val = ' '..stats.count..' plugins (loaded '..stats.loaded..' in '..ms..'ms)'
+      pcall(vim.cmd.AlphaRedraw)
     end,
   })
 
