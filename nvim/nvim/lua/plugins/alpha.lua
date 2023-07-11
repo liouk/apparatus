@@ -48,7 +48,7 @@ local function alpha_config()
     local output
     Job:new({
       command = 'ls',
-      args = {'-at1'},
+      args = {'-at1', vim.g.sessions_path},
       on_exit = function(j)
         output = j:result()
       end,
@@ -73,11 +73,11 @@ local function alpha_config()
   local offset = #mru_sessions.val
   local mru_sessions_shortcuts = {'j', 'k', 'l'}
   for i = 1, (#sessions <= 3 and #sessions or 3) do
-    local session_name = string.gsub(sessions[i], vim.g.sessions_path..'/', '')
+    local session_filepath = vim.g.sessions_path..'/'..sessions[i]
     mru_sessions.val[offset+i] = dashboard.button(
       mru_sessions_shortcuts[i],
-      ' ' .. session_name,
-      ':source ' .. sessions[i] .. '<CR>'
+      ' ' .. sessions[i],
+      ':source ' .. session_filepath .. '<CR>'
     )
   end
 
