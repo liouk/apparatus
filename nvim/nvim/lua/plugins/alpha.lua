@@ -5,17 +5,23 @@ local function alpha_config()
   local theta = require('alpha.themes.theta')
   local config = theta.config
   local cwd = vim.fn.getcwd()
-
-  -- header
   local header = {
-    '           9   /   F       J',
-    '    l  μ   r   t   =       λ  i  |',
-    ' A  4  V   Y   3   T   @   ?  .  _',
-    ' y  *  -   $   r   <   ω   8  ?  Q',
-    ' .  :  n   e   o      i   m  :  .',
-    ' b  ;  {   f   ]   h   X   <  v  k',
-    '    o  &   f   d   H       0  θ  E',
-    '           D       %          ¢  0',
+    '             `.-..........`             ',
+    '            `////////::.`-/.            ',
+    '            -: ....-////////.           ',
+    '            //:-::///////////`          ',
+    '     `--::: `-://////////////:          ',
+    '     //////-    ``.-:///////// .`       ',
+    '     `://////:-.`    :///////::///:`    ',
+    '       .-/////////:---/////////////:    ',
+    '          .-://////////////////////.    ',
+    '         yMN+`.-::///////////////-`     ',
+    '      .-`:NMMNMs`  `..-------..`        ',
+    '       MN+/mMMMMMhoooyysshsss           ',
+    'MMM    MMMMMMMMMMMMMMyyddMMM+           ',
+    ' MMMM   MMMMMMMMMMMMMNdyNMMh`     hyhMMM',
+    '  MMMMMMMMMMMMMMMMyoNNNMMM+.   MMMMMMMM ',
+    '   MMNMMMNNMMMMMNM+ mhsMNyyyyMNMMMMsMM  ',
   }
 
   -- mru_files
@@ -94,17 +100,29 @@ local function alpha_config()
   }
 
   -- set current config
+  local header_opts_red = { hl = 'Error',  shrink_margin = false, position = 'center' }
+  local header_opts_white = { hl = 'Variable',  shrink_margin = false, position = 'center' }
+  -- local header_cmd = "sh " .. os.getenv("HOME") .. "/.config/nvim/lua/plugins/alpha-logo.sh"
   config.layout = {
     -- header
-    { type = 'padding', val = 2 },
-    { type = 'text', val = header[1], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[2], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[3], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[4], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[5], opts = { shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[6], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[7], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
-    { type = 'text', val = header[8], opts = { hl = 'String',  shrink_margin = false, position = 'center' } },
+    -- { type = "terminal", command = header_cmd, width = 80, height = 28, opts = { redraw = true } },
+    { type = 'padding', val = 1 },
+    { type = 'text', val = header[1], opts = header_opts_red },
+    { type = 'text', val = header[2], opts = header_opts_red },
+    { type = 'text', val = header[3], opts = header_opts_red },
+    { type = 'text', val = header[4], opts = header_opts_red },
+    { type = 'text', val = header[5], opts = header_opts_red },
+    { type = 'text', val = header[6], opts = header_opts_red },
+    { type = 'text', val = header[7], opts = header_opts_red },
+    { type = 'text', val = header[8], opts = header_opts_red },
+    { type = 'text', val = header[9], opts = header_opts_red },
+    { type = 'text', val = header[10], opts = header_opts_red },
+    { type = 'text', val = header[11], opts = header_opts_white },
+    { type = 'text', val = header[12], opts = header_opts_white },
+    { type = 'text', val = header[13], opts = header_opts_white },
+    { type = 'text', val = header[14], opts = header_opts_white },
+    { type = 'text', val = header[15], opts = header_opts_white },
+    { type = 'text', val = header[16], opts = header_opts_white },
 
     -- recent files
     { type = 'padding', val = 2 },
