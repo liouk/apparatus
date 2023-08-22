@@ -47,8 +47,8 @@ local function alpha_config()
     local sessions = {}
     local output
     Job:new({
-      command = 'ls',
-      args = {'-at1', vim.g.sessions_path},
+      command = '/bin/ls',
+      args = {'-atu1', vim.g.sessions_path},
       on_exit = function(j)
         output = j:result()
       end,
