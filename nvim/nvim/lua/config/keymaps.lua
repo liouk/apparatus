@@ -38,3 +38,8 @@ vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>', { desc = 'Dismiss loc
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines (preserve cursor)' })
 vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//g<left><left>', { desc = 'Replace visual selection' })
 vim.keymap.set('n', '<CR>', 'ciw', { desc = 'Delete word under cursor and insert' })
+
+-- syntax highlighting shortcuts
+vim.keymap.set('', '<leader>w1', ':set syn=sh<CR>')
+vim.keymap.set('', '<leader>w2', ':set syn=yaml<CR>')
+vim.keymap.set('', '<leader>w3', ':set syn=json<CR>')
