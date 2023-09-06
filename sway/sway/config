@@ -86,6 +86,9 @@ input "type:pointer" {
 # Key bindings
 #
 
+# toggle waybar
+bindsym $mod+o exec killall -SIGUSR1 waybar
+
 # switch to next keyboard layout
 bindsym Mod4+Space exec swaymsg input "type:keyboard" xkb_switch_layout next
 
