@@ -2,7 +2,6 @@
   "position": "top",
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-  "modules-center": ["sway/window"],
   "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "battery", "custom/powerbutton"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
