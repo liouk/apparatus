@@ -21,6 +21,9 @@ local function alpha_config()
   math.randomseed(os.time())
   local header_color = header_colors[ math.random(#header_colors) ]
   local header_opts = { hl = header_color, shrink_margin = false, position = 'center' }
+  local v = vim.version()
+  local nvim_version = 'v'..v.major..'.'..v.minor..'.'..v.patch
+  nvim_version = string.format('%70s', nvim_version)
 
   -- mru_files
   local mru_files = config.layout[4]
@@ -87,7 +90,6 @@ local function alpha_config()
 
   -- footer
   local footer_opts = { hl = 'Comment', shrink_margin = false, position = 'center' }
-  local v = vim.version()
   local plugins_stats = {
     type = 'text',
     val = ' ',
@@ -106,6 +108,7 @@ local function alpha_config()
     { type = 'text', val = header[6], opts = header_opts },
     { type = 'text', val = header[7], opts = header_opts },
     { type = 'text', val = header[8], opts = header_opts },
+    { type = 'text', val = nvim_version, opts = footer_opts },
 
     -- recent files
     { type = 'padding', val = 2 },
@@ -120,7 +123,6 @@ local function alpha_config()
 
     -- footer
     { type = 'padding', val = 2 },
-    { type = 'text', val = '  nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = footer_opts },
     plugins_stats,
     { type = 'text', val = '  '..vim.fn.fnamemodify(cwd, ':~'), opts = footer_opts },
   }
