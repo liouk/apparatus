@@ -36,11 +36,6 @@ if type "nvim" > /dev/null; then
   export VISUAL="nvim"
   export EDITOR="nvim"
   alias vim='nvim'
-
-  # bring vim to foreground with Ctrl-z if suspended
-  function fg-nvim() { fg %nvim }
-  zle -N fg-nvim
-  bindkey '^Z' fg-nvim
 fi
 
 # keybindings
@@ -49,6 +44,19 @@ KEYTIMEOUT=1
 bindkey -e
 bindkey '^[' backward-word
 bindkey '^]' forward-word
+
+# toggle fg/bg with Ctrl-z
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line -w
+  else
+    zle push-input -w
+    zle clear-screen -w
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
 
 # git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
