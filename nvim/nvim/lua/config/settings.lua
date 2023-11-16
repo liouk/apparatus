@@ -31,9 +31,10 @@ vim.g.loaded_netrwPlugin = 1
 
 -- colors
 vim.opt.termguicolors = true
+-- highlight extra whitespace except for the dashboard (alpha)
 vim.cmd([[
 highlight ExtraWhitespace ctermbg=darkblue guibg=#494d64
-autocmd BufEnter * exe ':2match ExtraWhitespace /\s\+$\| \+\ze\t\|\t\+\ze /'
+autocmd FileType * if &ft!="alpha" | execute ':2match ExtraWhitespace /\s\+$\| \+\ze\t\|\t\+\ze /' | endif
 ]])
 
 -- cursor: block everywhere, underline in insert
