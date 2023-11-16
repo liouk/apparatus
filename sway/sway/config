@@ -45,9 +45,9 @@ bindswitch --reload --locked lid:off output $laptop enable
 # Idle configuration
 #
 exec swayidle -w \
-         timeout 600 "swaymsg input '*' xkb_switch_layout 0 && swaylock -f" \
+         timeout 600 "swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f" \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep "swaymsg input '*' xkb_switch_layout 0 && swaylock -f"
+         before-sleep "swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f"
 
 #
 # Inputs
@@ -213,7 +213,7 @@ bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 
 # screen lock
-bindsym $mod+End exec swaymsg input '*' xkb_switch_layout 0 && swaylock -f
+bindsym $mod+End exec swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f
 
 #
 # Window configuration
