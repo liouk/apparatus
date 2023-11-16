@@ -5,24 +5,22 @@ local function alpha_config()
   local theta = require('alpha.themes.theta')
   local config = theta.config
   local cwd = vim.fn.getcwd()
+
+  -- header
   local header = {
-    '             `.-..........`             ',
-    '            `////////::.`-/.            ',
-    '            -: ....-////////.           ',
-    '            //:-::///////////`          ',
-    '     `--::: `-://////////////:          ',
-    '     //////-    ``.-:///////// .`       ',
-    '     `://////:-.`    :///////::///:`    ',
-    '       .-/////////:---/////////////:    ',
-    '          .-://////////////////////.    ',
-    '         yMN+`.-::///////////////-`     ',
-    '      .-`:NMMNMs`  `..-------..`        ',
-    '       MN+/mMMMMMhoooyysshsss           ',
-    'MMM    MMMMMMMMMMMMMMyyddMMM+           ',
-    ' MMMM   MMMMMMMMMMMMMNdyNMMh`     hyhMMM',
-    '  MMMMMMMMMMMMMMMMyoNNNMMM+.   MMMMMMMM ',
-    '   MMNMMMNNMMMMMNM+ mhsMNyyyyMNMMMMsMM  ',
+    [[                                                                     ]],
+    [[       ████ ██████           █████      ██                     ]],
+    [[      ███████████             █████                             ]],
+    [[      █████████ ███████████████████ ███   ███████████   ]],
+    [[     █████████  ███    █████████████ █████ ██████████████   ]],
+    [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+    [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+    [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
   }
+  local header_colors = { 'WinSeparator', 'Constant', 'Number', 'Exception', 'String', 'Function', 'Identifier', 'Keyword' }
+  math.randomseed(os.time())
+  local header_color = header_colors[ math.random(#header_colors) ]
+  local header_opts = { hl = header_color, shrink_margin = false, position = 'center' }
 
   -- mru_files
   local mru_files = config.layout[4]
@@ -88,41 +86,26 @@ local function alpha_config()
   end
 
   -- footer
+  local footer_opts = { hl = 'Comment', shrink_margin = false, position = 'center' }
   local v = vim.version()
   local plugins_stats = {
     type = 'text',
     val = ' ',
-    opts = {
-      hl = 'Comment',
-      shrink_margin = false,
-      position = 'center',
-    },
+    opts = footer_opts,
   }
 
   -- set current config
-  local header_opts_red = { hl = 'Error',  shrink_margin = false, position = 'center' }
-  local header_opts_white = { hl = 'Variable',  shrink_margin = false, position = 'center' }
-  -- local header_cmd = "sh " .. os.getenv("HOME") .. "/.config/nvim/lua/plugins/alpha-logo.sh"
   config.layout = {
     -- header
-    -- { type = "terminal", command = header_cmd, width = 80, height = 28, opts = { redraw = true } },
     { type = 'padding', val = 1 },
-    { type = 'text', val = header[1], opts = header_opts_red },
-    { type = 'text', val = header[2], opts = header_opts_red },
-    { type = 'text', val = header[3], opts = header_opts_red },
-    { type = 'text', val = header[4], opts = header_opts_red },
-    { type = 'text', val = header[5], opts = header_opts_red },
-    { type = 'text', val = header[6], opts = header_opts_red },
-    { type = 'text', val = header[7], opts = header_opts_red },
-    { type = 'text', val = header[8], opts = header_opts_red },
-    { type = 'text', val = header[9], opts = header_opts_red },
-    { type = 'text', val = header[10], opts = header_opts_red },
-    { type = 'text', val = header[11], opts = header_opts_white },
-    { type = 'text', val = header[12], opts = header_opts_white },
-    { type = 'text', val = header[13], opts = header_opts_white },
-    { type = 'text', val = header[14], opts = header_opts_white },
-    { type = 'text', val = header[15], opts = header_opts_white },
-    { type = 'text', val = header[16], opts = header_opts_white },
+    { type = 'text', val = header[1], opts = header_opts },
+    { type = 'text', val = header[2], opts = header_opts },
+    { type = 'text', val = header[3], opts = header_opts },
+    { type = 'text', val = header[4], opts = header_opts },
+    { type = 'text', val = header[5], opts = header_opts },
+    { type = 'text', val = header[6], opts = header_opts },
+    { type = 'text', val = header[7], opts = header_opts },
+    { type = 'text', val = header[8], opts = header_opts },
 
     -- recent files
     { type = 'padding', val = 2 },
@@ -137,9 +120,9 @@ local function alpha_config()
 
     -- footer
     { type = 'padding', val = 2 },
-    { type = 'text', val = ' nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = { hl = 'Comment', shrink_margin = false, position = 'center', } },
+    { type = 'text', val = '  nvim v'..v.major..'.'..v.minor..'.'..v.patch, opts = footer_opts },
     plugins_stats,
-    { type = 'text', val = ' '..vim.fn.fnamemodify(cwd, ':~'), opts = { position = 'center', hl = 'Comment', } },
+    { type = 'text', val = '  '..vim.fn.fnamemodify(cwd, ':~'), opts = footer_opts },
   }
 
   -- update startup time when completed
@@ -149,7 +132,7 @@ local function alpha_config()
       -- the plugins section of the footer
       local stats = require('lazy').stats()
       local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      plugins_stats.val = ' '..stats.count..' plugins (loaded '..stats.loaded..' in '..ms..'ms)'
+      plugins_stats.val = '  '..stats.count..' plugins (loaded '..stats.loaded..' in '..ms..'ms)'
       pcall(vim.cmd.AlphaRedraw)
     end,
   })
