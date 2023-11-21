@@ -1,6 +1,7 @@
 return {
   'liouk/gitlinks.nvim',
   dependencies = { 'nvim-lua/plenary.nvim' },
+  event = 'VeryLazy',
   cmd = { 'GitlinkFileOpen', 'GitlinkFileCopy', 'GitlinkBlameOpen', 'GitlinkBlameCopy' },
   keys = {
     { '<leader>gf', mode = { 'n', 'v' }, },
