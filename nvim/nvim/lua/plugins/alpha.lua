@@ -7,6 +7,7 @@ local function alpha_config()
   local cwd = vim.fn.getcwd()
 
   -- header
+  -- logo courtesy of https://github.com/MaximilianLloyd/ascii.nvim
   local header = {
     [[                                                                     ]],
     [[       ████ ██████           █████      ██                     ]],
