@@ -43,12 +43,12 @@
   },
   "disk#root": {
     "interval": 60,
-    "format": "󰆼 {path} {percentage_free}%",
+    "format": "󰦣 {percentage_free}%",
     "path": "/"
   },
   "disk#home": {
     "interval": 60,
-    "format": "{path} {percentage_free}%",
+    "format": "󰋜 {percentage_free}%",
     "path": "/home"
   },
   "battery": {
