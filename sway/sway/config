@@ -317,6 +317,8 @@ bindsym --to-code {
 # startup
 workspace 1
 exec $term
+workspace 2
+exec firefox
 workspace 3
 exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 4
@@ -325,7 +327,6 @@ workspace 9
 exec /usr/bin/viber
 exec google-chrome-stable --app-id=$whatsapp_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
 workspace 2
-exec google-chrome-stable
 
 # always start pavucontrol as a floating window
 for_window [app_id="pavucontrol"] floating enable, resize set width 50 ppt height 75 ppt
