@@ -268,46 +268,22 @@ bar {
 # Scratchpad
 #
 
-set $spotify_app_id pjibgclleladliembfgfagdaldikeohf
-set $scratch_spotify google-chrome-stable --app-id=$spotify_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
+set $scratch_spotify kitty --class=spotify /usr/bin/spt
 set $cal_app_id kjbdgfilnfhdoflbpgamdcdgpehopbep
 set $scratch_cal google-chrome-stable --app-id=$cal_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
 set $scratch_term kitty --class=scratch_term
 set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
 set $whatsapp_app_id hnpfjngllnobngcgfapefoaidbinmjnm
 for_window {
-
-  # kitty
-  [app_id="scratch_term"] {
-    move scratchpad
-    [app_id="scratch_term"] scratchpad show
-    $scratch_pos
-  }
-
-  # spotify
-  [app_id=$spotify_app_id] {
-    move scratchpad
-    [app_id=$spotify_app_id] scratchpad show
-    $scratch_pos
-  }
-
-  # google calendar
-  [app_id=$cal_app_id] {
-    move scratchpad
-    [app_id=$cal_app_id] scratchpad show
-    $scratch_pos
-  }
-
-  # whatsapp
-  [app_id=$whatsapp_app_id] {
-    move to workspace number 9
-  }
+     [app_id=$cal_app_id] move scratchpad,    [app_id=$cal_app_id] scratchpad show, $scratch_pos
+  [app_id="scratch_term"] move scratchpad, [app_id="scratch_term"] scratchpad show, $scratch_pos
+       [app_id="spotify"] move scratchpad,      [app_id="spotify"] scratchpad show, $scratch_pos
 }
 
 bindsym --to-code {
-  $mod+minus exec swaymsg [app_id="scratch_term"]  scratchpad show || exec $scratch_term, $scratch_pos
-  $mod+equal exec swaymsg [app_id=$spotify_app_id] scratchpad show || exec $scratch_spotify, $scratch_pos
-  $mod+0     exec swaymsg [app_id=$cal_app_id]     scratchpad show || exec $scratch_cal, $scratch_pos
+  $mod+0     exec swaymsg    [app_id=$cal_app_id] scratchpad show || exec $scratch_cal, $scratch_pos
+  $mod+minus exec swaymsg [app_id="scratch_term"] scratchpad show || exec $scratch_term, $scratch_pos
+  $mod+equal exec swaymsg      [app_id="spotify"] scratchpad show || exec $scratch_spotify, $scratch_pos
 }
 
 #
@@ -325,7 +301,6 @@ workspace 4
 exec /usr/bin/obsidian %U --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 9
 exec /usr/bin/viber
-exec google-chrome-stable --app-id=$whatsapp_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
 workspace 2
 
 # enable floating for popups and dialogs
