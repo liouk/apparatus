@@ -44,8 +44,8 @@ return {
         lualine_a = {'mode'},
         lualine_b = {{repo, icon = '󰊢'}, {'branch', icon = ''} , 'diff', 'diagnostics'},
         lualine_c = {{'filename', path = 1}},
-        lualine_x = {'filetype'},
-        lualine_y = {'progress'},
+        lualine_x = {},
+        lualine_y = {'filetype'},
         lualine_z = {'location'}
       },
     })
