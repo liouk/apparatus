@@ -13,7 +13,7 @@ end
 return {
   'junegunn/fzf.vim',
   dependencies = { 'junegunn/fzf' },
-  keys = { '<C-p>', '<leader>f', '<leader>e', '<leader>r' },
+  event = 'VeryLazy',
 
   config = function()
     vim.api.nvim_create_user_command('Rg', function(c)

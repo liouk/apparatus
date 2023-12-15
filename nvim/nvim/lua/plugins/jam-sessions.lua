@@ -1,8 +1,7 @@
 return {
   'liouk/jam-sessions.nvim',
   dependencies = { 'junegunn/fzf', 'junegunn/fzf.vim', 'nvim-lua/plenary.nvim' },
-  cmd = { 'SaveSession', 'LoadSession', 'DeleteSession' },
-  keys = { '<leader>ss', '<leader>sl',  '<leader>sd', '<leader>sq' },
+  event = 'VeryLazy',
 
   config = function()
     require('jam-sessions').setup({

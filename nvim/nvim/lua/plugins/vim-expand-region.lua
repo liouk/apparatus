@@ -1,4 +1,4 @@
 return {
   'terryma/vim-expand-region',
-  keys = { '_', '+' },
+  event = 'VeryLazy',
 }

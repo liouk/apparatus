@@ -1,9 +1,6 @@
 return {
   'tpope/vim-commentary',
-  keys = {
-    { 'gc', mode = 'n' },
-    { '<leader>c', mode = { 'n', 'v' } },
-  },
+  event = 'VeryLazy',
 
   config = function()
     vim.keymap.set('n', '<leader>c', ':Commentary<CR>')

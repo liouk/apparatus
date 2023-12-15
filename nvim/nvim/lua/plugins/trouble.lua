@@ -1,11 +1,7 @@
 return {
   'folke/trouble.nvim',
   cmd = { 'Trouble', 'TroubleToggle' },
-  keys = {
-    '<leader>md',
-    '<leader>mw',
-    'gr',
-  },
+  event = 'VeryLazy',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require('trouble').setup({

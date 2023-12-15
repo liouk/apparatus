@@ -1,6 +1,6 @@
 return {
   'm4xshen/smartcolumn.nvim',
-  event = 'BufReadPre',
+  event = 'VeryLazy',
 
   config = function()
     require('smartcolumn').setup({
