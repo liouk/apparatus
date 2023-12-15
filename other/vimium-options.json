@@ -1,0 +1,14 @@
+{
+  "keyMappings": "map d removeTab\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp\nmap <c-k> previousTab\nmap <c-j> nextTab\nmap ,1 firstTab\nmap ,2 firstTab count=2\nmap ,3 firstTab count=3\nmap ,4 firstTab count=4\nmap ,5 firstTab count=5\nmap ,6 firstTab count=6\nmap ,7 firstTab count=7\nmap ,8 firstTab count=8\nmap ,9 firstTab count=9\nmap - visitPreviousTab",
+  "settingsVersion": "2.0.6",
+  "exclusionRules": [
+    {
+      "passKeys": "jkxdgc",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "wdam",
+      "pattern": "https?://calendar.google.com/*"
+    }
+  ]
+}
