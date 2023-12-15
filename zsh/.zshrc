@@ -29,15 +29,6 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt SHARE_HISTORY
 
-# default editor
-export VISUAL="vim"
-export EDITOR="vim"
-if type "nvim" > /dev/null; then
-  export VISUAL="nvim"
-  export EDITOR="nvim"
-  alias vim='nvim'
-fi
-
 # keybindings
 export LC_ALL=en_US.UTF-8
 KEYTIMEOUT=1
@@ -69,8 +60,17 @@ if type "direnv" > /dev/null; then
 fi
 
 # fzf
-export FZF_DEFAULT_COMMAND='find .'
-export FZF_CTRL_T_COMMAND='find .'
+export FZF_DEFAULT_COMMAND='fd .'
+export FZF_CTRL_T_COMMAND='fd .'
+
+# default editor
+export VISUAL="vim"
+export EDITOR="vim"
+if type "nvim" > /dev/null; then
+  export VISUAL="nvim"
+  export EDITOR="nvim"
+  alias vim='FZF_DEFAULT_COMMAND="fd . --exclude vendor" nvim'
+fi
 
 # navi (widget used with ctrl+G)
 if type "navi" > /dev/null; then

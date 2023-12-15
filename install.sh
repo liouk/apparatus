@@ -139,7 +139,8 @@ function install_arch {
     kitty \
     unzip \
     ttf-jetbrains-mono \
-    sway
+    sway \
+    fd
 
   sudo pacman -Sy --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
