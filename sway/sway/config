@@ -268,22 +268,34 @@ bar {
 # Scratchpad
 #
 
-set $scratch_spotify kitty --class=spotify /usr/bin/spt
-set $cal_app_id kjbdgfilnfhdoflbpgamdcdgpehopbep
-set $scratch_cal google-chrome-stable --app-id=$cal_app_id --user-data-dir=$HOME/.config/google-chrome --profile-directory=Default
+set $scratch_spotify spotify --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu
 set $scratch_term kitty --class=scratch_term
 set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
-set $whatsapp_app_id hnpfjngllnobngcgfapefoaidbinmjnm
 for_window {
-     [app_id=$cal_app_id] move scratchpad,    [app_id=$cal_app_id] scratchpad show, $scratch_pos
-  [app_id="scratch_term"] move scratchpad, [app_id="scratch_term"] scratchpad show, $scratch_pos
-       [app_id="spotify"] move scratchpad,      [app_id="spotify"] scratchpad show, $scratch_pos
+  [app_id="scratch_term"] {
+    move scratchpad
+    [app_id="scratch_term"] scratchpad show
+    $scratch_pos
+  }
+
+  [title="^WhatsApp — Mozilla Firefox$"] {
+    move to workspace number 9
+  }
+
+  # when spotify starts, this is the title
+  [title="^Spotify Premium$"] {
+    move scratchpad
+    [title="^Spotify Premium$"] scratchpad show
+  }
 }
 
 bindsym --to-code {
-  $mod+0     exec swaymsg    [app_id=$cal_app_id] scratchpad show || exec $scratch_cal, $scratch_pos
   $mod+minus exec swaymsg [app_id="scratch_term"] scratchpad show || exec $scratch_term, $scratch_pos
-  $mod+equal exec swaymsg      [app_id="spotify"] scratchpad show || exec $scratch_spotify, $scratch_pos
+
+  # spotify hack
+  # the title changes when a song plays; the app_id is empty, so match it
+  # for the fix see https://community.spotify.com/t5/Desktop-Linux/No-window-icon-in-Wayland-because-app-id-is-not-correctly-set/td-p/5626427
+  $mod+equal exec swaymsg [app_id="^$"] scratchpad show || exec $scratch_spotify, $scratch_pos
 }
 
 #
@@ -301,6 +313,7 @@ workspace 4
 exec /usr/bin/obsidian %U --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 9
 exec /usr/bin/viber
+workspace 3
 workspace 2
 
 # enable floating for popups and dialogs
