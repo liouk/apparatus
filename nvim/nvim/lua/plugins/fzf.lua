@@ -7,7 +7,8 @@ local function vim_grep(args, bang)
   end
 
   local sh = 'rg --glob "!vendor/" --column --line-number --no-heading --color=always --smart-case -- ' .. query
-  vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'up:40%'), bang)
+  local spec = {options = '--delimiter=: --nth=4..'}
+  vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', spec, 'up:40%'), bang)
 end
 
 return {
