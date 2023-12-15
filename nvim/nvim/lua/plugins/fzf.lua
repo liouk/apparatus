@@ -6,7 +6,7 @@ local function vim_grep(args, bang)
     query = vim.fn.shellescape(args)
   end
 
-  local sh = 'rg --column --line-number --no-heading --color=always --smart-case -- ' .. query
+  local sh = 'rg --glob "!vendor/" --column --line-number --no-heading --color=always --smart-case -- ' .. query
   vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'up:40%'), bang)
 end
 
