@@ -69,7 +69,7 @@ export EDITOR="vim"
 if type "nvim" > /dev/null; then
   export VISUAL="nvim"
   export EDITOR="nvim"
-  alias vim='FZF_DEFAULT_COMMAND="fd . --exclude vendor" nvim'
+  alias vim='FZF_DEFAULT_COMMAND="fd . --type file --exclude vendor" nvim'
 fi
 
 # navi (widget used with ctrl+G)
