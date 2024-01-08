@@ -1,12 +1,4 @@
-@define-color fujiWhite    #DCD7BA;
-@define-color waveBlue2    #2D4F67;
-@define-color sumiInk3     #1F1F28;
-@define-color sumiInk5     #363646;
-@define-color peachRed     #FF5D62;
-@define-color surimiOrange #FFA066;
-@define-color dragonBlue   #658594;
-@define-color lightBlue    #A3D4D5;
-@define-color redhatRed    #EE0000;
+@import "catppuccin-mocha.css";
 
 * {
   border: none;
@@ -16,11 +8,11 @@
 }
 
 window#waybar {
-  background-color: rgba(31, 31, 40, 1.0);
-  border-bottom: 3px solid @sumiInk5;
-  color: @fujiWhite;
   transition-property: background-color;
   transition-duration: .5s;
+  color: @subtext0;
+  background-color: @base;
+  border: 2px solid @crust;
 }
 
 button {
@@ -34,35 +26,37 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
   background: inherit;
-  box-shadow: inset 0 -3px @fujiWhite;
+  box-shadow: inset 0 -3px @subtext0;
 }
 
 #workspaces button {
   padding: 0 5px;
-  background-color: transparent;
-  color: @fujiWhite;
+  color: @subtext0;
 }
 
 #workspaces button:hover {
-  background-color: @sumiInk3;
   opacity: 1.0;
 }
 
 #workspaces button.focused {
-  background-color: @waveBlue2;
-  box-shadow: inset 0 -3px @fujiWhite;
+  color: @text;
+  background-color: @surface1;
+  box-shadow: inset 0 -3px @subtext0;
 }
 
 #workspaces button.urgent {
-  background-color: @peachRed;
-  color: @sumiInk3;
-  border-bottom: @fujiWhite;
+  background-color: @red;
+  color: @base;
 }
 
 #mode {
-  background-color: @surimiOrange;
-  color: @sumiInk3;
-  border-bottom: 3px solid @fujiWhite;
+  background-color: @peach;
+  color: @base;
+}
+
+.modules-right {
+  background-color: transparent;
+  /* color: @subtext0; */
 }
 
 #clock,
@@ -87,6 +81,11 @@ button:hover {
   padding: 0 10px;
 }
 
+#custom-media {
+  color: @green;
+  min-width: 100px;
+}
+
 #window,
 #workspaces {
   margin: 0 4px;
@@ -102,51 +101,14 @@ button:hover {
   margin-right: 0;
 }
 
-#clock {
-  background-color: transparent;
-}
-
-#battery {
-  background-color: transparent;
-}
-
-#battery.charging, #battery.plugged {
-  background-color: transparent;
-}
-
 #battery.critical:not(.charging) {
-  background-color: @peachRed;
-  color: @sumiInk3;
-  border-bottom: @fujiWhite;
+  background-color: @red;
+  color: @base;
+  border-bottom: @subtext0;
 }
 
 label:focus {
   background-color: #000000;
-}
-
-#network {
-}
-
-#network.disconnected {
-}
-
-#pulseaudio {
-}
-
-#pulseaudio.muted {
-}
-
-#wireplumber {
-}
-
-#wireplumber.muted {
-}
-
-#custom-media {
-  min-width: 100px;
-}
-
-#tray {
 }
 
 #tray > .passive {
@@ -157,20 +119,8 @@ label:focus {
   -gtk-icon-effect: highlight;
 }
 
-#idle_inhibitor {
-}
-
-#idle_inhibitor.activated {
-}
-
 #language {
   padding: 0 10px;
-}
-
-#scratchpad {
-}
-
-#scratchpad.empty {
 }
 
 #custom-vpn.disconnected {

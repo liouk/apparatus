@@ -3,30 +3,30 @@ disable-caps-lock-text
 show-keyboard-layout
 
 font=JetBrains Mono SemiBold
-image=/usr/share/backgrounds/bg.png
+image=/usr/share/backgrounds/catppuccin-soundwave.png
 
-bs-hl-color=#FF5D62
-key-hl-color=#B7D0AE
-inside-color=#76946ADD
-line-color=#1F1F28
-ring-color=#76946A
-text-color=#1F1F28
+bs-hl-color=#f2cdcd
+key-hl-color=#94e2d5
+inside-color=#585b70dd
+line-color=#11111b
+ring-color=#585b70
+text-color=#11111b
 
-inside-clear-color=#FFA066DD
-line-clear-color=#1F1F28
-ring-clear-color=#FFA066
-text-clear-color=#1F1F28
+inside-clear-color=#f2cdcddd
+line-clear-color=#11111b
+ring-clear-color=#f2cdcd
+text-clear-color=#11111b
 
-inside-ver-color=#7E9CD8DD
-line-ver-color=#1F1F28
-ring-ver-color=#7E9CD8
-text-ver-color=#1F1F28
+inside-ver-color=#94e2d5dd
+line-ver-color=#11111b
+ring-ver-color=#94e2d5
+text-ver-color=#11111b
 
-inside-wrong-color=#C34043DD
-line-wrong-color=#1F1F28
-ring-wrong-color=#C34043
-text-wrong-color=#1F1F28
+inside-wrong-color=#f38ba8dd
+line-wrong-color=#11111b
+ring-wrong-color=#f38ba8
+text-wrong-color=#11111b
 
-layout-bg-color=#1F1F28
-layout-border-color=#1F1F28
-layout-text-color=#DCD7BA
+layout-bg-color=#11111b
+layout-border-color=#11111b
+layout-text-color=#cdd6f4

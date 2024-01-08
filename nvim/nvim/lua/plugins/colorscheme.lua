@@ -8,27 +8,41 @@ return {
     enabled = false,
   },
   {
-    'rebelot/kanagawa.nvim',
-    name = 'kanagawa',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     lazy = false,
     priority = 1000,
 
     config = function()
-      require('kanagawa').setup({
-        undercurl = false,
-        commentStyle = { italic = true },
-        functionStyle = {},
-        keywordStyle = { italic = false },
-        statementStyle = {},
-        typeStyle = {},
-        overrides = function()
+      require('catppuccin').setup({
+        flavour = 'macchiato',
+        styles = {
+          comments = { 'italic' },
+          conditionals = {},
+          loops = {},
+          functions = {},
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
+        },
+        integrations = {
+          barbar = true,
+          leap = true,
+          which_key = true,
+        },
+        custom_highlights = function()
           return {
-            Boolean = { bold = false },
+            -- remove italic from namespace style
+            ['@namespace'] = { style = {} },
           }
         end,
       })
-
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'catppuccin-macchiato'
     end
   }
 }

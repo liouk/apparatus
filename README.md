@@ -53,3 +53,13 @@ curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/install.sh |
 #### MacOS
 - [Homebrew](https://brew.sh/)
 - [karabiner](https://karabiner-elements.pqrs.org/)
+
+## Theme
+This config currently uses the [catppuccin](https://github.com/catppuccin/catppuccin) theme, in the following places that apparatus controls:
+- kitty
+- neovim
+- sway
+- waybar
+- mako
+- tig
+- swaylock

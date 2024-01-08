@@ -1,3 +1,5 @@
+include theme-catppuccin-mocha
+
 #
 # Variables
 #
@@ -27,7 +29,7 @@ set $homedisplay DP-3
 set $officedisplay "Samsung Electric Company LF32TU87 HNTT100830"
 
 output * {
-  bg /usr/share/backgrounds/bg.png fill
+  bg /usr/share/backgrounds/catppuccin-soundwave.png fill
 }
 
 output $officedisplay {
@@ -220,42 +222,6 @@ bindsym $mod+End exec swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/o
 #
 default_border pixel 2
 default_floating_border pixel 2
-
-#
-# Colors
-#
-
-# tailored to kanagawa
-set $fujiWhite  #DCD7BA
-set $fujiGray   #727169
-set $waveBlue1  #223249
-set $dragonBlue #658594
-set $lightBlue  #A3D4D5
-set $sumiInk3   #1F1F28
-set $sumiInk4   #2A2A37
-set $sumiInk5   #363646
-set $oniViolet2 #B8B4D0
-set $peachRed   #FF5D62
-
-set $text1   $fujiWhite
-set $back1   $waveBlue1
-set $border1 $dragonBlue
-set $hl1     $lightBlue
-
-set $text2   $fujiGray
-set $back2   $sumiInk4
-set $border2 $sumiInk5
-
-set $text3   $oniViolet2
-set $back3   $sumiInk3
-set $border3 $sumiInk5
-set $border4 $peachRed
-
-# class                  border    background  text    indicator child_border
-client.focused           $border1  $back1      $text1  $hl1      $border1
-client.unfocused         $border2  $back2      $text2  $back2    $border2
-client.focused_inactive  $border2  $back2      $text2  $back2    $border2
-client.urgent            $border1  $back1      $text1  $hl1      $border4
 
 #
 # Waybar

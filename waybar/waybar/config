@@ -92,7 +92,7 @@
     "on-click": "pavucontrol"
   },
   "custom/media": {
-    "format": "<span color=\"#87A987\">{icon} {}</span>",
+    "format": "{icon} {}",
     "format-icons": {
       "spotify": "",
       "default": ""

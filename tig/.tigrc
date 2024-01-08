@@ -12,3 +12,6 @@ set main-view-date-format = "%Y-%m-%d %H:%M"
 
 # Copy Commit SHA to clipboard
 bind generic 9 !@bash -c "echo -n %(commit) | wl-copy"
+
+# fix cursor color for catppuccin-mocha
+color cursor default blue
