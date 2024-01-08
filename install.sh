@@ -139,6 +139,7 @@ function install_arch {
     kitty \
     unzip \
     ttf-jetbrains-mono \
+    ttf-ibm-plex \
     sway \
     fd
 
