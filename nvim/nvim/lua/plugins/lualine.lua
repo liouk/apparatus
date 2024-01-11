@@ -42,7 +42,7 @@ return {
       },
       sections = {
         lualine_a = {'mode'},
-        lualine_b = {{repo, icon = '󰊢'}, {'branch', icon = ''} , 'diff', 'diagnostics'},
+        lualine_b = {{repo, icon = '󰊢'}, {'branch', icon = ''}, 'diagnostics'},
         lualine_c = {{'filename', path = 1}},
         lualine_x = {},
         lualine_y = {'filetype'},
