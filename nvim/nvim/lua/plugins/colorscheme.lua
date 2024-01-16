@@ -39,6 +39,7 @@ return {
           return {
             -- remove italic from namespace style
             ['@namespace'] = { style = {} },
+            ['@function.builtin.bash'] = { style = {} },
           }
         end,
       })
