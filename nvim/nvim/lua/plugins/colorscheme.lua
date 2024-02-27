@@ -38,7 +38,7 @@ return {
         custom_highlights = function()
           return {
             -- remove italic from namespace style
-            ['@namespace'] = { style = {} },
+            ['@module'] = { style = {} },
             ['@function.builtin.bash'] = { style = {} },
           }
         end,
