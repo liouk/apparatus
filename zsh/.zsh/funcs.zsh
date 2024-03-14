@@ -17,10 +17,3 @@ function kns () {
   chosen=$(kubectl get ns --no-headers -o custom-columns=":metadata.name" | fzf)
   kubectl config set-context --current --namespace="$chosen"
 }
-
-function makesh () {
-	name="$1"
-	[ -f $name ] && { echo "file '$name' already exists"; return; }
-	echo "#!/usr/bin/env bash" > "$name"
-	chmod +x "$name"
-}
