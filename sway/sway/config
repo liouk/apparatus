@@ -240,6 +240,9 @@ bar {
 # Scratchpad
 #
 
+bindsym $mod+0 [con_mark="main_scratchpad"] scratchpad show
+bindsym $mod+Shift+0 mark main_scratchpad, move scratchpad
+
 set $scratch_spotify spotify --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu
 set $scratch_term kitty --class=scratch_term
 set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
