@@ -2,3 +2,6 @@
 
 # build for other OS/arch
 GOOS=linux GOARCH=amd64 go build
+
+# get module version ready for go.mod
+go mod download -json <repo>@<commit hash> | jq --raw-output '"\(.Path) \(.Version)"'
