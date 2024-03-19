@@ -199,8 +199,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # screenshots with grim
-bindsym Print exec grim -g "$(slurp)" - | wl-copy
-bindsym $mod+Print exec grim -g "$(slurp)"
+bindsym $mod+Control+3 exec grim -g "$(slurp)"
+bindsym $mod+Control+4 exec grim -g "$(slurp)" - | wl-copy
 
 # audio
 bindsym XF86AudioMute exec ~/.config/sway/volctl.sh mute
