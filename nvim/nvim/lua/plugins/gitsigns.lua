@@ -22,7 +22,6 @@ return {
       current_line_blame_formatter = '<abbrev_sha> <author>, <author_time:%Y-%m-%d> - <summary>',
     })
 
-    vim.keymap.set('n', '<leader>gl', ':Gitsigns toggle_current_line_blame<CR>')
     vim.keymap.set('n', '<leader>gr', ':Gitsigns reset_hunk<CR>')
     vim.keymap.set('n', '<leader>gn', ':Gitsigns next_hunk<CR>')
     vim.keymap.set('n', '<leader>gp', ':Gitsigns prev_hunk<CR>')
