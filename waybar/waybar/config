@@ -2,7 +2,7 @@
   "position": "top",
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "disk#root", "disk#home", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "battery", "custom/powerbutton"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "disk#root", "disk#home", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "idle_inhibitor", "battery", "custom/suspendbutton", "custom/powerbutton"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -113,8 +113,13 @@
     "on-click": "$HOME/.config/waybar/vpn.sh down",
     "signal": 1
   },
+  "custom/suspendbutton": {
+    "format": "",
+    "on-click": "systemctl suspend",
+    "tooltip": false
+  },
   "custom/powerbutton": {
-    "format": "",
+    "format": "⏻",
     "on-click": "shutdown now",
     "tooltip": false
   }
