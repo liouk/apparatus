@@ -29,10 +29,6 @@ vim.keymap.set('n', 'N', 'Nzz', { desc = 'Search backward; cursor at middle' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected lines up' })
 
--- paste mode
-vim.keymap.set('n', '<F2>', ':set invpaste paste?<CR>', { desc = 'Toggle paste mode' })
-vim.opt.pastetoggle = '<F2>'
-
 -- misc
 vim.keymap.set('n', '<leader>a', ':cclose<CR>:lclose<CR>', { desc = 'Dismiss loclist and quickfix' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines (preserve cursor)' })
