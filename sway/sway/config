@@ -253,10 +253,6 @@ for_window {
     $scratch_pos
   }
 
-  [title="^WhatsApp — Mozilla Firefox$"] {
-    move to workspace number 9
-  }
-
   # when spotify starts, this is the title
   [title="^Spotify Premium$"] {
     move scratchpad
