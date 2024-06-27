@@ -83,17 +83,6 @@
 [commit]
   gpgsign = true
 
-[includeIf "gitdir:/home/ilias/Syncthing/notes/.obsidian/"]
-  path = .config/git/liouk-redarch
-
-[includeIf "gitdir:/home/ilias/.apparatus/"]
-  path = .config/git/liouk-redarch
-
-[includeIf "gitdir:/home/ilias/liouk/"]
-  path = .config/git/liouk-redarch
-
-[includeIf "gitdir:/home/ilias/redhat/"]
-  path = .config/git/redhat-redarch
-
-[includeIf "gitdir:/Users/ilias/Workspace/redhat/"]
-  path = .gitconfig-redhat-stingray
+[include]
+  # defines where to find GPG signature key configuration
+  path = .config/git/gpgsign-config
