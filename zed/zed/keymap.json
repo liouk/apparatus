@@ -1,0 +1,108 @@
+// Keymaps docs: https://zed.dev/docs/key-bindings
+// Default linux keymaps: https://github.com/zed-industries/zed/blob/main/assets/keymaps/default-linux.json
+// Default vim keymaps: https://github.com/zed-industries/zed/blob/main/assets/keymaps/vim.json
+// Keymap contexts: https://github.com/zed-industries/zed/issues/14718
+[
+	// ==================
+	// Custom keybindings
+	// ==================
+	{
+		"context": "Workspace",
+		"bindings": {
+			"ctrl-a d": "diagnostics::Deploy",
+			"ctrl-a h": "project_panel::ToggleFocus",
+			"ctrl-a l": "project_symbols::Toggle",
+			"ctrl-a m": "terminal_panel::ToggleFocus",
+			"ctrl-a p": ["projects::OpenRecent", { "create_new_window": false }],
+			"ctrl-f": "workspace::ToggleZoom",
+			"ctrl-m": "workspace::ToggleBottomDock"
+		}
+	},
+	{
+		"context": "Workspace && not_editing",
+		"bindings": {
+			", d": "workspace::ToggleLeftDock",
+			", f": "workspace::NewSearch"
+		}
+	},
+	{
+		"context": "Editor && mode == full",
+		"bindings": {
+			"ctrl-a g": "outline::Toggle",
+			"ctrl-a ctrl-a": "editor::SelectAll",
+			"ctrl-m": "workspace::ToggleBottomDock",
+			"ctrl-alt-e": "editor::SelectEnclosingSymbol"
+		}
+	},
+	{
+		"context": "ProjectPanel && not_editing",
+		"bindings": {
+			"q": "workspace::ToggleLeftDock",
+			"a": "project_panel::NewFile",
+			"r": "project_panel::Rename",
+			"d": "project_panel::Delete",
+			"f": "project_panel::NewDirectory",
+			"shift-e": "project_panel::ExpandSelectedEntry",
+			", d": "workspace::ToggleLeftDock",
+			", f": "workspace::NewSearch"
+		}
+	},
+	{
+		"context": "Terminal",
+		"bindings": {
+			"ctrl-n": "workspace::NewTerminal",
+			"ctrl-a": ["terminal::SendKeystroke", "ctrl-a"],
+			"ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
+			"ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
+			"ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
+			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"]
+		}
+	},
+	{
+		"context": "MarkdownPreview",
+		"bindings": {
+			"ctrl-h": "workspace::ActivateNextPane"
+		}
+	},
+	// ======================
+	// Custom vim keybindings
+	// ======================
+	{
+		"context": "VimControl && !menu",
+		"bindings": {
+			// splits & buffers
+			"ctrl-k": "pane::ActivatePrevItem",
+			"ctrl-j": "pane::ActivateNextItem",
+			"ctrl-e": "pane::SplitRight",
+			"ctrl-h": "workspace::ActivateNextPane",
+			"ctrl-w": "pane::CloseActiveItem",
+			"ctrl-enter": "markdown::OpenPreviewToTheSide",
+			// leader combos
+			", b": "editor::ToggleGitBlame",
+			", d": "workspace::ToggleLeftDock",
+			", e": "editor::SelectEnclosingSymbol",
+			", f": "workspace::NewSearch",
+			", g f": "editor::OpenPermalinkToLine",
+			", g c": "editor::CopyPermalinkToLine",
+			", g p": "editor::CopyPath",
+			", r": "editor::RevertSelectedHunks",
+			", t": "editor::Format",
+			// lsp & code
+			"shift-k": "editor::Hover",
+			"g a": "editor::ToggleCodeActions",
+			"g d": "editor::GoToDefinition",
+			"g i": "editor::GoToImplementation",
+			"g n": "editor::Rename",
+			"g o": "editor::GoToTypeDefinition",
+			"g r": "editor::FindAllReferences",
+			"g u": "editor::OpenUrl"
+		}
+	},
+	{
+		"context": "VimControl && vim_mode == visual",
+		"bindings": {
+			"shift-k": "editor::MoveLineUp",
+			"shift-j": "editor::MoveLineDown"
+		}
+	}
+]
