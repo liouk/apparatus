@@ -1,6 +1,8 @@
 # general
 alias grep='grep --color'
 alias fgrep='fgrep --color'
+alias zed=zeditor
+alias z=zeditor
 
 # directory shortcuts
 alias ..='cd ..'

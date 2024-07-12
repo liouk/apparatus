@@ -1,0 +1,104 @@
+// Settings: https://zed.dev/docs/configuring-zed
+// Features: https://zed.dev/features
+{
+	// general
+	"restore_on_startup": "last_session",
+	"auto_update": false,
+	"telemetry": {
+		"diagnostics": false,
+		"metrics": false
+	},
+
+	// editor
+	"cursor_blink": false,
+	"current_line_highlight": "none",
+	"soft_wrap": "editor_width",
+	"vertical_scroll_margin": 4,
+	"tabs": {
+		"git_status": true
+	},
+
+	// git
+	"git": {
+		"inline_blame": {
+			"enabled": false
+		}
+	},
+
+	// vim
+	"vim_mode": true,
+	"vim": {
+		"use_smartcase_find": true,
+		"use_system_clipboard": "on_yank"
+	},
+
+	// formatting
+	"format_on_save": "on",
+	"ensure_final_newline_on_save": false,
+	"remove_trailing_whitespace_on_save": true,
+	"always_treat_brackets_as_autoclosed": true,
+
+	// theme, fonts & sizes
+	"theme": "Catppuccin Macchiato (maroon, italic comments only, dark terminal)",
+	"buffer_font_family": "JetBrains Mono NL",
+	"buffer_font_size": 16.5,
+	"ui_font_family": "JetBrains Mono NL",
+	"ui_font_size": 16.5,
+
+	// tabs & indentation
+	"hard_tabs": true,
+	"tab_size": 2,
+	"indent_guides": {
+		"enabled": false
+	},
+
+	// terminal
+	"terminal": {
+		"copy_on_select": true,
+		"button": false,
+		"blinking": "off"
+	},
+
+	// project panel
+	"project_panel": {
+		"default_width": 360,
+		"button": false
+	},
+
+	// ui
+	"show_call_status_icon": false,
+	"tab_bar": {
+		"show": true,
+		"show_nav_history_buttons": false
+	},
+	"scrollbar": {
+		"show": "never"
+	},
+	"features": {
+		"inline_completion_provider": "none",
+		"copilot": true
+	},
+	"toolbar": {
+		"quick_actions": false
+	},
+	"collaboration_panel": {
+		"button": false
+	},
+	"outline_panel": {
+		"button": false
+	},
+	"assistant": {
+		"default_model": {
+			"provider": "anthropic",
+			"model": "claude-3-5-sonnet-20240620"
+		},
+		"version": "2",
+		"button": false
+	},
+	"chat_panel": {
+		"button": false
+	},
+	"notification_panel": {
+		"button": false
+	}
+}

@@ -124,6 +124,7 @@ function install_arch {
     git \
     tig \
     neovim \
+    zed \
     npm \
     stow \
     fzf \
@@ -179,6 +180,7 @@ function stow_arch {
   stow --restow --target="$HOME/.config" waybar
   stow --restow --target="$HOME/.config" mako
   stow --restow --target="$HOME/.config" xkb
+  stow --restow --target="$HOME/.config" zed
   stow --restow --target="$navi_dir" navi
   popd > /dev/null
 }
@@ -201,6 +203,7 @@ function unstow_arch {
   stow --delete --target="$HOME/.config" waybar
   stow --delete --target="$HOME/.config" mako
   stow --delete --target="$HOME/.config" xkb
+  stow --delete --target="$HOME/.config" zed
   stow --delete --target="$navi_dir" navi
   popd > /dev/null
 }
