@@ -96,6 +96,7 @@
 			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
+			"ctrl-shift-e": "pane::JoinIntoNext",
 			// leader combos
 			", b": "editor::ToggleGitBlame",
 			", d": "workspace::ToggleLeftDock",
@@ -110,6 +111,7 @@
 			"shift-k": "editor::Hover",
 			"g a": "editor::ToggleCodeActions",
 			"g d": "editor::GoToDefinition",
+			"g f": "editor::OpenFile",
 			"g i": "editor::GoToImplementation",
 			"g n": "editor::Rename",
 			"g o": "editor::GoToTypeDefinition",

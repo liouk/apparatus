@@ -100,5 +100,18 @@
 	},
 	"notification_panel": {
 		"button": false
+	},
+
+	// LSP
+	"lsp": {
+		"yaml-language-server": {
+			"initialization_options": {
+				"yaml": {
+					"format": {
+						"enable": true
+					}
+				}
+			}
+		}
 	}
 }
