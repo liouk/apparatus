@@ -26,6 +26,14 @@ function rh () {
   __jumpfunc "$HOME/redhat" $1
 }
 
+function ro () {
+  __jumpfunc "$HOME/redhat/repos/openshift" $1
+}
+
+function rl () {
+  __jumpfunc "$HOME/redhat/repos/liouk" $1
+}
+
 function occ () {
   xdg-open $(oc whoami --show-console)
 }
