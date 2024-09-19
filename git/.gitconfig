@@ -83,6 +83,9 @@
 [commit]
   gpgsign = true
 
+[absorb]
+  oneFixupPerCommit = true
+
 [include]
   # defines where to find GPG signature key configuration
   path = .config/git/gpgsign-config
