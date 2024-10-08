@@ -97,6 +97,7 @@
 			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
 			"ctrl-shift-e": "pane::JoinIntoNext",
+			"ctrl-shift-w": "pane::JoinAll",
 			// leader combos
 			", b": "editor::ToggleGitBlame",
 			", d": "workspace::ToggleLeftDock",

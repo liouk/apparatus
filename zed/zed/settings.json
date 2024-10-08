@@ -15,7 +15,8 @@
 	"soft_wrap": "editor_width",
 	"vertical_scroll_margin": 4,
 	"tabs": {
-		"git_status": true
+		"git_status": true,
+		"file_icons": true
 	},
 
 	// git
