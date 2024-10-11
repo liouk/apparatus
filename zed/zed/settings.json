@@ -57,7 +57,8 @@
 	"terminal": {
 		"copy_on_select": true,
 		"button": false,
-		"blinking": "off"
+		"blinking": "off",
+		"cursor_shape": "block"
 	},
 
 	// project panel
