@@ -49,6 +49,7 @@
 	// tabs & indentation
 	"hard_tabs": true,
 	"tab_size": 2,
+	"auto_indent_on_paste": true,
 	"indent_guides": {
 		"enabled": false
 	},
@@ -68,6 +69,9 @@
 	},
 
 	// ui
+	"active_pane_modifiers": {
+		"border_size": 0.5
+	},
 	"show_call_status_icon": false,
 	"tab_bar": {
 		"show": true,
