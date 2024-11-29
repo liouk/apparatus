@@ -10,7 +10,11 @@
 		"bindings": {
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl ctrl": "command_palette::Toggle",
-			"ctrl-a i": "assistant::InlineAssist"
+			"ctrl-a i": "assistant::InlineAssist",
+			"ctrl-a e": [
+				"task::Spawn",
+				{ "task_name": "open all git-modified files" }
+			]
 		}
 	},
 	{

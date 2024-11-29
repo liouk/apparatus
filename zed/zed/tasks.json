@@ -1,0 +1,11 @@
+[
+	{
+		"label": "open all git-modified files",
+		"command": "zed $(git status -s | awk '{ if ($1 == \"M\") print $2 }')",
+		"use_new_terminal": true,
+		"reveal": "never",
+		"hide": "always",
+		"show_summary": false,
+		"show_output": "false"
+	}
+]
