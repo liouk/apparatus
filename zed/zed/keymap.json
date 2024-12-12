@@ -8,6 +8,7 @@
 	// ==================
 	{
 		"bindings": {
+			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl ctrl": "command_palette::Toggle",
 			"ctrl-a i": "assistant::InlineAssist",
@@ -98,7 +99,6 @@
 			"ctrl-j": "pane::ActivateNextItem",
 			"ctrl-e": "pane::SplitRight",
 			"ctrl-h": "workspace::ActivateNextPane",
-			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
 			"ctrl-shift-e": "pane::JoinIntoNext",
 			"ctrl-shift-w": "pane::JoinAll",
