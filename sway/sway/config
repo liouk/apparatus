@@ -209,8 +209,8 @@ bindsym XF86AudioLowerVolume exec ~/.config/sway/volctl.sh down
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # playback
-bindsym XF86Go exec playerctl previous
-bindsym Cancel exec playerctl play-pause
+bindsym XF86PickupPhone exec playerctl previous
+bindsym XF86HangupPhone exec playerctl play-pause
 bindsym XF86Favorites exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioPlay exec playerctl play-pause
