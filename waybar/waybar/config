@@ -92,17 +92,10 @@
     "on-click": "pavucontrol"
   },
   "custom/media": {
-    "format": "{icon} {}",
-    "format-icons": {
-      "spotify": "",
-      "default": ""
-    },
-    "escape": true,
     "max-length": 80,
     "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "return-type": "json",
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+    "exec": "$HOME/.config/waybar/media.sh",
+    "interval": 1
   },
   "custom/vpn": {
     "format": "󱄛",
