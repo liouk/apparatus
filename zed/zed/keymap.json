@@ -122,7 +122,7 @@
 			"shift-k": "editor::Hover",
 			"g a": "editor::ToggleCodeActions",
 			"g d": "editor::GoToDefinition",
-			"g f": "editor::OpenFile",
+			"g f": "editor::OpenSelectedFilename",
 			"g i": "editor::GoToImplementation",
 			"g n": "editor::Rename",
 			"g o": "editor::GoToTypeDefinition",
