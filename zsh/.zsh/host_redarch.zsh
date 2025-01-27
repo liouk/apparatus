@@ -11,6 +11,10 @@ alias ls='ls -lahp --color'
 alias open=xdg-open
 alias vlc='QT_QPA_PLATFORM=wayland vlc'
 
+# zed shortcuts
+alias zrh='zed "$HOME/redhat"'
+alias zap='zed "$HOME/.apparatus"'
+
 # oc completion
 if command -v oc &> /dev/null; then
   autoload -Uz compinit && compinit
