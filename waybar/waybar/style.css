@@ -1,62 +1,62 @@
 @import "catppuccin-mocha.css";
 
 * {
-  border: none;
-  border-radius: 0;
-  font-family: "JetBrains Mono SemiBold";
-  font-size: 10pt;
+	border: none;
+	border-radius: 0;
+	font-family: "JetBrains Mono SemiBold";
+	font-size: 10pt;
 }
 
 window#waybar {
-  transition-property: background-color;
-  transition-duration: .5s;
-  color: @subtext0;
-  background-color: @base;
-  border: 2px solid @crust;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+	color: @subtext0;
+	background-color: @base;
+	border: 2px solid @crust;
 }
 
 button {
-  /* Use box-shadow instead of border so the text isn't offset */
-  box-shadow: inset 0 -3px transparent;
-  /* Avoid rounded borders under each button name */
-  border: none;
-  border-radius: 0;
+	/* Use box-shadow instead of border so the text isn't offset */
+	box-shadow: inset 0 -3px transparent;
+	/* Avoid rounded borders under each button name */
+	border: none;
+	border-radius: 0;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-  background: inherit;
-  box-shadow: inset 0 -3px @subtext0;
+	background: inherit;
+	box-shadow: inset 0 -3px @subtext0;
 }
 
 #workspaces button {
-  padding: 0 5px;
-  color: @subtext0;
+	padding: 0 5px;
+	color: @subtext0;
 }
 
 #workspaces button:hover {
-  opacity: 1.0;
+	opacity: 1;
 }
 
 #workspaces button.focused {
-  color: @text;
-  background-color: @surface1;
-  box-shadow: inset 0 -3px @subtext0;
+	color: @text;
+	background-color: @surface1;
+	box-shadow: inset 0 -3px @subtext0;
 }
 
 #workspaces button.urgent {
-  background-color: @red;
-  color: @base;
+	background-color: @red;
+	color: @base;
 }
 
 #mode {
-  background-color: @peach;
-  color: @base;
+	background-color: @peach;
+	color: @base;
 }
 
 .modules-right {
-  background-color: transparent;
-  /* color: @subtext0; */
+	background-color: transparent;
+	/* color: @subtext0; */
 }
 
 #clock,
@@ -70,6 +70,7 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
+#custom-ticker,
 #custom-media,
 #custom-powerbutton,
 #custom-vpn,
@@ -78,60 +79,65 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #mpd {
-  padding: 0 10px;
+	padding: 0 10px;
+}
+
+#custom-ticker {
+	color: @overlay0;
+	min-width: 100px;
 }
 
 #custom-media {
-  color: @green;
-  min-width: 100px;
+	color: @green;
+	min-width: 100px;
 }
 
 #window,
 #workspaces {
-  margin: 0 4px;
+	margin: 0 4px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
+	margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
+	margin-right: 0;
 }
 
 #battery.critical:not(.charging) {
-  background-color: @red;
-  color: @base;
-  border-bottom: @subtext0;
+	background-color: @red;
+	color: @base;
+	border-bottom: @subtext0;
 }
 
 label:focus {
-  background-color: #000000;
+	background-color: #000000;
 }
 
 #tray > .passive {
-  -gtk-icon-effect: dim;
+	-gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-  -gtk-icon-effect: highlight;
+	-gtk-icon-effect: highlight;
 }
 
 #language {
-  padding: 0 10px;
+	padding: 0 10px;
 }
 
 #custom-vpn.disconnected {
-  opacity: 0.4;
+	opacity: 0.4;
 }
 
 #custom-vpn.connected {
-  opacity: 1.0;
-  color: @redhatRed;
+	opacity: 1;
+	color: @redhatRed;
 }
 
 #custom-powerbutton {
-  font-size: 16pt;
+	font-size: 16pt;
 }
