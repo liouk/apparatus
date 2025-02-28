@@ -112,7 +112,7 @@
 	// LSP
 	"lsp": {
 		"yaml-language-server": {
-			"initialization_options": {
+			"settings": {
 				"yaml": {
 					"format": {
 						"enable": true
