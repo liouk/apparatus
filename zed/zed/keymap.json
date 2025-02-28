@@ -75,7 +75,7 @@
 		"context": "Terminal",
 		"bindings": {
 			"ctrl-a": ["terminal::SendKeystroke", "ctrl-a"],
-			"ctrl-e": "pane::SplitRight",
+			"ctrl-e": ["terminal::SendKeystroke", "ctrl-e"],
 			"ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
 			"ctrl-a i": "assistant::InlineAssist",
 			"ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],

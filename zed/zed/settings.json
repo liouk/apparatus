@@ -42,9 +42,10 @@
 	// theme, fonts & sizes
 	"theme": "Catppuccin Macchiato (maroon, italic comments only, dark terminal)",
 	"buffer_font_family": "JetBrains Mono NL",
-	"buffer_font_size": 16.5,
+	"buffer_font_size": 15.5,
 	"ui_font_family": "JetBrains Mono NL",
 	"ui_font_size": 16.5,
+	"icon_theme": "Material Icon Theme",
 
 	// tabs & indentation
 	"hard_tabs": true,
