@@ -8,7 +8,11 @@
 	// ==================
 	{
 		"bindings": {
+			", d": "workspace::ToggleLeftDock",
+			", f": "workspace::NewSearch",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
+			"ctrl-[": "workspace::ToggleLeftDock",
+			"ctrl-]": "workspace::ToggleRightDock",
 			"ctrl ctrl": "command_palette::Toggle",
 			"ctrl-a i": "assistant::InlineAssist",
 			"ctrl-a e": [
@@ -33,13 +37,6 @@
 			],
 			"ctrl-f": "workspace::ToggleZoom",
 			"ctrl-m": "workspace::ToggleBottomDock"
-		}
-	},
-	{
-		"context": "Workspace && not_editing",
-		"bindings": {
-			", d": "workspace::ToggleLeftDock",
-			", f": "workspace::NewSearch"
 		}
 	},
 	{
