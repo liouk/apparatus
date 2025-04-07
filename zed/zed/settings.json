@@ -82,7 +82,7 @@
 		"show": "never"
 	},
 	"features": {
-		"inline_completion_provider": "none",
+		"edit_prediction_provider": "none",
 		"copilot": true
 	},
 	"toolbar": {
@@ -103,7 +103,7 @@
 		"button": false
 	},
 	"chat_panel": {
-		"button": false
+		"button": "never"
 	},
 	"notification_panel": {
 		"button": false

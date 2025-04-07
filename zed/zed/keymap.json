@@ -8,8 +8,6 @@
 	// ==================
 	{
 		"bindings": {
-			", d": "workspace::ToggleLeftDock",
-			", f": "workspace::NewSearch",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl-[": "workspace::ToggleLeftDock",
 			"ctrl-]": "workspace::ToggleRightDock",
@@ -22,12 +20,18 @@
 		}
 	},
 	{
+		"context": "vim_mode != insert",
+		"bindings": {
+			", d": "project_panel::ToggleFocus",
+			", g": "git_panel::ToggleFocus",
+			", f": "workspace::NewSearch",
+			", a": "workspace::CloseAllDocks"
+		}
+	},
+	{
 		"context": "Workspace",
 		"bindings": {
 			"ctrl-a d": "diagnostics::Deploy",
-			"ctrl-a f": "workspace::NewSearch",
-			"ctrl-a h": "project_panel::ToggleFocus",
-			"ctrl-a o": "assistant::ToggleFocus",
 			"ctrl-a l": "project_symbols::Toggle",
 			"ctrl-a m": "terminal_panel::ToggleFocus",
 			"ctrl-a p": ["projects::OpenRecent", { "create_new_window": false }],
@@ -35,6 +39,8 @@
 				"workspace::SendKeystrokes",
 				"ctrl-e ctrl ctrl new center terminal enter"
 			],
+			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
+			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
 			"ctrl-f": "workspace::ToggleZoom",
 			"ctrl-m": "workspace::ToggleBottomDock"
 		}
@@ -56,16 +62,28 @@
 		}
 	},
 	{
+		"context": "GitPanel",
+		"bindings": {
+			"escape": "git_panel::Close",
+			", g": "git_panel::Close"
+		}
+	},
+	{
+		"context": "ProjectPanel",
+		"bindings": {
+			"escape": "workspace::ToggleLeftDock"
+		}
+	},
+	{
 		"context": "ProjectPanel && not_editing",
 		"bindings": {
+			", d": "workspace::ToggleLeftDock",
 			"q": "workspace::ToggleLeftDock",
 			"a": "project_panel::NewFile",
 			"r": "project_panel::Rename",
 			"d": "project_panel::Delete",
 			"f": "project_panel::NewDirectory",
-			"shift-e": "project_panel::ExpandSelectedEntry",
-			", d": "workspace::ToggleLeftDock",
-			", f": "workspace::NewSearch"
+			"shift-e": "project_panel::ExpandSelectedEntry"
 		}
 	},
 	{
@@ -73,20 +91,22 @@
 		"bindings": {
 			"ctrl-a": ["terminal::SendKeystroke", "ctrl-a"],
 			"ctrl-e": ["terminal::SendKeystroke", "ctrl-e"],
-			"ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
 			"ctrl-a i": "assistant::InlineAssist",
 			"ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
 			"ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
 			"ctrl-n": "workspace::NewTerminal",
 			"ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
-			"ctrl-a m": "terminal_panel::ToggleFocus"
+			"ctrl-a m": "terminal_panel::ToggleFocus",
+			"ctrl-[": ["terminal::SendKeystroke", "ctrl-["],
+			"ctrl-]": ["terminal::SendKeystroke", "ctrl-]"]
 		}
 	},
 	{
 		"context": "MarkdownPreview",
 		"bindings": {
 			"ctrl-h": "workspace::ActivateNextPane",
+			"ctrl-w": "pane::CloseActiveItem",
 			":": "command_palette::Toggle"
 		}
 	},
@@ -97,7 +117,7 @@
 		"context": "VimControl && !menu",
 		"bindings": {
 			// splits & buffers
-			"ctrl-k": "pane::ActivatePrevItem",
+			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-j": "pane::ActivateNextItem",
 			"ctrl-e": "pane::SplitRight",
 			"ctrl-h": "workspace::ActivateNextPane",
@@ -106,32 +126,39 @@
 			"ctrl-shift-e": "pane::JoinIntoNext",
 			"ctrl-shift-w": "pane::JoinAll",
 			// leader combos
-			", b": "editor::ToggleGitBlame",
-			", d": "workspace::ToggleLeftDock",
+			", b": "git::Blame",
 			", e": "editor::SelectEnclosingSymbol",
-			", f": "workspace::NewSearch",
-			", g f": "editor::OpenPermalinkToLine",
-			", g c": "editor::CopyPermalinkToLine",
-			", g p": "editor::CopyPath",
-			", r": "editor::RevertSelectedHunks",
+			"ctrl-a o": "editor::OpenPermalinkToLine",
+			"ctrl-a c": "editor::CopyPermalinkToLine",
+			"ctrl-a p": "workspace::CopyPath",
+			", r": "git::Restore",
 			", t": "editor::Format",
 			// lsp & code
 			"shift-k": "editor::Hover",
 			"g a": "editor::ToggleCodeActions",
 			"g d": "editor::GoToDefinition",
+			"g D": "editor::GoToDefinitionSplit",
 			"g f": "editor::OpenSelectedFilename",
 			"g i": "editor::GoToImplementation",
 			"g n": "editor::Rename",
 			"g o": "editor::GoToTypeDefinition",
+			"g O": "editor::GoToTypeDefinitionSplit",
 			"g r": "editor::FindAllReferences",
 			"g u": "editor::OpenUrl"
 		}
 	},
 	{
-		"context": "VimControl && vim_mode == visual",
+		"context": "vim_mode == visual",
 		"bindings": {
 			"shift-k": "editor::MoveLineUp",
 			"shift-j": "editor::MoveLineDown"
+		}
+	},
+	{
+		"context": "vim_mode == insert",
+		"bindings": {
+			"ctrl-[": "vim::PreviousWordStart",
+			"ctrl-]": "vim::NextWordStart"
 		}
 	}
 ]
