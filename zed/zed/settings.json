@@ -40,12 +40,23 @@
 	"always_treat_brackets_as_autoclosed": true,
 
 	// theme, fonts & sizes
-	"theme": "Catppuccin Macchiato (maroon, italic comments only, dark terminal)",
+	"theme": "One Dark",
 	"buffer_font_family": "JetBrains Mono NL",
 	"buffer_font_size": 15.5,
 	"ui_font_family": "JetBrains Mono NL",
 	"ui_font_size": 16.5,
 	"icon_theme": "Material Icon Theme",
+	"experimental.theme_overrides": {
+		"syntax": {
+			"comment": {
+				"font_style": "italic"
+			},
+			"comment.doc": {
+				"font_style": "italic"
+			}
+		},
+		"terminal.background": "#181b20ff" // make terminal background a bit darker
+	},
 
 	// tabs & indentation
 	"hard_tabs": true,
