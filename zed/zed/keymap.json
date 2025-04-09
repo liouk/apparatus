@@ -130,7 +130,7 @@
 			", e": "editor::SelectEnclosingSymbol",
 			"ctrl-a o": "editor::OpenPermalinkToLine",
 			"ctrl-a c": "editor::CopyPermalinkToLine",
-			"ctrl-a p": "workspace::CopyPath",
+			"ctrl-a y": "workspace::CopyPath",
 			", r": "git::Restore",
 			", t": "editor::Format",
 			// lsp & code
