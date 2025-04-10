@@ -20,7 +20,7 @@
 		}
 	},
 	{
-		"context": "vim_mode != insert",
+		"context": "vim_mode == normal",
 		"bindings": {
 			", d": "project_panel::ToggleFocus",
 			", g": "git_panel::ToggleFocus",
@@ -114,7 +114,7 @@
 	// Custom vim keybindings
 	// ======================
 	{
-		"context": "VimControl && !menu",
+		"context": "vim_mode == normal && !menu",
 		"bindings": {
 			// splits & buffers
 			"ctrl-k": "pane::ActivatePreviousItem",
