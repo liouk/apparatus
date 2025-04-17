@@ -22,10 +22,11 @@
 	{
 		"context": "vim_mode == normal",
 		"bindings": {
+			", a": "workspace::ClearAllNotifications",
+			", c": "workspace::CloseAllDocks",
 			", d": "project_panel::ToggleFocus",
-			", g": "git_panel::ToggleFocus",
 			", f": "workspace::NewSearch",
-			", a": "workspace::CloseAllDocks"
+			", g": "git_panel::ToggleFocus"
 		}
 	},
 	{
