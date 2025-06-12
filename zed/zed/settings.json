@@ -85,6 +85,10 @@
 		"border_size": 0.5
 	},
 	"show_call_status_icon": false,
+	"title_bar": {
+		"show_sign_in": false,
+		"show_user_picture": false
+	},
 	"tab_bar": {
 		"show": true,
 		"show_nav_history_buttons": false
@@ -105,11 +109,7 @@
 	"outline_panel": {
 		"button": false
 	},
-	"assistant": {
-		"default_model": {
-			"provider": "anthropic",
-			"model": "claude-3-5-sonnet-20240620"
-		},
+	"agent": {
 		"version": "2",
 		"button": false
 	},
@@ -117,6 +117,9 @@
 		"button": "never"
 	},
 	"notification_panel": {
+		"button": false
+	},
+	"search": {
 		"button": false
 	},
 
