@@ -159,7 +159,8 @@
 		"context": "vim_mode == insert",
 		"bindings": {
 			"ctrl-[": "vim::PreviousWordStart",
-			"ctrl-]": "vim::NextWordStart"
+			"ctrl-]": "vim::NextWordStart",
+			"ctrl-v": "vim::Paste"
 		}
 	}
 ]

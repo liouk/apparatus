@@ -126,7 +126,7 @@
 			"settings": {
 				"yaml": {
 					"format": {
-						"enable": true
+						"enable": false
 					}
 				}
 			}
