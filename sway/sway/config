@@ -262,11 +262,7 @@ for_window {
 
 bindsym --to-code {
   $mod+minus exec swaymsg [app_id="scratch_term"] scratchpad show || exec $scratch_term, $scratch_pos
-
-  # spotify hack
-  # the title changes when a song plays; the app_id is empty, so match it
-  # for the fix see https://community.spotify.com/t5/Desktop-Linux/No-window-icon-in-Wayland-because-app-id-is-not-correctly-set/td-p/5626427
-  $mod+equal exec swaymsg [app_id="^$"] scratchpad show || exec $scratch_spotify, $scratch_pos
+  $mod+equal exec swaymsg [app_id="spotify"] scratchpad show || exec $scratch_spotify, $scratch_pos
 }
 
 #
