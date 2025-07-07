@@ -123,16 +123,20 @@
 		"button": false
 	},
 
-	// LSP
-	"lsp": {
-		"yaml-language-server": {
-			"settings": {
-				"yaml": {
-					"format": {
-						"enable": false
-					}
+	// Languages
+	"languages": {
+		"YAML": {
+			"formatter": {
+				"external": {
+					"command": "yamlfmt", // https://github.com/google/yamlfmt
+					"arguments": [
+						"-formatter",
+						"indent=2,indentless_arrays=true,retain_line_breaks=true",
+						"-"
+					]
 				}
-			}
+			},
+			"format_on_save": "on"
 		}
 	}
 }
