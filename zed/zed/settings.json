@@ -55,7 +55,7 @@
 				"font_style": "italic"
 			}
 		},
-		"terminal.background": "#181b20ff" // make terminal background a bit darker
+		"terminal.background": "#242529ff" // make terminal background a bit darker
 	},
 
 	// tabs & indentation
@@ -139,6 +139,12 @@
 				}
 			},
 			"format_on_save": "on"
+		},
+		"Markdown": {
+			"show_completions_on_input": false
+		},
+		"Plain Text": {
+			"show_completions_on_input": false
 		}
 	}
 }

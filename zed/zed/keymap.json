@@ -36,10 +36,7 @@
 			"ctrl-a l": "project_symbols::Toggle",
 			"ctrl-a m": "terminal_panel::ToggleFocus",
 			"ctrl-a p": ["projects::OpenRecent", { "create_new_window": false }],
-			"ctrl-a t": [
-				"workspace::SendKeystrokes",
-				"ctrl-e ctrl ctrl new center terminal enter"
-			],
+			"ctrl-a t": "tab_switcher::ToggleAll",
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
 			"ctrl-f": "workspace::ToggleZoom",
