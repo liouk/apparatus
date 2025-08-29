@@ -9,6 +9,7 @@
 	{
 		"bindings": {
 			"ctrl-h": "workspace::ActivateNextPane",
+			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl-[": "workspace::ToggleLeftDock",
 			"ctrl-]": "workspace::ToggleRightDock",
@@ -42,12 +43,6 @@
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
 			"ctrl-f": "workspace::ToggleZoom",
 			"ctrl-m": "workspace::ToggleBottomDock"
-		}
-	},
-	{
-		"context": "EmptyPane || KeyContextView",
-		"bindings": {
-			"ctrl-w": "pane::CloseActiveItem"
 		}
 	},
 	{
@@ -104,7 +99,6 @@
 	{
 		"context": "MarkdownPreview",
 		"bindings": {
-			"ctrl-w": "pane::CloseActiveItem",
 			":": "command_palette::Toggle"
 		}
 	},
@@ -118,7 +112,6 @@
 			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-j": "pane::ActivateNextItem",
 			"ctrl-e": "pane::SplitRight",
-			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
 			"ctrl-shift-e": "pane::JoinIntoNext",
 			"ctrl-shift-w": "pane::JoinAll",
