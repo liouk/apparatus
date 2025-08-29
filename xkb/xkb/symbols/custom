@@ -11,3 +11,13 @@ xkb_symbols "caps_lctrl_hjkl" {
     replace key <CAPS> { [ Control_L, Control_L ] };
     modifier_map  Control { <CAPS> };
 };
+
+xkb_symbols "rwin_umlauts" {
+    // Make Right Super act as Level3 shift (if not already)
+    replace key <RWIN> { [ ISO_Level3_Shift ] };
+
+    // Third-level (with Super_R held) produces umlauts
+    key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
+    key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
+    key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
+};

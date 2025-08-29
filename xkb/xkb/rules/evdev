@@ -1,3 +1,4 @@
 ! option = symbols
   custom:caps_lctrl_hjkl = +custom(caps_lctrl_hjkl)
+  custom:rwin_umlauts    = +custom(rwin_umlauts)
 ! include %S/evdev
