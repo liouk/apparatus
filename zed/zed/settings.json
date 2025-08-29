@@ -110,7 +110,6 @@
 		"button": false
 	},
 	"agent": {
-		"version": "2",
 		"button": false
 	},
 	"chat_panel": {
@@ -126,6 +125,7 @@
 	// Languages
 	"languages": {
 		"YAML": {
+			"hard_tabs": false,
 			"formatter": {
 				"external": {
 					"command": "yamlfmt", // https://github.com/google/yamlfmt
