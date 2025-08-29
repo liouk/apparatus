@@ -97,8 +97,7 @@
 		"show": "never"
 	},
 	"features": {
-		"edit_prediction_provider": "none",
-		"copilot": true
+		"edit_prediction_provider": "none"
 	},
 	"toolbar": {
 		"quick_actions": false
@@ -120,6 +119,9 @@
 	},
 	"search": {
 		"button": false
+	},
+	"status_bar": {
+		"active_language_button": false
 	},
 
 	// Languages
