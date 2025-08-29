@@ -276,8 +276,6 @@ workspace 2
 exec firefox
 workspace 3
 exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
-workspace 4
-exec /usr/bin/obsidian %U --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 9
 exec /usr/bin/viber
 workspace 3
