@@ -8,6 +8,7 @@
 	// ==================
 	{
 		"bindings": {
+			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl-[": "workspace::ToggleLeftDock",
 			"ctrl-]": "workspace::ToggleRightDock",
@@ -24,7 +25,7 @@
 		"bindings": {
 			", a": "workspace::ClearAllNotifications",
 			", c": "workspace::CloseAllDocks",
-			", d": "project_panel::ToggleFocus",
+			", d": "workspace::ToggleLeftDock",
 			", f": "workspace::NewSearch",
 			", g": "git_panel::ToggleFocus"
 		}
@@ -103,7 +104,6 @@
 	{
 		"context": "MarkdownPreview",
 		"bindings": {
-			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-w": "pane::CloseActiveItem",
 			":": "command_palette::Toggle"
 		}
@@ -118,7 +118,6 @@
 			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-j": "pane::ActivateNextItem",
 			"ctrl-e": "pane::SplitRight",
-			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
 			"ctrl-shift-e": "pane::JoinIntoNext",
