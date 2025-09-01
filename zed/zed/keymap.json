@@ -91,6 +91,7 @@
 			"ctrl-n": "workspace::NewTerminal",
 			"ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+			"ctrl-w": ["terminal::SendKeystroke", "ctrl-w"],
 			"ctrl-a m": "terminal_panel::ToggleFocus",
 			"ctrl-[": ["terminal::SendKeystroke", "ctrl-["],
 			"ctrl-]": ["terminal::SendKeystroke", "ctrl-]"]
