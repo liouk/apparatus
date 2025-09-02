@@ -74,6 +74,7 @@ button:hover {
 #custom-media,
 #custom-powerbutton,
 #custom-vpn,
+#custom-tailscale,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -135,7 +136,14 @@ label:focus {
 
 #custom-vpn.connected {
 	opacity: 1;
-	color: @redhatRed;
+}
+
+#custom-tailscale.disconnected {
+	opacity: 0.4;
+}
+
+#custom-tailscale.connected {
+	opacity: 1;
 }
 
 #custom-powerbutton {

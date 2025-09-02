@@ -1,5 +1,29 @@
 #!/usr/bin/env bash
 
+tailscale_status() {
+  local status_output
+  status_output=$(tailscale status --json 2>/dev/null)
+
+  if [[ $? -ne 0 ]] || [[ $(echo "$status_output" | jq -r '.BackendState') != "Running" ]]; then
+    echo "{\"class\": \"disconnected\", \"tooltip\": \"tailscale down\"}"
+    return
+  fi
+
+  local exit_node
+  exit_node=$(echo "$status_output" | jq -r '.ExitNodeStatus.Online // false')
+
+  if [[ "$exit_node" == "true" ]]; then
+    local exit_node_id
+    exit_node_id=$(echo "$status_output" | jq -r '.ExitNodeStatus.ID')
+    local country_code hostname
+    country_code=$(echo "$status_output" | jq -r --arg id "$exit_node_id" '.Peer[] | select(.ID == $id) | .Location.CountryCode // (.Location.Country // "unknown")')
+    hostname=$(echo "$status_output" | jq -r --arg id "$exit_node_id" '.Peer[] | select(.ID == $id) | .HostName // "unknown"')
+    echo "{\"class\": \"connected\", \"text\": \"$country_code\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
+  else
+    echo "{\"class\": \"connected\", \"tooltip\": \"tailscale up\"}"
+  fi
+}
+
 vpn_status () {
   nmcli connection show --active | grep --quiet "$VPN_CONN_UUID"
 }
@@ -30,12 +54,12 @@ main () {
 
   cmd="$1"
   case "$1" in
-    status|statusjson|up|down|toggle) ;;
+    status|statusjson|up|down|toggle) vpn_"$cmd" ;;
+    tailscale_status) tailscale_status ;;
     "") cmd="status" ;;
     *) echo "unknown command: '$1'" && exit 1 ;;
   esac
 
-  vpn_"$cmd"
 }
 
 main "$@"
