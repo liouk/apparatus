@@ -89,3 +89,7 @@
 [include]
   # defines where to find GPG signature key configuration
   path = .config/git/gpgsign-config
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
