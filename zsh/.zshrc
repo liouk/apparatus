@@ -77,6 +77,9 @@ if type "navi" > /dev/null; then
   eval "$(navi widget zsh)"
 fi
 
+# npm
+export PATH=$HOME/.npm-global/bin:$PATH
+
 # plugins
 
 # zsh syntax highlighting and autosuggestions
