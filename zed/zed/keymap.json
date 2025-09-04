@@ -14,6 +14,7 @@
 			"ctrl-[": "workspace::ToggleLeftDock",
 			"ctrl-]": "workspace::ToggleRightDock",
 			"ctrl ctrl": "command_palette::Toggle",
+			"ctrl-a a": "agent::ToggleFocus",
 			"ctrl-a i": "assistant::InlineAssist",
 			"ctrl-a e": [
 				"task::Spawn",
