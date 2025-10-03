@@ -111,9 +111,6 @@
 	"agent": {
 		"button": false
 	},
-	"chat_panel": {
-		"button": "never"
-	},
 	"notification_panel": {
 		"button": false
 	},

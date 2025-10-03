@@ -112,7 +112,8 @@
 			// splits & buffers
 			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-j": "pane::ActivateNextItem",
-			"ctrl-e": "pane::SplitRight",
+			"ctrl-e": "pane::SplitAndMoveRight",
+			"ctrl-a e": "pane::JoinIntoNext",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
 			"ctrl-shift-e": "pane::JoinIntoNext",
 			"ctrl-shift-w": "pane::JoinAll",
