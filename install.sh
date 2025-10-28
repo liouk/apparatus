@@ -129,8 +129,6 @@ function install_arch {
     stow \
     fzf \
     ripgrep \
-    direnv \
-    bat \
     jq \
     zsh \
     zsh-syntax-highlighting \
@@ -140,9 +138,7 @@ function install_arch {
     kitty \
     unzip \
     ttf-jetbrains-mono \
-    ttf-ibm-plex \
-    sway \
-    fd
+    sway
 
   sudo pacman -Sy --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
