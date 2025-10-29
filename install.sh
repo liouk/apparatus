@@ -130,7 +130,6 @@ function install_arch {
     zsh \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
-    zsh-theme-powerlevel10k \
     kitty \
     unzip \
     ttf-jetbrains-mono \
@@ -143,6 +142,7 @@ function install_arch {
   cd ..
   rm -rf yay-bin
   yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
+    zsh-theme-powerlevel10k-git \
     waybar
 
   sudo mkdir -p /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
