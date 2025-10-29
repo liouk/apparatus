@@ -117,7 +117,7 @@ function unstow_fedora_server {
 }
 
 function install_arch {
-  sudo pacman -Syu --noconfirm --needed \
+  sudo pacman -Syyu --noconfirm --needed \
     git \
     tig \
     neovim \
@@ -133,7 +133,8 @@ function install_arch {
     kitty \
     unzip \
     ttf-jetbrains-mono \
-    sway
+    sway \
+    swaylock
 
   sudo pacman -Sy --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
@@ -143,7 +144,8 @@ function install_arch {
   rm -rf yay-bin
   yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
     zsh-theme-powerlevel10k-git \
-    waybar
+    waybar \
+    sway-launcher-desktop
 
   sudo mkdir -p /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
   curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/NerdFontsSymbolsOnly.zip --output NerdFontsSymbolsOnly.zip
