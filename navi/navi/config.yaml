@@ -1,9 +1,0 @@
-finder:
-  command: fzf
-
-shell:
-  command: zsh
-
-cheats:
-  paths:
-    - ~/.apparatus/navi/navi/cheats

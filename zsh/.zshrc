@@ -72,11 +72,6 @@ if type "nvim" > /dev/null; then
   alias vim='FZF_DEFAULT_COMMAND="fd . --type file --exclude vendor" nvim'
 fi
 
-# navi (widget used with ctrl+G)
-if type "navi" > /dev/null; then
-  eval "$(navi widget zsh)"
-fi
-
 # npm
 export PATH=$HOME/.npm-global/bin:$PATH
 

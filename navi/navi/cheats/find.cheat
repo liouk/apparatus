@@ -1,7 +1,0 @@
-% find, shell
-
-# find and delete files
-find . -type f -name "SEARCH-REGEX" -exec rm -rf {} \;
-#
-# find in files and replace
-rg -l '<TEXT>' | xargs -d'\n' sed -i.bak 's/<TEXT>/<NEW>/g'

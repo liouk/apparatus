@@ -23,7 +23,6 @@ function install_macos {
     direnv \
     bat \
     jq \
-    navi \
     romkatv/powerlevel10k/powerlevel10k \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
@@ -52,7 +51,6 @@ function stow_macos {
   stow --restow --target="$HOME/.config" kitty
   stow --restow --target="$HOME/.config" karabiner
   stow --restow --target="$HOME/.config" nvim
-  stow --restow --target="$HOME/Library/Application Support" navi
   popd > /dev/null
 }
 
@@ -68,7 +66,6 @@ function unstow_macos {
   stow --delete --target="$HOME/.config" kitty
   stow --delete --target="$HOME/.config" karabiner
   stow --delete --target="$HOME/.config" nvim
-  stow --delete --target="$HOME/Library/Application Support" navi
   popd > /dev/null
 }
 
@@ -134,7 +131,6 @@ function install_arch {
     zsh-syntax-highlighting \
     zsh-autosuggestions \
     zsh-theme-powerlevel10k \
-    btop \
     kitty \
     unzip \
     ttf-jetbrains-mono \
@@ -147,7 +143,6 @@ function install_arch {
   cd ..
   rm -rf yay-bin
   yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
-    navi \
     waybar
 
   sudo mkdir -p /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
@@ -159,8 +154,6 @@ function install_arch {
 
 function stow_arch {
   local apparatus_dir="$1"
-  local navi_dir=$(navi info config-path)
-  navi_dir=${navi_dir%navi/config.yaml}
   mkdir -p "$HOME/.config"
   pushd . > /dev/null
   cd $apparatus_dir
@@ -177,14 +170,11 @@ function stow_arch {
   stow --restow --target="$HOME/.config" mako
   stow --restow --target="$HOME/.config" xkb
   stow --restow --target="$HOME/.config" zed
-  stow --restow --target="$navi_dir" navi
   popd > /dev/null
 }
 
 function unstow_arch {
   local apparatus_dir="$1"
-  local navi_dir=$(navi info config-path)
-  navi_dir=${navi_dir%config.yaml}
   pushd . > /dev/null
   cd $apparatus_dir
   stow --delete --target="$HOME" zsh
@@ -200,7 +190,6 @@ function unstow_arch {
   stow --delete --target="$HOME/.config" mako
   stow --delete --target="$HOME/.config" xkb
   stow --delete --target="$HOME/.config" zed
-  stow --delete --target="$navi_dir" navi
   popd > /dev/null
 }
 
