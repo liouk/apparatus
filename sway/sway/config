@@ -29,7 +29,7 @@ set $homedisplay DP-3
 set $officedisplay "Samsung Electric Company LF32TU87 HNTT100830"
 
 output * {
-  bg /usr/share/backgrounds/catppuccin-soundwave.png fill
+  bg /usr/share/backgrounds/bg.png fill
 }
 
 output $officedisplay {
