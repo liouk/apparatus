@@ -135,7 +135,8 @@ function install_arch {
     ttf-jetbrains-mono \
     sway \
     swaylock \
-    swaybg
+    swaybg \
+    swayidle
 
   sudo pacman -Sy --noconfirm --needed git base-devel
   git clone https://aur.archlinux.org/yay-bin.git
