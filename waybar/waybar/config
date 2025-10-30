@@ -2,7 +2,7 @@
   "position": "top",
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "disk#root", "disk#home", "network", "custom/vpn", "custom/tailscale", "bluetooth", "sway/language", "clock", "idle_inhibitor", "custom/suspendbutton", "custom/powerbutton", "battery"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "custom/tailscale", "bluetooth", "sway/language", "clock", "idle_inhibitor", "custom/suspendbutton", "custom/powerbutton", "battery"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
