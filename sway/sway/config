@@ -217,8 +217,8 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 
 # brightness
-bindsym XF86MonBrightnessUp exec light -A 10
-bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec sh -c 'if command -v light >/dev/null; then light -A 10; elif command -v brightnessctl >/dev/null; then brightnessctl set +10%; fi'
+bindsym XF86MonBrightnessDown exec sh -c 'if command -v light >/dev/null; then light -U 10; elif command -v brightnessctl >/dev/null; then brightnessctl set 10%-; fi'
 
 # screen lock
 bindsym $mod+End exec swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f
