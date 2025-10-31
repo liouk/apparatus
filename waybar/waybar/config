@@ -60,11 +60,10 @@
     "format-icons": [" ", " ", " ", " ", " "]
   },
   "network": {
-    "format-wifi": " ",
+    "format-wifi": "",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}",
-    "format-ethernet": " {ipaddr}/{cidr}",
+    "format-ethernet": "",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
-    "format-linked": "{ifname} (No IP)",
     "format-disconnected": "⚠ disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },

@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+help() {
+	cat <<-EOF
+	Usage: vpn.sh [COMMAND] [ARGS]
+
+	VPN Commands (Red Hat OpenVPN):
+	   up              Start Red Hat VPN
+	   down            Stop Red Hat VPN
+	   status          Show Red Hat VPN status
+
+	Tailscale Commands:
+	   tailscale|tail  Manage Tailscale VPN
+	      up [ARGS]       Start Tailscale (passes ARGS to 'tailscale up')
+	      down            Stop Tailscale
+	      status          Show Tailscale status
+
+	Other:
+	   help            Show this message
+	   (no args)       Output waybar status JSON
+	EOF
+}
+
 waybar_notify() {
 	pkill -RTMIN+1 waybar
 }
@@ -39,16 +60,25 @@ tailscale_status() {
 }
 
 vpn_up() {
+	sudo openvpn --daemon --config "${HOME}/liouk/redhat-config/redhat.ovpn"
+	while ! ip addr show tun0 > /dev/null 2>&1; do
+    sleep 0.5
+  done
 	waybar_notify
 }
 
 vpn_down() {
+	sudo pkill -9 openvpn
+	while ip addr show tun0 > /dev/null 2>&1; do
+    sleep 0.5
+  done
 	waybar_notify
 }
 
 vpn_status() {
-	#echo "{\"text\": \"󱄛\", \"class\": \"connected\", \"tooltip\": \"redhat vpn up\"}"
-	return
+	if ip addr show tun0 > /dev/null 2>&1; then
+		echo "{\"text\": \"󱄛\", \"class\": \"connected\", \"tooltip\": \"redhat vpn up\"}"
+	fi
 }
 
 main() {
@@ -57,6 +87,7 @@ main() {
 	case "$cmd" in
 		up|down|status) { vpn_"$cmd" "$@"; return; } ;;
 		tailscale|tail) { tailscale_cmd "$@"; return; } ;;
+		help|-h|--help) { help; return; } ;;
 		"") ;;
 		*) echo "unknown command: '$cmd'" && exit 1 ;;
 	esac
