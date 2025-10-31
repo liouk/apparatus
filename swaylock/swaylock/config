@@ -3,7 +3,7 @@ disable-caps-lock-text
 show-keyboard-layout
 
 font=JetBrains Mono SemiBold
-image=/usr/share/backgrounds/catppuccin-soundwave.png
+image=/usr/share/backgrounds/bg.png
 
 bs-hl-color=#f2cdcd
 key-hl-color=#94e2d5
