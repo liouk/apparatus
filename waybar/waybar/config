@@ -2,7 +2,7 @@
   "position": "top",
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "custom/tailscale", "bluetooth", "sway/language", "clock", "idle_inhibitor", "custom/suspendbutton", "custom/powerbutton", "battery"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "idle_inhibitor", "custom/suspendbutton", "custom/powerbutton", "battery"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -98,12 +98,10 @@
     "interval": 1
   },
   "custom/vpn": {
-    "format": "󱄛",
     "tooltip": true,
-    "interval": "once",
     "return-type": "json",
-    "exec": "$HOME/.config/waybar/vpn.sh statusjson",
-    "on-click": "$HOME/.config/waybar/vpn.sh down",
+    "exec": "$HOME/.config/waybar/vpn.sh",
+    "interval": "once",
     "signal": 1
   },
   "custom/suspendbutton": {
@@ -115,13 +113,5 @@
     "format": "⏻",
     "on-click": "shutdown now",
     "tooltip": false
-  },
-  "custom/tailscale": {
-    "format": "󱗼 {text}",
-    "tooltip": true,
-    "interval": 60,
-    "return-type": "json",
-    "exec": "$HOME/.apparatus/waybar/waybar/vpn.sh tailscale_status",
-    "on-click": "xdg-open https://login.tailscale.com/admin/machines"
   }
 }
