@@ -26,16 +26,16 @@ set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/swa
 #
 set $laptop eDP-1
 set $homedisplay DP-3
-set $officedisplay "Samsung Electric Company LF32TU87 HNTT100830"
+set $officedisplay1 "Samsung Electric Company LF32TU87 HNTT100830"
+set $officedisplay2 "Samsung Electric Company LF32TU87 HNTT100819"
+set $officedisplays "Samsung Electric Company LF32TU87 HNTT100830" "Samsung Electric Company LF32TU87 HNTT100819"
 
 output * {
   bg /usr/share/backgrounds/bg.png fill
 }
 
-output $officedisplay {
-  mode 2560x1440@59.951Hz
-}
-
+output $officedisplay1 mode 2560x1440@59.951Hz
+output $officedisplay2 mode 2560x1440@59.951Hz
 output $laptop pos 0 0 res 1920x1080
 output $homedisplay pos 1920 -360 res 2560x1440
 
@@ -296,8 +296,8 @@ for_window {
 }
 
 # assign workspaces to outputs
-workspace 1 output $homedisplay $officedisplay
-workspace 2 output $homedisplay $officedisplay
+workspace 1 output $homedisplay $officedisplays
+workspace 2 output $homedisplay $officedisplays
 workspace 3 output $laptop
 workspace 4 output $laptop
 workspace 9 output $laptop
