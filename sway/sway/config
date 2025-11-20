@@ -28,7 +28,8 @@ set $laptop eDP-1
 set $homedisplay DP-3
 set $officedisplay1 "Samsung Electric Company LF32TU87 HNTT100830"
 set $officedisplay2 "Samsung Electric Company LF32TU87 HNTT100819"
-set $officedisplays "Samsung Electric Company LF32TU87 HNTT100830" "Samsung Electric Company LF32TU87 HNTT100819"
+set $officedisplay3 "Samsung Electric Company LF32TU87 HNTT100833"
+set $officedisplays "Samsung Electric Company LF32TU87 HNTT100830" "Samsung Electric Company LF32TU87 HNTT100819" "Samsung Electric Company LF32TU87 HNTT100833"
 
 output * {
   bg /usr/share/backgrounds/bg.png fill
@@ -36,6 +37,7 @@ output * {
 
 output $officedisplay1 mode 2560x1440@59.951Hz
 output $officedisplay2 mode 2560x1440@59.951Hz
+output $officedisplay3 mode 2560x1440@59.951Hz
 output $laptop pos 0 0 res 1920x1080
 output $homedisplay pos 1920 -360 res 2560x1440
 
