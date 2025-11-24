@@ -49,8 +49,9 @@ bindswitch --reload --locked lid:off output $laptop enable
 # Idle configuration
 #
 exec swayidle -w \
-         timeout 600 "swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f" \
-         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 1800 "swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f && swaymsg 'output * power off'" \
+         resume 'swaymsg "output * power on"' \
+         timeout 3600 'systemctl suspend' \
          before-sleep "swaymsg input '*' xkb_switch_layout 0 && rm -f ~/.config/op/.session-token && swaylock -f"
 
 #
