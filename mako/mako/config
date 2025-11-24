@@ -2,6 +2,8 @@ default-timeout=5000
 width=300
 height=100
 font=JetBrains Mono NL 11
+anchor=top-right
+margin=10
 
 # catppuccin mocha
 background-color=#1e1e2e
