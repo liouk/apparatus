@@ -9,6 +9,7 @@
 	{
 		"bindings": {
 			"ctrl-h": "workspace::ActivateNextPane",
+			"ctrl-m": "workspace::ToggleBottomDock",
 			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl-[": "workspace::ToggleLeftDock",
@@ -42,8 +43,7 @@
 			"ctrl-a t": "tab_switcher::ToggleAll",
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
-			"ctrl-f": "workspace::ToggleZoom",
-			"ctrl-m": "workspace::ToggleBottomDock"
+			"ctrl-f": "workspace::ToggleZoom"
 		}
 	},
 	{
@@ -51,7 +51,6 @@
 		"bindings": {
 			"ctrl-a g": "outline::Toggle",
 			"ctrl-a ctrl-a": "editor::SelectAll",
-			"ctrl-m": "workspace::ToggleBottomDock",
 			"ctrl-alt-e": "editor::SelectEnclosingSymbol",
 			"ctrl-l": "editor::ScrollCursorTop"
 		}
