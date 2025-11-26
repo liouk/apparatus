@@ -277,17 +277,25 @@ bindsym --to-code {
 # Applications
 #
 
+assign [app_id="dev.zed.Zed" title="^redhat"] workspace 1
+assign [app_id="dev.zed.Zed" title="^notes"] workspace 4
+assign [app_id="dev.zed.Zed" title="^\.apparatus"] workspace 5
+assign [app_id="Slack"] workspace 3
+assign [app_id="com.viber.Viber"] workspace 9
+
+for_window [app_id="firefox" title="^WhatsApp"] move container to workspace 9
+
 # startup
-workspace 1
-exec $term
 workspace 2
 exec firefox
-workspace 3
+
+workspace 1
+exec swaymsg layout tabbed
+exec $term
+exec zeditor
+
 exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
-workspace 9
 exec /usr/bin/viber
-workspace 3
-workspace 2
 
 # enable floating for popups and dialogs
 for_window {
