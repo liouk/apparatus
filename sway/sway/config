@@ -21,6 +21,10 @@ font JetBrains Mono SemiBold 10
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
 set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
 
+# zed-picker
+for_window [app_id="^zed-picker$"] floating enable, sticky enable, resize set 40 ppt 30 ppt
+set $zedpicker $term --class=zed-picker -e env TERMINAL_COMMAND='$term -e' /usr/local/bin/zed-picker
+
 #
 # Outputs
 #
@@ -29,7 +33,8 @@ set $homedisplay DP-3
 set $officedisplay1 "Samsung Electric Company LF32TU87 HNTT100830"
 set $officedisplay2 "Samsung Electric Company LF32TU87 HNTT100819"
 set $officedisplay3 "Samsung Electric Company LF32TU87 HNTT100833"
-set $officedisplays "Samsung Electric Company LF32TU87 HNTT100830" "Samsung Electric Company LF32TU87 HNTT100819" "Samsung Electric Company LF32TU87 HNTT100833"
+set $officedisplay4 "Samsung Electric Company LF32TU87 HNTT100825"
+set $officedisplays "Samsung Electric Company LF32TU87 HNTT100830" "Samsung Electric Company LF32TU87 HNTT100819" "Samsung Electric Company LF32TU87 HNTT100833" "Samsung Electric Company LF32TU87 HNTT100825"
 
 output * {
   bg /usr/share/backgrounds/bg.png fill
@@ -38,6 +43,7 @@ output * {
 output $officedisplay1 mode 2560x1440@59.951Hz
 output $officedisplay2 mode 2560x1440@59.951Hz
 output $officedisplay3 mode 2560x1440@59.951Hz
+output $officedisplay4 mode 2560x1440@59.951Hz
 output $laptop pos 0 0 res 1920x1080
 output $homedisplay pos 1920 -360 res 2560x1440
 
@@ -103,6 +109,9 @@ bindsym $mod+Shift+q kill
 
 # start launcher
 bindsym $mod+space exec $menu
+
+# zed-picker
+bindsym $mod+p exec $zedpicker
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
