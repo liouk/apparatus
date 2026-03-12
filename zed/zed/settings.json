@@ -2,11 +2,18 @@
 // Features: https://zed.dev/features
 {
 	// general
+	"edit_predictions": {
+		"provider": "none",
+	},
 	"restore_on_startup": "last_session",
 	"auto_update": false,
 	"telemetry": {
 		"diagnostics": false,
-		"metrics": false
+		"metrics": false,
+	},
+	"session": {
+		"restore_unsaved_buffers": true,
+		"trust_all_worktrees": true,
 	},
 
 	// editor
@@ -16,21 +23,21 @@
 	"vertical_scroll_margin": 4,
 	"tabs": {
 		"git_status": true,
-		"file_icons": true
+		"file_icons": true,
 	},
 
 	// git
 	"git": {
 		"inline_blame": {
-			"enabled": false
-		}
+			"enabled": false,
+		},
 	},
 
 	// vim
 	"vim_mode": true,
 	"vim": {
 		"use_smartcase_find": true,
-		"use_system_clipboard": "on_yank"
+		"use_system_clipboard": "on_yank",
 	},
 
 	// formatting
@@ -45,17 +52,17 @@
 	"buffer_font_size": 15.5,
 	"ui_font_family": "JetBrains Mono NL",
 	"ui_font_size": 16.5,
-	"icon_theme": "Material Icon Theme",
+	"icon_theme": "Zed (Default)",
 	"experimental.theme_overrides": {
 		"syntax": {
 			"comment": {
-				"font_style": "italic"
+				"font_style": "italic",
 			},
 			"comment.doc": {
-				"font_style": "italic"
-			}
+				"font_style": "italic",
+			},
 		},
-		"terminal.background": "#242529ff" // make terminal background a bit darker
+		"terminal.background": "#242529ff", // make terminal background a bit darker
 	},
 
 	// tabs & indentation
@@ -63,7 +70,7 @@
 	"tab_size": 2,
 	"auto_indent_on_paste": true,
 	"indent_guides": {
-		"enabled": false
+		"enabled": false,
 	},
 
 	// terminal
@@ -71,54 +78,52 @@
 		"copy_on_select": true,
 		"button": false,
 		"blinking": "off",
-		"cursor_shape": "block"
+		"cursor_shape": "block",
 	},
 
 	// project panel
 	"project_panel": {
-		"default_width": 360,
-		"button": true
+		"hide_hidden": false,
+  "default_width": 360,
+		"button": true,
 	},
 
 	// ui
 	"active_pane_modifiers": {
-		"border_size": 0.5
+		"border_size": 0.5,
 	},
 	"show_call_status_icon": false,
 	"title_bar": {
 		"show_sign_in": false,
-		"show_user_picture": false
+		"show_user_picture": false,
 	},
 	"tab_bar": {
 		"show": true,
-		"show_nav_history_buttons": false
+		"show_nav_history_buttons": false,
 	},
 	"scrollbar": {
-		"show": "never"
-	},
-	"features": {
-		"edit_prediction_provider": "none"
+		"show": "never",
 	},
 	"toolbar": {
-		"quick_actions": false
+		"quick_actions": false,
 	},
 	"collaboration_panel": {
-		"button": false
+		"button": false,
 	},
 	"outline_panel": {
-		"button": false
+		"button": false,
 	},
 	"agent": {
-		"button": false
+		"button": false,
 	},
 	"notification_panel": {
-		"button": false
+		"button": false,
 	},
 	"search": {
-		"button": false
+		"button": false,
 	},
 	"status_bar": {
-		"active_language_button": false
+		"active_language_button": false,
 	},
 
 	// Languages
@@ -131,17 +136,17 @@
 					"arguments": [
 						"-formatter",
 						"indent=2,indentless_arrays=true,retain_line_breaks=true",
-						"-"
-					]
-				}
+						"-",
+					],
+				},
 			},
-			"format_on_save": "on"
+			"format_on_save": "on",
 		},
 		"Markdown": {
-			"show_completions_on_input": false
+			"show_completions_on_input": false,
 		},
 		"Plain Text": {
-			"show_completions_on_input": false
-		}
-	}
+			"show_completions_on_input": false,
+		},
+	},
 }
