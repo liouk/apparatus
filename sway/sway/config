@@ -25,6 +25,10 @@ set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/swa
 for_window [app_id="^zed-picker$"] floating enable, sticky enable, resize set 40 ppt 30 ppt
 set $zedpicker $term --class=zed-picker -e env TERMINAL_COMMAND='$term -e' /usr/local/bin/zed-picker
 
+# goot
+for_window [app_id="^goot$"] floating enable, sticky enable, resize set 60 ppt 80 ppt
+set $goot $term --class=goot -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/bin/goot
+
 #
 # Outputs
 #
@@ -112,6 +116,9 @@ bindsym $mod+space exec $menu
 
 # zed-picker
 bindsym $mod+p exec $zedpicker
+
+# goot
+bindsym $mod+t exec $goot
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
