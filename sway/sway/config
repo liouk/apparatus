@@ -291,9 +291,6 @@ bindsym --to-code {
 # Applications
 #
 
-assign [app_id="dev.zed.Zed" title="^redhat"] workspace 1
-assign [app_id="dev.zed.Zed" title="^notes"] workspace 4
-assign [app_id="dev.zed.Zed" title="^\.apparatus"] workspace 5
 assign [app_id="Slack"] workspace 3
 assign [app_id="com.viber.Viber"] workspace 9
 
