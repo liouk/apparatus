@@ -19,9 +19,9 @@
 			"ctrl-a i": "assistant::InlineAssist",
 			"ctrl-a e": [
 				"task::Spawn",
-				{ "task_name": "open all git-modified files" }
-			]
-		}
+				{ "task_name": "open all git-modified files" },
+			],
+		},
 	},
 	{
 		"context": "vim_mode == normal",
@@ -30,8 +30,8 @@
 			", c": "workspace::CloseAllDocks",
 			", d": "workspace::ToggleLeftDock",
 			", f": "workspace::NewSearch",
-			", g": "git_panel::ToggleFocus"
-		}
+			", g": "git_panel::ToggleFocus",
+		},
 	},
 	{
 		"context": "Workspace",
@@ -43,8 +43,8 @@
 			"ctrl-a t": "tab_switcher::ToggleAll",
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
-			"ctrl-f": "workspace::ToggleZoom"
-		}
+			"ctrl-f": "workspace::ToggleZoom",
+		},
 	},
 	{
 		"context": "Editor && mode == full",
@@ -52,21 +52,21 @@
 			"ctrl-a g": "outline::Toggle",
 			"ctrl-a ctrl-a": "editor::SelectAll",
 			"ctrl-alt-e": "editor::SelectEnclosingSymbol",
-			"ctrl-l": "editor::ScrollCursorTop"
-		}
+			"ctrl-l": "editor::ScrollCursorTop",
+		},
 	},
 	{
 		"context": "GitPanel",
 		"bindings": {
 			"escape": "git_panel::Close",
-			", g": "git_panel::Close"
-		}
+			", g": "git_panel::Close",
+		},
 	},
 	{
 		"context": "ProjectPanel",
 		"bindings": {
-			"escape": "workspace::ToggleLeftDock"
-		}
+			"escape": "workspace::ToggleLeftDock",
+		},
 	},
 	{
 		"context": "ProjectPanel && not_editing",
@@ -77,8 +77,8 @@
 			"r": "project_panel::Rename",
 			"d": "project_panel::Delete",
 			"f": "project_panel::NewDirectory",
-			"shift-e": "project_panel::ExpandSelectedEntry"
-		}
+			"shift-e": "project_panel::ExpandSelectedEntry",
+		},
 	},
 	{
 		"context": "Terminal",
@@ -93,14 +93,14 @@
 			"ctrl-w": ["terminal::SendKeystroke", "ctrl-w"],
 			"ctrl-a m": "terminal_panel::ToggleFocus",
 			"ctrl-[": ["terminal::SendKeystroke", "ctrl-["],
-			"ctrl-]": ["terminal::SendKeystroke", "ctrl-]"]
-		}
+			"ctrl-]": ["terminal::SendKeystroke", "ctrl-]"],
+		},
 	},
 	{
 		"context": "MarkdownPreview",
 		"bindings": {
-			":": "command_palette::Toggle"
-		}
+			":": "command_palette::Toggle",
+		},
 	},
 	// ======================
 	// Custom vim keybindings
@@ -136,22 +136,22 @@
 			"g o": "editor::GoToTypeDefinition",
 			"g O": "editor::GoToTypeDefinitionSplit",
 			"g r": "editor::FindAllReferences",
-			"g u": "editor::OpenUrl"
-		}
+			"g u": "editor::OpenUrl",
+		},
 	},
 	{
 		"context": "vim_mode == visual",
 		"bindings": {
 			"shift-k": "editor::MoveLineUp",
-			"shift-j": "editor::MoveLineDown"
-		}
+			"shift-j": "editor::MoveLineDown",
+		},
 	},
 	{
 		"context": "vim_mode == insert",
 		"bindings": {
 			"ctrl-[": "vim::PreviousWordStart",
 			"ctrl-]": "vim::NextWordStart",
-			"ctrl-v": "vim::Paste"
-		}
-	}
+			"ctrl-v": "vim::Paste",
+		},
+	},
 ]
