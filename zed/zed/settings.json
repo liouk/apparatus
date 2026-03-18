@@ -84,7 +84,7 @@
 	// project panel
 	"project_panel": {
 		"hide_hidden": false,
-  "default_width": 360,
+		"default_width": 360,
 		"button": true,
 	},
 
@@ -114,6 +114,11 @@
 		"button": false,
 	},
 	"agent": {
+		"default_model": {
+			"provider": "google",
+			"model": "gemini-2.5-flash",
+			"enable_thinking": false,
+		},
 		"button": false,
 	},
 	"notification_panel": {
