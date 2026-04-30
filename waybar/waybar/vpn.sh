@@ -29,7 +29,7 @@ tailscale_cmd() {
 	cmd="$1"
 	shift
 	case "$cmd" in
-		up) tailscale up "$@" && waybar_notify ;;
+		up) tailscale up --reset --accept-dns=false "$@" && waybar_notify ;;
 		down) tailscale down && waybar_notify ;;
 		status) tailscale status ;;
 		*) echo "unknown command: '$cmd'" && exit 1 ;;
