@@ -41,25 +41,29 @@ tailscale_cmd() {
 
 tailscale_status() {
   local status_output
-  status_output=$(tailscale status --json 2>/dev/null)
+  status_output=$(tailscale status --json 2>/dev/null) || return
 
-  if [[ $? -ne 0 ]] || [[ $(echo "$status_output" | jq -r '.BackendState') != "Running" ]]; then
-    return
-  fi
+  local parsed
+  parsed=$(echo "$status_output" | jq -r '
+    if .BackendState != "Running" then "off"
+    elif (.ExitNodeStatus.Online // false) then
+      (.ExitNodeStatus.ID) as $id |
+      .Peer[] | select(.ID == $id) |
+      "exit\t\(.HostName // "unknown")\t\(.Location.CountryCode // .Location.Country // "unknown")"
+    else "on"
+    end
+  ')
 
-  local exit_node
-  exit_node=$(echo "$status_output" | jq -r '.ExitNodeStatus.Online // false')
-
-  if [[ "$exit_node" == "true" ]]; then
-    local exit_node_id
-    exit_node_id=$(echo "$status_output" | jq -r '.ExitNodeStatus.ID')
-    local country_code hostname
-    country_code=$(echo "$status_output" | jq -r --arg id "$exit_node_id" '.Peer[] | select(.ID == $id) | .Location.CountryCode // (.Location.Country // "unknown")')
-    hostname=$(echo "$status_output" | jq -r --arg id "$exit_node_id" '.Peer[] | select(.ID == $id) | .HostName // "unknown"')
-    echo "{\"text\": \"󱗼$country_code\", \"class\": \"connected\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
-  else
-    echo "{\"text\": \"󱗼\", \"class\": \"connected\", \"tooltip\": \"tailscale up\"}"
-  fi
+  case "$parsed" in
+    off) return ;;
+    on) echo "{\"text\": \"󱗼\", \"class\": \"connected\", \"tooltip\": \"tailscale up\"}" ;;
+    exit*)
+      local hostname country_code
+      hostname=$(echo "$parsed" | cut -f2)
+      country_code=$(echo "$parsed" | cut -f3)
+      echo "{\"text\": \"󱗼$country_code\", \"class\": \"connected\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
+      ;;
+  esac
 }
 
 vpn_up() {
