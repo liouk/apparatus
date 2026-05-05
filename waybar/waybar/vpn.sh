@@ -34,17 +34,24 @@ tailscale_cmd() {
 	case "$cmd" in
 		up) tailscale up --reset --accept-dns=false "$@" && waybar_notify ;;
 		down) tailscale down && waybar_notify ;;
-		status) tailscale status ;;
+		status)
+			local parsed
+			parsed=$(tailscale_parsed)
+			case "${parsed:-off}" in
+				off) echo "disconnected" ;;
+				on) echo "connected" ;;
+				exit*) echo "connected (exit node: $(echo "$parsed" | cut -f2), $(echo "$parsed" | cut -f3))" ;;
+			esac
+			;;
 		*) echo "unknown command: '$cmd'" && exit 1 ;;
 	esac
 }
 
-tailscale_status() {
+tailscale_parsed() {
 	local status_output
 	status_output=$(tailscale status --json 2>/dev/null) || return
 
-	local parsed
-	parsed=$(echo "$status_output" | jq -r '
+	echo "$status_output" | jq -r '
 		if .BackendState != "Running" then "off"
 		elif (.ExitNodeStatus.Online // false) then
 			(.ExitNodeStatus.ID) as $id |
@@ -52,18 +59,7 @@ tailscale_status() {
 			"exit\t\(.HostName // "unknown")\t\(.Location.CountryCode // .Location.Country // "unknown")"
 		else "on"
 		end
-	')
-
-	case "$parsed" in
-		off) return ;;
-		on) echo "{\"text\": \"󱗼\", \"class\": \"connected\", \"tooltip\": \"tailscale up\"}" ;;
-		exit*)
-			local hostname country_code
-			hostname=$(echo "$parsed" | cut -f2)
-			country_code=$(echo "$parsed" | cut -f3)
-			echo "{\"text\": \"󱗼$country_code\", \"class\": \"connected\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
-			;;
-	esac
+	'
 }
 
 vpn_up() {
@@ -84,28 +80,34 @@ vpn_down() {
 
 vpn_status() {
 	if ip addr show tun0 > /dev/null 2>&1; then
-		echo "{\"text\": \"󱄛\", \"class\": \"connected\", \"tooltip\": \"redhat vpn up\"}"
+		echo "connected"
+	else
+		echo "disconnected"
 	fi
 }
 
 waybar_vpn() {
-	local output
-	output=$(vpn_status)
-	if [[ -n "$output" ]]; then
-		echo "$output"
+	if [[ $(vpn_status) == "connected" ]]; then
+		echo '{"text": "󱄛", "class": "connected", "tooltip": "redhat vpn up"}'
 	else
 		echo '{"text": "󱄛", "class": "disconnected", "tooltip": "redhat vpn down"}'
 	fi
 }
 
 waybar_tailscale() {
-	local output
-	output=$(tailscale_status)
-	if [[ -n "$output" ]]; then
-		echo "$output"
-	else
-		echo '{"text": "󱗼", "class": "disconnected", "tooltip": "tailscale down"}'
-	fi
+	local parsed
+	parsed=$(tailscale_parsed)
+
+	case "${parsed:-off}" in
+		off) echo '{"text": "󱗼", "class": "disconnected", "tooltip": "tailscale down"}' ;;
+		on) echo '{"text": "󱗼", "class": "connected", "tooltip": "tailscale up"}' ;;
+		exit*)
+			local hostname country_code
+			hostname=$(echo "$parsed" | cut -f2)
+			country_code=$(echo "$parsed" | cut -f3)
+			echo "{\"text\": \"󱗼$country_code\", \"class\": \"connected\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
+			;;
+	esac
 }
 
 main() {
