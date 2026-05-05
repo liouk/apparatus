@@ -15,9 +15,12 @@ help() {
 	      down            Stop Tailscale
 	      status          Show Tailscale status
 
+	Waybar Commands:
+	   waybar-vpn      Output waybar JSON for Red Hat VPN
+	   waybar-tailscale Output waybar JSON for Tailscale
+
 	Other:
 	   help            Show this message
-	   (no args)       Output waybar status JSON
 	EOF
 }
 
@@ -81,32 +84,37 @@ vpn_status() {
 	fi
 }
 
+waybar_vpn() {
+  local output
+  output=$(vpn_status)
+  if [[ -n "$output" ]]; then
+    echo "$output"
+  else
+    echo '{"text": "󱄛", "class": "disconnected", "tooltip": "redhat vpn down"}'
+  fi
+}
+
+waybar_tailscale() {
+  local output
+  output=$(tailscale_status)
+  if [[ -n "$output" ]]; then
+    echo "$output"
+  else
+    echo '{"text": "󱗼", "class": "disconnected", "tooltip": "tailscale down"}'
+  fi
+}
+
 main() {
 	cmd="$1"
 	shift
 	case "$cmd" in
 		up|down|status) { vpn_"$cmd" "$@"; return; } ;;
 		tailscale|tail) { tailscale_cmd "$@"; return; } ;;
+		waybar-vpn) { waybar_vpn; return; } ;;
+		waybar-tailscale) { waybar_tailscale; return; } ;;
 		help|-h|--help) { help; return; } ;;
-		"") ;;
 		*) echo "unknown command: '$cmd'" && exit 1 ;;
 	esac
-
-  local vpn_output
-  vpn_output=$(vpn_status)
-  if [[ -n "$vpn_output" ]]; then
-    echo "$vpn_output"
-    return
-  fi
-
-  local tailscale_output
-  tailscale_output=$(tailscale_status)
-  if [[ -n "$tailscale_output" ]]; then
-    echo "$tailscale_output"
-    return
-  fi
-
-  echo "{\"text\": \"\", \"class\": \"disconnected\", \"tooltip\": \"direct connection\"}"
 }
 
 main "$@"

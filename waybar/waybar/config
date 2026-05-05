@@ -2,7 +2,7 @@
   "position": "top",
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "bluetooth", "sway/language", "clock", "custom/suspendbutton", "custom/powerbutton", "battery"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "custom/tailscale", "bluetooth", "sway/language", "clock", "custom/suspendbutton", "custom/powerbutton", "battery"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -99,7 +99,14 @@
   "custom/vpn": {
     "tooltip": true,
     "return-type": "json",
-    "exec": "$HOME/.config/waybar/vpn.sh",
+    "exec": "$HOME/.config/waybar/vpn.sh waybar-vpn",
+    "interval": "once",
+    "signal": 1
+  },
+  "custom/tailscale": {
+    "tooltip": true,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/vpn.sh waybar-tailscale",
     "interval": "once",
     "signal": 1
   },
