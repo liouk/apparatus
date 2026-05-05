@@ -119,6 +119,10 @@ main() {
 		waybar-vpn) { waybar_vpn; return; } ;;
 		waybar-tailscale) { waybar_tailscale; return; } ;;
 		help|-h|--help) { help; return; } ;;
+		"")
+			echo "redhat vpn: $(vpn_status)"
+			echo "tailscale:  $(tailscale_cmd status)"
+			;;
 		*) echo "unknown command: '$cmd'" && exit 1 ;;
 	esac
 }
