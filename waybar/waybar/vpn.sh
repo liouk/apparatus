@@ -40,45 +40,45 @@ tailscale_cmd() {
 }
 
 tailscale_status() {
-  local status_output
-  status_output=$(tailscale status --json 2>/dev/null) || return
+	local status_output
+	status_output=$(tailscale status --json 2>/dev/null) || return
 
-  local parsed
-  parsed=$(echo "$status_output" | jq -r '
-    if .BackendState != "Running" then "off"
-    elif (.ExitNodeStatus.Online // false) then
-      (.ExitNodeStatus.ID) as $id |
-      .Peer[] | select(.ID == $id) |
-      "exit\t\(.HostName // "unknown")\t\(.Location.CountryCode // .Location.Country // "unknown")"
-    else "on"
-    end
-  ')
+	local parsed
+	parsed=$(echo "$status_output" | jq -r '
+		if .BackendState != "Running" then "off"
+		elif (.ExitNodeStatus.Online // false) then
+			(.ExitNodeStatus.ID) as $id |
+			.Peer[] | select(.ID == $id) |
+			"exit\t\(.HostName // "unknown")\t\(.Location.CountryCode // .Location.Country // "unknown")"
+		else "on"
+		end
+	')
 
-  case "$parsed" in
-    off) return ;;
-    on) echo "{\"text\": \"󱗼\", \"class\": \"connected\", \"tooltip\": \"tailscale up\"}" ;;
-    exit*)
-      local hostname country_code
-      hostname=$(echo "$parsed" | cut -f2)
-      country_code=$(echo "$parsed" | cut -f3)
-      echo "{\"text\": \"󱗼$country_code\", \"class\": \"connected\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
-      ;;
-  esac
+	case "$parsed" in
+		off) return ;;
+		on) echo "{\"text\": \"󱗼\", \"class\": \"connected\", \"tooltip\": \"tailscale up\"}" ;;
+		exit*)
+			local hostname country_code
+			hostname=$(echo "$parsed" | cut -f2)
+			country_code=$(echo "$parsed" | cut -f3)
+			echo "{\"text\": \"󱗼$country_code\", \"class\": \"connected\", \"tooltip\": \"tailscale up\nexit node: $hostname ($country_code)\"}"
+			;;
+	esac
 }
 
 vpn_up() {
 	sudo openvpn --daemon --config "${HOME}/liouk/redhat-config/redhat.ovpn"
 	while ! ip addr show tun0 > /dev/null 2>&1; do
-    sleep 0.5
-  done
+		sleep 0.5
+	done
 	waybar_notify
 }
 
 vpn_down() {
 	sudo pkill -9 openvpn
 	while ip addr show tun0 > /dev/null 2>&1; do
-    sleep 0.5
-  done
+		sleep 0.5
+	done
 	waybar_notify
 }
 
@@ -89,23 +89,23 @@ vpn_status() {
 }
 
 waybar_vpn() {
-  local output
-  output=$(vpn_status)
-  if [[ -n "$output" ]]; then
-    echo "$output"
-  else
-    echo '{"text": "󱄛", "class": "disconnected", "tooltip": "redhat vpn down"}'
-  fi
+	local output
+	output=$(vpn_status)
+	if [[ -n "$output" ]]; then
+		echo "$output"
+	else
+		echo '{"text": "󱄛", "class": "disconnected", "tooltip": "redhat vpn down"}'
+	fi
 }
 
 waybar_tailscale() {
-  local output
-  output=$(tailscale_status)
-  if [[ -n "$output" ]]; then
-    echo "$output"
-  else
-    echo '{"text": "󱗼", "class": "disconnected", "tooltip": "tailscale down"}'
-  fi
+	local output
+	output=$(tailscale_status)
+	if [[ -n "$output" ]]; then
+		echo "$output"
+	else
+		echo '{"text": "󱗼", "class": "disconnected", "tooltip": "tailscale down"}'
+	fi
 }
 
 main() {
