@@ -11,6 +11,7 @@ alias ...='cd ../../'
 # git
 alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
+alias pr='gh pr checkout --force'
 
 # docker
 alias doc='docker compose'
