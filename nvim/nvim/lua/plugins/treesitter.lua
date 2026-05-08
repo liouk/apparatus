@@ -9,7 +9,7 @@ return {
         'bash',
         'dockerfile',
         'go',
-        'help',
+        'vimdoc',
         'jq',
         'json',
         'lua',
