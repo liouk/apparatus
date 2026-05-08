@@ -9,13 +9,11 @@ return {
 
     local wk = require('which-key')
     wk.setup({})
-    wk.register({
-      ['<leader>'] = {
-        g = { name = 'git' },
-        m = { name = 'Trouble' },
-        s = { name = 'sessions' },
-      },
-      g = { name = 'Movements/LSP'},
+    wk.add({
+      { '<leader>g', group = 'git' },
+      { '<leader>m', group = 'Trouble' },
+      { '<leader>s', group = 'sessions' },
+      { 'g', group = 'Movements/LSP' },
     })
   end,
 }

@@ -65,11 +65,11 @@ return {
       vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end,   opts(bufnr, 'lsp.buf.type_definition'))
       vim.keymap.set('n', 'gn', function() vim.lsp.buf.rename() end,            opts(bufnr, 'lsp.buf.rename'))
       vim.keymap.set('n', 'ga', function() vim.lsp.buf.code_action() end,       opts(bufnr, 'lsp.buf.code_action'))
-      vim.keymap.set('x', 'ga', function() vim.lsp.buf.range_code_action() end, opts(bufnr, 'lsp.buf.range_code_action'))
+      vim.keymap.set('x', 'ga', function() vim.lsp.buf.code_action() end,       opts(bufnr, 'lsp.buf.code_action'))
       vim.keymap.set('n', 'gs', function() vim.lsp.buf.signature_help() end,    opts(bufnr, 'lsp.buf.signature_help'))
       vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end,     opts(bufnr, 'diagnostic.open_float'))
-      vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end,      opts(bufnr, 'diagnostic.goto_next'))
-      vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end,      opts(bufnr, 'diagnostic.goto_prev'))
+      vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count = -1}) end, opts(bufnr, 'diagnostic.jump prev'))
+      vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count = 1}) end,  opts(bufnr, 'diagnostic.jump next'))
       vim.keymap.set('n', '<leader>t', function() vim.lsp.buf.format() end,     opts(bufnr, 'lsp.buf.format'))
     end
 
