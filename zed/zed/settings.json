@@ -2,6 +2,11 @@
 // Features: https://zed.dev/features
 {
 	// general
+	"cli_default_open_behavior": "new_window",
+	"git_panel": {
+		"dock": "left",
+		"show_count_badge": true,
+	},
 	"edit_predictions": {
 		"provider": "none",
 	},
@@ -21,6 +26,7 @@
 	"current_line_highlight": "none",
 	"soft_wrap": "editor_width",
 	"vertical_scroll_margin": 4,
+	"code_lens": "on",
 	"tabs": {
 		"git_status": true,
 		"file_icons": true,
@@ -53,16 +59,18 @@
 	"ui_font_family": "JetBrains Mono NL",
 	"ui_font_size": 16.5,
 	"icon_theme": "Zed (Default)",
-	"experimental.theme_overrides": {
-		"syntax": {
-			"comment": {
-				"font_style": "italic",
+	"theme_overrides": {
+		"One Dark": {
+			"syntax": {
+				"comment": {
+					"font_style": "italic",
+				},
+				"comment.doc": {
+					"font_style": "italic",
+				},
 			},
-			"comment.doc": {
-				"font_style": "italic",
-			},
+			"terminal.background": "#242529ff",
 		},
-		"terminal.background": "#242529ff", // make terminal background a bit darker
 	},
 
 	// tabs & indentation
@@ -83,9 +91,11 @@
 
 	// project panel
 	"project_panel": {
+		"dock": "left",
 		"hide_hidden": false,
 		"default_width": 360,
 		"button": true,
+		"diagnostic_badges": true,
 	},
 
 	// ui
@@ -108,20 +118,15 @@
 		"quick_actions": false,
 	},
 	"collaboration_panel": {
+		"dock": "left",
 		"button": false,
 	},
 	"outline_panel": {
+		"dock": "left",
 		"button": false,
 	},
 	"agent": {
-		"default_model": {
-			"provider": "google",
-			"model": "gemini-2.5-flash",
-			"enable_thinking": false,
-		},
-		"button": false,
-	},
-	"notification_panel": {
+		"dock": "right",
 		"button": false,
 	},
 	"search": {
@@ -129,6 +134,19 @@
 	},
 	"status_bar": {
 		"active_language_button": false,
+	},
+
+	// LSP
+	"lsp": {
+		"gopls": {
+			"initialization_options": {
+				"codelenses": {
+					"test": true,
+					"generate": true,
+					"tidy": true,
+				},
+			},
+		},
 	},
 
 	// Languages

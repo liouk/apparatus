@@ -53,6 +53,7 @@
 			"ctrl-a ctrl-a": "editor::SelectAll",
 			"ctrl-alt-e": "editor::SelectEnclosingSymbol",
 			"ctrl-l": "editor::ScrollCursorTop",
+			"ctrl-\"": "editor::ToggleAllDiffHunks",
 		},
 	},
 	{

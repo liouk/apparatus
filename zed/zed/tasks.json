@@ -6,6 +6,5 @@
 		"reveal": "never",
 		"hide": "always",
 		"show_summary": false,
-		"show_output": "false"
-	}
+	},
 ]
