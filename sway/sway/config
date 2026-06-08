@@ -33,6 +33,10 @@ set $goot $term --class=goot -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/b
 for_window [app_id="^skratch$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
 set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' /usr/local/bin/skratch
 
+# glone
+for_window [app_id="^glone$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
+set $glone $term --class=glone -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/bin/glone
+
 #
 # Outputs
 #
@@ -126,6 +130,9 @@ bindsym $mod+t exec $goot
 
 # skratch
 bindsym $mod+s exec $skratch
+
+# glone
+bindsym $mod+g exec $glone
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
