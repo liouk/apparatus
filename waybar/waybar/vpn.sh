@@ -11,7 +11,7 @@ help() {
 
 	Tailscale Commands:
 	   tailscale|tail  Manage Tailscale VPN
-	      up [ARGS]       Start Tailscale (passes ARGS to 'tailscale up')
+	      up [COUNTRY]    Start Tailscale, optionally with an exit node for COUNTRY
 	      down            Stop Tailscale
 	      status          Show Tailscale status
 
@@ -32,8 +32,8 @@ tailscale_cmd() {
 	cmd="$1"
 	shift
 	case "$cmd" in
-		up) tailscale up --reset --accept-dns=false "$@" && waybar_notify ;;
-		down) tailscale down && waybar_notify ;;
+		up) tailscale_up "$@" && waybar_notify ;;
+		down) sudo tailscale down && waybar_notify ;;
 		status)
 			local parsed
 			parsed=$(tailscale_parsed)
@@ -47,9 +47,35 @@ tailscale_cmd() {
 	esac
 }
 
+tailscale_up() {
+	local country="$1"
+	local exit_node_arg=()
+	local running
+
+	if [[ -n "$country" ]]; then
+		local hostname
+		hostname=$(sudo tailscale exit-node list | awk -v c="$country" 'BEGIN{IGNORECASE=1} $0 ~ c {print $2; exit}')
+		if [[ -z "$hostname" ]]; then
+			echo "no exit node found for '$country'" && return 1
+		fi
+		exit_node_arg=(--exit-node="$hostname")
+	fi
+
+	running=$(sudo tailscale status --json 2>/dev/null | jq -r '.BackendState')
+	if [[ "$running" == "Running" ]]; then
+		if [[ ${#exit_node_arg[@]} -gt 0 ]]; then
+			sudo tailscale set "${exit_node_arg[@]}"
+		else
+			sudo tailscale set --exit-node=
+		fi
+	else
+		sudo tailscale up --reset --accept-dns=false "${exit_node_arg[@]}"
+	fi
+}
+
 tailscale_parsed() {
 	local status_output
-	status_output=$(tailscale status --json 2>/dev/null) || return
+	status_output=$(sudo tailscale status --json 2>/dev/null) || return
 
 	echo "$status_output" | jq -r '
 		if .BackendState != "Running" then "off"
