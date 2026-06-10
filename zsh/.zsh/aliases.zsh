@@ -11,7 +11,8 @@ alias ...='cd ../../'
 # git
 alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
-alias pr='gh pr checkout --force'
+alias gh-pr='gh pr checkout --force'
+alias gh-sync='gh repo sync $(gh repo view --json nameWithOwner -q .nameWithOwner) --branch $(git branch --show-current)'
 
 # docker
 alias doc='docker compose'
