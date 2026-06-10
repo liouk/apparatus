@@ -4,212 +4,10 @@ set -e
 set -o pipefail
 [ -n "$TRACE" ] && { set -x; }
 
-function install_macos {
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-  # install brew
-  which -s brew &>/dev/null || { /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; }
-
-  # install brew packages
-  brew install \
-    findutils \
-    coreutils \
-    git \
-    tig \
-    neovim \
-    node \
-    stow \
-    fzf \
-    ripgrep \
-    direnv \
-    bat \
-    jq \
-    romkatv/powerlevel10k/powerlevel10k \
-    zsh-syntax-highlighting \
-    zsh-autosuggestions \
-    btop \
-    gnupg pinentry-mac \
-    itchyny/tap/mmv \
-    saulpw/vd/visidata
-
-  # fonts
-  brew tap homebrew/cask-fonts
-  brew install --cask font-jetbrains-mono-nerd-font
-
-  # kitty
-  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
-}
-
-function stow_macos {
-  local apparatus_dir="$1"
-  pushd . > /dev/null
-  cd $apparatus_dir
-  stow --restow --target="$HOME" zsh
-  stow --restow --target="$HOME" powerlevel10k
-  stow --restow --target="$HOME" tig
-  stow --restow --target="$HOME" git --ignore "git"
-  stow --restow --target="$HOME/.config" git --ignore ".gitconfig"
-  stow --restow --target="$HOME/.config" kitty
-  stow --restow --target="$HOME/.config" karabiner
-  stow --restow --target="$HOME/.config" nvim
-  popd > /dev/null
-}
-
-function unstow_macos {
-  local apparatus_dir="$1"
-  pushd . > /dev/null
-  cd $apparatus_dir
-  stow --delete --target="$HOME" zsh
-  stow --delete --target="$HOME" powerlevel10k
-  stow --delete --target="$HOME" tig
-  stow --restow --target="$HOME" git --ignore "git"
-  stow --restow --target="$HOME/.config" git --ignore ".gitconfig"
-  stow --delete --target="$HOME/.config" kitty
-  stow --delete --target="$HOME/.config" karabiner
-  stow --delete --target="$HOME/.config" nvim
-  popd > /dev/null
-}
-
-function install_fedora_server {
-  sudo dnf install -y \
-    zsh \
-    zsh-syntax-highlighting \
-    zsh-autosuggestions \
-    git \
-    tig \
-    stow \
-    fzf \
-    ripgrep \
-    btop
-
-  # powerlevel10k
-  local p10k_dir="/opt/powerlevel10k"
-  if [ -d "$p10k_dir" ]; then
-    echo "will not clone powerlevel10k; it already exists in $p10k_dir"
-  else
-    sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /opt/powerlevel10k
-  fi
-}
-
-function wrapup_linux {
-  echo -e "\nSetup complete! Change your shell to zsh by running:\n\tchsh -s \$(which zsh)"
-}
-
-function stow_fedora_server {
-  local apparatus_dir="$1"
-  pushd . > /dev/null
-  cd $apparatus_dir
-  stow --restow --target="$HOME" zsh
-  stow --restow --target="$HOME" git
-  stow --restow --target="$HOME" tig
-  stow --restow --target="$HOME" powerlevel10k
-  popd > /dev/null
-}
-
-function unstow_fedora_server {
-  local apparatus_dir="$1"
-  pushd . > /dev/null
-  stow --delete --target="$HOME" zsh
-  stow --delete --target="$HOME" git
-  stow --delete --target="$HOME" tig
-  stow --delete --target="$HOME" powerlevel10k
-  cd $apparatus_dir
-  popd > /dev/null
-}
-
-function install_arch {
-  sudo pacman -Syyu --noconfirm --needed \
-    git \
-    tig \
-    neovim \
-    zed \
-    npm \
-    stow \
-    fzf \
-    ripgrep \
-    jq \
-    zsh \
-    zsh-syntax-highlighting \
-    zsh-autosuggestions \
-    kitty \
-    unzip \
-    ttf-jetbrains-mono \
-    sway \
-    swaylock \
-    swaybg \
-    swayidle
-
-  sudo pacman -Sy --noconfirm --needed git base-devel
-  git clone https://aur.archlinux.org/yay-bin.git
-  cd yay-bin
-  makepkg -si --noconfirm
-  cd ..
-  rm -rf yay-bin
-  yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
-    zsh-theme-powerlevel10k-git \
-    waybar \
-    sway-launcher-desktop
-
-  sudo mkdir -p /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
-  curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/NerdFontsSymbolsOnly.zip --output NerdFontsSymbolsOnly.zip
-  sudo unzip NerdFontsSymbolsOnly.zip -d /usr/local/share/fonts/nerd/NerdFontsSymbolsOnly/
-  rm NerdFontsSymbolsOnly.zip
-  fc-cache -r
-}
-
-function stow_arch {
-  local apparatus_dir="$1"
-  mkdir -p "$HOME/.config"
-  pushd . > /dev/null
-  cd $apparatus_dir
-  stow --restow --target="$HOME" zsh
-  stow --restow --target="$HOME" powerlevel10k
-  stow --restow --target="$HOME" tig
-  stow --restow --target="$HOME" git --ignore "git"
-  stow --restow --target="$HOME/.config" git --ignore ".gitconfig"
-  stow --restow --target="$HOME/.config" kitty
-  stow --restow --target="$HOME/.config" nvim
-  stow --restow --target="$HOME/.config" sway
-  stow --restow --target="$HOME/.config" swaylock
-  stow --restow --target="$HOME/.config" waybar
-  stow --restow --target="$HOME/.config" mako
-  stow --restow --target="$HOME/.config" xkb
-  stow --restow --target="$HOME/.config" zed
-  popd > /dev/null
-}
-
-function unstow_arch {
-  local apparatus_dir="$1"
-  pushd . > /dev/null
-  cd $apparatus_dir
-  stow --delete --target="$HOME" zsh
-  stow --delete --target="$HOME" powerlevel10k
-  stow --delete --target="$HOME" tig
-  stow --delete --target="$HOME" git --ignore "git"
-  stow --delete --target="$HOME/.config" git --ignore ".gitconfig"
-  stow --delete --target="$HOME/.config" kitty
-  stow --delete --target="$HOME/.config" nvim
-  stow --delete --target="$HOME/.config" sway
-  stow --delete --target="$HOME/.config" swaylock
-  stow --delete --target="$HOME/.config" waybar
-  stow --delete --target="$HOME/.config" mako
-  stow --delete --target="$HOME/.config" xkb
-  stow --delete --target="$HOME/.config" zed
-  popd > /dev/null
-}
-
-function apparatus {
-  local installdir="$1"
-  local link="$2"
-
-  if [ -d "${installdir}" ]; then
-    echo "will not clone apparatus; it already exists in $installdir"
-    return
-  fi
-
-  git clone git@github.com:liouk/apparatus.git "$installdir"
-  if [ -n "$link" ]; then
-    [ -e "$link" ] || { ln -s "$installdir" "$link"; }
-  fi
+function read_lines {
+  grep -v '^\s*#' "$1" | grep -v '^\s*$'
 }
 
 function detect_os {
@@ -218,15 +16,59 @@ function detect_os {
     return
   fi
 
-  if grep -q "PRETTY_NAME=.*Fedora.*Server.*" "/etc/os-release" 2>/dev/null; then
-    DETECTED_OS="fedora-server"
-    return
-  fi
-
   if [ -f "/etc/arch-release" ]; then
     DETECTED_OS="arch"
     return
   fi
+}
+
+function install_packages {
+  local platform_dir="$1"
+
+  case "$DETECTED_OS" in
+    macos)
+      if [ -f "$platform_dir/packages.brew" ]; then
+        brew install $(read_lines "$platform_dir/packages.brew" | tr '\n' ' ')
+      fi
+      if [ -f "$platform_dir/packages.cask" ]; then
+        brew install --cask $(read_lines "$platform_dir/packages.cask" | tr '\n' ' ')
+      fi
+      ;;
+    arch)
+      if [ -f "$platform_dir/packages.pacman" ]; then
+        sudo pacman -Syyu --noconfirm --needed $(read_lines "$platform_dir/packages.pacman" | tr '\n' ' ')
+      fi
+      if [ -f "$platform_dir/packages.yay" ]; then
+        yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
+          $(read_lines "$platform_dir/packages.yay" | tr '\n' ' ')
+      fi
+      ;;
+  esac
+}
+
+function do_stow {
+  local action="$1"
+  local apparatus_dir="$2"
+  local stow_file="$3"
+
+  mkdir -p "$HOME/.config"
+  pushd "$apparatus_dir" > /dev/null
+  while IFS=: read -r target package; do
+    [[ "$target" == "HOME" ]] && target="$HOME" || target="$HOME/$target"
+    stow "$action" --target="$target" "$package"
+  done < <(read_lines "$stow_file")
+  popd > /dev/null
+}
+
+function apparatus {
+  local installdir="$1"
+
+  if [ -d "${installdir}" ]; then
+    echo "will not clone apparatus; it already exists in $installdir"
+    return
+  fi
+
+  git clone git@github.com:liouk/apparatus.git "$installdir"
 }
 
 function parse_opts {
@@ -249,7 +91,6 @@ function parse_opts {
         shift
         ;;
       "")
-        # no (more) options found
         break
         ;;
       *)
@@ -261,54 +102,44 @@ function parse_opts {
 }
 
 function main {
-
   detect_os
   parse_opts "$@"
 
   if [ -n "$CHECK_SUPPORT" ]; then
     if [[ "$DETECTED_OS" == "" ]]; then
-      echo "unsupported operating system (supported: macos, fedora-server)"
+      echo "unsupported operating system (supported: macos, arch)"
       exit 1
     fi
-
     echo "operating system supported ($DETECTED_OS)"
     exit 0
   fi
 
+  local platform_dir="$SCRIPT_DIR/platforms/$DETECTED_OS"
+  if [ ! -d "$platform_dir" ]; then
+    echo "unsupported operating system (supported: macos, arch)"
+    exit 1
+  fi
+
+  local apparatus_dir
   case "$DETECTED_OS" in
-
-    macos)
-      APPARATUS_DIR="$HOME/Workspace/github.com/liouk/apparatus"
-      [[ -n "$ALL" ]] && install_macos
-      [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR" "$HOME/.apparatus"
-      [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_macos "$APPARATUS_DIR"
-      [[ -n "$UNSTOW_ONLY" ]] && unstow_macos "$APPARATUS_DIR" || :
-      ;;
-
-    fedora-server)
-      APPARATUS_DIR="$HOME/.apparatus"
-      [[ -n "$ALL" ]] && install_fedora_server
-      [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
-      [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_fedora_server "$APPARATUS_DIR"
-      [[ -n "$ALL" ]] && wrapup_linux
-      [[ -n "$UNSTOW_ONLY" ]] && unstow_fedora_server "$APPARATUS_DIR" || :
-      ;;
-
-    arch)
-      APPARATUS_DIR="$HOME/.apparatus"
-      [[ -n "$ALL" ]] && install_arch
-      [[ -n "$ALL" ]] && apparatus "$APPARATUS_DIR"
-      [[ -n "$ALL" || -n "$STOW_ONLY" ]] && stow_arch "$APPARATUS_DIR"
-      [[ -n "$ALL" ]] && wrapup_linux
-      [[ -n "$UNSTOW_ONLY" ]] && unstow_arch "$APPARATUS_DIR" || :
-      ;;
-
-    *)
-      echo "unsupported operating system (supported: macos, fedora-server)"
-      exit 1
-      ;;
-
+    macos)  apparatus_dir="$HOME/Workspace/github.com/liouk/apparatus" ;;
+    arch)   apparatus_dir="$HOME/.apparatus" ;;
   esac
+
+  if [ -n "$ALL" ]; then
+    [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
+    install_packages "$platform_dir"
+    [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
+    apparatus "$apparatus_dir"
+  fi
+
+  if [ -n "$ALL" ] || [ -n "$STOW_ONLY" ]; then
+    do_stow --restow "$apparatus_dir" "$platform_dir/stow-targets"
+  fi
+
+  if [ -n "$UNSTOW_ONLY" ]; then
+    do_stow --delete "$apparatus_dir" "$platform_dir/stow-targets"
+  fi
 }
 
 main "$@"

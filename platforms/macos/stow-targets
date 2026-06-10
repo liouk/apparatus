@@ -1,0 +1,7 @@
+HOME:zsh
+HOME:powerlevel10k
+HOME:tig
+HOME:git
+.config:kitty
+.config:karabiner
+.config:nvim

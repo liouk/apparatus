@@ -1,0 +1,12 @@
+HOME:zsh
+HOME:powerlevel10k
+HOME:tig
+HOME:git
+.config:kitty
+.config:nvim
+.config:sway
+.config:swaylock
+.config:waybar
+.config:mako
+.config:xkb
+.config:zed
