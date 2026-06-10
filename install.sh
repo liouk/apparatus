@@ -5,16 +5,7 @@ set -o pipefail
 [ -n "$TRACE" ] && { set -x; }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-declare -A PKG_CMD
-PKG_CMD[pacman]="sudo pacman -Syyu --noconfirm --needed"
-PKG_CMD[yay]="yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed"
-PKG_CMD[brew]="brew install"
-PKG_CMD[cask]="brew install --cask"
-PKG_CMD[go]="go install"
-
-declare -A PKG_PER_LINE
-PKG_PER_LINE[go]=1
+APPARATUS_REPO="git@github.com:liouk/apparatus.git"
 
 function read_lines {
   grep -v '^\s*#' "$1" | grep -v '^\s*$'
@@ -31,7 +22,7 @@ function detect_os {
 function install_packages {
   local platform_dir="$1"
 
-  for pkg_file in $(ls "$platform_dir"/packages.* 2>/dev/null | sort); do
+  for pkg_file in $(printf '%s\n' "$platform_dir"/packages.* | sort); do
     [ -f "$pkg_file" ] || continue
     local mgr="${pkg_file##*.}"
     local cmd="${PKG_CMD[$mgr]}"
@@ -98,7 +89,7 @@ function apparatus {
     return
   fi
 
-  git clone git@github.com:liouk/apparatus.git "$installdir"
+  git clone "$APPARATUS_REPO" "$installdir"
 }
 
 function parse_opts {

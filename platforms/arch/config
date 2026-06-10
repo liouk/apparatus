@@ -1,1 +1,9 @@
 APPARATUS_DIR="$HOME/.apparatus"
+
+declare -A PKG_CMD
+PKG_CMD[pacman]="sudo pacman -Syyu --noconfirm --needed"
+PKG_CMD[yay]="yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed"
+PKG_CMD[go]="go install"
+
+declare -A PKG_PER_LINE
+PKG_PER_LINE[go]=1

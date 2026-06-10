@@ -1,1 +1,5 @@
 APPARATUS_DIR="$HOME/Workspace/github.com/liouk/apparatus"
+
+declare -A PKG_CMD
+PKG_CMD[brew]="brew install"
+PKG_CMD[cask]="brew install --cask"
