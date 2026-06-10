@@ -29,3 +29,7 @@ firefox
 go
 tailscale
 openvpn
+direnv
+fd
+pavucontrol
+kubectl

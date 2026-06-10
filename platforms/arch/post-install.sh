@@ -9,4 +9,12 @@ if [ ! -d "/usr/local/share/fonts/nerd/NerdFontsSymbolsOnly" ]; then
   fc-cache -r
 fi
 
+# oc (OpenShift CLI)
+if ! command -v oc &>/dev/null; then
+  curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz
+  tar xzf oc.tar.gz
+  sudo mv oc /usr/local/bin/oc
+  rm -f oc.tar.gz kubectl README.md
+fi
+
 echo -e "\nSetup complete! Change your shell to zsh by running:\n\tchsh -s \$(which zsh)"
