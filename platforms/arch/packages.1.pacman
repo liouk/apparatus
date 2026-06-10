@@ -27,3 +27,5 @@ brightnessctl
 pipewire-pulse
 firefox
 go
+tailscale
+openvpn
