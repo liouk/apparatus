@@ -1,0 +1,7 @@
+fzfpac:$HOME/liouk/toolshed/fzfpac/fzfpac
+skratch:$HOME/liouk/toolshed/skratch/skratch.sh
+zed-picker:$HOME/liouk/toolshed/zed-picker/zed-picker.sh
+opa:$HOME/liouk/opa/opa
+mkimg:$HOME/redhat/tools/mkimg
+oclu:$HOME/redhat/tools/oclu
+vpn:$HOME/.apparatus/waybar/waybar/vpn.sh

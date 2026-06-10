@@ -11,6 +11,10 @@ PKG_CMD[pacman]="sudo pacman -Syyu --noconfirm --needed"
 PKG_CMD[yay]="yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed"
 PKG_CMD[brew]="brew install"
 PKG_CMD[cask]="brew install --cask"
+PKG_CMD[go]="go install"
+
+declare -A PKG_PER_LINE
+PKG_PER_LINE[go]=1
 
 function read_lines {
   grep -v '^\s*#' "$1" | grep -v '^\s*$'
@@ -39,7 +43,13 @@ function install_packages {
       echo "unknown package manager: $mgr"
       exit 1
     fi
-    $cmd $(read_lines "$pkg_file" | tr '\n' ' ')
+    if [ -n "${PKG_PER_LINE[$mgr]}" ]; then
+      while read -r pkg; do
+        $cmd "$pkg"
+      done < <(read_lines "$pkg_file")
+    else
+      $cmd $(read_lines "$pkg_file" | tr '\n' ' ')
+    fi
   done
 }
 
@@ -55,6 +65,33 @@ function do_stow {
     stow "$action" --target="$target" "$package"
   done < <(read_lines "$stow_file")
   popd > /dev/null
+}
+
+function clone_repos {
+  local repos_file="$1"
+  [ -f "$repos_file" ] || return 0
+  while read -r target_dir git_url; do
+    target_dir=$(eval echo "$target_dir")
+    if [ -d "$target_dir" ]; then
+      echo "will not clone $git_url; $target_dir already exists"
+    else
+      mkdir -p "$(dirname "$target_dir")"
+      git clone "$git_url" "$target_dir"
+    fi
+  done < <(read_lines "$repos_file")
+}
+
+function create_links {
+  local links_file="$1"
+  [ -f "$links_file" ] || return 0
+  while IFS=: read -r link_name target_path; do
+    target_path=$(eval echo "$target_path")
+    if [ -L "/usr/local/bin/$link_name" ]; then
+      echo "link /usr/local/bin/$link_name already exists; skipping"
+    else
+      sudo ln -s "$target_path" "/usr/local/bin/$link_name"
+    fi
+  done < <(read_lines "$links_file")
 }
 
 function apparatus {
@@ -122,6 +159,8 @@ function main {
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
+    clone_repos "$platform_dir/repos"
+    create_links "$platform_dir/links"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
     apparatus "$APPARATUS_DIR"
   fi
