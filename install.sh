@@ -6,6 +6,12 @@ set -o pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+declare -A PKG_CMD
+PKG_CMD[pacman]="sudo pacman -Syyu --noconfirm --needed"
+PKG_CMD[yay]="yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed"
+PKG_CMD[brew]="brew install"
+PKG_CMD[cask]="brew install --cask"
+
 function read_lines {
   grep -v '^\s*#' "$1" | grep -v '^\s*$'
 }
@@ -25,25 +31,16 @@ function detect_os {
 function install_packages {
   local platform_dir="$1"
 
-  case "$DETECTED_OS" in
-    macos)
-      if [ -f "$platform_dir/packages.brew" ]; then
-        brew install $(read_lines "$platform_dir/packages.brew" | tr '\n' ' ')
-      fi
-      if [ -f "$platform_dir/packages.cask" ]; then
-        brew install --cask $(read_lines "$platform_dir/packages.cask" | tr '\n' ' ')
-      fi
-      ;;
-    arch)
-      if [ -f "$platform_dir/packages.pacman" ]; then
-        sudo pacman -Syyu --noconfirm --needed $(read_lines "$platform_dir/packages.pacman" | tr '\n' ' ')
-      fi
-      if [ -f "$platform_dir/packages.yay" ]; then
-        yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed \
-          $(read_lines "$platform_dir/packages.yay" | tr '\n' ' ')
-      fi
-      ;;
-  esac
+  for pkg_file in "$platform_dir"/packages.*; do
+    [ -f "$pkg_file" ] || continue
+    local mgr="${pkg_file##*.}"
+    local cmd="${PKG_CMD[$mgr]}"
+    if [ -z "$cmd" ]; then
+      echo "unknown package manager: $mgr"
+      exit 1
+    fi
+    $cmd $(read_lines "$pkg_file" | tr '\n' ' ')
+  done
 }
 
 function do_stow {
@@ -107,7 +104,7 @@ function main {
 
   if [ -n "$CHECK_SUPPORT" ]; then
     if [[ "$DETECTED_OS" == "" ]]; then
-      echo "unsupported operating system (supported: macos, arch)"
+      echo "unsupported operating system"
       exit 1
     fi
     echo "operating system supported ($DETECTED_OS)"
@@ -116,29 +113,25 @@ function main {
 
   local platform_dir="$SCRIPT_DIR/platforms/$DETECTED_OS"
   if [ ! -d "$platform_dir" ]; then
-    echo "unsupported operating system (supported: macos, arch)"
+    echo "unsupported operating system"
     exit 1
   fi
 
-  local apparatus_dir
-  case "$DETECTED_OS" in
-    macos)  apparatus_dir="$HOME/Workspace/github.com/liouk/apparatus" ;;
-    arch)   apparatus_dir="$HOME/.apparatus" ;;
-  esac
+  source "$platform_dir/config"
 
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
-    apparatus "$apparatus_dir"
+    apparatus "$APPARATUS_DIR"
   fi
 
   if [ -n "$ALL" ] || [ -n "$STOW_ONLY" ]; then
-    do_stow --restow "$apparatus_dir" "$platform_dir/stow-targets"
+    do_stow --restow "$APPARATUS_DIR" "$platform_dir/stow-targets"
   fi
 
   if [ -n "$UNSTOW_ONLY" ]; then
-    do_stow --delete "$apparatus_dir" "$platform_dir/stow-targets"
+    do_stow --delete "$APPARATUS_DIR" "$platform_dir/stow-targets"
   fi
 }
 
