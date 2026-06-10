@@ -23,12 +23,8 @@ function read_lines {
 function detect_os {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     DETECTED_OS="macos"
-    return
-  fi
-
-  if [ -f "/etc/arch-release" ]; then
-    DETECTED_OS="arch"
-    return
+  elif [ -f /etc/os-release ]; then
+    DETECTED_OS=$(. /etc/os-release && echo "$ID")
   fi
 }
 
