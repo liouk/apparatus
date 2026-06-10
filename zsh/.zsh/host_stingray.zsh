@@ -23,7 +23,6 @@ bindkey \^U backward-kill-line
 
 # macos specific aliases
 alias ls='ls -Glahp'
-alias nas='test -d /Volumes/ilias || . ~/.apparatus/util/macmount.sh; cd /Volumes/ilias'
 command -v gxargs 2>&1 >/dev/null && { alias xargs='gxargs' }
 
 # funcs
