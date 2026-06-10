@@ -31,7 +31,7 @@ function detect_os {
 function install_packages {
   local platform_dir="$1"
 
-  for pkg_file in "$platform_dir"/packages.*; do
+  for pkg_file in $(ls "$platform_dir"/packages.* 2>/dev/null | sort); do
     [ -f "$pkg_file" ] || continue
     local mgr="${pkg_file##*.}"
     local cmd="${PKG_CMD[$mgr]}"
