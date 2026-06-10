@@ -13,5 +13,11 @@ set main-view-date-format = "%Y-%m-%d %H:%M"
 # Copy Commit SHA to clipboard
 bind generic 9 !@bash -c "echo -n %(commit) | wl-copy"
 
+# Open commit on GitHub
+bind generic ( !@bash -c "gh browse %(commit)"
+
+# Open associated PR on GitHub
+bind generic 8 !@bash -c "url=$(gh api repos/{owner}/{repo}/commits/%(commit)/pulls --jq '.[0].html_url' 2>/dev/null) && [ -n \"$url\" ] && xdg-open \"$url\""
+
 # fix cursor color for catppuccin-mocha
 color cursor default blue

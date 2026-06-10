@@ -7,4 +7,28 @@
 		"hide": "always",
 		"show_summary": false,
 	},
+	{
+		"label": "github: open commit",
+		"command": "gh browse $(git blame -L $ZED_ROW,$ZED_ROW --porcelain $ZED_FILE | head -1 | awk '{print $1}')",
+		"use_new_terminal": true,
+		"reveal": "never",
+		"hide": "on_success",
+		"show_summary": true,
+	},
+	{
+		"label": "github: open PR",
+		"command": "sha=$(git blame -L $ZED_ROW,$ZED_ROW --porcelain $ZED_FILE | head -1 | awk '{print $1}') && url=$(gh api repos/{owner}/{repo}/commits/$sha/pulls --jq '.[0].html_url' 2>/dev/null) && [ -n \"$url\" ] && xdg-open \"$url\"",
+		"use_new_terminal": true,
+		"reveal": "never",
+		"hide": "on_success",
+		"show_summary": true,
+	},
+	{
+		"label": "github: open repo",
+		"command": "gh browse",
+		"use_new_terminal": true,
+		"reveal": "never",
+		"hide": "on_success",
+		"show_summary": true,
+	},
 ]
