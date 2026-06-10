@@ -1,79 +1,44 @@
-# :nut_and_bolt: apparatus
+# :gear: apparatus
 
-Apparatus is a monorepo containing all the dotfiles for my setup, which is based on zsh, neovim and kitty, among other tools.
+Dotfiles and setup automation, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-You can use the installation script to install every tool of the toolchain and place the dotfiles where they need to be. The install script performs the following:
+Originally forked from [michailpanagiotis/apparatus](https://github.com/michailpanagiotis/apparatus) :heart:
 
-- it detects the platform/OS that executes it
-- it will install all the necessary tools, fonts, etc. for the supported platforms
-- it will place the dotfiles where they need to be, depending on the platform
-
-The script currently only supports MacOS, and Fedora Server and Workstation are work in progress.
-
-Originally forked from [michailpanagiotis/apparatus](https://github.com/michailpanagiotis/apparatus).
-
-## Requirements
-
-The script requires `bash` and `curl` only; it will install everything else it needs (e.g. `brew`, `git`).
-
-## Installation
-
-To check if your platform is supported, run the following command:
+## Structure
 
 ```
-curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/install.sh | bash /dev/stdin --check-support
+platforms/<os>/          # per-platform config (packages, stow targets, repos, links)
+<package>/               # stow packages (zsh, git, kitty, sway, etc.)
+install.sh               # generic driver script
 ```
 
-The script will print whether the current OS is supported or not.
+## Usage
 
-To install everything, run the following command:
+```bash
+# check if current OS is supported
+./install.sh --check-support
 
+# full install (packages + repos + links + stow)
+./install.sh
+
+# restow dotfiles only
+./install.sh --stow-only
+
+# unstow dotfiles
+./install.sh --unstow-only
 ```
-curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/install.sh | bash /dev/stdin
-```
 
-## Toolchain
+## Adding a new platform
 
-#### Terminal & Shell
+Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-release`) with:
 
-- [zsh](https://www.zsh.org/)
-- [kitty](https://sw.kovidgoyal.net/kitty/)
-- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
-
-#### CLI Tools
-
-- [fzf](https://github.com/junegunn/fzf)
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
-- [direnv](https://direnv.net/)
-- [bat](https://github.com/sharkdp/bat)
-- [jq](https://stedolan.github.io/jq/)
-- [visidata](https://www.visidata.org/)
-- [GNU stow](https://www.gnu.org/software/stow/)
-- [btop](https://github.com/aristocratos/btop)
-- [mmv](https://github.com/itchyny/mmv)
-
-#### Editor
-
-- [neovim](https://neovim.io/)
-
-#### VCS
-
-- [git](https://git-scm.com/)
-- [tig](https://github.com/jonas/tig)
-
-#### MacOS
-
-- [Homebrew](https://brew.sh/)
-- [karabiner](https://karabiner-elements.pqrs.org/)
+- `config` — `APPARATUS_DIR`, `PKG_CMD`, `PKG_PER_LINE` declarations
+- `packages.<N>.<manager>` — one package per line, installed in sort order
+- `stow-targets` — `TARGET:package` per line
+- `repos` (optional) — `target_dir git_url` per line
+- `links` (optional) — `link_name:target_path` per line
+- `pre-install.sh` / `post-install.sh` (optional) — run before/after package install
 
 ## Theme
 
-This config currently uses the [catppuccin](https://github.com/catppuccin/catppuccin) theme, in the following places that apparatus controls:
-
-- kitty
-- neovim
-- sway
-- waybar
-- mako
-- tig
-- swaylock
+[Catppuccin Mocha](https://github.com/catppuccin/catppuccin), applied in kitty, neovim, sway, waybar, mako, tig, and swaylock.
