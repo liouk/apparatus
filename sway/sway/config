@@ -37,6 +37,10 @@ set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' /usr/local
 for_window [app_id="^glone$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
 set $glone $term --class=glone -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/bin/glone
 
+# show-keys
+for_window [app_id="^show-keys$"] floating enable, sticky enable, resize set 50 ppt 75 ppt
+set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
+
 #
 # Outputs
 #
@@ -134,6 +138,9 @@ bindsym $mod+s exec $skratch
 # glone
 bindsym $mod+g exec $glone
 
+# show keyboard shortcuts
+bindsym $mod+slash exec $showkeys
+
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
 # Despite the name, also works for non-floating windows.
@@ -141,19 +148,19 @@ bindsym $mod+g exec $glone
 # mouse button for dragging.
 floating_modifier $mod normal
 
-# reload the configuration file
+# reload config
 bindsym $mod+Shift+c reload
 
-# exit sway (logs you out of your Wayland session)
+# exit sway
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-# move your focus around
+# focus window
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# move the focused window with the same, but add Shift
+# move focused window
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -192,25 +199,26 @@ bindsym $mod+Shift+9 move container to workspace number 9
 # move to new workspace
 bindsym $mod+n exec swaymsg workspace $(~/.config/sway/new-workspace.sh)
 
-# you can "split" the current object of your focus with
-# $mod+b or $mod+v, for horizontal and vertical splits
-# respectively
+# split container
 bindsym $mod+b splith
 bindsym $mod+v splitv
 
-# switch the current container between different layout styles
+# layout
 #bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# make the current focus fullscreen
+# fullscreen
 bindsym $mod+f fullscreen
 
-# toggle the current focus between tiling and floating mode
+# toggle floating
 bindsym $mod+Shift+space floating toggle
 
-# move focus to the parent container
+# focus parent
 bindsym $mod+a focus parent
+
+# resize mode
+bindsym $mod+r mode "resize"
 
 mode "resize" {
   # left will shrink the containers width
@@ -227,7 +235,6 @@ mode "resize" {
   bindsym Escape mode "default"
   bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
 
 # screenshots with grim
 bindsym $mod+Control+3 exec grim -g "$(slurp)"
