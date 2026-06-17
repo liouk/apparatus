@@ -126,6 +126,7 @@
 		"button": false,
 	},
 	"agent": {
+		"enabled": false,
 		"dock": "right",
 		"button": false,
 	},
