@@ -141,7 +141,7 @@
 		"gopls": {
 			"initialization_options": {
 				"codelenses": {
-					"test": true,
+					"test": false,
 					"generate": true,
 					"tidy": true,
 				},
