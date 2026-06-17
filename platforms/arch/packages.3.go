@@ -1,2 +1,2 @@
-github.com/liouk/goot@latest
-github.com/liouk/glone@latest
+github.com/liouk/toolshed/goot@latest
+github.com/liouk/toolshed/glone@latest
