@@ -55,6 +55,12 @@
   sp = stash pop
   sc = stash clear
 
+  # worktree
+  wa = worktree add
+  wr = worktree remove
+  wl = worktree list
+  wp = worktree prune
+
   # list aliases
   la = "!git config -l | grep alias | cut -c 7-"
 

@@ -12,6 +12,7 @@ alias ...='cd ../../'
 alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
 alias gh-pr='gh pr checkout --force'
+alias git-wt='find ~/redhat/repos ~/liouk -maxdepth 3 -name .git -exec sh -c "wt=\"\$(git --git-dir=\"\$1\" worktree list)\"; [ \"\$(echo \"\$wt\" | wc -l)\" -gt 1 ] && echo \"\$wt\" && echo" _ {} \; 2>/dev/null'
 alias gh-sync='gh repo sync $(gh repo view --json nameWithOwner -q .nameWithOwner) --branch $(git branch --show-current)'
 
 # docker
