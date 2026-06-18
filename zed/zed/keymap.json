@@ -10,6 +10,7 @@
 		"bindings": {
 			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-m": "workspace::ToggleBottomDock",
+			"ctrl-s": "workspace::SaveWithoutFormat",
 			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
 			"ctrl-[": "workspace::ToggleLeftDock",
@@ -21,18 +22,9 @@
 				"task::Spawn",
 				{ "task_name": "open all git-modified files" },
 			],
-			"ctrl-a 9": [
-				"task::Spawn",
-				{ "task_name": "github: open commit" },
-			],
-			"ctrl-a 8": [
-				"task::Spawn",
-				{ "task_name": "github: open PR" },
-			],
-			"ctrl-a 0": [
-				"task::Spawn",
-				{ "task_name": "github: open repo" },
-			],
+			"ctrl-a 9": ["task::Spawn", { "task_name": "github: open commit" }],
+			"ctrl-a 8": ["task::Spawn", { "task_name": "github: open PR" }],
+			"ctrl-a 0": ["task::Spawn", { "task_name": "github: open repo" }],
 		},
 	},
 	{
