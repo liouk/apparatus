@@ -157,6 +157,7 @@
 			"ctrl-[": "vim::PreviousWordStart",
 			"ctrl-]": "vim::NextWordStart",
 			"ctrl-v": "vim::Paste",
+			"ctrl-w": "editor::DeleteToPreviousWordStart",
 		},
 	},
 ]
