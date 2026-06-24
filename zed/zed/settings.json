@@ -26,7 +26,7 @@
 	"current_line_highlight": "none",
 	"soft_wrap": "editor_width",
 	"vertical_scroll_margin": 4,
-	"code_lens": "on",
+	"code_lens": "off",
 	"tabs": {
 		"git_status": true,
 		"file_icons": true,
@@ -146,6 +146,12 @@
 					"generate": true,
 					"tidy": true,
 				},
+				"analyses": {
+					"unusedparams": false,
+					"shadow": false,
+				},
+				"staticcheck": false,
+				"memoryMode": "DegradeClosed",
 			},
 		},
 	},
