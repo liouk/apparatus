@@ -151,7 +151,6 @@
 					"shadow": false,
 				},
 				"staticcheck": false,
-				"memoryMode": "DegradeClosed",
 			},
 		},
 	},
