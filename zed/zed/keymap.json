@@ -43,7 +43,7 @@
 			"ctrl-a d": "diagnostics::Deploy",
 			"ctrl-a l": "project_symbols::Toggle",
 			"ctrl-a m": "terminal_panel::ToggleFocus",
-			"ctrl-a p": ["projects::OpenRecent", { "create_new_window": false }],
+			// "ctrl-a p": ["projects::OpenRecent", { "create_new_window": false }],
 			"ctrl-a t": "workspace::NewCenterTerminal",
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
@@ -53,6 +53,7 @@
 	{
 		"context": "Editor && mode == full",
 		"bindings": {
+			"ctrl-a p": ["task::Spawn", { "task_name": "copy symbol reference" }],
 			"ctrl-a g": "outline::Toggle",
 			"ctrl-a ctrl-a": "editor::SelectAll",
 			"ctrl-alt-e": "editor::SelectEnclosingSymbol",

@@ -31,4 +31,12 @@
 		"hide": "on_success",
 		"show_summary": true,
 	},
+	{
+		"label": "copy symbol reference",
+		"command": "echo -n \"$ZED_RELATIVE_FILE:$ZED_ROW:$ZED_SYMBOL\" | wl-copy",
+		"use_new_terminal": true,
+		"reveal": "never",
+		"hide": "always",
+		"show_summary": false,
+	},
 ]
