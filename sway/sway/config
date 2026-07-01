@@ -132,7 +132,7 @@ bindsym $mod+space exec $menu
 bindsym $mod+p exec $zedpicker
 
 # open apparatus in zed
-bindsym $mod+comma exec zeditor ~/.apparatus
+bindsym $mod+comma exec swaymsg '[app_id="dev.zed.Zed" title=".apparatus"]' focus || zeditor ~/.apparatus
 
 # goot
 bindsym $mod+t exec $goot
