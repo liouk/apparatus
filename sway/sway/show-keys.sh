@@ -44,6 +44,7 @@ draw() {
             "$(fmt_entry "${C}Mod+t${N}" "${D}goot${N}")"
             "$(fmt_entry "${C}Mod+s${N}" "${D}skratch${N}")"
             "$(fmt_entry "${C}Mod+g${N}" "${D}glone${N}")"
+            "$(fmt_entry "${C}Mod+,${N}" "${D}apparatus${N}")"
         )
         right=(
             "${Y}SESSION${N}"
