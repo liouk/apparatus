@@ -51,6 +51,8 @@ bindkey '^Z' fancy-ctrl-z
 
 # completion
 autoload -Uz compinit && compinit
+_git-wt() { compadd $(git branch --format='%(refname:short)' 2>/dev/null) }
+compdef _git-wt git-wt
 
 # direnv
 if type "direnv" > /dev/null; then

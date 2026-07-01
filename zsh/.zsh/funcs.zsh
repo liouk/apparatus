@@ -12,6 +12,19 @@ function __jumpfunc () {
   esac
 }
 
+# manage git worktrees
+function git-wt () {
+  if [[ -z "$1" ]]; then
+    find ~/redhat/repos ~/liouk -maxdepth 3 -name .git -exec sh -c \
+      'wt="$(git --git-dir="$1" worktree list)"; [ "$(echo "$wt" | wc -l)" -gt 1 ] && echo "$wt" && echo' _ {} \; 2>/dev/null
+  else
+    local toplevel="$(git rev-parse --show-toplevel)"
+    local wtdir="${toplevel}.wt/$1"
+    [[ -d "${toplevel}.wt" ]] || mkdir -p "${toplevel}.wt"
+    git worktree add "$wtdir" "$1"
+  fi
+}
+
 # checkout a GitHub PR in a new git worktree
 function gh-prw () {
   local wtdir="$(git rev-parse --show-toplevel).wt/pr-$1"
