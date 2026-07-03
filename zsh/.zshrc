@@ -51,7 +51,14 @@ bindkey '^Z' fancy-ctrl-z
 
 # completion
 autoload -Uz compinit && compinit
-_git-wt() { compadd $(git branch --format='%(refname:short)' 2>/dev/null) }
+_git-wt() {
+  if [[ "$words[2]" == "remove" || "$words[2]" == "rm" ]]; then
+    local toplevel="$(git rev-parse --show-toplevel 2>/dev/null)"
+    [[ -n "$toplevel" ]] && compadd $(ls "${toplevel}.wt" 2>/dev/null)
+  else
+    compadd remove rm $(git branch --format='%(refname:short)' 2>/dev/null)
+  fi
+}
 compdef _git-wt git-wt
 
 # direnv
