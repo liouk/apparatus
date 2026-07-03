@@ -22,10 +22,11 @@ draw() {
     clear
 
     # tab bar
-    local tabs=("1:General" "2:Windows" "3:Workspaces" "4:Other")
+    local tabs=("1:General" "2:Windows" "3:Workspaces" "4:Other" "0:Bash")
     local bar=""
+    local page_nums=(1 2 3 4 0)
     for i in "${!tabs[@]}"; do
-        if (( i + 1 == page )); then
+        if (( page_nums[i] == page )); then
             bar+="${B}[ ${tabs[$i]} ]${N}  "
         else
             bar+="${D}  ${tabs[$i]}  ${N}  "
@@ -104,6 +105,33 @@ draw() {
             "$(fmt_entry "${C}Mod+Ctrl+3${N}" "${D}screenshot to file${N}")"
             "$(fmt_entry "${C}Mod+Ctrl+4${N}" "${D}screenshot to clip${N}")"
         ) ;;
+    0)
+        left=(
+            "${Y}GENERAL${N}"
+            "$(fmt_entry "${C}zed, z${N}" "${D}zeditor${N}")"
+            "$(fmt_entry "${C}..${N}" "${D}cd ..${N}")"
+            "$(fmt_entry "${C}...${N}" "${D}cd ../../${N}")"
+            "$(fmt_entry "${C}icat${N}" "${D}kitty image viewer${N}")"
+            ""
+            "${Y}GIT${N}"
+            "$(fmt_entry "${C}vimod${N}" "${D}vim modified files${N}")"
+            "$(fmt_entry "${C}tiga${N}" "${D}tig --all${N}")"
+            "$(fmt_entry "${C}gh-pr${N}" "${D}checkout PR${N}")"
+            "$(fmt_entry "${C}gh-sync${N}" "${D}sync fork branch${N}")"
+            "$(fmt_entry "${C}git-wt${N}" "${D}manage git worktrees${N}")"
+            "$(fmt_entry "${C}git-wt rm${N}" "${D}remove a worktree${N}")"
+            "$(fmt_entry "${C}gh-prw <n>${N}" "${D}PR in worktree${N}")"
+        )
+        right=(
+            "${Y}DOCKER${N}"
+            "$(fmt_entry "${C}doc${N}" "${D}docker compose${N}")"
+            "$(fmt_entry "${C}dex${N}" "${D}docker exec -it${N}")"
+            ""
+            "${Y}K8S${N}"
+            "$(fmt_entry "${C}kc${N}" "${D}kubectl${N}")"
+            "$(fmt_entry "${C}kcs${N}" "${D}kubectl -n kube-system${N}")"
+            "$(fmt_entry "${C}kns${N}" "${D}pick kube namespace${N}")"
+        ) ;;
     esac
 
     local rows=$(( ${#left[@]} > ${#right[@]} ? ${#left[@]} : ${#right[@]} ))
@@ -116,7 +144,7 @@ draw() {
         printf "  %b%*s%b\n" "$l" "$pad" "" "$r"
     done
 
-    printf "\n  ${D}press 1-4 to switch, q to quit${N}\n"
+    printf "\n  ${D}press 1-4/0 to switch, q to quit${N}\n"
 }
 
 page=1
@@ -125,7 +153,7 @@ draw $page
 while true; do
     read -rsn1 key
     case "$key" in
-        1|2|3|4) page=$key; draw $page ;;
+        0|1|2|3|4) page=$key; draw $page ;;
         q|Q) break ;;
     esac
 done
