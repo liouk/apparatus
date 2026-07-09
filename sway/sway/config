@@ -46,17 +46,8 @@ set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
 #
 set $laptop eDP-1
 set $homedisplay DP-3
-set $officedisplay1 "Samsung Electric Company LF32TU87 HNTT100830"
-output $officedisplay1 mode 2560x1440@59.951Hz
-set $officedisplay2 "Samsung Electric Company LF32TU87 HNTT100819"
-output $officedisplay2 mode 2560x1440@59.951Hz
-set $officedisplay3 "Samsung Electric Company LF32TU87 HNTT100833"
-output $officedisplay3 mode 2560x1440@59.951Hz
-set $officedisplay4 "Samsung Electric Company LF32TU87 HNTT100825"
-output $officedisplay4 mode 2560x1440@59.951Hz
-set $officedisplay5 "Samsung Electric Company LF32TU87 HNTT100828"
-output $officedisplay5 mode 2560x1440@59.951Hz
-set $officedisplays $officedisplay1 $officedisplay2 $officedisplay3 $officedisplay4 $officedisplay5
+set $officedisplay DP-1
+output $officedisplay mode 2560x1440@59.951Hz
 
 output $laptop pos 0 0 res 1920x1080
 output $homedisplay pos 1920 -360 res 2560x1440
@@ -344,8 +335,8 @@ for_window {
 }
 
 # assign workspaces to outputs
-workspace 1 output $homedisplay $officedisplays
-workspace 2 output $homedisplay $officedisplays
+workspace 1 output $homedisplay $officedisplay
+workspace 2 output $homedisplay $officedisplay
 workspace 3 output $laptop
 workspace 4 output $laptop
 workspace 9 output $laptop
