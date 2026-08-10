@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+LAST_FILE="/tmp/media-last-player"
 playing=""
 paused=""
+last=$(cat "$LAST_FILE" 2>/dev/null)
 
 for p in $(playerctl -l 2>/dev/null); do
   pstatus=$(playerctl -p "$p" status 2>/dev/null)
@@ -12,7 +14,14 @@ for p in $(playerctl -l 2>/dev/null); do
   fi
 done
 
-target="${playing:-$paused}"
+if [[ -n "$playing" ]]; then
+  target="$playing"
+  echo "$target" > "$LAST_FILE"
+elif [[ -n "$last" ]] && playerctl -p "$last" status &>/dev/null; then
+  target="$last"
+else
+  target="$paused"
+fi
 [[ -z "$target" ]] && exit 0
 
 case "$1" in
