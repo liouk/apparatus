@@ -92,8 +92,8 @@
   },
   "custom/media": {
     "max-length": 80,
-    "on-click": "playerctl play-pause",
-    "exec": "$HOME/.config/waybar/media.sh",
+    "on-click": "$HOME/.config/waybar/media.sh play-pause",
+    "exec": "$HOME/.config/waybar/media.sh status",
     "interval": 1
   },
   "custom/vpn": {

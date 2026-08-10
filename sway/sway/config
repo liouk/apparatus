@@ -244,16 +244,16 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # playback
 ## t14s
-bindsym XF86PickupPhone exec playerctl previous
-bindsym XF86HangupPhone exec playerctl play-pause
-bindsym XF86Favorites exec playerctl next
+bindsym XF86PickupPhone exec ~/.config/waybar/media.sh previous
+bindsym XF86HangupPhone exec ~/.config/waybar/media.sh play-pause
+bindsym XF86Favorites exec ~/.config/waybar/media.sh next
 ## x1
-bindsym XF86SelectiveScreenshot exec playerctl previous
-bindcode 455 exec playerctl play-pause
+bindsym XF86SelectiveScreenshot exec ~/.config/waybar/media.sh previous
+bindcode 455 exec ~/.config/waybar/media.sh play-pause
 ## k12pro
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec ~/.config/waybar/media.sh previous
+bindsym XF86AudioPlay exec ~/.config/waybar/media.sh play-pause
+bindsym XF86AudioNext exec ~/.config/waybar/media.sh next
 
 # brightness
 bindsym XF86MonBrightnessUp exec sh -c 'if command -v light >/dev/null; then light -A 10; elif command -v brightnessctl >/dev/null; then brightnessctl set +10%; fi'
@@ -314,6 +314,7 @@ assign [app_id="com.viber.Viber"] workspace 9
 for_window [app_id="firefox" title="^WhatsApp"] move container to workspace 9
 
 # startup
+exec playerctld daemon
 workspace 2
 exec firefox
 
