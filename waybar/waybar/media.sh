@@ -26,10 +26,17 @@ fi
 
 case "$1" in
   status)
-    icon=""
-    [[ "$target" == spotify* ]] && icon=""
-    [[ -z "$playing" ]] && icon=""
-    echo "$icon $(playerctl -p "$target" metadata --format '{{ artist }} - {{ title }}')"
+    if [[ -z "$playing" ]]; then
+      icon=""
+    elif [[ "$target" == spotify* ]]; then
+      icon=""
+    elif [[ "$target" == firefox* ]]; then
+      icon=""
+    else
+      icon=""
+    fi
+    text=$(playerctl -p "$target" metadata --format '{{ artist }} - {{ title }}' | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g')
+    echo "$icon $text"
     ;;
   *)
     playerctl -p "$target" "$@"
