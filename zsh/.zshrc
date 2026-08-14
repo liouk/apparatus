@@ -97,3 +97,4 @@ for conf in $(find -L "$HOME/.zsh/conf.d" -type f); do
   source $conf
 done
 export PATH="$HOME/.local/bin:$PATH"
+[ -f "/home/liouk/.config/claude-code-vertex/env.sh" ] && . "/home/liouk/.config/claude-code-vertex/env.sh"
