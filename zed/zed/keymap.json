@@ -8,6 +8,11 @@
 	// ==================
 	{
 		"bindings": {
+			", a": "workspace::ClearAllNotifications",
+			", c": "workspace::CloseAllDocks",
+			", d": "workspace::ToggleLeftDock",
+			", f": "workspace::NewSearch",
+			", g": "git_panel::ToggleFocus",
 			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-m": "workspace::ToggleBottomDock",
 			"ctrl-s": "workspace::SaveWithoutFormat",
@@ -25,16 +30,6 @@
 			"ctrl-a 9": ["task::Spawn", { "task_name": "github: open commit" }],
 			"ctrl-a 8": ["task::Spawn", { "task_name": "github: open PR" }],
 			"ctrl-a 0": ["task::Spawn", { "task_name": "github: open repo" }],
-		},
-	},
-	{
-		"context": "vim_mode == normal",
-		"bindings": {
-			", a": "workspace::ClearAllNotifications",
-			", c": "workspace::CloseAllDocks",
-			", d": "workspace::ToggleLeftDock",
-			", f": "workspace::NewSearch",
-			", g": "git_panel::ToggleFocus",
 		},
 	},
 	{
