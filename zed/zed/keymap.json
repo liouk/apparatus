@@ -1,11 +1,6 @@
 [
 	{
 		"bindings": {
-			", a": "workspace::ClearAllNotifications",
-			", c": "workspace::CloseAllDocks",
-			", d": "workspace::ToggleLeftDock",
-			", f": "workspace::NewSearch",
-			", g": "git_panel::ToggleFocus",
 			"ctrl-h": "workspace::ActivateNextPane",
 			"ctrl-m": "workspace::ToggleBottomDock",
 			"ctrl-s": "workspace::SaveWithoutFormat",
@@ -35,6 +30,16 @@
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
 			"ctrl-f": "workspace::ToggleZoom",
+		},
+	},
+	{
+		"context": "EmptyPane",
+		"bindings": {
+			", a": "workspace::ClearAllNotifications",
+			", c": "workspace::CloseAllDocks",
+			", d": "project_panel::ToggleFocus",
+			", f": "workspace::NewSearch",
+			", g": "git_panel::ToggleFocus",
 		},
 	},
 	{
@@ -118,6 +123,12 @@
 			", e": "editor::SelectEnclosingSymbol",
 			", r": "git::Restore",
 			", t": "editor::Format",
+			// global leader combos
+			", a": "workspace::ClearAllNotifications",
+			", c": "workspace::CloseAllDocks",
+			", d": "project_panel::ToggleFocus",
+			", f": "workspace::NewSearch",
+			", g": "git_panel::ToggleFocus",
 			// lsp & code
 			"shift-b": "editor::BlameHover",
 			"shift-k": "editor::Hover",
