@@ -1,11 +1,4 @@
-// Keymaps docs: https://zed.dev/docs/key-bindings
-// Default linux keymaps: https://github.com/zed-industries/zed/blob/main/assets/keymaps/default-linux.json
-// Default vim keymaps: https://github.com/zed-industries/zed/blob/main/assets/keymaps/vim.json
-// Keymap contexts: https://github.com/zed-industries/zed/issues/14718
 [
-	// ==================
-	// Custom keybindings
-	// ==================
 	{
 		"bindings": {
 			", a": "workspace::ClearAllNotifications",
@@ -38,7 +31,6 @@
 			"ctrl-a d": "diagnostics::Deploy",
 			"ctrl-a l": "project_symbols::Toggle",
 			"ctrl-a m": "terminal_panel::ToggleFocus",
-			// "ctrl-a p": ["projects::OpenRecent", { "create_new_window": false }],
 			"ctrl-a t": "workspace::NewCenterTerminal",
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
@@ -104,12 +96,15 @@
 			":": "command_palette::Toggle",
 		},
 	},
-	// ======================
-	// Custom vim keybindings
-	// ======================
+	// =======
+	// = vim =
+	// =======
 	{
 		"context": "vim_mode == normal && !menu",
 		"bindings": {
+			"ctrl-a o": "editor::OpenPermalinkToLine",
+			"ctrl-a c": "editor::CopyPermalinkToLine",
+			"ctrl-a y": "workspace::CopyPath",
 			// splits & buffers
 			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-j": "pane::ActivateNextItem",
@@ -120,14 +115,11 @@
 			"ctrl-shift-w": "pane::JoinAll",
 			// leader combos
 			", b": "git::Blame",
-			"shift-b": "editor::BlameHover",
 			", e": "editor::SelectEnclosingSymbol",
-			"ctrl-a o": "editor::OpenPermalinkToLine",
-			"ctrl-a c": "editor::CopyPermalinkToLine",
-			"ctrl-a y": "workspace::CopyPath",
 			", r": "git::Restore",
 			", t": "editor::Format",
 			// lsp & code
+			"shift-b": "editor::BlameHover",
 			"shift-k": "editor::Hover",
 			"g a": "editor::ToggleCodeActions",
 			"g d": "editor::GoToDefinition",
