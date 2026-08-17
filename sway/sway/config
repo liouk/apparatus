@@ -37,6 +37,10 @@ set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' /usr/local
 for_window [app_id="^glone$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
 set $glone $term --class=glone -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/bin/glone
 
+# rename-workspace
+for_window [app_id="^rename-ws$"] floating enable, sticky enable, resize set 30 ppt 10 ppt
+set $renamews $term --class=rename-ws -e ~/.config/sway/rename-workspace.sh
+
 # show-keys
 for_window [app_id="^show-keys$"] floating enable, sticky enable, resize set 50 ppt 75 ppt
 set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
@@ -213,24 +217,8 @@ bindsym $mod+Shift+space floating toggle
 # focus parent
 bindsym $mod+a focus parent
 
-# resize mode
-bindsym $mod+r mode "resize"
-
-mode "resize" {
-  # left will shrink the containers width
-  # right will grow the containers width
-  # up will shrink the containers height
-  # down will grow the containers height
-  bindsym $left resize shrink width 10px
-  bindsym $down resize grow height 10px
-  bindsym $up resize shrink height 10px
-  bindsym $right resize grow width 10px
-
-  # Return to default mode
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-  bindsym $mod+r mode "default"
-}
+# rename workspace
+bindsym $mod+r exec $renamews
 
 # screenshots with grim
 bindsym $mod+Control+3 exec grim -g "$(slurp)"
