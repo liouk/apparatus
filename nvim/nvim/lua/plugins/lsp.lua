@@ -1,5 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
+  enabled = vim.g.nvim_ide or false,
   event = 'VeryLazy',
   dependencies = {
     'williamboman/mason.nvim',

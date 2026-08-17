@@ -32,7 +32,6 @@ return {
         },
         integrations = {
           barbar = true,
-          leap = true,
           which_key = true,
         },
         custom_highlights = function()

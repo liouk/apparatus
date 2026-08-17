@@ -1,5 +1,6 @@
 return {
   'ray-x/go.nvim',
+  enabled = vim.g.nvim_ide or false,
   dependencies = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
   ft = 'go',
 

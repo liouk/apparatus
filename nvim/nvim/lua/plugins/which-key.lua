@@ -9,11 +9,15 @@ return {
 
     local wk = require('which-key')
     wk.setup({})
-    wk.register({
+    local groups = {
       ['<leader>g'] = { name = 'git' },
-      ['<leader>m'] = { name = 'Trouble' },
       ['<leader>s'] = { name = 'sessions' },
-      ['g'] = { name = 'Movements/LSP' },
-    })
+      ['g'] = { name = 'Movements' },
+    }
+    if vim.g.nvim_ide then
+      groups['<leader>m'] = { name = 'Trouble' }
+      groups['g'] = { name = 'Movements/LSP' }
+    end
+    wk.register(groups)
   end,
 }
