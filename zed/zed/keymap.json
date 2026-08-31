@@ -1,7 +1,13 @@
 [
 	{
 		"bindings": {
-			"ctrl-h": "workspace::ActivateNextPane",
+			"ctrl-h": [
+				"action::Sequence",
+				[
+					["agent::SelectAgent", { "agent": "codex-acp" }],
+					"agent::ToggleFocus",
+				],
+			],
 			"ctrl-m": "workspace::ToggleBottomDock",
 			"ctrl-s": "workspace::SaveWithoutFormat",
 			"ctrl-w": "pane::CloseActiveItem",
@@ -49,7 +55,7 @@
 			"ctrl-a g": "outline::Toggle",
 			"ctrl-a ctrl-a": "editor::SelectAll",
 			"ctrl-alt-e": "editor::SelectEnclosingSymbol",
-			"ctrl-l": "editor::ScrollCursorTop",
+			"ctrl-l": "workspace::ActivateNextPane",
 			"ctrl-\"": "editor::ToggleAllDiffHunks",
 		},
 	},
@@ -158,6 +164,31 @@
 			"ctrl-]": "vim::NextWordStart",
 			"ctrl-v": "vim::Paste",
 			"ctrl-w": "editor::DeleteToPreviousWordStart",
+		},
+	},
+	{
+		"context": "AgentPanel || (AgentPanel > Editor) || AcpThread || (AcpThread > Editor)",
+		"bindings": {
+			"ctrl-n": [
+				"agent::NewExternalAgentThread",
+				{ "agent": "codex-acp" },
+			],
+			"ctrl-l": "multi_workspace::ToggleWorkspaceSidebar",
+			"ctrl-]": "workspace::ToggleRightDock",
+		},
+	},
+	{
+		"context": "((AcpThread > Editor) || (MessageEditor > Editor)) && !Picker && !menu",
+		"bindings": {
+			"enter": ["action::Sequence", ["agent::Chat", "workspace::Unfollow"]],
+			"ctrl-enter": "agent::ChatWithFollow",
+		},
+	},
+	{
+		"context": "ThreadsSidebar || (ThreadsSidebar > Editor)",
+		"bindings": {
+			"ctrl-l": "multi_workspace::ToggleWorkspaceSidebar",
+			"escape": "multi_workspace::ToggleWorkspaceSidebar",
 		},
 	},
 ]

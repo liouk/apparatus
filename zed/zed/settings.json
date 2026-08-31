@@ -1,5 +1,14 @@
 {
 	// general
+	"agent_servers": {
+		"codex-acp": {
+			"default_config_options": {
+				"mode": "read-only",
+				"reasoning_effort": "medium",
+			},
+			"type": "registry",
+		},
+	},
 	"diff_view_style": "unified",
 	"cli_default_open_behavior": "new_window",
 	"git_panel": {
@@ -55,8 +64,10 @@
 	"theme": "One Dark",
 	"buffer_font_family": "JetBrains Mono NL",
 	"buffer_font_size": 15.5,
+	"agent_buffer_font_size": 15.5,
+	"agent_ui_font_size": 17,
+	"ui_font_size": 15.5,
 	"ui_font_family": "JetBrains Mono NL",
-	"ui_font_size": 16.5,
 	"icon_theme": "Zed (Default)",
 	"theme_overrides": {
 		"One Dark": {
@@ -125,9 +136,10 @@
 		"button": false,
 	},
 	"agent": {
-		"enabled": false,
+		"enabled": true,
 		"dock": "right",
-		"button": false,
+		"sidebar_side": "right",
+		"button": true,
 	},
 	"search": {
 		"button": false,
