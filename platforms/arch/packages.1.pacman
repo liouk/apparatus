@@ -22,6 +22,7 @@ mako
 grim
 slurp
 wl-clipboard
+libnotify
 playerctl
 brightnessctl
 pipewire-pulse

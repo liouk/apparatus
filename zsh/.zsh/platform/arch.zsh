@@ -9,7 +9,6 @@ ZSH_PLUGINS_DIR="/usr/share/zsh/plugins"
 
 # Arch-specific aliases
 alias ls='ls -lahp --color'
-alias open=xdg-open
 alias vlc='QT_QPA_PLATFORM=wayland vlc'
 alias zed=zeditor
 alias z=zeditor
