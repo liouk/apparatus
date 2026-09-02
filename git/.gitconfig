@@ -1,7 +1,10 @@
 [user]
   name = Ilias Rinis
   email = iliasr@gmail.com
-  signingkey = 6350313EDE6D4E66
+
+[include]
+  # defines where to find GPG signature key configuration
+  path = .config/git/gpgsign-config
 
 [core]
   editor = nvim
@@ -92,10 +95,8 @@
 [absorb]
   oneFixupPerCommit = true
 
-[include]
-  # defines where to find GPG signature key configuration
-  path = .config/git/gpgsign-config
 [init]
 	defaultBranch = main
+
 [fetch]
 	prune = true
