@@ -43,9 +43,9 @@
 		"bindings": {
 			", a": "workspace::ClearAllNotifications",
 			", c": "workspace::CloseAllDocks",
-			", d": "project_panel::ToggleFocus",
+			", d": "project_panel::Toggle",
 			", f": "workspace::NewSearch",
-			", g": "git_panel::ToggleFocus",
+			", g": "git_panel::Toggle",
 		},
 	},
 	{
@@ -75,7 +75,7 @@
 	{
 		"context": "ProjectPanel && not_editing",
 		"bindings": {
-			", d": "workspace::ToggleLeftDock",
+			", d": "project_panel::Toggle",
 			"q": "workspace::ToggleLeftDock",
 			"a": "project_panel::NewFile",
 			"r": "project_panel::Rename",
@@ -132,9 +132,9 @@
 			// global leader combos
 			", a": "workspace::ClearAllNotifications",
 			", c": "workspace::CloseAllDocks",
-			", d": "project_panel::ToggleFocus",
+			", d": "project_panel::Toggle",
 			", f": "workspace::NewSearch",
-			", g": "git_panel::ToggleFocus",
+			", g": "git_panel::Toggle",
 			// lsp & code
 			"shift-b": "editor::BlameHover",
 			"shift-k": "editor::Hover",
@@ -179,10 +179,7 @@
 	{
 		"context": "AgentPanel || (AgentPanel > Editor) || AcpThread || (AcpThread > Editor)",
 		"bindings": {
-			"ctrl-n": [
-				"agent::NewExternalAgentThread",
-				{ "agent": "codex-acp" },
-			],
+			"ctrl-n": ["agent::NewExternalAgentThread", { "agent": "codex-acp" }],
 			"ctrl-l": "multi_workspace::ToggleWorkspaceSidebar",
 			"ctrl-]": "workspace::ToggleRightDock",
 		},
