@@ -143,3 +143,10 @@ label:focus {
 #custom-powerbutton {
 	font-size: 16pt;
 }
+
+#custom-web-monitor.alert,
+#custom-web-monitor.error {
+	background-color: @red;
+	color: @base;
+	padding: 0 10px;
+}

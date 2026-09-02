@@ -2,7 +2,7 @@
   "position": "top",
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "network", "custom/vpn", "custom/tailscale", "bluetooth", "sway/language", "clock", "custom/suspendbutton", "custom/powerbutton", "battery"],
+  "modules-right": ["custom/web-monitor", "pulseaudio", "cpu", "memory", "network", "custom/vpn", "custom/tailscale", "bluetooth", "sway/language", "clock", "custom/suspendbutton", "custom/powerbutton", "battery"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -109,6 +109,15 @@
     "exec": "$HOME/.config/waybar/vpn.sh waybar-tailscale",
     "interval": "once",
     "signal": 1
+  },
+  "custom/web-monitor": {
+    "tooltip": true,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/web-monitor.sh",
+    "on-click": "$HOME/.config/waybar/web-monitor.sh --open",
+    "on-click-right": "$HOME/.config/waybar/web-monitor.sh --dismiss",
+    "exec-on-event": true,
+    "interval": 3600
   },
   "custom/suspendbutton": {
     "format": "",
