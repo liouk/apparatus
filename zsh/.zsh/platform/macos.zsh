@@ -21,5 +21,4 @@ alias ls='ls -Glahp'
 alias z=zed
 alias zap='zed "$HOME/Workspace/github.com/liouk/apparatus"'
 
-command -v gxargs > /dev/null && alias xargs=gxargs
 export GPG_TTY="$TTY"

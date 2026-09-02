@@ -1,5 +1,3 @@
-findutils
-coreutils
 bash
 git
 tig
@@ -8,14 +6,10 @@ node
 stow
 fzf
 ripgrep
-direnv
-bat
 jq
 romkatv/powerlevel10k/powerlevel10k
 zsh-syntax-highlighting
 zsh-autosuggestions
-btop
 gnupg
 pinentry-mac
 itchyny/tap/mmv
-saulpw/vd/visidata
