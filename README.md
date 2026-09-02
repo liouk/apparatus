@@ -43,6 +43,8 @@ From an existing checkout:
 ./install.sh --unstow-only
 ```
 
+Additional machine- or work-specific shell files can be linked into `~/.zsh/conf.d/`. Files ending in `.zsh` or `.sh` are sourced in filename order.
+
 ## Adding a new platform
 
 Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-release`) with:

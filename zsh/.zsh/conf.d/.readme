@@ -1,2 +1,2 @@
-# place any additional config files that live outside apparatus here
-# they'll be sourced by .zshrc automagically
+# Link additional .zsh and .sh configuration files here.
+# They are sourced automatically by .zshrc in filename order.

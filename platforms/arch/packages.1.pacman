@@ -27,8 +27,6 @@ brightnessctl
 pipewire-pulse
 firefox
 go
-tailscale
-openvpn
 direnv
 fd
 pavucontrol

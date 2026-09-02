@@ -11,9 +11,26 @@ source ~/.zsh/aliases.zsh
 # helper funcs
 source ~/.zsh/funcs.zsh
 
-# host specific
-export HOST="${HOST%.local}"
-source ~/.zsh/host_${HOST}.zsh
+# platform
+case "$(uname -s)" in
+  Darwin)
+    APPARATUS_PLATFORM="macos"
+    ;;
+  Linux)
+    APPARATUS_PLATFORM="$(. /etc/os-release && printf '%s' "$ID")"
+    ;;
+  *)
+    print -u2 "unsupported apparatus platform: $(uname -s)"
+    return 1
+    ;;
+esac
+
+platform_config="$HOME/.zsh/platform/$APPARATUS_PLATFORM.zsh"
+if [[ ! -r "$platform_config" ]]; then
+  print -u2 "missing apparatus platform config: $platform_config"
+  return 1
+fi
+source "$platform_config"
 
 # history
 HISTFILE="$HOME/.zsh_history"
@@ -50,7 +67,9 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # completion
-autoload -Uz compinit && compinit
+if (( ! $+functions[compdef] )); then
+  autoload -Uz compinit && compinit
+fi
 _git-wt() {
   if [[ "$words[2]" == "remove" || "$words[2]" == "rm" ]]; then
     local toplevel="$(git rev-parse --show-toplevel 2>/dev/null)"
@@ -85,16 +104,16 @@ export PATH=$HOME/.npm-global/bin:$PATH
 # plugins
 
 # zsh syntax highlighting and autosuggestions
-source "${ZSH_PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "${ZSH_PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[[ ! -r "${ZSH_PLUGINS_DIR:-}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || source "${ZSH_PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ ! -r "${ZSH_PLUGINS_DIR:-}/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || source "${ZSH_PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # powerlevel10k
-source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"
+[[ ! -r "${POWERLEVEL10K_DIR:-}/powerlevel10k.zsh-theme" ]] || source "${POWERLEVEL10K_DIR}/powerlevel10k.zsh-theme"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# additional config files that live outside apparatus
-for conf in $(find -L "$HOME/.zsh/conf.d" -type f); do
-  source $conf
+# external machine- or work-specific configuration
+for conf in "$HOME"/.zsh/conf.d/*.(zsh|sh)(N); do
+  [[ ! -f "$conf" ]] || source "$conf"
 done
+
 export PATH="$HOME/.local/bin:$PATH"
-[ -f "/home/liouk/.config/claude-code-vertex/env.sh" ] && . "/home/liouk/.config/claude-code-vertex/env.sh"

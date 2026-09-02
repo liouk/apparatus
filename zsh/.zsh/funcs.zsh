@@ -12,10 +12,15 @@ function __jumpfunc () {
   esac
 }
 
+function lk () {
+  __jumpfunc "$APPARATUS_WORKSPACE_ROOT" "$1"
+}
+
 # manage git worktrees
 function git-wt () {
   if [[ -z "$1" ]]; then
-    find ~/redhat/repos ~/liouk -maxdepth 3 -name .git -exec sh -c \
+    local -a roots=("$APPARATUS_WORKSPACE_ROOT" "${GIT_WORKTREE_ROOTS[@]}")
+    find "${roots[@]}" -maxdepth 3 -name .git -exec sh -c \
       'wt="$(git --git-dir="$1" worktree list)"; [ "$(echo "$wt" | wc -l)" -gt 1 ] && echo "$wt" && echo' _ {} \; 2>/dev/null
   elif [[ "$1" == "remove" || "$1" == "rm" ]]; then
     local toplevel="$(git rev-parse --show-toplevel)"
