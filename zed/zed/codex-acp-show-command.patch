@@ -1,0 +1,20 @@
+diff --git a/dist/index.js b/dist/index.js
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -25447,6 +25447,7 @@ function nonBlank(value) {
+ // src/permissions/presentation.ts
+ function commandToolCall(params) {
+   const network = params.networkApprovalContext;
++  const commandContent = params.command ? [textContent(stripShellPrefix(params.command))] : [];
+   const rawInput = {
+     ...params.command ? { command: stripShellPrefix(params.command) } : {},
+     ...params.cwd ? { cwd: params.cwd } : {},
+@@ -25464,7 +25465,7 @@ function commandToolCall(params) {
+       ...commandActionPaths(params.commandActions),
+       ...permissionProfilePaths(params.additionalPermissions)
+     ])),
+-    ...network ? { content: [textContent(`${network.protocol} access to ${network.host}`), ...additionalPermissionContent] } : additionalPermissionContent.length > 0 ? { content: additionalPermissionContent } : {}
++    ...network ? { content: [textContent(`${network.protocol} access to ${network.host}`), ...commandContent, ...additionalPermissionContent] } : commandContent.length > 0 || additionalPermissionContent.length > 0 ? { content: [...commandContent, ...additionalPermissionContent] } : {}
+   };
+ }
+ function fileChangeToolCall(params, permissionContext) {
