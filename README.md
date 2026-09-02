@@ -9,10 +9,25 @@ Originally forked from [michailpanagiotis/apparatus](https://github.com/michailp
 ```
 platforms/<os>/          # per-platform config (packages, stow targets, repos, links)
 <package>/               # stow packages (zsh, git, kitty, sway, etc.)
-install.sh               # generic driver script
+bootstrap.sh             # clones the repo, then invokes install.sh
+install.sh               # repo-local installation driver
 ```
 
 ## Usage
+
+Apparatus requires Bash 4 or newer. On macOS, install Homebrew if necessary, then install a current Bash:
+
+```bash
+brew install bash
+```
+
+To bootstrap a new machine:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/bootstrap.sh | sh
+```
+
+From an existing checkout:
 
 ```bash
 # check if current OS is supported
@@ -32,7 +47,7 @@ install.sh               # generic driver script
 
 Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-release`) with:
 
-- `config` — `APPARATUS_DIR`, `PKG_CMD`, `PKG_PER_LINE` declarations
+- `config` — an `install_<manager>_packages` function for each package manager
 - `packages.<N>.<manager>` — one package per line, installed in sort order
 - `stow-targets` — `TARGET:package` per line
 - `repos` (optional) — `target_dir git_url` per line

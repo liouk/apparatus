@@ -1,14 +1,45 @@
 #!/usr/bin/env bash
 
+if ((BASH_VERSINFO[0] < 4)); then
+  echo "apparatus requires Bash 4 or newer (found $BASH_VERSION)" >&2
+  echo "On macOS, install it with Homebrew and rerun this script with Homebrew's bash." >&2
+  exit 1
+fi
+
 set -e
 set -o pipefail
 [ -n "$TRACE" ] && { set -x; }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APPARATUS_REPO="git@github.com:liouk/apparatus.git"
 
 function read_lines {
-  grep -v '^\s*#' "$1" | grep -v '^\s*$'
+  local line trimmed
+  while IFS= read -r line || [ -n "$line" ]; do
+    trimmed="${line#"${line%%[![:space:]]*}"}"
+    trimmed="${trimmed%"${trimmed##*[![:space:]]}"}"
+    [[ -z "$trimmed" || "$trimmed" == \#* ]] && continue
+    printf '%s\n' "$trimmed"
+  done < "$1"
+}
+
+function expand_path {
+  case "$1" in
+    '$HOME')
+      printf '%s\n' "$HOME"
+      ;;
+    '$HOME/'*)
+      printf '%s/%s\n' "$HOME" "${1#\$HOME/}"
+      ;;
+    '~')
+      printf '%s\n' "$HOME"
+      ;;
+    '~/'*)
+      printf '%s/%s\n' "$HOME" "${1#\~/}"
+      ;;
+    *)
+      printf '%s\n' "$1"
+      ;;
+  esac
 }
 
 function detect_os {
@@ -21,22 +52,19 @@ function detect_os {
 
 function install_packages {
   local platform_dir="$1"
+  local pkg_file mgr installer
+  local -a packages
 
-  for pkg_file in $(printf '%s\n' "$platform_dir"/packages.* | sort); do
+  for pkg_file in "$platform_dir"/packages.*; do
     [ -f "$pkg_file" ] || continue
-    local mgr="${pkg_file##*.}"
-    local cmd="${PKG_CMD[$mgr]}"
-    if [ -z "$cmd" ]; then
+    mgr="${pkg_file##*.}"
+    installer="install_${mgr}_packages"
+    if ! declare -F "$installer" > /dev/null; then
       echo "unknown package manager: $mgr"
       exit 1
     fi
-    if [ -n "${PKG_PER_LINE[$mgr]}" ]; then
-      while read -r pkg; do
-        $cmd "$pkg"
-      done < <(read_lines "$pkg_file")
-    else
-      $cmd $(read_lines "$pkg_file" | tr '\n' ' ')
-    fi
+    mapfile -t packages < <(read_lines "$pkg_file")
+    [ "${#packages[@]}" -eq 0 ] || "$installer" "${packages[@]}"
   done
 }
 
@@ -56,9 +84,14 @@ function do_stow {
 
 function clone_repos {
   local repos_file="$1"
+  local target_spec target_dir git_url remainder
   [ -f "$repos_file" ] || return 0
-  while read -r target_dir git_url; do
-    target_dir=$(eval echo "$target_dir")
+  while read -r target_spec git_url remainder; do
+    if [ -n "$remainder" ]; then
+      echo "invalid repository entry: $target_spec $git_url $remainder" >&2
+      exit 1
+    fi
+    target_dir="$(expand_path "$target_spec")"
     if [ -d "$target_dir" ]; then
       echo "will not clone $git_url; $target_dir already exists"
     else
@@ -70,26 +103,20 @@ function clone_repos {
 
 function create_links {
   local links_file="$1"
+  local link_name target_spec target_path link_path
   [ -f "$links_file" ] || return 0
-  while IFS=: read -r link_name target_path; do
-    target_path=$(eval echo "$target_path")
-    if [ -L "/usr/local/bin/$link_name" ]; then
-      echo "link /usr/local/bin/$link_name already exists; skipping"
+  while IFS=: read -r link_name target_spec; do
+    target_path="$(expand_path "$target_spec")"
+    link_path="/usr/local/bin/$link_name"
+    if [ -L "$link_path" ]; then
+      echo "link $link_path already exists; skipping"
+    elif [ -e "$link_path" ]; then
+      echo "will not create link $link_path; a non-symlink already exists" >&2
+      exit 1
     else
-      sudo ln -s "$target_path" "/usr/local/bin/$link_name"
+      sudo ln -s "$target_path" "$link_path"
     fi
   done < <(read_lines "$links_file")
-}
-
-function apparatus {
-  local installdir="$1"
-
-  if [ -d "${installdir}" ]; then
-    echo "will not clone apparatus; it already exists in $installdir"
-    return
-  fi
-
-  git clone "$APPARATUS_REPO" "$installdir"
 }
 
 function parse_opts {
@@ -127,7 +154,7 @@ function main {
   parse_opts "$@"
 
   if [ -n "$CHECK_SUPPORT" ]; then
-    if [[ "$DETECTED_OS" == "" ]]; then
+    if [ -z "$DETECTED_OS" ] || [ ! -d "$SCRIPT_DIR/platforms/$DETECTED_OS" ]; then
       echo "unsupported operating system"
       exit 1
     fi
@@ -149,15 +176,14 @@ function main {
     clone_repos "$platform_dir/repos"
     create_links "$platform_dir/links"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
-    apparatus "$APPARATUS_DIR"
   fi
 
   if [ -n "$ALL" ] || [ -n "$STOW_ONLY" ]; then
-    do_stow --restow "$APPARATUS_DIR" "$platform_dir/stow-targets"
+    do_stow --restow "$SCRIPT_DIR" "$platform_dir/stow-targets"
   fi
 
   if [ -n "$UNSTOW_ONLY" ]; then
-    do_stow --delete "$APPARATUS_DIR" "$platform_dir/stow-targets"
+    do_stow --delete "$SCRIPT_DIR" "$platform_dir/stow-targets"
   fi
 }
 

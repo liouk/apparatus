@@ -1,9 +1,14 @@
-APPARATUS_DIR="$HOME/.apparatus"
+function install_pacman_packages {
+  sudo pacman -Syyu --noconfirm --needed "$@"
+}
 
-declare -A PKG_CMD
-PKG_CMD[pacman]="sudo pacman -Syyu --noconfirm --needed"
-PKG_CMD[yay]="yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed"
-PKG_CMD[go]="go install"
+function install_yay_packages {
+  yay -Sy --answerclean N --answerdiff N --cleanafter --noremovemake --noconfirm --needed "$@"
+}
 
-declare -A PKG_PER_LINE
-PKG_PER_LINE[go]=1
+function install_go_packages {
+  local package
+  for package in "$@"; do
+    go install "$package"
+  done
+}

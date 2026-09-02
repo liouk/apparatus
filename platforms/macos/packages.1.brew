@@ -1,5 +1,6 @@
 findutils
 coreutils
+bash
 git
 tig
 neovim
