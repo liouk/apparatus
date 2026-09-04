@@ -11,6 +11,7 @@ state_file="$state_dir/waybar.json"
 dismissed_file="$state_dir/dismissed.json"
 dismiss_repaint_file="$state_dir/dismiss-repaint.json"
 timeout_seconds="${WEB_MONITOR_TIMEOUT:-10}"
+retry_delays="${WEB_MONITOR_RETRY_DELAYS-5 15}"
 
 empty_result() {
 	mkdir -p "$state_dir"
@@ -168,18 +169,51 @@ main() {
 		return
 	}
 
-	local results='[]'
+	local monitors=()
+	local monitor_results=()
 	local monitor
 	while IFS= read -r -d '' monitor; do
-		local result
-		result=$(run_monitor "$monitor")
-		results=$(jq -c --argjson result "$result" '. + [$result]' <<<"$results")
+		monitors+=("$monitor")
 	done < <(find "$config_dir" -maxdepth 1 -type f -executable -print0 | sort -z)
 
-	if [[ $(jq 'length' <<<"$results") -eq 0 ]]; then
+	if ((${#monitors[@]} == 0)); then
 		empty_result
 		return
 	fi
+
+	local index
+	for index in "${!monitors[@]}"; do
+		monitor_results+=("$(run_monitor "${monitors[$index]}")")
+	done
+
+	# Resume can make Waybar run an overdue interval before networking is ready.
+	# Retry only errors, in shared rounds, so healthy checks are never delayed and
+	# simultaneous network failures wait only once per round.
+	local retry_delay_values=()
+	read -r -a retry_delay_values <<<"$retry_delays"
+	local delay
+	for delay in "${retry_delay_values[@]}"; do
+		[[ "$delay" =~ ^[0-9]+([.][0-9]+)?$ ]] || continue
+
+		local has_errors=false
+		for index in "${!monitor_results[@]}"; do
+			if jq -e '.state == "error"' >/dev/null 2>&1 <<<"${monitor_results[$index]}"; then
+				has_errors=true
+				break
+			fi
+		done
+		[[ "$has_errors" == true ]] || break
+
+		sleep "$delay"
+		for index in "${!monitor_results[@]}"; do
+			if jq -e '.state == "error"' >/dev/null 2>&1 <<<"${monitor_results[$index]}"; then
+				monitor_results[$index]=$(run_monitor "${monitors[$index]}")
+			fi
+		done
+	done
+
+	local results
+	results=$(printf '%s\n' "${monitor_results[@]}" | jq -sc '.')
 
 	render "$results"
 }
