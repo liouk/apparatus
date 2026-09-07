@@ -72,12 +72,22 @@ function do_stow {
   local action="$1"
   local apparatus_dir="$2"
   local stow_file="$3"
+  local target package package_dir layout
+  local -a stow_options
 
   mkdir -p "$HOME/.config"
   pushd "$apparatus_dir" > /dev/null
-  while IFS=: read -r target package; do
+  while IFS=: read -r target package layout; do
     [[ "$target" == "HOME" ]] && target="$HOME" || target="$HOME/$target"
-    stow "$action" --target="$target" "$package"
+    stow_options=()
+    case "$layout" in
+      '') ;;
+      no-folding) stow_options+=(--no-folding) ;;
+      *) echo "unknown Stow layout: $layout" >&2; return 1 ;;
+    esac
+    # Manifests can refer to shared or platform-local packages, relative to the checkout.
+    package_dir="$apparatus_dir/$(dirname "$package")"
+    stow "$action" "${stow_options[@]}" --dir="$package_dir" --target="$target" "$(basename "$package")"
   done < <(read_lines "$stow_file")
   popd > /dev/null
 }

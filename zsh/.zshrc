@@ -25,7 +25,9 @@ case "$(uname -s)" in
     ;;
 esac
 
-platform_config="$HOME/.zsh/platform/$APPARATUS_PLATFORM.zsh"
+# Resolve the Stow symlink to find the checkout, regardless of its location.
+APPARATUS_DIR="${${(%):-%x}:A:h:h}"
+platform_config="$APPARATUS_DIR/platforms/$APPARATUS_PLATFORM/zsh.zsh"
 if [[ ! -r "$platform_config" ]]; then
   print -u2 "missing apparatus platform config: $platform_config"
   return 1
