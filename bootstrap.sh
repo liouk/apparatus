@@ -14,11 +14,14 @@ case "$(uname -s)" in
       exit 1
     fi
     . /etc/os-release
-    if [ "${ID:-}" != "arch" ]; then
-      echo "unsupported operating system: ${ID:-unknown}" >&2
-      exit 1
-    fi
-    default_install_dir="$HOME/.apparatus"
+    case "${ID:-}" in
+      arch) default_install_dir="$HOME/.apparatus" ;;
+      fedora) default_install_dir="$HOME/liouk/apparatus" ;;
+      *)
+        echo "unsupported operating system: ${ID:-unknown}" >&2
+        exit 1
+        ;;
+    esac
     ;;
   *)
     echo "unsupported operating system: $(uname -s)" >&2

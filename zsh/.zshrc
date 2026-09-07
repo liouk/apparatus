@@ -82,11 +82,6 @@ _git-wt() {
 }
 compdef _git-wt git-wt
 
-# direnv
-if type "direnv" > /dev/null; then
-  eval "$(direnv hook zsh)"
-fi
-
 # fzf
 export FZF_DEFAULT_COMMAND='fd .'
 export FZF_CTRL_T_COMMAND='fd .'

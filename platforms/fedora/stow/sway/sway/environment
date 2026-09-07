@@ -1,0 +1,2 @@
+# Fedora's start-sway sources this before launching Sway and its applications.
+export PATH="$HOME/.local/bin:$PATH"

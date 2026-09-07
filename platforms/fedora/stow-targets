@@ -1,0 +1,14 @@
+HOME:zsh
+HOME:powerlevel10k
+HOME:tig
+HOME:git
+.config:foot
+.config:platforms/fedora/stow/fuzzel
+.config:nvim
+.config:sway:no-folding
+.config:platforms/fedora/stow/sway:no-folding
+.config:swaylock
+.config:waybar
+.config:mako
+.config:xkb
+.config:zed

@@ -1,0 +1,17 @@
+APPARATUS_BIN_DIR="$HOME/.local/bin"
+
+function install_dnf_packages {
+  # Avoid pulling optional desktop/audio services into a managed installation.
+  sudo dnf install -y --setopt=install_weak_deps=False "$@"
+}
+
+function install_go_packages {
+  local package
+  for package in "$@"; do
+    GOBIN="$HOME/.local/bin" go install "$package"
+  done
+}
+
+function install_npm_packages {
+  npm install --global --prefix "$HOME/.local" "$@"
+}

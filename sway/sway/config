@@ -10,6 +10,11 @@ set $up k
 set $right l
 set $term foot
 
+# Default helper locations; platforms may supply their own paths.
+set $local_bin /usr/local/bin
+set $go_bin ~/go/bin
+include ~/.config/sway/tool-paths.conf
+
 #
 # Fonts
 #
@@ -19,23 +24,23 @@ font JetBrains Mono SemiBold 10
 # App launcher
 #
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
+set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' sway-launcher-desktop
 
 # zed-picker
 for_window [app_id="^zed-picker$"] floating enable, sticky enable, resize set 40 ppt 30 ppt
-set $zedpicker $term --class=zed-picker -e env TERMINAL_COMMAND='$term -e' /usr/local/bin/zed-picker
+set $zedpicker $term --class=zed-picker -e env TERMINAL_COMMAND='$term -e' $local_bin/zed-picker
 
 # goot
 for_window [app_id="^goot$"] floating enable, sticky enable, resize set 30 ppt 70 ppt
-set $goot $term --class=goot -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/bin/goot
+set $goot $term --class=goot -e env TERMINAL_COMMAND='$term -e' $go_bin/goot
 
 # skratch
 for_window [app_id="^skratch$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
-set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' /usr/local/bin/skratch
+set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' $local_bin/skratch
 
 # glone
 for_window [app_id="^glone$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
-set $glone $term --class=glone -e env TERMINAL_COMMAND='$term -e' /home/liouk/go/bin/glone
+set $glone $term --class=glone -e env TERMINAL_COMMAND='$term -e' $go_bin/glone
 
 # rename-workspace
 for_window [app_id="^rename-ws$"] floating enable, sticky enable, resize set 30 ppt 10 ppt
@@ -298,9 +303,6 @@ bindsym --to-code {
 #
 
 assign [app_id="Slack"] workspace 3
-assign [app_id="com.viber.Viber"] workspace 9
-
-for_window [app_id="firefox" title="^WhatsApp"] move container to workspace 9
 
 # startup
 exec playerctld daemon
@@ -313,7 +315,6 @@ exec $term
 exec zeditor
 
 exec /usr/bin/slack -s %U --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec /usr/bin/viber
 
 # enable floating for popups and dialogs
 for_window {
@@ -332,3 +333,4 @@ workspace 4 output $laptop
 workspace 9 output $laptop
 
 include /etc/sway/config.d/*
+include ~/.config/sway/platform.d/*.conf

@@ -1,0 +1,45 @@
+# Apparatus CLI tools (base-system utilities and build toolchains are CSB-provided)
+git
+openssh-clients
+unzip
+tig
+neovim
+npm
+stow
+fzf
+ripgrep
+jq
+golang
+fd-find
+gh
+netbird
+
+# Shell and fonts (Powerlevel10k and Nerd Font symbols are installed separately)
+zsh
+zsh-syntax-highlighting
+zsh-autosuggestions
+jetbrains-mono-fonts
+jetbrains-mono-nl-fonts
+
+# Sway alongside the managed desktop; no display-manager or audio-server changes
+foot
+fuzzel
+sway
+sway-config-fedora
+sway-systemd
+swaylock
+swaybg
+swayidle
+waybar
+mako
+grim
+slurp
+wl-clipboard
+libnotify
+playerctl
+brightnessctl
+pulseaudio-utils
+pavucontrol
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+firefox

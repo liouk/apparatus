@@ -113,18 +113,25 @@ function clone_repos {
 
 function create_links {
   local links_file="$1"
+  local link_dir="${2:-/usr/local/bin}"
   local link_name target_spec target_path link_path
+  local -a link_command=(ln)
   [ -f "$links_file" ] || return 0
+  if [ "$link_dir" = /usr/local/bin ]; then
+    link_command=(sudo ln)
+  else
+    mkdir -p "$link_dir"
+  fi
   while IFS=: read -r link_name target_spec; do
     target_path="$(expand_path "$target_spec")"
-    link_path="/usr/local/bin/$link_name"
+    link_path="$link_dir/$link_name"
     if [ -L "$link_path" ]; then
       echo "link $link_path already exists; skipping"
     elif [ -e "$link_path" ]; then
       echo "will not create link $link_path; a non-symlink already exists" >&2
       exit 1
     else
-      sudo ln -s "$target_path" "$link_path"
+      "${link_command[@]}" -s "$target_path" "$link_path"
     fi
   done < <(read_lines "$links_file")
 }
@@ -184,7 +191,7 @@ function main {
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
     clone_repos "$platform_dir/repos"
-    create_links "$platform_dir/links"
+    create_links "$platform_dir/links" "${APPARATUS_BIN_DIR:-/usr/local/bin}"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
   fi
 
