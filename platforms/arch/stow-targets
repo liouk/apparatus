@@ -2,7 +2,7 @@ HOME:zsh
 HOME:powerlevel10k
 HOME:tig
 HOME:git
-.config:kitty
+.config:foot
 .config:nvim
 .config:sway
 .config:swaylock

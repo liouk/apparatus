@@ -111,7 +111,6 @@ draw() {
             "$(fmt_entry "${C}zed, z${N}" "${D}zeditor${N}")"
             "$(fmt_entry "${C}..${N}" "${D}cd ..${N}")"
             "$(fmt_entry "${C}...${N}" "${D}cd ../../${N}")"
-            "$(fmt_entry "${C}icat${N}" "${D}kitty image viewer${N}")"
             ""
             "${Y}GIT${N}"
             "$(fmt_entry "${C}vimod${N}" "${D}vim modified files${N}")"

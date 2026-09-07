@@ -8,7 +8,7 @@ Originally forked from [michailpanagiotis/apparatus](https://github.com/michailp
 
 ```
 platforms/<os>/          # per-platform config (packages, stow targets, repos, links)
-<package>/               # stow packages (zsh, git, kitty, sway, etc.)
+<package>/               # stow packages (zsh, git, foot, sway, etc.)
 bootstrap.sh             # clones the repo, then invokes install.sh
 install.sh               # repo-local installation driver
 ```
@@ -58,4 +58,4 @@ Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-
 
 ## Theme
 
-[Catppuccin Mocha](https://github.com/catppuccin/catppuccin), applied in kitty, neovim, sway, waybar, mako, tig, and swaylock.
+[Catppuccin Mocha](https://github.com/catppuccin/catppuccin), applied in foot, neovim, sway, waybar, mako, tig, and swaylock.

@@ -8,7 +8,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term kitty
+set $term foot
 
 #
 # Fonts
@@ -51,7 +51,7 @@ set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
 set $laptop eDP-1
 set $homedisplay DP-3
 set $officedisplay DP-1
-output $officedisplay mode 2560x1440@59.951Hz
+output $officedisplay mode 3840x2160@59.997Hz scale 1.6
 
 output $laptop pos 0 0 res 1920x1080
 output $homedisplay pos 1920 -360 res 2560x1440
@@ -272,7 +272,7 @@ bindsym $mod+0 [con_mark="main_scratchpad"] scratchpad show
 bindsym $mod+Shift+0 mark main_scratchpad, move scratchpad
 
 set $scratch_spotify spotify --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu
-set $scratch_term kitty --class=scratch_term
+set $scratch_term foot --class=scratch_term
 set $scratch_pos move position center, resize set width 50 ppt height 75 ppt
 for_window {
   [app_id="scratch_term"] {

@@ -15,11 +15,8 @@ alias gh-sync='gh repo sync $(gh repo view --json nameWithOwner -q .nameWithOwne
 alias doc='docker compose'
 alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
 
-# kitty SSH compatibility
-# https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
-[[ "$TERM" == "xterm-kitty" ]] && { alias ssh='env TERM=xterm-256color ssh' }
-
-alias icat="kitty +kitten icat"
+# SSH compatibility for remote hosts without Foot terminfo.
+[[ "$TERM" == "foot" || "$TERM" == "foot-direct" ]] && { alias ssh='env TERM=xterm-256color ssh' }
 
 # k8s
 alias kc=kubectl
