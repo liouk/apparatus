@@ -80,6 +80,7 @@ The package list covers Apparatus tools, not base-system provisioning. Standard 
 - Installs Go helpers and `yamlfmt`, plus the same Nerd Font symbols release as Arch. No AUR/COPR setup or `fzfpac` link is added.
 - Installs [Ankit Pokhrel's JiraCLI](https://github.com/ankitpokhrel/jira-cli), the same CLI used on the Arch machine, as `~/.local/bin/jira` through Go. Jira configuration and credentials are not copied; initialize or supply them separately.
 - Installs [Bitwarden CLI (`bw`)](https://bitwarden.com/help/cli/) through npm with the user-local prefix `~/.local`, placing `bw` in `~/.local/bin`. Rerunning the installer updates it to the latest release. Vault login is separate.
+- Installs [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) through npm with the same user-local prefix, placing `codex` in `~/.local/bin`. Rerunning the installer updates it to the latest release. Authentication is separate; redhat-config owns the global Codex instructions.
 
 Personal helper links, Go binaries, and newly installed Zed/kubectl commands live in `~/.local/bin`, without sudo. Fedora's Zsh settings set `GOBIN` there for future Go installs. Both Zsh and the Fedora Sway session explicitly put this directory on `PATH`; log into Sway through the login screen (or use `start-sway`) to load its environment. Existing system-managed tool installations are left alone.
 
