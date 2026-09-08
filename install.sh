@@ -50,6 +50,38 @@ function detect_os {
   fi
 }
 
+function ssh_keygen {
+  command ssh-keygen "$@"
+}
+
+function recover_ssh_keys (
+  local answer pub fingerprint manifest name
+  umask 077
+  mkdir -p "$HOME/.ssh"
+  cd "$HOME/.ssh"
+  if [[ "${YUBIKEY_NONINTERACTIVE:-0}" != 1 ]] && { exec 3<> /dev/tty; } 2> /dev/null; then
+    read -r -p 'Recover SSH keys from your YubiKey? [y/N] ' answer <&3 2>&3 || return 0
+    if [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]]; then
+      read -r -p 'Plug in your YubiKey and press Enter when ready. ' answer <&3 2>&3 || return 0
+      ssh_keygen -K <&3 >&3 2>&3
+    fi
+  fi
+  for pub in *.pub; do
+    [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
+    fingerprint="$(ssh_keygen -lf "$pub" -E sha256 | awk '{print $2}')"
+    for manifest in "$SCRIPT_DIR/ssh-key.fingerprints" "$HOME/.config/git/signing-key.fingerprints"; do
+      [[ -r "$manifest" ]] || continue
+      name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$manifest")"
+      [[ -n "$name" ]] || continue
+      [[ -e "$name" || -L "$name" ]] || ln -s "${pub%.pub}" "$name"
+      [[ -e "$name.pub" || -L "$name.pub" ]] || ln -s "$pub" "$name.pub"
+    done
+  done
+  if [[ ! -r "$HOME/.ssh/id_ed25519_sk_git_signing_personal" ]]; then
+    echo "warning: personal signing key is missing; recover it before committing. Signing remains enabled." >&2
+  fi
+)
+
 function install_packages {
   local platform_dir="$1"
   local pkg_file mgr installer
@@ -78,7 +110,11 @@ function do_stow {
   mkdir -p "$HOME/.config"
   pushd "$apparatus_dir" > /dev/null
   while IFS=: read -r target package layout; do
-    [[ "$target" == "HOME" ]] && target="$HOME" || target="$HOME/$target"
+    case "$target" in
+      HOME) target="$HOME" ;;
+      CODEX) target="${CODEX_HOME:-$HOME/.codex}"; mkdir -p "$target" ;;
+      *) target="$HOME/$target" ;;
+    esac
     stow_options=()
     case "$layout" in
       '') ;;
@@ -150,6 +186,11 @@ function parse_opts {
         ALL=
         shift
         ;;
+      --recover-keys-only)
+        RECOVER_KEYS_ONLY=1
+        ALL=
+        shift
+        ;;
       --unstow-only)
         UNSTOW_ONLY=1
         ALL=
@@ -187,6 +228,11 @@ function main {
 
   source "$platform_dir/config"
 
+  if [ -n "$RECOVER_KEYS_ONLY" ]; then
+    recover_ssh_keys
+    return
+  fi
+
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
@@ -201,6 +247,10 @@ function main {
 
   if [ -n "$UNSTOW_ONLY" ]; then
     do_stow --delete "$SCRIPT_DIR" "$platform_dir/stow-targets"
+  fi
+
+  if [ -n "$ALL" ]; then
+    recover_ssh_keys
   fi
 }
 

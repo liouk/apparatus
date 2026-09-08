@@ -5,3 +5,8 @@ function install_brew_packages {
 function install_cask_packages {
   brew install --cask "$@"
 }
+
+# Apple's OpenSSH does not support FIDO2 key recovery.
+function ssh_keygen {
+  "$(brew --prefix openssh)/bin/ssh-keygen" "$@"
+}

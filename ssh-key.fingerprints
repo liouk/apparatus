@@ -1,0 +1,3 @@
+# Existing resident credentials; these are public fingerprints, not key handles.
+id_ed25519_sk_github SHA256:qJEamLpmVYQALNDf8nEtdbyP6qgt1owc6yEMj0SslTo
+id_ed25519_sk_git_signing_personal SHA256:wDHe6MHuP8R2COJSOxAyZcErenbAlbVQIFrTw35UxIs

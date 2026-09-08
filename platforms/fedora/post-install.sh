@@ -10,7 +10,7 @@
   export PATH="$HOME/.local/bin:$PATH"
   mkdir -p "$HOME/.local/bin"
 
-  # Keep CSB-provided installations. Otherwise use Zed's upstream stable installer.
+  # Keep existing installations. Otherwise use Zed's upstream stable installer.
   if ! command -v zeditor > /dev/null && ! command -v zed > /dev/null; then
     curl -fsSL https://zed.dev/install.sh -o "$fedora_tmp/zed-install.sh"
     sh "$fedora_tmp/zed-install.sh"
@@ -26,7 +26,7 @@
   fi
 
   # Latest stable kubectl, verified against upstream's SHA-256 checksum.
-  # An existing client may be managed by the CSB, so do not replace it.
+  # An existing client may be system-managed, so do not replace it.
   if ! command -v kubectl > /dev/null; then
     case "$(uname -m)" in
       x86_64) kubectl_arch=amd64 ;;
@@ -61,27 +61,6 @@
 
   printf '\nFedora tools installed. Select Sway at the login screen when ready.\n'
   printf 'The managed desktop, audio services and login shell have not been changed.\n'
-)
-
-(
-  umask 077
-  mkdir -p "$HOME/.ssh"
-  cd "$HOME/.ssh"
-  if [[ "${YUBIKEY_NONINTERACTIVE:-0}" != 1 ]] && { exec 3<> /dev/tty; } 2> /dev/null; then
-    read -r -p 'Recover SSH keys from your YubiKey? [y/N] ' answer <&3 2>&3 || exit 0
-    if [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]]; then
-      read -r -p 'Plug in your YubiKey and press Enter when ready. ' answer <&3 2>&3 || exit 0
-      ssh-keygen -K <&3 >&3 2>&3
-    fi
-  fi
-  for pub in *.pub; do
-    [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
-    fingerprint="$(ssh-keygen -lf "$pub" -E sha256 | awk '{print $2}')"
-    name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$SCRIPT_DIR/platforms/fedora/github-key.fingerprints")"
-    [[ -n "$name" ]] || continue
-    [[ -e "$name" || -L "$name" ]] || ln -sT "${pub%.pub}" "$name"
-    [[ -e "$name.pub" || -L "$name.pub" ]] || ln -sT "$pub" "$name.pub"
-  done
 )
 
 if [[ ! -e "$HOME/.ssh/config" && ! -L "$HOME/.ssh/config" ]]; then

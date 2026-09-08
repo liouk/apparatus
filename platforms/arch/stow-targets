@@ -1,7 +1,8 @@
 HOME:zsh
 HOME:powerlevel10k
 HOME:tig
-HOME:git
+HOME:git:no-folding
+CODEX:codex:no-folding
 .config:foot
 .config:nvim
 .config:sway

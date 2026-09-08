@@ -1,4 +1,4 @@
-# Apparatus CLI tools (base-system utilities and build toolchains are CSB-provided)
+# Apparatus CLI tools (base-system utilities and build toolchains are prerequisites)
 git
 openssh-clients
 unzip
@@ -12,7 +12,6 @@ jq
 golang
 fd-find
 gh
-netbird
 podman
 
 # Shell and fonts (Powerlevel10k and Nerd Font symbols are installed separately)

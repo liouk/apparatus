@@ -1,10 +1,10 @@
 [user]
   name = Ilias Rinis
-  email = iliasr@gmail.com
 
 [include]
-  # defines where to find GPG signature key configuration
-  path = .config/git/gpgsign-config
+  path = ~/.config/git/personal
+  # Optional machine-specific identity and routing overrides.
+  path = ~/.config/git/local.conf
 
 [core]
   editor = nvim

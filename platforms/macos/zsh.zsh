@@ -8,6 +8,8 @@ APPARATUS_WORKSPACE_ROOT="$HOME/Workspace/github.com/liouk"
 
 if command -v brew > /dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
+  # Use FIDO2-capable OpenSSH for authentication and Git's SSH signatures.
+  export PATH="$HOMEBREW_PREFIX/opt/openssh/bin:$PATH"
   POWERLEVEL10K_DIR="$HOMEBREW_PREFIX/share/powerlevel10k"
   ZSH_PLUGINS_DIR="$HOMEBREW_PREFIX/share"
 fi

@@ -18,12 +18,5 @@ command -v dnf > /dev/null || {
   exit 1
 }
 
-# Preserve CSB-provided NetBird installations/repository configuration.
-if ! rpm -q netbird > /dev/null 2>&1 &&
-   [ ! -e /etc/yum.repos.d/netbird.repo ] &&
-   [ ! -L /etc/yum.repos.d/netbird.repo ]; then
-  sudo install -m 0644 "$(dirname "${BASH_SOURCE[0]}")/netbird.repo" /etc/yum.repos.d/netbird.repo
-fi
-
 # User-owned binaries and helper links.
 mkdir -p "$HOME/.local/bin"
