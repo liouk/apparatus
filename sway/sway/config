@@ -54,12 +54,14 @@ set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
 # Outputs
 #
 set $laptop eDP-1
-set $homedisplay DP-3
+set $homedisplay "Dell Inc. DELL U2520D JMZKGZ2"
+# Connector fallback for workspace placement only; not a monitor identity.
 set $officedisplay DP-1
-output $officedisplay mode 3840x2160@59.997Hz scale 1.6
+# Restore the office mode/scale using its make/model/serial, not DP-1:
+# output "<office monitor identifier>" mode 3840x2160@59.997Hz scale 1.6
 
 output $laptop pos 0 0 res 1920x1080
-output $homedisplay pos 1920 -360 res 2560x1440
+output $homedisplay pos 1920 -360 res 2560x1440 scale 1
 
 output * {
   bg /usr/share/backgrounds/bg.png fill
