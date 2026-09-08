@@ -1,6 +1,3 @@
 [user]
   email = iliasr@gmail.com
   signingkey = ~/.ssh/id_ed25519_sk_git_signing_personal
-
-[gpg]
-  format = ssh

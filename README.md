@@ -71,14 +71,23 @@ Keep platform customizations under `platforms/<os>/`. The shared Zsh config reso
 
 All platforms use the personal identity in `git/.config/git/personal` by default,
 with SSH commit signing enabled. The private key handle stays in `~/.ssh`, outside
-the repository. `~/.config/git/local.conf` is an optional include loaded after the
-personal identity; independently managed configuration can put conditional
-identity overrides there. Apparatus does not create or remove that file.
+the repository. Shared signing settings live in `.gitconfig`; identity files
+contain only email and signing key. At the end, Git loads optional `platform.conf`,
+the personal identity, then optional `~/.config/git/local.conf`. Independently
+managed configuration can put settings and conditional identity overrides in
+that last file. Apparatus does not create or remove it.
+
+Directory-based `includeIf "gitdir:..."` rules match Git's metadata location.
+Linked worktrees retain routing based on that location, even when their working
+directories are elsewhere. Repository-local Git settings can still override
+these global defaults.
 
 On macOS, Homebrew OpenSSH is installed for FIDO2 support. The macOS shell config
-puts it ahead of Apple's OpenSSH for Git signing and SSH authentication. Recovery
-also explicitly uses Homebrew's `ssh-keygen`. Restart Zsh after installation;
-applications launched outside that shell must also use Homebrew OpenSSH to sign.
+puts it ahead of Apple's OpenSSH for SSH authentication. The platform post-install
+step writes the actual Homebrew `ssh-keygen` path to `~/.config/git/platform.conf`
+as `gpg.ssh.program`, so Git signing does not depend on shell startup. Recovery
+also explicitly uses Homebrew's `ssh-keygen`. Restart Zsh after installation.
+The generated platform setting is refreshed by full installation, not Stow-only.
 
 At the end of a full installation, apparatus asks whether to recover SSH keys,
 then waits for you to plug in the YubiKey and press Enter. It runs `ssh-keygen -K`
@@ -88,7 +97,8 @@ All resident SSH keys are recovered and left there. Public fingerprints in
 aliases. An optional `~/.config/git/signing-key.fingerprints` can supply additional
 alias/fingerprint pairs without putting them in this repository.
 
-Existing aliases are preserved. There is no temporary recovery directory, key
+Existing aliases are preserved; missing or mismatched public fingerprints produce
+a warning without replacing files. There is no temporary recovery directory, key
 deletion or new credential generation. Recovery is skipped without a controlling
 terminal or with `YUBIKEY_NONINTERACTIVE=1`; alias matching still runs for existing
 files. Missing personal signing keys produce a warning, never disable signing.

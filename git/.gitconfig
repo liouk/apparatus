@@ -1,11 +1,6 @@
 [user]
   name = Ilias Rinis
 
-[include]
-  path = ~/.config/git/personal
-  # Optional machine-specific identity and routing overrides.
-  path = ~/.config/git/local.conf
-
 [core]
   editor = nvim
 
@@ -92,6 +87,9 @@
 [commit]
   gpgsign = true
 
+[gpg]
+  format = ssh
+
 [absorb]
   oneFixupPerCommit = true
 
@@ -100,3 +98,9 @@
 
 [fetch]
 	prune = true
+
+[include]
+  path = ~/.config/git/platform.conf
+  path = ~/.config/git/personal
+  # Optional machine-specific settings and identity routing, loaded last.
+  path = ~/.config/git/local.conf

@@ -55,7 +55,7 @@ function ssh_keygen {
 }
 
 function recover_ssh_keys (
-  local answer pub fingerprint manifest name
+  local answer pub fingerprint manifest name expected
   umask 077
   mkdir -p "$HOME/.ssh"
   cd "$HOME/.ssh"
@@ -68,7 +68,7 @@ function recover_ssh_keys (
   fi
   for pub in *.pub; do
     [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
-    fingerprint="$(ssh_keygen -lf "$pub" -E sha256 | awk '{print $2}')"
+    fingerprint="$(ssh_keygen -lf "$pub" -E sha256 2>/dev/null | awk '{print $2}')" || continue
     for manifest in "$SCRIPT_DIR/ssh-key.fingerprints" "$HOME/.config/git/signing-key.fingerprints"; do
       [[ -r "$manifest" ]] || continue
       name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$manifest")"
@@ -76,6 +76,18 @@ function recover_ssh_keys (
       [[ -e "$name" || -L "$name" ]] || ln -s "${pub%.pub}" "$name"
       [[ -e "$name.pub" || -L "$name.pub" ]] || ln -s "$pub" "$name.pub"
     done
+  done
+  for manifest in "$SCRIPT_DIR/ssh-key.fingerprints" "$HOME/.config/git/signing-key.fingerprints"; do
+    [[ -r "$manifest" ]] || continue
+    while read -r name expected; do
+      [[ -z "$name" || "$name" == \#* ]] && continue
+      if [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]]; then
+        fingerprint="$(ssh_keygen -lf "$name.pub" -E sha256 2>/dev/null | awk '{print $2}')" || fingerprint=
+        if [[ "$fingerprint" != "$expected" ]]; then
+          echo "warning: $name has a missing or mismatched public fingerprint; existing files preserved." >&2
+        fi
+      fi
+    done < "$manifest"
   done
   if [[ ! -r "$HOME/.ssh/id_ed25519_sk_git_signing_personal" ]]; then
     echo "warning: personal signing key is missing; recover it before committing. Signing remains enabled." >&2
