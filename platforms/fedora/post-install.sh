@@ -62,3 +62,31 @@
   printf '\nFedora tools installed. Select Sway at the login screen when ready.\n'
   printf 'The managed desktop, audio services and login shell have not been changed.\n'
 )
+
+(
+  umask 077
+  mkdir -p "$HOME/.ssh"
+  cd "$HOME/.ssh"
+  if [[ "${YUBIKEY_NONINTERACTIVE:-0}" != 1 ]] && { exec 3<> /dev/tty; } 2> /dev/null; then
+    read -r -p 'Recover SSH keys from your YubiKey? [y/N] ' answer <&3 2>&3 || exit 0
+    if [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]]; then
+      read -r -p 'Plug in your YubiKey and press Enter when ready. ' answer <&3 2>&3 || exit 0
+      ssh-keygen -K <&3 >&3 2>&3
+    fi
+  fi
+  for pub in *.pub; do
+    [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
+    fingerprint="$(ssh-keygen -lf "$pub" -E sha256 | awk '{print $2}')"
+    name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$SCRIPT_DIR/platforms/fedora/github-key.fingerprints")"
+    [[ -n "$name" ]] || continue
+    [[ -e "$name" || -L "$name" ]] || ln -sT "${pub%.pub}" "$name"
+    [[ -e "$name.pub" || -L "$name.pub" ]] || ln -sT "$pub" "$name.pub"
+  done
+)
+
+if [[ ! -e "$HOME/.ssh/config" && ! -L "$HOME/.ssh/config" ]]; then
+  mkdir -p -m 700 "$HOME/.ssh"
+  ln -sT "$SCRIPT_DIR/platforms/fedora/github-ssh.conf" "$HOME/.ssh/config"
+else
+  echo "Existing SSH config preserved; see platforms/fedora/github-ssh.conf for the GitHub settings."
+fi

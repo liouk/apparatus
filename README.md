@@ -8,10 +8,11 @@ Originally forked from [michailpanagiotis/apparatus](https://github.com/michailp
 
 ```
 platforms/<os>/          # per-platform config (packages, stow targets, repos, links)
+platforms/<os>/bootstrap.sh # checkout defaults and bootstrap prerequisites
 platforms/<os>/zsh.zsh   # platform-specific shell settings
 platforms/<os>/stow/     # platform-local Stow packages
 <package>/               # stow packages (zsh, git, foot, sway, etc.)
-bootstrap.sh             # clones the repo, then invokes install.sh
+bootstrap.sh             # checks prerequisites, clones over HTTPS, runs install.sh
 install.sh               # repo-local installation driver
 ```
 
@@ -28,6 +29,20 @@ To bootstrap a new machine:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/bootstrap.sh | sh
 ```
+
+The bootstrap clones public apparatus over HTTPS; GitHub authentication is not
+required. It runs downloaded code, so review the script first if desired. A piped
+bootstrap also fetches the selected `platforms/<os>/bootstrap.sh` over HTTPS;
+running from a checkout uses the local platform file instead. On Fedora it offers
+to install missing Git and modern Bash with DNF before cloning. OpenSSH is
+installed later through Fedora's normal package list. Existing checkouts and custom `APPARATUS_REPO_URL` /
+`APPARATUS_INSTALL_DIR` overrides are preserved. An SSH URL override still requires
+SSH authentication in advance.
+
+For a fork or another bootstrap revision, `APPARATUS_RAW_URL` overrides the raw
+repository base URL used to fetch platform files (default:
+`https://raw.githubusercontent.com/liouk/apparatus/master`). Set it alongside
+`APPARATUS_REPO_URL` when bootstrapping a fork over a pipe.
 
 From an existing checkout:
 
@@ -51,11 +66,11 @@ Keep platform customizations under `platforms/<os>/`. The shared Zsh config reso
 
 ## Fedora
 
-The `fedora` platform targets a regular, DNF-based Fedora installation, including a managed CSB with permission to install packages. Fedora Atomic is not supported by the full installer. Install Git first if needed (`sudo dnf install git`), and configure GitHub SSH access for the personal repositories before running the bootstrap or `./install.sh`.
+The `fedora` platform targets a regular, DNF-based Fedora installation, including a managed CSB with permission to install packages. Fedora Atomic is rejected by the platform's pre-install check. Start with curl available and permission to use sudo/DNF; the bootstrap handles missing Git and Bash, and the installer supplies OpenSSH. Public repository downloads use HTTPS, so GitHub SSH access is not needed before installation.
 
 On Fedora, the bootstrap defaults to `~/liouk/apparatus`, alongside `~/liouk/toolshed`. The `zap` shell alias and Sway apparatus shortcut use this location. Arch and macOS retain their existing paths.
 
-The package list covers Apparatus tools, not base-system provisioning. Standard utilities (including SSH and curl), a working build toolchain, and graphics drivers are assumed to come from the CSB. DNF still installs dependencies required by the listed tools.
+The package list covers Apparatus tools, not base-system provisioning. Standard utilities (including curl), a working build toolchain, and graphics drivers are assumed to come from the CSB. OpenSSH clients are explicitly installed; DNF supplies their FIDO2 dependencies.
 
 - Reuses the shared dotfiles, including Foot, Sway, Waybar, Mako, Neovim and Zed. Fedora-only Sway session helpers are in `platforms/fedora/stow/sway/`.
 - Uses Fedora packages for the desktop and CLI tools. Keeps the existing desktop/login manager and audio stack; only installs PulseAudio-compatible client tools (`pulseaudio-utils`, `pavucontrol`), not an audio server.
@@ -68,9 +83,30 @@ The package list covers Apparatus tools, not base-system provisioning. Standard 
 
 Personal helper links, Go binaries, and newly installed Zed/kubectl commands live in `~/.local/bin`, without sudo. Fedora's Zsh settings set `GOBIN` there for future Go installs. Both Zsh and the Fedora Sway session explicitly put this directory on `PATH`; log into Sway through the login screen (or use `start-sway`) to load its environment. Existing system-managed tool installations are left alone.
 
-The installer does not overwrite conflicting dotfiles: resolve Stow conflicts explicitly. Review the shared Sway output names/scaling and `/usr/share/backgrounds/bg.png` wallpaper path for the new hardware. Slack and Spotify remain optional external installations referenced by the shared Sway config; they are not installed here. Personal SSH/GPG keys, Git signing configuration, work credentials and the local Codex ACP adapter patch must be set up separately.
+The installer does not overwrite conflicting dotfiles: resolve Stow conflicts explicitly. Review the shared Sway output names/scaling and `/usr/share/backgrounds/bg.png` wallpaper path for the new hardware. Slack and Spotify remain optional external installations referenced by the shared Sway config; they are not installed here. Commit-signing keys/configuration, work credentials and the local Codex ACP adapter patch must be set up separately.
 
 After installation, select **Sway** at the existing login screen. The installer does not change your login shell; use `zsh` explicitly, or change it through the method permitted by your CSB. Reruns skip existing upstream clones, Zed, kubectl and installed symbol fonts; update these separately when needed.
+
+### GitHub authentication with the YubiKey
+
+Fedora's post-install step asks whether to recover SSH keys, then waits for you
+to plug in the YubiKey and press Enter. It runs `ssh-keygen -K` directly in
+`~/.ssh`; OpenSSH handles PIN/passphrase and existing-filename prompts.
+
+All resident SSH keys are recovered and left there. A short fingerprint lookup
+using `platforms/fedora/github-key.fingerprints` adds the
+`id_ed25519_sk_github` alias (and its `.pub` companion) expected by our SSH config.
+Existing aliases are left alone. There is no temporary directory, key deletion,
+or replacement credential generation. Never commit key handles.
+
+The GitHub configuration in `platforms/fedora/github-ssh.conf` is linked as
+`~/.ssh/config` if that path is absent. Existing SSH configuration is preserved;
+merge the GitHub block manually if needed. Verify access with
+`ssh -T git@github.com`, checking GitHub's host fingerprint on first connection.
+
+Recovery is skipped without a controlling terminal or with
+`YUBIKEY_NONINTERACTIVE=1`. Apparatus stops here: clone and install any
+private/work configuration yourself.
 
 ### Updating Zed
 
@@ -87,6 +123,7 @@ This installs or refreshes `~/.local/zed.app` and its `~/.local/bin/zed` command
 Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-release`) with:
 
 - `config` — an `install_<manager>_packages` function for each package manager
+- `bootstrap.sh` — POSIX-shell defaults (`default_install_dir`, optional `bash_candidates` / `bash_hint`) and an optional `bootstrap_prepare` function for prerequisites needed before cloning
 - `APPARATUS_BIN_DIR` (optional, set in `config`) — user-owned directory for helper links; defaults to `/usr/local/bin` with sudo
 - `packages.<N>.<manager>` — one package per line, installed in sort order
 - `stow-targets` — `TARGET:package-path[:no-folding]` per line, with package paths relative to the checkout (e.g. `.config:platforms/fedora/stow/sway:no-folding`)

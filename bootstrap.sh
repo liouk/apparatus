@@ -2,11 +2,12 @@
 
 set -eu
 
-repo_url="${APPARATUS_REPO_URL:-git@github.com:liouk/apparatus.git}"
+repo_url="${APPARATUS_REPO_URL:-https://github.com/liouk/apparatus.git}"
+raw_url="${APPARATUS_RAW_URL:-https://raw.githubusercontent.com/liouk/apparatus/master}"
 
 case "$(uname -s)" in
   Darwin)
-    default_install_dir="$HOME/Workspace/github.com/liouk/apparatus"
+    platform_id=macos
     ;;
   Linux)
     if [ ! -r /etc/os-release ]; then
@@ -14,14 +15,7 @@ case "$(uname -s)" in
       exit 1
     fi
     . /etc/os-release
-    case "${ID:-}" in
-      arch) default_install_dir="$HOME/.apparatus" ;;
-      fedora) default_install_dir="$HOME/liouk/apparatus" ;;
-      *)
-        echo "unsupported operating system: ${ID:-unknown}" >&2
-        exit 1
-        ;;
-    esac
+    platform_id="${ID:-}"
     ;;
   *)
     echo "unsupported operating system: $(uname -s)" >&2
@@ -29,10 +23,16 @@ case "$(uname -s)" in
     ;;
 esac
 
-install_dir="${APPARATUS_INSTALL_DIR:-$default_install_dir}"
+case "$platform_id" in
+  ''|*[!a-z0-9_-]*) echo "invalid platform ID: $platform_id" >&2; exit 1 ;;
+esac
+
+bash_candidates=
+bash_hint="Install Bash 4 or newer and rerun the bootstrap."
+bootstrap_prepare() { :; }
 
 find_modern_bash() {
-  for candidate in /opt/homebrew/bin/bash /usr/local/bin/bash "$(command -v bash 2>/dev/null || true)"; do
+  for candidate in $bash_candidates "$(command -v bash 2>/dev/null || true)"; do
     [ -n "$candidate" ] || continue
     if [ -x "$candidate" ] && "$candidate" -c '((BASH_VERSINFO[0] >= 4))' 2>/dev/null; then
       printf '%s\n' "$candidate"
@@ -42,14 +42,39 @@ find_modern_bash() {
   return 1
 }
 
-if ! bash_path="$(find_modern_bash)"; then
-  echo "apparatus requires Bash 4 or newer." >&2
-  echo "On macOS, install Homebrew Bash with: brew install bash" >&2
+# Use the matching local platform file when running from a checkout. A piped
+# bootstrap downloads it first because Git and the checkout may not exist yet.
+bootstrap_dir="$(CDPATH= cd "$(dirname "$0")" && pwd)"
+bootstrap_download=
+if [ -f "$0" ] && [ -f "$bootstrap_dir/install.sh" ]; then
+  platform_bootstrap="$bootstrap_dir/platforms/$platform_id/bootstrap.sh"
+else
+  bootstrap_download="$(mktemp -t apparatus-bootstrap.XXXXXXXX)"
+  trap 'rm -f "$bootstrap_download"' EXIT
+  platform_bootstrap="$bootstrap_download"
+  curl -fsSL "$raw_url/platforms/$platform_id/bootstrap.sh" -o "$platform_bootstrap"
+fi
+if [ ! -r "$platform_bootstrap" ]; then
+  echo "unsupported platform: $platform_id" >&2
+  exit 1
+fi
+. "$platform_bootstrap"
+if [ -n "$bootstrap_download" ]; then
+  rm -f "$bootstrap_download"
+  trap - EXIT
+fi
+
+install_dir="${APPARATUS_INSTALL_DIR:-$default_install_dir}"
+if [ -e "$install_dir" ] && [ ! -d "$install_dir/.git" ]; then
+  echo "will not clone apparatus; $install_dir exists but is not an apparatus checkout" >&2
   exit 1
 fi
 
-if [ -e "$install_dir" ] && [ ! -d "$install_dir/.git" ]; then
-  echo "will not clone apparatus; $install_dir exists but is not an apparatus checkout" >&2
+bootstrap_prepare
+
+if ! bash_path="$(find_modern_bash)"; then
+  echo "apparatus requires Bash 4 or newer." >&2
+  echo "$bash_hint" >&2
   exit 1
 fi
 
