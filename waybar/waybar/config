@@ -106,7 +106,7 @@
     "interval": 3600
   },
   "custom/suspendbutton": {
-    "format": "",
+    "format": "󰖔",
     "on-click": "systemctl suspend",
     "tooltip": false
   },

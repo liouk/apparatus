@@ -18,7 +18,7 @@ include ~/.config/sway/tool-paths.conf
 #
 # Fonts
 #
-font JetBrains Mono SemiBold 10
+font Maple Mono NL NF SemiBold 10
 
 #
 # App launcher

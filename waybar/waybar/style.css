@@ -3,7 +3,7 @@
 * {
 	border: none;
 	border-radius: 0;
-	font-family: "JetBrains Mono SemiBold";
+	font-family: "Maple Mono NL NF SemiBold";
 	font-size: 10pt;
 }
 
@@ -122,8 +122,11 @@ label:focus {
 	padding: 0 10px;
 }
 
+#custom-suspendbutton,
 #custom-powerbutton {
-	font-size: 16pt;
+	font-size: 10pt;
+	min-width: 18px;
+	padding: 0 8px;
 }
 
 #custom-web-monitor.alert,

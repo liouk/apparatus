@@ -2,7 +2,7 @@ ignore-empty-password
 disable-caps-lock-text
 show-keyboard-layout
 
-font=JetBrains Mono SemiBold
+font=Maple Mono NL NF SemiBold
 image=/usr/share/backgrounds/bg.png
 
 bs-hl-color=#f2cdcd

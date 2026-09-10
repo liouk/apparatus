@@ -1,7 +1,7 @@
 default-timeout=5000
 width=300
 height=100
-font=JetBrains Mono NL 11
+font=Maple Mono NL NF 11
 anchor=top-right
 margin=10
 

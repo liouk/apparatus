@@ -59,6 +59,22 @@
     fc-cache -f "$font_dir"
   fi
 
+  # Maple Mono NL NF, used by Foot, Waybar and Zed.
+  if ! fc-match -f '%{family}\n' 'Maple Mono NL NF' | rg -q '^Maple Mono NL NF$'; then
+    maple_version=7.9
+    maple_archive="$fedora_tmp/MapleMonoNL-NF-$maple_version.zip"
+    curl -fsSL "https://github.com/subframe7536/maple-font/releases/download/v$maple_version/MapleMonoNL-NF-$maple_version.zip" \
+      -o "$maple_archive"
+    printf '%s  %s\n' \
+      f6b2c6d1981ca338729449dba0caf07ba05751edd1d4b474b46d7b316b3c0db3 \
+      "$maple_archive" | sha256sum --check
+    unzip -q "$maple_archive" '*.ttf' -d "$fedora_tmp/maple-fonts"
+    maple_font_dir="$HOME/.local/share/fonts/MapleMonoNL-NF"
+    mkdir -p "$maple_font_dir"
+    install -m 0644 "$fedora_tmp"/maple-fonts/*.ttf "$maple_font_dir/"
+    fc-cache -f "$maple_font_dir"
+  fi
+
   printf '\nFedora tools installed. Select Sway at the login screen when ready.\n'
   printf 'The managed desktop, audio services and login shell have not been changed.\n'
 )
