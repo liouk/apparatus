@@ -7,6 +7,7 @@ zed
 npm
 stow
 fzf
+gum
 ripgrep
 jq
 zsh

@@ -34,6 +34,10 @@ set $zedpicker $term --class=zed-picker -e env TERMINAL_COMMAND='$term -e' $loca
 for_window [app_id="^goot$"] floating enable, sticky enable, resize set 30 ppt 70 ppt
 set $goot $term --class=goot -e env TERMINAL_COMMAND='$term -e' $go_bin/goot
 
+# ghproj
+for_window [app_id="^ghproj$"] floating enable, sticky enable, resize set 50 ppt 50 ppt
+set $ghproj $term --class=ghproj -e zsh -lic '$local_bin/ghproj'
+
 # skratch
 for_window [app_id="^skratch$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
 set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' $local_bin/skratch
@@ -135,20 +139,13 @@ bindsym $mod+Shift+q kill
 # start launcher
 bindsym $mod+space exec $menu
 
-# zed-picker
+# app shortcuts
 bindsym $mod+p exec $zedpicker
-
-# open apparatus in zed
 bindsym $mod+comma exec swaymsg '[app_id="dev.zed.Zed" title=".apparatus"]' focus || zeditor ~/.apparatus
-
-# goot
 bindsym $mod+t exec $goot
-
-# skratch
 bindsym $mod+s exec $skratch
-
-# glone
 bindsym $mod+g exec $glone
+bindsym $mod+r exec $ghproj
 
 # show keyboard shortcuts
 bindsym $mod+slash exec $showkeys
@@ -231,7 +228,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+a focus parent
 
 # rename workspace
-bindsym $mod+r exec $renamews
+bindsym $mod+shift+r exec $renamews
 
 # screenshots with grim
 bindsym $mod+Control+3 exec grim -g "$(slurp)"

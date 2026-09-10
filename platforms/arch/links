@@ -1,4 +1,5 @@
 fzfpac:$HOME/liouk/toolshed/fzfpac/fzfpac
+ghproj:$HOME/liouk/toolshed/ghproj/ghproj.sh
 skratch:$HOME/liouk/toolshed/skratch/skratch.sh
 zed-picker:$HOME/liouk/toolshed/zed-picker/zed-picker.sh
 opa:$HOME/liouk/opa/opa
