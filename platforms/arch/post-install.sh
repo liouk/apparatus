@@ -9,4 +9,4 @@ if [ ! -d "/usr/local/share/fonts/nerd/NerdFontsSymbolsOnly" ]; then
   fc-cache -r
 fi
 
-echo -e "\nSetup complete! Change your shell to zsh by running:\n\tchsh -s \$(which zsh)"
+apparatus_message "Setup complete! Change your shell to zsh by running: chsh -s \$(which zsh)"

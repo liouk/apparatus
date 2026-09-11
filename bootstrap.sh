@@ -2,6 +2,15 @@
 
 set -eu
 
+if [ -t 1 ] || [ -t 2 ]; then
+  APPARATUS_PREFIX="$(printf '\033[1;3;34m[apparatus]\033[0m')"
+else
+  APPARATUS_PREFIX='[apparatus]'
+fi
+
+apparatus_message() { printf '%s %s\n' "$APPARATUS_PREFIX" "$*"; }
+apparatus_warning() { printf '%s %s\n' "$APPARATUS_PREFIX" "$*" >&2; }
+
 repo_url="${APPARATUS_REPO_URL:-https://github.com/liouk/apparatus.git}"
 raw_url="${APPARATUS_RAW_URL:-https://raw.githubusercontent.com/liouk/apparatus/master}"
 
@@ -11,20 +20,20 @@ case "$(uname -s)" in
     ;;
   Linux)
     if [ ! -r /etc/os-release ]; then
-      echo "unsupported operating system" >&2
+      apparatus_warning "unsupported operating system"
       exit 1
     fi
     . /etc/os-release
     platform_id="${ID:-}"
     ;;
   *)
-    echo "unsupported operating system: $(uname -s)" >&2
+    apparatus_warning "unsupported operating system: $(uname -s)"
     exit 1
     ;;
 esac
 
 case "$platform_id" in
-  ''|*[!a-z0-9_-]*) echo "invalid platform ID: $platform_id" >&2; exit 1 ;;
+  ''|*[!a-z0-9_-]*) apparatus_warning "invalid platform ID: $platform_id"; exit 1 ;;
 esac
 
 bash_candidates=
@@ -55,7 +64,7 @@ else
   curl -fsSL "$raw_url/platforms/$platform_id/bootstrap.sh" -o "$platform_bootstrap"
 fi
 if [ ! -r "$platform_bootstrap" ]; then
-  echo "unsupported platform: $platform_id" >&2
+  apparatus_warning "unsupported platform: $platform_id"
   exit 1
 fi
 . "$platform_bootstrap"
@@ -66,21 +75,21 @@ fi
 
 install_dir="${APPARATUS_INSTALL_DIR:-$default_install_dir}"
 if [ -e "$install_dir" ] && [ ! -d "$install_dir/.git" ]; then
-  echo "will not clone apparatus; $install_dir exists but is not an apparatus checkout" >&2
+  apparatus_warning "will not clone apparatus; $install_dir exists but is not an apparatus checkout"
   exit 1
 fi
 
 bootstrap_prepare
 
 if ! bash_path="$(find_modern_bash)"; then
-  echo "apparatus requires Bash 4 or newer." >&2
-  echo "$bash_hint" >&2
+  apparatus_warning "apparatus requires Bash 4 or newer."
+  apparatus_warning "$bash_hint"
   exit 1
 fi
 
 if [ ! -d "$install_dir/.git" ]; then
   command -v git > /dev/null 2>&1 || {
-    echo "git is required to bootstrap apparatus" >&2
+    apparatus_warning "git is required to bootstrap apparatus"
     exit 1
   }
   mkdir -p "$(dirname "$install_dir")"

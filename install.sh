@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if ((BASH_VERSINFO[0] < 4)); then
-  echo "apparatus requires Bash 4 or newer (found $BASH_VERSION)" >&2
-  echo "On macOS, install it with Homebrew and rerun this script with Homebrew's bash." >&2
+  printf '[apparatus] apparatus requires Bash 4 or newer (found %s)\n' "$BASH_VERSION" >&2
+  printf '[apparatus] On macOS, install it with Homebrew and rerun this script with Homebrew Bash.\n' >&2
   exit 1
 fi
 
@@ -11,6 +11,24 @@ set -o pipefail
 [ -n "$TRACE" ] && { set -x; }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [[ -t 1 || -t 2 ]]; then
+  APPARATUS_PREFIX=$'\033[1;3;34m[apparatus]\033[0m'
+else
+  APPARATUS_PREFIX='[apparatus]'
+fi
+
+function apparatus_message {
+  printf '%s %s\n' "$APPARATUS_PREFIX" "$*"
+}
+
+function apparatus_warning {
+  printf '%s %s\n' "$APPARATUS_PREFIX" "$*" >&2
+}
+
+function apparatus_prompt {
+  printf '%s %s' "$APPARATUS_PREFIX" "$1" >&3
+}
 
 function read_lines {
   local line trimmed
@@ -60,9 +78,11 @@ function recover_ssh_keys (
   mkdir -p "$HOME/.ssh"
   cd "$HOME/.ssh"
   if [[ "${YUBIKEY_NONINTERACTIVE:-0}" != 1 ]] && { exec 3<> /dev/tty; } 2> /dev/null; then
-    read -r -p 'Recover SSH keys from your YubiKey? [y/N] ' answer <&3 2>&3 || return 0
+    apparatus_prompt 'Recover SSH keys from your YubiKey? [y/N] '
+    read -r answer <&3 2>&3 || return 0
     if [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]]; then
-      read -r -p 'Plug in your YubiKey and press Enter when ready. ' answer <&3 2>&3 || return 0
+      apparatus_prompt 'Plug in your YubiKey and press Enter when ready. '
+      read -r answer <&3 2>&3 || return 0
       ssh_keygen -K <&3 >&3 2>&3
     fi
   fi
@@ -79,12 +99,12 @@ function recover_ssh_keys (
     if [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]]; then
       fingerprint="$(ssh_keygen -lf "$name.pub" -E sha256 2>/dev/null | awk '{print $2}')" || fingerprint=
       if [[ "$fingerprint" != "$expected" ]]; then
-        echo "warning: $name has a missing or mismatched public fingerprint; existing files preserved." >&2
+        apparatus_warning "warning: $name has a missing or mismatched public fingerprint; existing files preserved."
       fi
     fi
   done < "$SCRIPT_DIR/ssh-key.fingerprints"
   if [[ ! -r "$HOME/.ssh/id_ed25519_sk_git_signing_personal" ]]; then
-    echo "warning: personal signing key is missing; recover it before committing. Signing remains enabled." >&2
+    apparatus_warning "warning: personal signing key is missing; recover it before committing. Signing remains enabled."
   fi
 )
 
@@ -98,7 +118,7 @@ function install_packages {
     mgr="${pkg_file##*.}"
     installer="install_${mgr}_packages"
     if ! declare -F "$installer" > /dev/null; then
-      echo "unknown package manager: $mgr"
+      apparatus_warning "unknown package manager: $mgr"
       exit 1
     fi
     mapfile -t packages < <(read_lines "$pkg_file")
@@ -125,7 +145,7 @@ function do_stow {
     case "$layout" in
       '') ;;
       no-folding) stow_options+=(--no-folding) ;;
-      *) echo "unknown Stow layout: $layout" >&2; return 1 ;;
+      *) apparatus_warning "unknown Stow layout: $layout"; return 1 ;;
     esac
     # Manifests can refer to shared or platform-local packages, relative to the checkout.
     package_dir="$apparatus_dir/$(dirname "$package")"
@@ -140,12 +160,12 @@ function clone_repos {
   [ -f "$repos_file" ] || return 0
   while read -r target_spec git_url remainder; do
     if [ -n "$remainder" ]; then
-      echo "invalid repository entry: $target_spec $git_url $remainder" >&2
+      apparatus_warning "invalid repository entry: $target_spec $git_url $remainder"
       exit 1
     fi
     target_dir="$(expand_path "$target_spec")"
     if [ -d "$target_dir" ]; then
-      echo "will not clone $git_url; $target_dir already exists"
+      apparatus_message "will not clone $git_url; $target_dir already exists"
     else
       mkdir -p "$(dirname "$target_dir")"
       git clone "$git_url" "$target_dir"
@@ -160,8 +180,8 @@ function create_links {
   local -a link_command=(ln)
   [ -f "$links_file" ] || return 0
   if [ "$link_dir" = /usr/local/bin ]; then
-    echo "Creating links in $link_dir requires sudo; enter your sudo password when prompted."
-    link_command=(sudo -p 'apparatus: enter your sudo password: ' ln)
+    apparatus_message "Creating links in $link_dir requires sudo; enter your password for sudo when prompted."
+    link_command=(sudo -p 'apparatus: enter your password for sudo: ' ln)
   else
     mkdir -p "$link_dir"
   fi
@@ -169,9 +189,9 @@ function create_links {
     target_path="$(expand_path "$target_spec")"
     link_path="$link_dir/$link_name"
     if [ -L "$link_path" ]; then
-      echo "link $link_path already exists; skipping"
+      apparatus_message "link $link_path already exists; skipping"
     elif [ -e "$link_path" ]; then
-      echo "will not create link $link_path; a non-symlink already exists" >&2
+      apparatus_warning "will not create link $link_path; a non-symlink already exists"
       exit 1
     else
       "${link_command[@]}" -s "$target_path" "$link_path"
@@ -207,7 +227,7 @@ function parse_opts {
         break
         ;;
       *)
-        echo "unexpected option: $1"
+        apparatus_warning "unexpected option: $1"
         exit 1
         ;;
     esac
@@ -220,16 +240,16 @@ function main {
 
   if [ -n "$CHECK_SUPPORT" ]; then
     if [ -z "$DETECTED_OS" ] || [ ! -d "$SCRIPT_DIR/platforms/$DETECTED_OS" ]; then
-      echo "unsupported operating system"
+      apparatus_warning "unsupported operating system"
       exit 1
     fi
-    echo "operating system supported ($DETECTED_OS)"
+    apparatus_message "operating system supported ($DETECTED_OS)"
     exit 0
   fi
 
   local platform_dir="$SCRIPT_DIR/platforms/$DETECTED_OS"
   if [ ! -d "$platform_dir" ]; then
-    echo "unsupported operating system"
+    apparatus_warning "unsupported operating system"
     exit 1
   fi
 

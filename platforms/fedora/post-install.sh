@@ -19,7 +19,7 @@
   if ! command -v zeditor > /dev/null; then
     zed_path="$(command -v zed)"
     if [ -e "$HOME/.local/bin/zeditor" ] || [ -L "$HOME/.local/bin/zeditor" ]; then
-      echo "Cannot create $HOME/.local/bin/zeditor: an unusable file/link already exists." >&2
+      apparatus_warning "Cannot create $HOME/.local/bin/zeditor: an unusable file/link already exists."
       exit 1
     fi
     ln -s "$zed_path" "$HOME/.local/bin/zeditor"
@@ -31,11 +31,11 @@
     case "$(uname -m)" in
       x86_64) kubectl_arch=amd64 ;;
       aarch64) kubectl_arch=arm64 ;;
-      *) echo "Unsupported kubectl architecture" >&2; exit 1 ;;
+      *) apparatus_warning "Unsupported kubectl architecture"; exit 1 ;;
     esac
     kubectl_version="$(curl -fsSL https://dl.k8s.io/release/stable.txt)"
     if [[ ! "$kubectl_version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-      echo "Invalid upstream kubectl version: $kubectl_version" >&2
+      apparatus_warning "Invalid upstream kubectl version: $kubectl_version"
       exit 1
     fi
     kubectl_url="https://dl.k8s.io/release/$kubectl_version/bin/linux/$kubectl_arch/kubectl"
@@ -75,13 +75,13 @@
     fc-cache -f "$maple_font_dir"
   fi
 
-  printf '\nFedora tools installed. Select Sway at the login screen when ready.\n'
-  printf 'The managed desktop, audio services and login shell have not been changed.\n'
+  apparatus_message "Fedora tools installed. Select Sway at the login screen when ready."
+  apparatus_message "The managed desktop, audio services and login shell have not been changed."
 )
 
 if [[ ! -e "$HOME/.ssh/config" && ! -L "$HOME/.ssh/config" ]]; then
   mkdir -p -m 700 "$HOME/.ssh"
   ln -sT "$SCRIPT_DIR/platforms/fedora/github-ssh.conf" "$HOME/.ssh/config"
 else
-  echo "Existing SSH config preserved; see platforms/fedora/github-ssh.conf for the GitHub settings."
+  apparatus_message "Existing SSH config preserved; see platforms/fedora/github-ssh.conf for the GitHub settings."
 fi
