@@ -78,10 +78,3 @@
   apparatus_message "Fedora tools installed. Select Sway at the login screen when ready."
   apparatus_message "The managed desktop, audio services and login shell have not been changed."
 )
-
-if [[ ! -e "$HOME/.ssh/config" && ! -L "$HOME/.ssh/config" ]]; then
-  mkdir -p -m 700 "$HOME/.ssh"
-  ln -sT "$SCRIPT_DIR/platforms/fedora/github-ssh.conf" "$HOME/.ssh/config"
-else
-  apparatus_message "Existing SSH config preserved; see platforms/fedora/github-ssh.conf for the GitHub settings."
-fi

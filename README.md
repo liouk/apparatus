@@ -137,10 +137,10 @@ After installation, select **Sway** at the existing login screen. The installer 
 
 ### GitHub authentication with the YubiKey
 
-The GitHub configuration in `platforms/fedora/github-ssh.conf` is linked as
-`~/.ssh/config` if that path is absent. Existing SSH configuration is preserved;
-merge the GitHub block manually if needed. The shared recovery step creates the
-`id_ed25519_sk_github` alias expected by this config. Verify access with
+The shared GitHub configuration is stowed as `~/.ssh/config` on every platform.
+Existing SSH configuration is preserved; merge the GitHub block manually if
+needed. The shared recovery step restores the GitHub key under the
+`id_ed25519_sk_github` filename expected by this config. Verify access with
 `ssh -T git@github.com`, checking GitHub's host fingerprint on first connection.
 
 Apparatus stops here: clone and install any private configuration yourself.

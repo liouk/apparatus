@@ -2,6 +2,7 @@ HOME:zsh
 HOME:powerlevel10k
 HOME:tig
 HOME:git:no-folding
+HOME:ssh:no-folding
 CODEX:codex:no-folding
 .config:karabiner
 .config:ghostty
