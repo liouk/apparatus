@@ -120,8 +120,12 @@ function recover_ssh_keys (
     fingerprint="$(ssh_keygen -lf "$pub" -E sha256 2>/dev/null | awk '{print $2}')" || continue
     name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$SCRIPT_DIR/ssh-key.fingerprints")"
     [[ -n "$name" ]] || continue
-    [[ -e "$name" || -L "$name" ]] || ln -s "${pub%.pub}" "$name"
-    [[ -e "$name.pub" || -L "$name.pub" ]] || ln -s "$pub" "$name.pub"
+    key="${pub%.pub}"
+    [[ "$key" == "$name" ]] && continue
+    [[ -L "$name" ]] && rm "$name"
+    [[ -L "$name.pub" ]] && rm "$name.pub"
+    mv "$key" "$name"
+    mv "$pub" "$name.pub"
   done
   while read -r name expected; do
     [[ -z "$name" || "$name" == \#* ]] && continue
