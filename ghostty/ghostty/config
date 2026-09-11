@@ -10,6 +10,7 @@ keybind = ctrl+shift+g=write_scrollback_file:open
 cursor-style = underline
 cursor-style-blink = false
 adjust-cursor-thickness = 4
+shell-integration-features = no-cursor
 
 foreground = #cdd6f4
 background = #1e1e2e
