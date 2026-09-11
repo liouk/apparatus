@@ -9,6 +9,7 @@
 				],
 			],
 			"ctrl-m": "workspace::ToggleBottomDock",
+			"ctrl-p": "file_finder::Toggle",
 			"ctrl-s": "workspace::SaveWithoutFormat",
 			"ctrl-w": "pane::CloseActiveItem",
 			"ctrl-\\": ["workspace::SendKeystrokes", "escape"],
