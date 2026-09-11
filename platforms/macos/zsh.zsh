@@ -5,6 +5,7 @@ elif [[ -x /usr/local/bin/brew ]]; then
 fi
 
 APPARATUS_WORKSPACE_ROOT="$HOME/Workspace/github.com/liouk"
+export PATH="$HOME/.local/bin:$PATH"
 
 if command -v brew > /dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
