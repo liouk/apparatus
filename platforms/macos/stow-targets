@@ -4,4 +4,5 @@ HOME:tig
 HOME:git:no-folding
 CODEX:codex:no-folding
 .config:karabiner
+.config:ghostty
 .config:nvim

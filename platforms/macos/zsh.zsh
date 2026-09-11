@@ -20,7 +20,5 @@ fi
 
 # macOS-specific aliases
 alias ls='ls -Glahp'
-alias z=zed
-alias zap='zed "$HOME/Workspace/github.com/liouk/apparatus"'
 
 export GPG_TTY="$TTY"
