@@ -1,9 +1,15 @@
+APPARATUS_BIN_DIR="$HOME/.local/bin"
+
 function install_brew_packages {
   brew install "$@"
 }
 
 function install_cask_packages {
   brew install --cask "$@"
+}
+
+function install_npm_packages {
+  npm install --global "$@"
 }
 
 # Apple's OpenSSH does not support FIDO2 key recovery.
