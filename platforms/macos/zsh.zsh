@@ -21,5 +21,6 @@ fi
 
 # macOS-specific aliases
 alias ls='ls -Glahp'
+alias zap='cd "$HOME/workspace/apparatus'
 
 export GPG_TTY="$TTY"
