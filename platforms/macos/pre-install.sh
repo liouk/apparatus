@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-# install brew
-which -s brew &>/dev/null || { /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; }
+# Homebrew and modern Bash are prepared by platforms/macos/bootstrap.sh.
