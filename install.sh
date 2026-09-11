@@ -141,6 +141,18 @@ function recover_ssh_keys (
   fi
 )
 
+function configure_apparatus_remote {
+  local remote_url
+  remote_url="$(git -C "$SCRIPT_DIR" remote get-url origin 2>/dev/null || true)"
+  case "$remote_url" in
+    https://github.com/liouk/apparatus|https://github.com/liouk/apparatus.git)
+      [[ -r "$HOME/.ssh/id_ed25519_sk_github" ]] || return 0
+      git -C "$SCRIPT_DIR" remote set-url origin git@github.com:liouk/apparatus.git
+      apparatus_message "Switched the Apparatus remote to SSH."
+      ;;
+  esac
+}
+
 function install_packages {
   local platform_dir="$1"
   local pkg_file mgr installer
@@ -297,6 +309,7 @@ function main {
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
     recover_ssh_keys
+    configure_apparatus_remote
     clone_repos "$platform_dir/repos"
     create_links "$platform_dir/links" "${APPARATUS_BIN_DIR:-/usr/local/bin}"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
