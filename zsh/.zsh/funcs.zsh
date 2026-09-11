@@ -12,10 +12,6 @@ function __jumpfunc () {
   esac
 }
 
-function lk () {
-  __jumpfunc "$APPARATUS_WORKSPACE_ROOT" "$1"
-}
-
 # manage git worktrees
 function git-wt () {
   if [[ -z "$1" ]]; then

@@ -4,7 +4,7 @@ elif [[ -x /usr/local/bin/brew ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-APPARATUS_WORKSPACE_ROOT="$HOME/Workspace/github.com/liouk"
+APPARATUS_WORKSPACE_ROOT="$HOME/Workspace"
 export PATH="$HOME/.local/bin:$PATH"
 
 if command -v brew > /dev/null; then
@@ -21,6 +21,9 @@ fi
 
 # macOS-specific aliases
 alias ls='ls -Glahp'
-alias zap='cd "$HOME/workspace/apparatus"'
 
 export GPG_TTY="$TTY"
+
+function ws () {
+  __jumpfunc "$APPARATUS_WORKSPACE_ROOT" "$1"
+}
