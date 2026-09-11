@@ -55,7 +55,7 @@ function ssh_keygen {
 }
 
 function recover_ssh_keys (
-  local answer pub fingerprint manifest name expected
+  local answer pub fingerprint name expected
   umask 077
   mkdir -p "$HOME/.ssh"
   cd "$HOME/.ssh"
@@ -69,26 +69,20 @@ function recover_ssh_keys (
   for pub in *.pub; do
     [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
     fingerprint="$(ssh_keygen -lf "$pub" -E sha256 2>/dev/null | awk '{print $2}')" || continue
-    for manifest in "$SCRIPT_DIR/ssh-key.fingerprints" "$HOME/.config/git/signing-key.fingerprints"; do
-      [[ -r "$manifest" ]] || continue
-      name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$manifest")"
-      [[ -n "$name" ]] || continue
-      [[ -e "$name" || -L "$name" ]] || ln -s "${pub%.pub}" "$name"
-      [[ -e "$name.pub" || -L "$name.pub" ]] || ln -s "$pub" "$name.pub"
-    done
+    name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' "$SCRIPT_DIR/ssh-key.fingerprints")"
+    [[ -n "$name" ]] || continue
+    [[ -e "$name" || -L "$name" ]] || ln -s "${pub%.pub}" "$name"
+    [[ -e "$name.pub" || -L "$name.pub" ]] || ln -s "$pub" "$name.pub"
   done
-  for manifest in "$SCRIPT_DIR/ssh-key.fingerprints" "$HOME/.config/git/signing-key.fingerprints"; do
-    [[ -r "$manifest" ]] || continue
-    while read -r name expected; do
-      [[ -z "$name" || "$name" == \#* ]] && continue
-      if [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]]; then
-        fingerprint="$(ssh_keygen -lf "$name.pub" -E sha256 2>/dev/null | awk '{print $2}')" || fingerprint=
-        if [[ "$fingerprint" != "$expected" ]]; then
-          echo "warning: $name has a missing or mismatched public fingerprint; existing files preserved." >&2
-        fi
+  while read -r name expected; do
+    [[ -z "$name" || "$name" == \#* ]] && continue
+    if [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]]; then
+      fingerprint="$(ssh_keygen -lf "$name.pub" -E sha256 2>/dev/null | awk '{print $2}')" || fingerprint=
+      if [[ "$fingerprint" != "$expected" ]]; then
+        echo "warning: $name has a missing or mismatched public fingerprint; existing files preserved." >&2
       fi
-    done < "$manifest"
-  done
+    fi
+  done < "$SCRIPT_DIR/ssh-key.fingerprints"
   if [[ ! -r "$HOME/.ssh/id_ed25519_sk_git_signing_personal" ]]; then
     echo "warning: personal signing key is missing; recover it before committing. Signing remains enabled." >&2
   fi
@@ -248,6 +242,7 @@ function main {
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
+    recover_ssh_keys
     clone_repos "$platform_dir/repos"
     create_links "$platform_dir/links" "${APPARATUS_BIN_DIR:-/usr/local/bin}"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
@@ -261,9 +256,6 @@ function main {
     do_stow --delete "$SCRIPT_DIR" "$platform_dir/stow-targets"
   fi
 
-  if [ -n "$ALL" ]; then
-    recover_ssh_keys
-  fi
 }
 
 main "$@"
