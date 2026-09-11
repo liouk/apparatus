@@ -160,7 +160,8 @@ function create_links {
   local -a link_command=(ln)
   [ -f "$links_file" ] || return 0
   if [ "$link_dir" = /usr/local/bin ]; then
-    link_command=(sudo ln)
+    echo "Creating links in $link_dir requires sudo; enter your sudo password when prompted."
+    link_command=(sudo -p 'apparatus: enter your sudo password: ' ln)
   else
     mkdir -p "$link_dir"
   fi
