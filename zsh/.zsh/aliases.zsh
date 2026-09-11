@@ -6,18 +6,9 @@ alias ..='cd ..'
 alias ...='cd ../../'
 
 # git
-alias vimod='vim -p $(git diff --name-only | uniq)'
 alias tiga='tig --all'
 alias gh-pr='gh pr checkout --force'
 alias gh-sync='gh repo sync $(gh repo view --json nameWithOwner -q .nameWithOwner) --branch $(git branch --show-current)'
 
-# docker
-alias doc='docker compose'
-alias dex='docker exec -it -e COLUMNS="`tput cols`" -e LINES="`tput lines`"'
-
 # SSH compatibility for remote hosts without Foot terminfo.
 [[ "$TERM" == "foot" || "$TERM" == "foot-direct" ]] && { alias ssh='env TERM=xterm-256color ssh' }
-
-# k8s
-alias kc=kubectl
-alias kcs=kubectl -n kube-system

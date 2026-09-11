@@ -122,14 +122,6 @@ draw() {
             "$(fmt_entry "${C}gh-prw <n>${N}" "${D}PR in worktree${N}")"
         )
         right=(
-            "${Y}DOCKER${N}"
-            "$(fmt_entry "${C}doc${N}" "${D}docker compose${N}")"
-            "$(fmt_entry "${C}dex${N}" "${D}docker exec -it${N}")"
-            ""
-            "${Y}K8S${N}"
-            "$(fmt_entry "${C}kc${N}" "${D}kubectl${N}")"
-            "$(fmt_entry "${C}kcs${N}" "${D}kubectl -n kube-system${N}")"
-            "$(fmt_entry "${C}kns${N}" "${D}pick kube namespace${N}")"
         ) ;;
     esac
 
