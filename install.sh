@@ -73,7 +73,8 @@ function ssh_keygen {
 }
 
 function recover_ssh_keys (
-  local answer pub fingerprint name expected
+  local answer pub fingerprint name expected key key_type index
+  local -a unlisted_keys=() unlisted_pubs=() unlisted_fingerprints=()
   umask 077
   mkdir -p "$HOME/.ssh"
   cd "$HOME/.ssh"
@@ -84,6 +85,34 @@ function recover_ssh_keys (
       apparatus_prompt 'Plug in your YubiKey and press Enter when ready. '
       read -r answer <&3 2>&3 || return 0
       ssh_keygen -K <&3 >&3 2>&3
+    fi
+
+    for pub in *.pub; do
+      [[ -f "$pub" || -L "$pub" ]] || continue
+      key_type="$(awk 'NR == 1 {print $1}' "$pub")"
+      [[ "$key_type" == sk-* ]] || continue
+      fingerprint="$(ssh_keygen -lf "$pub" -E sha256 2>/dev/null | awk '{print $2}')" || continue
+      if ! awk -v fp="$fingerprint" '$2 == fp {found=1} END {exit !found}' "$SCRIPT_DIR/ssh-key.fingerprints"; then
+        unlisted_keys+=("${pub%.pub}")
+        unlisted_pubs+=("$pub")
+        unlisted_fingerprints+=("$fingerprint")
+      fi
+    done
+    if (( ${#unlisted_keys[@]} )); then
+      printf '%s The following YubiKey handles are not in the apparatus manifest:\n' "$APPARATUS_PREFIX" >&3
+      for index in "${!unlisted_keys[@]}"; do
+        printf '  %s (%s)\n' "${unlisted_keys[$index]}" "${unlisted_fingerprints[$index]}" >&3
+      done
+      apparatus_prompt 'Remove them from ~/.ssh? [y/N] '
+      read -r answer <&3 2>&3 || return 0
+      if [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]]; then
+        for index in "${!unlisted_keys[@]}"; do
+          key="${unlisted_keys[$index]}"
+          pub="${unlisted_pubs[$index]}"
+          apparatus_warning "Removing unlisted YubiKey handle: $key"
+          rm -f -- "$key" "$pub"
+        done
+      fi
     fi
   fi
   for pub in *.pub; do
