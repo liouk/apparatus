@@ -141,12 +141,32 @@ function recover_ssh_keys (
   fi
 )
 
+function ensure_github_auth_key {
+  local key_path="${HOME}/.ssh/id_ed25519_github"
+  local answer
+  [[ -r "$key_path" && -r "$key_path.pub" ]] && return 0
+  if [[ -e "$key_path" || -e "$key_path.pub" ]]; then
+    apparatus_warning "GitHub SSH key files are incomplete; existing files preserved."
+    return 0
+  fi
+  if [[ "${YUBIKEY_NONINTERACTIVE:-0}" == 1 ]] || ! { exec 3<> /dev/tty; } 2> /dev/null; then
+    apparatus_warning "GitHub SSH key is missing; rerun interactively to create it."
+    return 0
+  fi
+  apparatus_prompt 'Create a local SSH authentication key for GitHub? [y/N] '
+  read -r answer <&3 2>&3 || return 0
+  if [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]]; then
+    ssh-keygen -t ed25519 -f "$key_path" -C "github-auth-$(uname -n)" <&3 >&3 2>&3
+    apparatus_message "Add $key_path.pub to your GitHub account as an authentication key."
+  fi
+}
+
 function configure_apparatus_remote {
   local remote_url
   remote_url="$(git -C "$SCRIPT_DIR" remote get-url origin 2>/dev/null || true)"
   case "$remote_url" in
     https://github.com/liouk/apparatus|https://github.com/liouk/apparatus.git)
-      [[ -r "$HOME/.ssh/id_ed25519_sk_github" ]] || return 0
+      [[ -r "$HOME/.ssh/id_ed25519_github" ]] || return 0
       git -C "$SCRIPT_DIR" remote set-url origin git@github.com:liouk/apparatus.git
       apparatus_message "Switched the Apparatus remote to SSH."
       ;;
@@ -308,6 +328,7 @@ function main {
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
+    ensure_github_auth_key
     recover_ssh_keys
     configure_apparatus_remote
     clone_repos "$platform_dir/repos"

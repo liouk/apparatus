@@ -89,12 +89,12 @@ as `gpg.ssh.program`, so Git signing does not depend on shell startup. Recovery
 also explicitly uses Homebrew's `ssh-keygen`. Restart Zsh after installation.
 The generated platform setting is refreshed by full installation, not Stow-only.
 
-At the end of a full installation, apparatus asks whether to recover SSH keys,
-then waits for you to plug in the YubiKey and press Enter. It runs `ssh-keygen -K`
-directly in `~/.ssh`; OpenSSH handles PIN/passphrase and existing-filename prompts.
-All resident SSH keys are recovered and left there. Public fingerprints in
-`ssh-key.fingerprints` identify the personal signing and GitHub authentication
-aliases. An optional `~/.config/git/signing-key.fingerprints` can supply additional
+At the end of a full installation, apparatus offers to create a local GitHub SSH
+authentication key at `~/.ssh/id_ed25519_github`. It separately offers YubiKey
+recovery for resident signing keys, using `ssh-keygen -K` directly in
+`~/.ssh`; OpenSSH handles PIN/passphrase and existing-filename prompts.
+Public fingerprints in `ssh-key.fingerprints` identify resident signing keys.
+An optional `~/.config/git/signing-key.fingerprints` can supply additional
 alias/fingerprint pairs without putting them in this repository.
 
 Existing aliases are preserved; missing or mismatched public fingerprints produce
@@ -135,12 +135,12 @@ The installer does not overwrite conflicting dotfiles: resolve Stow conflicts ex
 
 After installation, select **Sway** at the existing login screen. The installer does not change your login shell; use `zsh` explicitly, or change it through your system's account settings. Reruns skip existing upstream clones, Zed, kubectl and installed symbol fonts; update these separately when needed.
 
-### GitHub authentication with the YubiKey
+### GitHub authentication
 
 The shared GitHub configuration is stowed as `~/.ssh/config` on every platform.
 Existing SSH configuration is preserved; merge the GitHub block manually if
-needed. The shared recovery step restores the GitHub key under the
-`id_ed25519_sk_github` filename expected by this config. Verify access with
+needed. Apparatus creates the local key at `~/.ssh/id_ed25519_github` when
+requested. Add its public half to GitHub as an authentication key, then verify access with
 `ssh -T git@github.com`, checking GitHub's host fingerprint on first connection.
 
 Apparatus stops here: clone and install any private configuration yourself.
