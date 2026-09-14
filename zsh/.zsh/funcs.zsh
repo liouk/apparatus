@@ -36,7 +36,11 @@ function git-wt () {
     local toplevel="$(git rev-parse --show-toplevel)"
     local wtdir="${toplevel}.wt/$1"
     [[ -d "${toplevel}.wt" ]] || mkdir -p "${toplevel}.wt"
-    git worktree add "$wtdir" "$1"
+    if git show-ref --verify --quiet "refs/heads/$1"; then
+      git worktree add "$wtdir" "$1"
+    else
+      git worktree add -b "$1" "$wtdir"
+    fi
   fi
 }
 
