@@ -306,7 +306,7 @@ bindsym --to-code {
 # Applications
 #
 
-assign [app_id="Slack"] workspace 3
+assign [app_id="slack"] workspace 3
 
 # startup
 exec playerctld daemon
