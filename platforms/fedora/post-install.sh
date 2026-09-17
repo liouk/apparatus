@@ -62,8 +62,8 @@
   # Maple Mono NL NF, used by Foot, Waybar and Zed.
   if ! fc-match -f '%{family}\n' 'Maple Mono NL NF' | rg -q '^Maple Mono NL NF$'; then
     maple_version=7.9
-    maple_archive="$fedora_tmp/MapleMonoNL-NF-$maple_version.zip"
-    curl -fsSL "https://github.com/subframe7536/maple-font/releases/download/v$maple_version/MapleMonoNL-NF-$maple_version.zip" \
+    maple_archive="$fedora_tmp/MapleMonoNL-NF.zip"
+    curl -fsSL "https://github.com/subframe7536/Maple-font/releases/download/v$maple_version/MapleMonoNL-NF.zip" \
       -o "$maple_archive"
     printf '%s  %s\n' \
       f6b2c6d1981ca338729449dba0caf07ba05751edd1d4b474b46d7b316b3c0db3 \
