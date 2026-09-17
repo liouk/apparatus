@@ -22,7 +22,7 @@
     "tooltip": "false"
   },
   "clock": {
-    "format": " {:%a %d/%m %H:%M}"
+    "format": "{:%a %d/%m %H:%M}"
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -87,6 +87,8 @@
     "format-source-muted": "",
     "format-icons": {
       "headphone": "",
+      "headset": "",
+      "hands-free": "",
       "default": ["", "", "", "", ""]
     },
     "on-click": "pavucontrol"
