@@ -6,12 +6,14 @@ copy-on-select = clipboard
 bell-features = no-system,no-audio,no-attention
 scrollback-limit = 10000000
 keybind = ctrl+shift+g=write_scrollback_file:open
+quit-after-last-window-closed=true
 
 cursor-style = underline
 cursor-style-blink = false
-adjust-cursor-thickness = 4
+adjust-cursor-thickness = 6
 shell-integration-features = no-cursor
 
+# catppuccin mocha
 foreground = #cdd6f4
 background = #1e1e2e
 selection-foreground = #1e1e2e
