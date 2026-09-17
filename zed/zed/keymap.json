@@ -1,6 +1,7 @@
 [
 	{
 		"bindings": {
+			"cmd-enter": null,
 			"ctrl-h": [
 				"action::Sequence",
 				[
