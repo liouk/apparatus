@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# Usage example:
+# "custom/web-monitor": {
+#   "tooltip": true,
+#   "return-type": "json",
+#   "exec": "$HOME/.config/waybar/web-monitor.sh",
+#   "on-click": "$HOME/.config/waybar/web-monitor.sh --open",
+#   "on-click-right": "$HOME/.config/waybar/web-monitor.sh --dismiss",
+#   "exec-on-event": true,
+#   "interval": 3600
+# },
+
 set -u
 
 # Each executable in monitors.d must print one JSON object:
