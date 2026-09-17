@@ -58,7 +58,7 @@ set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
 # Outputs
 #
 set $laptop eDP-1
-output $laptop pos 0 0 res 1920x1080
+output $laptop pos 0 0 res 1920x1200
 
 set $homedisplay "Dell Inc. DELL U2520D JMZKGZ2"
 output $homedisplay pos 1920 -360 res 2560x1440 scale 1
