@@ -13,6 +13,7 @@ set $term foot
 # Default helper locations; platforms may supply their own paths.
 set $local_bin ~/.local/bin
 set $go_bin ~/go/bin
+set $apparatus ~/liouk/apparatus
 include ~/.config/sway/tool-paths.conf
 
 #
@@ -141,7 +142,7 @@ bindsym $mod+space exec $menu
 
 # app shortcuts
 bindsym $mod+p exec $zedpicker
-bindsym $mod+comma exec swaymsg '[app_id="dev.zed.Zed" title=".apparatus"]' focus || zeditor ~/.apparatus
+bindsym $mod+comma exec swaymsg '[app_id="dev.zed.Zed" title=".apparatus"]' focus || zeditor $apparatus
 bindsym $mod+t exec $goot
 bindsym $mod+s exec $skratch
 bindsym $mod+g exec $glone
