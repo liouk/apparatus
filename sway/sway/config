@@ -11,7 +11,7 @@ set $right l
 set $term foot
 
 # Default helper locations; platforms may supply their own paths.
-set $local_bin /usr/local/bin
+set $local_bin ~/.local/bin
 set $go_bin ~/go/bin
 include ~/.config/sway/tool-paths.conf
 
@@ -24,35 +24,35 @@ font Maple Mono NL NF SemiBold 10
 # App launcher
 #
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu $term --class=launcher -e env TERMINAL_COMMAND='$term -e' sway-launcher-desktop
+set $menu $term --app-id=launcher -e env TERMINAL_COMMAND='$term -e' sway-launcher-desktop
 
 # zed-picker
 for_window [app_id="^zed-picker$"] floating enable, sticky enable, resize set 40 ppt 30 ppt
-set $zedpicker $term --class=zed-picker -e env TERMINAL_COMMAND='$term -e' $local_bin/zed-picker
+set $zedpicker $term --app-id=zed-picker -e env TERMINAL_COMMAND='$term -e' $local_bin/zed-picker
 
 # goot
 for_window [app_id="^goot$"] floating enable, sticky enable, resize set 30 ppt 70 ppt
-set $goot $term --class=goot -e env TERMINAL_COMMAND='$term -e' $go_bin/goot
+set $goot $term --app-id=goot -e env TERMINAL_COMMAND='$term -e' $go_bin/goot
 
 # ghproj
 for_window [app_id="^ghproj$"] floating enable, sticky enable, resize set 50 ppt 50 ppt
-set $ghproj $term --class=ghproj -e zsh -lic '$local_bin/ghproj'
+set $ghproj $term --app-id=ghproj -e zsh -lic '$local_bin/ghproj'
 
 # skratch
 for_window [app_id="^skratch$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
-set $skratch $term --class=skratch -e env TERMINAL_COMMAND='$term -e' $local_bin/skratch
+set $skratch $term --app-id=skratch -e env TERMINAL_COMMAND='$term -e' $local_bin/skratch
 
 # glone
 for_window [app_id="^glone$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
-set $glone $term --class=glone -e env TERMINAL_COMMAND='$term -e' $go_bin/glone
+set $glone $term --app-id=glone -e env TERMINAL_COMMAND='$term -e' $local_bin/glone
 
 # rename-workspace
 for_window [app_id="^rename-ws$"] floating enable, sticky enable, resize set 30 ppt 10 ppt
-set $renamews $term --class=rename-ws -e ~/.config/sway/rename-workspace.sh
+set $renamews $term --app-id=rename-ws -e ~/.config/sway/rename-workspace.sh
 
 # show-keys
 for_window [app_id="^show-keys$"] floating enable, sticky enable, resize set 50 ppt 75 ppt
-set $showkeys $term --class=show-keys -e ~/.config/sway/show-keys.sh
+set $showkeys $term --app-id=show-keys -e ~/.config/sway/show-keys.sh
 
 #
 # Outputs
