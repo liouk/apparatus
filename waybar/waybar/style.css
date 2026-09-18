@@ -80,6 +80,12 @@ button:hover {
 	padding: 0 10px;
 }
 
+#clock {
+	font-family: "Maple Mono NL NF";
+	font-weight: 700;
+	color: @text;
+}
+
 #custom-media {
 	color: @green;
 	min-width: 100px;
