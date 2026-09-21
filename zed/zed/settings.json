@@ -3,6 +3,7 @@
 	"agent_servers": {
 		"codex-acp": {
 			"default_config_options": {
+				"model": "gpt-5.6-terra",
 				"mode": "read-only",
 				"reasoning_effort": "medium",
 			},
