@@ -1,0 +1,6 @@
+#custom-web-monitor.alert,
+#custom-web-monitor.error {
+	background-color: @red;
+	color: @base;
+	padding: 0 10px;
+}

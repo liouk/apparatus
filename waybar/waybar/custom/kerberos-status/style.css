@@ -1,0 +1,7 @@
+#custom-kerberos-status {
+	padding: 0 10px;
+}
+
+#custom-kerberos-status.expired {
+	color: @red;
+}

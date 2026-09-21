@@ -1,4 +1,7 @@
 @import "catppuccin-mocha.css";
+@import "custom/media/style.css";
+@import "custom/kerberos-status/style.css";
+@import "custom/web-monitor/style.css";
 
 * {
 	border: none;
@@ -70,7 +73,6 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
-#custom-media,
 #custom-powerbutton,
 #tray,
 #mode,
@@ -84,11 +86,6 @@ button:hover {
 	font-family: "Maple Mono NL NF";
 	font-weight: 700;
 	color: @text;
-}
-
-#custom-media {
-	color: @green;
-	min-width: 100px;
 }
 
 #window,
@@ -133,11 +130,4 @@ label:focus {
 	font-size: 10pt;
 	min-width: 18px;
 	padding: 0 8px;
-}
-
-#custom-web-monitor.alert,
-#custom-web-monitor.error {
-	background-color: @red;
-	color: @base;
-	padding: 0 10px;
 }

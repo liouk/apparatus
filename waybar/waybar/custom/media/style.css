@@ -1,0 +1,5 @@
+#custom-media {
+	padding: 0 10px;
+	color: @green;
+	min-width: 100px;
+}

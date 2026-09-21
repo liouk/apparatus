@@ -4,9 +4,9 @@
 # "custom/web-monitor": {
 #   "tooltip": true,
 #   "return-type": "json",
-#   "exec": "$HOME/.config/waybar/web-monitor.sh",
-#   "on-click": "$HOME/.config/waybar/web-monitor.sh --open",
-#   "on-click-right": "$HOME/.config/waybar/web-monitor.sh --dismiss",
+#   "exec": "$HOME/.config/waybar/custom/web-monitor/web-monitor.sh",
+#   "on-click": "$HOME/.config/waybar/custom/web-monitor/web-monitor.sh --open",
+#   "on-click-right": "$HOME/.config/waybar/custom/web-monitor/web-monitor.sh --dismiss",
 #   "exec-on-event": true,
 #   "interval": 3600
 # },
