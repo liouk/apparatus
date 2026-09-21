@@ -1,15 +1,16 @@
 diff --git a/dist/index.js b/dist/index.js
 --- a/dist/index.js
 +++ b/dist/index.js
-@@ -25447,6 +25447,7 @@ function nonBlank(value) {
+@@ -25951,7 +25951,8 @@ function nonBlank(value) {
  // src/permissions/presentation.ts
- function commandToolCall(params) {
+ function commandToolCall(params, permissionContext) {
+   const name = permissionContext.commandName(params.threadId, params.itemId);
    const network = params.networkApprovalContext;
 +  const commandContent = params.command ? [textContent(stripShellPrefix(params.command))] : [];
    const rawInput = {
      ...params.command ? { command: stripShellPrefix(params.command) } : {},
      ...params.cwd ? { cwd: params.cwd } : {},
-@@ -25464,7 +25465,7 @@ function commandToolCall(params) {
+@@ -25970,7 +25971,7 @@ function commandToolCall(params, permissionContext) {
        ...commandActionPaths(params.commandActions),
        ...permissionProfilePaths(params.additionalPermissions)
      ])),
