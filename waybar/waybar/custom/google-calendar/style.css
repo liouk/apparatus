@@ -1,0 +1,8 @@
+#custom-google-calendar {
+	padding: 0 10px;
+	color: @blue;
+}
+
+#custom-google-calendar.none {
+	padding: 0;
+}

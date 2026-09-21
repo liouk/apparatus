@@ -1,5 +1,6 @@
 @import "catppuccin-mocha.css";
 @import "custom/media/style.css";
+@import "custom/google-calendar/style.css";
 @import "custom/kerberos-status/style.css";
 @import "custom/pulseaudio/style.css";
 @import "custom/web-monitor/style.css";

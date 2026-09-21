@@ -3,7 +3,7 @@
   "spacing": 0,
   "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "custom/kerberos-status", "custom/pulseaudio", "cpu", "memory", "network", "bluetooth", "sway/language", "custom/suspendbutton", "custom/powerbutton", "battery"],
+  "modules-right": ["custom/google-calendar", "tray", "custom/kerberos-status", "custom/pulseaudio", "cpu", "memory", "network", "bluetooth", "sway/language", "custom/suspendbutton", "custom/powerbutton", "battery"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
@@ -86,6 +86,14 @@
     "on-click-right": "$HOME/.config/sway/volctl.sh mute",
     "on-scroll-up": "$HOME/.config/sway/volctl.sh up",
     "on-scroll-down": "$HOME/.config/sway/volctl.sh down"
+  },
+  "custom/google-calendar": {
+    "exec": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh",
+    "return-type": "json",
+    "interval": 3600,
+    "max-length": 36,
+    "escape": true,
+    "on-click": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh --open"
   },
   "custom/kerberos-status": {
     "exec": "$HOME/.config/waybar/custom/kerberos-status/kerberos-status.sh",
