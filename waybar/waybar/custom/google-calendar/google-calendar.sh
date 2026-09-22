@@ -105,9 +105,9 @@ access_token() {
 }
 
 calendar_events() {
-	local now="$1"
+	local time_min="$1"
 	local end_of_day="$2"
-	local token today now_epoch cached_response cached_day cached_at response
+	local token today now_epoch cached_response cached_day cached_at cached_time_min response
 
 	today=$(TZ="$time_zone" date '+%F')
 	now_epoch=$(date +%s)
@@ -115,7 +115,8 @@ calendar_events() {
 		cached_response=$(<"$events_cache_file")
 		cached_day=$(jq -r '.calendar_day // empty' <<<"$cached_response")
 		cached_at=$(jq -r '.fetched_at // 0' <<<"$cached_response")
-		if [[ "$cached_day" == "$today" && "$cached_at" =~ ^[0-9]+$ ]] && ((now_epoch - cached_at < fetch_interval_seconds)); then
+		cached_time_min=$(jq -r '.time_min // empty' <<<"$cached_response")
+		if [[ "$cached_day" == "$today" && "$cached_time_min" == "$time_min" && "$cached_at" =~ ^[0-9]+$ ]] && ((now_epoch - cached_at < fetch_interval_seconds)); then
 			jq -c '.response' <<<"$cached_response"
 			return
 		fi
@@ -124,7 +125,7 @@ calendar_events() {
 	token=$(access_token) || return
 	response=$(curl --fail-with-body --silent --show-error --get \
 		--header "Authorization: Bearer $token" \
-		--data-urlencode "timeMin=$now" \
+		--data-urlencode "timeMin=$time_min" \
 		--data-urlencode "timeMax=$end_of_day" \
 		--data-urlencode 'singleEvents=true' \
 		--data-urlencode 'orderBy=startTime' \
@@ -133,9 +134,10 @@ calendar_events() {
 		'https://www.googleapis.com/calendar/v3/calendars/primary/events') || return
 	write_private_json "$events_cache_file" "$(jq -cn \
 		--arg calendar_day "$today" \
+		--arg time_min "$time_min" \
 		--argjson fetched_at "$now_epoch" \
 		--argjson response "$response" \
-		'{calendar_day: $calendar_day, fetched_at: $fetched_at, response: $response}')" || return
+		'{calendar_day: $calendar_day, time_min: $time_min, fetched_at: $fetched_at, response: $response}')" || return
 	printf '%s\n' "$response"
 }
 
@@ -153,21 +155,22 @@ shorten() {
 }
 
 render() {
-	local now end_of_day response simultaneous start start_epoch now_epoch display_time time_label remaining_minutes count title suffix prefix available text tooltip url class
+	local now start_of_day end_of_day response simultaneous start start_epoch now_epoch display_time time_label remaining_minutes count title suffix prefix available text tooltip url class
 	now=$(TZ="$time_zone" date --iso-8601=seconds)
+	start_of_day=$(TZ="$time_zone" date -d 'today 00:00' --iso-8601=seconds)
 	end_of_day=$(TZ="$time_zone" date -d 'tomorrow 00:00' --iso-8601=seconds)
-	response=$(calendar_events "$now" "$end_of_day" 2>&1) || {
+	response=$(calendar_events "$start_of_day" "$end_of_day" 2>&1) || {
 		emit '󰃭' "Google Calendar: $response" '["error"]'
 		return
 	}
 
-	# The API response is requested in Zurich time, so same-day RFC3339 values
-	# sort correctly as strings. All-day events have no start.dateTime and are
-	# deliberately ignored.
+	# The API response includes today's timed events. Prefer an event still in
+	# progress; otherwise use the next one. All-day events are deliberately ignored.
 	simultaneous=$(jq -c --arg now "$now" '
-		([.items[]? | select(.start.dateTime? and .start.dateTime >= $now)] | sort_by(.start.dateTime)) as $events |
+		([.items[]? | select(.start.dateTime? and .end.dateTime? and .end.dateTime > $now)] | sort_by(.start.dateTime)) as $events |
 		if ($events | length) == 0 then []
-		else $events[0].start.dateTime as $start |
+		else ([ $events[] | select(.start.dateTime <= $now) ] | sort_by(.start.dateTime)) as $ongoing |
+			if ($ongoing | length) > 0 then $ongoing[0].start.dateTime else $events[0].start.dateTime end as $start |
 			[$events[] | select(.start.dateTime == $start)] | sort_by((.summary // "") | ascii_downcase)
 		end
 	' <<<"$response") || {
@@ -189,17 +192,15 @@ render() {
 	title=$(jq -r '.[0].summary // "Untitled event"' <<<"$simultaneous")
 	class='["upcoming"]'
 	time_label="$display_time"
-	if ((start_epoch >= now_epoch && start_epoch - now_epoch <= imminent_interval_seconds)); then
+	if ((start_epoch <= now_epoch)); then
+		time_label='Now'
+	elif ((start_epoch - now_epoch <= imminent_interval_seconds)); then
 		class='["upcoming", "imminent"]'
 		if ((start_epoch - now_epoch < urgent_interval_seconds)); then
 			class='["upcoming", "imminent", "urgent"]'
 		fi
-		if ((start_epoch == now_epoch)); then
-			time_label='now'
-		else
-			remaining_minutes=$(((start_epoch - now_epoch + 59) / 60))
-			time_label="${remaining_minutes}m"
-		fi
+		remaining_minutes=$(((start_epoch - now_epoch + 59) / 60))
+		time_label="${remaining_minutes}m"
 	fi
 	suffix=''
 	if ((count > 1)); then
