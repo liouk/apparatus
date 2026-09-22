@@ -7,6 +7,7 @@ neovim
 npm
 stow
 fzf
+zoxide
 gum
 ripgrep
 jq
