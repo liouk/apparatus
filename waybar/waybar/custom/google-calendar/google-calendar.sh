@@ -167,7 +167,10 @@ render() {
 	# The API response includes today's timed events. Prefer an event still in
 	# progress; otherwise use the next one. All-day events are deliberately ignored.
 	simultaneous=$(jq -c --arg now "$now" '
-		([.items[]? | select(.start.dateTime? and .end.dateTime? and .end.dateTime > $now)] | sort_by(.start.dateTime)) as $events |
+		([.items[]? |
+			select(.start.dateTime? and .end.dateTime? and .end.dateTime > $now) |
+			select([.attendees[]? | select(.self == true) | .responseStatus] | index("declined") | not)
+		] | sort_by(.start.dateTime)) as $events |
 		if ($events | length) == 0 then []
 		else ([ $events[] | select(.start.dateTime <= $now) ] | sort_by(.start.dateTime)) as $ongoing |
 			if ($ongoing | length) > 0 then $ongoing[0].start.dateTime else $events[0].start.dateTime end as $start |
