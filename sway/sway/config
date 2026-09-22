@@ -64,14 +64,11 @@ output $laptop pos 0 0 res 1920x1200
 set $homedisplay "Dell Inc. DELL U2520D JMZKGZ2"
 output $homedisplay pos 1920 -360 res 2560x1440 scale 1
 
-set $office1 "Samsung Electric Company LF32TU87 HNTT100823"
-output $office1 mode 3840x2160@59.997Hz scale 1.4
-
-set $office2 "Samsung Electric Company LF32TU87 HNTT100825"
-output $office2 mode 3840x2160@59.997Hz scale 1.4
+output "Samsung Electric Company LF32TU87 HNTT100823" mode 3840x2160@59.997Hz scale 1.4
+output "Samsung Electric Company LF32TU87 HNTT100825" mode 3840x2160@59.997Hz scale 1.4
+output "Samsung Electric Company LF32TU87 HNTT100833" mode 3840x2160@59.997Hz scale 1.4
 
 set $officeconnector DP-1
-
 
 output * {
   bg /usr/share/backgrounds/bg.png fill
