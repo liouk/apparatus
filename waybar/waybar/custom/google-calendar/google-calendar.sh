@@ -14,9 +14,13 @@ readonly credentials_file="${WAYBAR_GOOGLE_CALENDAR_CREDENTIALS:-$HOME/.config/w
 readonly data_dir="${XDG_DATA_HOME:-$HOME/.local/share}/waybar-google-calendar"
 readonly cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-google-calendar"
 readonly token_file="$data_dir/token.json"
+readonly events_cache_file="$cache_dir/events.json"
 readonly event_file="$cache_dir/next-event.json"
 readonly callback_port="${WAYBAR_GOOGLE_CALENDAR_CALLBACK_PORT:-53682}"
 readonly max_text_length=36
+readonly fetch_interval_seconds=3600
+readonly imminent_interval_seconds=1800
+readonly urgent_interval_seconds=600
 
 error() {
 	printf '%s\n' "$*" >&2
@@ -37,9 +41,9 @@ write_private_json() {
 emit() {
 	local text="$1"
 	local tooltip="$2"
-	local class="$3"
+	local classes="$3"
 
-	jq -cn --arg text "$text" --arg tooltip "$tooltip" --arg class "$class" \
+	jq -cn --arg text "$text" --arg tooltip "$tooltip" --argjson class "$classes" \
 		'{text: $text, tooltip: $tooltip, class: $class}'
 }
 
@@ -103,10 +107,22 @@ access_token() {
 calendar_events() {
 	local now="$1"
 	local end_of_day="$2"
-	local token
+	local token today now_epoch cached_response cached_day cached_at response
+
+	today=$(TZ="$time_zone" date '+%F')
+	now_epoch=$(date +%s)
+	if [[ -r "$events_cache_file" ]]; then
+		cached_response=$(<"$events_cache_file")
+		cached_day=$(jq -r '.calendar_day // empty' <<<"$cached_response")
+		cached_at=$(jq -r '.fetched_at // 0' <<<"$cached_response")
+		if [[ "$cached_day" == "$today" && "$cached_at" =~ ^[0-9]+$ ]] && ((now_epoch - cached_at < fetch_interval_seconds)); then
+			jq -c '.response' <<<"$cached_response"
+			return
+		fi
+	fi
 
 	token=$(access_token) || return
-	curl --fail-with-body --silent --show-error --get \
+	response=$(curl --fail-with-body --silent --show-error --get \
 		--header "Authorization: Bearer $token" \
 		--data-urlencode "timeMin=$now" \
 		--data-urlencode "timeMax=$end_of_day" \
@@ -114,7 +130,13 @@ calendar_events() {
 		--data-urlencode 'orderBy=startTime' \
 		--data-urlencode 'maxResults=250' \
 		--data-urlencode "timeZone=$time_zone" \
-		'https://www.googleapis.com/calendar/v3/calendars/primary/events'
+		'https://www.googleapis.com/calendar/v3/calendars/primary/events') || return
+	write_private_json "$events_cache_file" "$(jq -cn \
+		--arg calendar_day "$today" \
+		--argjson fetched_at "$now_epoch" \
+		--argjson response "$response" \
+		'{calendar_day: $calendar_day, fetched_at: $fetched_at, response: $response}')" || return
+	printf '%s\n' "$response"
 }
 
 shorten() {
@@ -131,11 +153,11 @@ shorten() {
 }
 
 render() {
-	local now end_of_day response simultaneous start display_time count title suffix prefix available text tooltip url
+	local now end_of_day response simultaneous start start_epoch now_epoch display_time time_label remaining_minutes count title suffix prefix available text tooltip url class
 	now=$(TZ="$time_zone" date --iso-8601=seconds)
 	end_of_day=$(TZ="$time_zone" date -d 'tomorrow 00:00' --iso-8601=seconds)
 	response=$(calendar_events "$now" "$end_of_day" 2>&1) || {
-		emit '󰃭' "Google Calendar: $response" 'error'
+		emit '󰃭' "Google Calendar: $response" '["error"]'
 		return
 	}
 
@@ -149,29 +171,45 @@ render() {
 			[$events[] | select(.start.dateTime == $start)] | sort_by((.summary // "") | ascii_downcase)
 		end
 	' <<<"$response") || {
-		emit '󰃭' 'Google Calendar: invalid API response' 'error'
+		emit '󰃭' 'Google Calendar: invalid API response' '["error"]'
 		return
 	}
 
 	count=$(jq 'length' <<<"$simultaneous")
 	if ((count == 0)); then
 		write_private_json "$event_file" '{"url":null}'
-		emit '' 'No remaining timed events today' 'none'
+		emit '' 'No remaining timed events today' '["none"]'
 		return
 	fi
 
 	start=$(jq -r '.[0].start.dateTime' <<<"$simultaneous")
+	start_epoch=$(date -d "$start" +%s)
+	now_epoch=$(date -d "$now" +%s)
 	display_time=$(TZ="$time_zone" date -d "$start" '+%H:%M')
 	title=$(jq -r '.[0].summary // "Untitled event"' <<<"$simultaneous")
+	class='["upcoming"]'
+	time_label="$display_time"
+	if ((start_epoch >= now_epoch && start_epoch - now_epoch <= imminent_interval_seconds)); then
+		class='["upcoming", "imminent"]'
+		if ((start_epoch - now_epoch < urgent_interval_seconds)); then
+			class='["upcoming", "imminent", "urgent"]'
+		fi
+		if ((start_epoch == now_epoch)); then
+			time_label='now'
+		else
+			remaining_minutes=$(((start_epoch - now_epoch + 59) / 60))
+			time_label="${remaining_minutes}m"
+		fi
+	fi
 	suffix=''
 	if ((count > 1)); then
 		suffix=" +$((count - 1))"
 	fi
-	prefix="󰃭 $display_time "
+	prefix="󰃭 $time_label · "
 	available=$((max_text_length - ${#prefix} - ${#suffix}))
 	text="$prefix$(shorten "$title" "$available")$suffix"
-	tooltip=$(jq -r --arg time "$display_time" '
-		[$time] + [.[] | "• " + (.summary // "Untitled event")] | join("\n")
+	tooltip=$(jq -r '
+		[.[] | "• \(.start.dateTime[11:16]) - \(.end.dateTime[11:16]) \(.summary // "Untitled event")"] | join("\n")
 	' <<<"$simultaneous")
 	url=$(jq -r '
 		.[0] |
@@ -179,7 +217,7 @@ render() {
 		.hangoutLink // .htmlLink // empty
 	' <<<"$simultaneous")
 	write_private_json "$event_file" "$(jq -cn --arg url "$url" '{url: $url}')"
-	emit "$text" "$tooltip" 'upcoming'
+	emit "$text" "$tooltip" "$class"
 }
 
 open_event() {

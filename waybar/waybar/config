@@ -90,7 +90,7 @@
   "custom/google-calendar": {
     "exec": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh",
     "return-type": "json",
-    "interval": 3600,
+    "interval": 60,
     "max-length": 36,
     "escape": true,
     "on-click": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh --open"
