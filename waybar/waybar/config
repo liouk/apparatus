@@ -98,7 +98,8 @@
   "custom/kerberos-status": {
     "exec": "$HOME/.config/waybar/custom/kerberos-status/kerberos-status.sh",
     "return-type": "json",
-    "interval": 3600,
+    "interval": "once",
+    "signal": 8,
     "tooltip": true,
     "escape": false
   },
