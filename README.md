@@ -126,7 +126,6 @@ The package list covers Apparatus tools, not base-system provisioning. Standard 
 - Uses Fuzzel on `$mod+Space` instead of sway-launcher-desktop, with Fedora-local configuration in `platforms/fedora/stow/fuzzel/`. Tig is unchanged.
 - Clones Powerlevel10k from upstream. Installs [Zed stable](https://zed.dev/docs/linux) and [latest stable kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) only if missing, preserving existing installations. Adds a `zeditor` compatibility link when needed. Kubectl downloads are SHA-256 checked.
 - Installs Go helpers and `yamlfmt`, Maple Mono NL NF, and the same Nerd Font symbols release as Arch. No AUR/COPR setup or `fzfpac` link is added.
-- Installs [Bitwarden CLI (`bw`)](https://bitwarden.com/help/cli/) through npm with the user-local prefix `~/.local`, placing `bw` in `~/.local/bin`. Rerunning the installer updates it to the latest release. Vault login is separate.
 - Installs [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) through npm with the same user-local prefix, placing `codex` in `~/.local/bin`. Rerunning the installer updates it to the latest release. Authentication is separate.
 
 Personal helper links, Go binaries, and newly installed Zed/kubectl commands live in `~/.local/bin`, without sudo. Fedora's Zsh settings set `GOBIN` there for future Go installs. Both Zsh and the Fedora Sway session explicitly put this directory on `PATH`; log into Sway through the login screen (or use `start-sway`) to load its environment. Existing system-managed tool installations are left alone.
