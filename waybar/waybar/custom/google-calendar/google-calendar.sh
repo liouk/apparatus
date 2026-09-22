@@ -155,8 +155,9 @@ shorten() {
 }
 
 render() {
-	local now start_of_day end_of_day response simultaneous start start_epoch now_epoch display_time time_label remaining_minutes count title suffix prefix available text tooltip url class
+	local now imminent_cutoff start_of_day end_of_day response simultaneous start start_epoch now_epoch display_time time_label remaining_minutes count title suffix prefix available text tooltip url class
 	now=$(TZ="$time_zone" date --iso-8601=seconds)
+	imminent_cutoff=$(TZ="$time_zone" date -d "$now + $imminent_interval_seconds seconds" --iso-8601=seconds)
 	start_of_day=$(TZ="$time_zone" date -d 'today 00:00' --iso-8601=seconds)
 	end_of_day=$(TZ="$time_zone" date -d 'tomorrow 00:00' --iso-8601=seconds)
 	response=$(calendar_events "$start_of_day" "$end_of_day" 2>&1) || {
@@ -164,16 +165,19 @@ render() {
 		return
 	}
 
-	# The API response includes today's timed events. Prefer an event still in
-	# progress; otherwise use the next one. All-day events are deliberately ignored.
-	simultaneous=$(jq -c --arg now "$now" '
+	# The API response includes today's timed events. Prefer an imminent event,
+	# then one in progress, then the next event. All-day events are ignored.
+	simultaneous=$(jq -c --arg now "$now" --arg imminent_cutoff "$imminent_cutoff" '
 		([.items[]? |
 			select(.start.dateTime? and .end.dateTime? and .end.dateTime > $now) |
 			select([.attendees[]? | select(.self == true) | .responseStatus] | index("declined") | not)
 		] | sort_by(.start.dateTime)) as $events |
 		if ($events | length) == 0 then []
-		else ([ $events[] | select(.start.dateTime <= $now) ] | sort_by(.start.dateTime)) as $ongoing |
-			if ($ongoing | length) > 0 then $ongoing[0].start.dateTime else $events[0].start.dateTime end as $start |
+		else ([ $events[] | select(.start.dateTime > $now and .start.dateTime < $imminent_cutoff) ] | sort_by(.start.dateTime)) as $imminent |
+			([ $events[] | select(.start.dateTime <= $now) ] | sort_by(.start.dateTime)) as $ongoing |
+			if ($imminent | length) > 0 then $imminent[0].start.dateTime
+			elif ($ongoing | length) > 0 then $ongoing[0].start.dateTime
+			else $events[0].start.dateTime end as $start |
 			[$events[] | select(.start.dateTime == $start)] | sort_by((.summary // "") | ascii_downcase)
 		end
 	' <<<"$response") || {
