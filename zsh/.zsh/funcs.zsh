@@ -47,5 +47,5 @@ function git-wt () {
 # checkout a GitHub PR in a new git worktree
 function gh-prw () {
   local wtdir="$(git rev-parse --show-toplevel).wt/pr-$1"
-  git worktree add "$wtdir" && (cd "$wtdir" && gh pr checkout --force "$1")
+  git worktree add "$wtdir" && (cd "$wtdir" && gh pr checkout --force "$1") && zeditor "$wtdir"
 }
