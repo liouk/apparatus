@@ -343,9 +343,10 @@ main() {
 	case "${1:-}" in
 		--authorize) authorize ;;
 		--open) open_event ;;
+		--refresh) rm -f "$events_cache_file" ;;
 		--callback-handler) callback_handler ;;
 		'') render ;;
-		*) error "usage: ${0##*/} [--authorize|--open]"; return 2 ;;
+		*) error "usage: ${0##*/} [--authorize|--open|--refresh]"; return 2 ;;
 	esac
 }
 

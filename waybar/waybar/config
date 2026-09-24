@@ -91,9 +91,11 @@
     "exec": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh",
     "return-type": "json",
     "interval": 60,
+    "signal": 9,
     "max-length": 36,
     "escape": true,
-    "on-click": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh --open"
+    "on-click": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh --open",
+    "on-click-right": "$HOME/.config/waybar/custom/google-calendar/google-calendar.sh --refresh && pkill -SIGRTMIN+9 waybar"
   },
   "custom/kerberos-status": {
     "exec": "$HOME/.config/waybar/custom/kerberos-status/kerberos-status.sh",
