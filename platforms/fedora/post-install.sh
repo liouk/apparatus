@@ -25,6 +25,12 @@
     ln -s "$zed_path" "$HOME/.local/bin/zeditor"
   fi
 
+  # Keep an existing installation. CodeRabbit's official installer uses ~/.local.
+  if ! command -v coderabbit > /dev/null; then
+    curl -fsSL https://cli.coderabbit.ai/install.sh -o "$fedora_tmp/coderabbit-install.sh"
+    sh "$fedora_tmp/coderabbit-install.sh"
+  fi
+
   # Latest stable kubectl, verified against upstream's SHA-256 checksum.
   # An existing client may be system-managed, so do not replace it.
   if ! command -v kubectl > /dev/null; then
