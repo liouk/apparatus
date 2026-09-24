@@ -1,5 +1,5 @@
 # jump between subdirs of a base dir
-function __jumpfunc () {
+__jumpfunc() {
   local jump_basedir=$1
   shift
   case $1 in
@@ -13,7 +13,7 @@ function __jumpfunc () {
 }
 
 # manage git worktrees
-function git-wt () {
+git-wt() {
   if [[ -z "$1" ]]; then
     local -a roots=("$APPARATUS_WORKSPACE_ROOT" "${GIT_WORKTREE_ROOTS[@]}")
     find "${roots[@]}" -maxdepth 3 -name .git -exec sh -c \
@@ -45,7 +45,76 @@ function git-wt () {
 }
 
 # checkout a GitHub PR in a new git worktree
-function gh-prw () {
+gh-prw() {
   local wtdir="$(git rev-parse --show-toplevel).wt/pr-$1"
   git worktree add "$wtdir" && (cd "$wtdir" && gh pr checkout --force "$1") && zeditor "$wtdir"
+}
+
+# replace a go module with another on a specific commit
+go-replace() {
+  if (( $# < 2 || $# > 3 )); then
+    echo "examples:" >&2
+    echo "  go-replace library-go github.com/you/library-go@my-branch" >&2
+    echo "  go-replace library-go ~/src/library-go" >&2
+    echo "  go-replace library-go ~/src/library-go my-branch" >&2
+    return 2
+  fi
+
+  local query="$1"
+  local fork_source="$2"
+  local fork ref origin prefix
+  local modules module upstream version
+  local -a matches
+
+  if [[ -d "$fork_source" ]]; then
+    origin="$(git -C "$fork_source" remote get-url origin)" || return
+    case "$origin" in
+      git@github.com:*) fork="github.com/${origin#git@github.com:}" ;;
+      https://github.com/*) fork="${origin#https://}" ;;
+      http://github.com/*) fork="${origin#http://}" ;;
+      ssh://git@github.com/*) fork="${origin#ssh://git@}" ;;
+      *)
+        echo "go-replace: local fork origin is not a GitHub URL: $origin" >&2
+        return 1
+        ;;
+    esac
+    fork="${fork%.git}"
+    prefix="$(git -C "$fork_source" rev-parse --show-prefix)" || return
+    [[ -n "$prefix" ]] && fork+="/${prefix%/}"
+    ref="${3:-HEAD}"
+    ref="$(git -C "$fork_source" rev-parse --verify "${ref}^{commit}")" || return
+  else
+    if (( $# != 2 )) || [[ "$fork_source" != *'@'* ]]; then
+      echo "go-replace: expected a local fork path or module@ref" >&2
+      echo "example: go-replace library-go github.com/you/library-go@my-branch" >&2
+      return 2
+    fi
+    fork="${fork_source%@*}"
+    ref="${fork_source##*@}"
+    if [[ -z "$fork" || -z "$ref" ]]; then
+      echo "go-replace: fork module and ref must both be non-empty" >&2
+      return 2
+    fi
+  fi
+
+  modules="$(go list -mod=mod -m -f '{{if not .Main}}{{.Path}}{{end}}' all)" || return
+  matches=()
+  while IFS= read -r module; do
+    [[ "$module" == *"$query"* ]] && matches+=("$module")
+  done <<< "$modules"
+
+  if (( ${#matches[@]} == 0 )); then
+    echo "go-replace: no dependency module matches '$query'" >&2
+    return 1
+  fi
+  if (( ${#matches[@]} > 1 )); then
+    echo "go-replace: multiple dependency modules match '$query':" >&2
+    printf '  %s\n' "${matches[@]}" >&2
+    return 1
+  fi
+
+  upstream="${matches[1]}"
+
+  version="$(go list -mod=mod -m -f '{{.Version}}' "${fork}@${ref}")" || return
+  go mod edit -replace="${upstream}=${fork}@${version}"
 }
