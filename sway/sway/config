@@ -62,11 +62,13 @@ set $laptop eDP-1
 output $laptop pos 0 0 res 1920x1200
 
 set $homedisplay "Dell Inc. DELL U2520D JMZKGZ2"
-output $homedisplay pos 1920 -360 res 2560x1440 scale 1
+output $homedisplay pos -320 -1440 res 2560x1440 scale 1
 
-output "Samsung Electric Company LF32TU87 HNTT100823" mode 3840x2160@59.997Hz scale 1.4
-output "Samsung Electric Company LF32TU87 HNTT100825" mode 3840x2160@59.997Hz scale 1.4
-output "Samsung Electric Company LF32TU87 HNTT100833" mode 3840x2160@59.997Hz scale 1.4
+# At scale 1.4, the 4K displays are roughly 2743x1543 logical pixels.
+# Center each one immediately above the 1920x1200 laptop display.
+output "Samsung Electric Company LF32TU87 HNTT100823" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
+output "Samsung Electric Company LF32TU87 HNTT100825" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
+output "Samsung Electric Company LF32TU87 HNTT100833" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
 
 set $officeconnector DP-1
 
