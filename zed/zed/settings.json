@@ -159,7 +159,14 @@
 	// LSP
 	"lsp": {
 		"gopls": {
+			"binary": {
+				"env": {
+					"GOMAXPROCS": "2",
+					"GOFLAGS": "-p=2",
+				},
+			},
 			"initialization_options": {
+				"diagnosticsTrigger": "Save",
 				"codelenses": {
 					"test": false,
 					"generate": true,
