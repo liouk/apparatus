@@ -142,6 +142,9 @@
 	},
 	"agent": {
 		"enabled": true,
+		"expand_terminal_card": false,
+		"expand_edit_card": false,
+		"thinking_display": "always_collapsed",
 		"dock": "right",
 		"sidebar_side": "right",
 		"button": true,
