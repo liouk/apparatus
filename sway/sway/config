@@ -69,6 +69,7 @@ output $homedisplay pos -320 -1440 res 2560x1440 scale 1
 output "Samsung Electric Company LF32TU87 HNTT100823" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
 output "Samsung Electric Company LF32TU87 HNTT100825" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
 output "Samsung Electric Company LF32TU87 HNTT100833" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
+output "Samsung Electric Company LF32TU87 HNTT100830" pos -412 -1543 mode 3840x2160@59.997Hz scale 1.4
 
 set $officeconnector DP-1
 
