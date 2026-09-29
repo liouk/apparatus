@@ -113,6 +113,17 @@ machine-local Codex settings. Restart Codex after changing it. An existing
 `AGENTS.override.md` in that directory takes precedence; see the
 [instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 
+## Codex ACP command preview
+
+Zed uses the registry-managed adapter. To apply the local command-title patch:
+
+```sh
+bash ~/.config/zed/apply-codex-acp-show-command-patch.sh
+```
+
+Restart Zed afterwards. Registry updates can overwrite this patch; reapply it
+after an update, or adapt it if the upstream code has changed.
+
 ## Fedora
 
 The `fedora` platform targets a regular, DNF-based Fedora installation. Fedora Atomic is rejected by the platform's pre-install check. Start with curl available and permission to use sudo/DNF; the bootstrap handles missing Git and Bash, and the installer supplies OpenSSH. Public repository downloads use HTTPS, so GitHub SSH access is not needed before installation.

@@ -1,12 +1,21 @@
 diff --git a/node_modules/@agentclientprotocol/codex-acp/dist/index.js b/node_modules/@agentclientprotocol/codex-acp/dist/index.js
 --- a/node_modules/@agentclientprotocol/codex-acp/dist/index.js
 +++ b/node_modules/@agentclientprotocol/codex-acp/dist/index.js
-@@ -31240,7 +31240,7 @@ function commandToolCall(params, permissionContext) {
-     ...name !== void 0 ? { name } : {},
-     kind: "execute",
-     status: "pending",
--    title: network ? `${network.protocol} network access to ${network.host}` : commandTitle(params.commandActions),
-+    title: network ? `${network.protocol} network access to ${network.host}` : params.command ? stripShellPrefix(params.command) : commandTitle(params.commandActions),
-     ...Object.keys(rawInput).length > 0 ? { rawInput } : {},
-     ...locationsField(unique([
-       ...commandActionPaths(params.commandActions),
+@@ -27769,7 +27769,7 @@
+       toolCallId: params.itemId,
+       ...name === void 0 ? {} : { name },
+       ...started ? {} : { kind: "execute", status: "pending" },
+-      title: network ? `${network.protocol} network access to ${network.host}` : started ? startedCommandTitle(params, actions) : permissionTitle(actions),
++      title: network ? `${network.protocol} network access to ${network.host}` : params.command ? stripShellPrefix(params.command) : started ? startedCommandTitle(params, actions) : permissionTitle(actions),
+       ...Object.keys(input2).length > 0 ? { input: input2 } : {},
+       locations: [.../* @__PURE__ */ new Set([
+         ...started ? [] : actionPaths(actions),
+@@ -27779,7 +27779,7 @@
+       standard: {
+         kind: "execute",
+         status: "pending",
+-        title: network ? `${network.protocol} network access to ${network.host}` : permissionTitle(actions),
++        title: network ? `${network.protocol} network access to ${network.host}` : params.command ? stripShellPrefix(params.command) : permissionTitle(actions),
+         locations: [.../* @__PURE__ */ new Set([
+           ...actionPaths(actions),
+           ...permissionProfilePaths(params.additionalPermissions)
