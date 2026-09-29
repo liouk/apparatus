@@ -50,6 +50,11 @@ gh-prw() {
   git worktree add "$wtdir" && (cd "$wtdir" && gh pr checkout --force "$1") && zeditor "$wtdir"
 }
 
+gomodver(){
+	ref="$1"
+	go list -mod=mod -m -json "$ref" | jq --raw-output '.Version'
+}
+
 # replace a go module with another on a specific commit
 go-replace() {
   if (( $# < 2 || $# > 3 )); then
