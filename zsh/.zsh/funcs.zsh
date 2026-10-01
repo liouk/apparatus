@@ -50,76 +50,50 @@ gh-prw() {
   git worktree add "$wtdir" && (cd "$wtdir" && gh pr checkout --force "$1") && zeditor "$wtdir"
 }
 
-gomodver(){
-	ref="$1"
-	go list -mod=mod -m -json "$ref" | jq --raw-output '.Version'
-}
-
-# replace a go module with another on a specific commit
+# replace a Go dependency with a pushed ref from a fork
 go-replace() {
-  if (( $# < 2 || $# > 3 )); then
-    echo "examples:" >&2
-    echo "  go-replace library-go github.com/you/library-go@my-branch" >&2
-    echo "  go-replace library-go ~/src/library-go" >&2
-    echo "  go-replace library-go ~/src/library-go my-branch" >&2
+  local usage="usage: go-replace <dependency> <ref> [owner/repo]"
+
+  if [[ "${1:-}" == help || "${1:-}" == -h || "${1:-}" == --help ]]; then
+    print -r -- "$usage"
+    return
+  elif (( $# < 2 || $# > 3 )); then
+    print -u2 -r -- "$usage"
     return 2
   fi
 
-  local query="$1"
-  local fork_source="$2"
-  local fork ref origin prefix
+  local query="$1" ref="$2" fork="$3"
   local modules module upstream version
   local -a matches
 
-  if [[ -d "$fork_source" ]]; then
-    origin="$(git -C "$fork_source" remote get-url origin)" || return
-    case "$origin" in
-      git@github.com:*) fork="github.com/${origin#git@github.com:}" ;;
-      https://github.com/*) fork="${origin#https://}" ;;
-      http://github.com/*) fork="${origin#http://}" ;;
-      ssh://git@github.com/*) fork="${origin#ssh://git@}" ;;
-      *)
-        echo "go-replace: local fork origin is not a GitHub URL: $origin" >&2
-        return 1
-        ;;
-    esac
-    fork="${fork%.git}"
-    prefix="$(git -C "$fork_source" rev-parse --show-prefix)" || return
-    [[ -n "$prefix" ]] && fork+="/${prefix%/}"
-    ref="${3:-HEAD}"
-    ref="$(git -C "$fork_source" rev-parse --verify "${ref}^{commit}")" || return
-  else
-    if (( $# != 2 )) || [[ "$fork_source" != *'@'* ]]; then
-      echo "go-replace: expected a local fork path or module@ref" >&2
-      echo "example: go-replace library-go github.com/you/library-go@my-branch" >&2
-      return 2
-    fi
-    fork="${fork_source%@*}"
-    ref="${fork_source##*@}"
-    if [[ -z "$fork" || -z "$ref" ]]; then
-      echo "go-replace: fork module and ref must both be non-empty" >&2
-      return 2
-    fi
-  fi
-
   modules="$(go list -mod=mod -m -f '{{if not .Main}}{{.Path}}{{end}}' all)" || return
-  matches=()
   while IFS= read -r module; do
     [[ "$module" == *"$query"* ]] && matches+=("$module")
   done <<< "$modules"
 
-  if (( ${#matches[@]} == 0 )); then
-    echo "go-replace: no dependency module matches '$query'" >&2
-    return 1
-  fi
-  if (( ${#matches[@]} > 1 )); then
-    echo "go-replace: multiple dependency modules match '$query':" >&2
-    printf '  %s\n' "${matches[@]}" >&2
-    return 1
-  fi
+  case ${#matches} in
+    0)
+      print -u2 "go-replace: no dependency matches '$query'"
+      return 1
+      ;;
+    1) upstream="${matches[1]}" ;;
+    *)
+      print -u2 "go-replace: multiple dependencies match '$query':"
+      printf '  %s\n' "${matches[@]}" >&2
+      return 1
+      ;;
+  esac
 
-  upstream="${matches[1]}"
+  if [[ -z "$fork" ]]; then
+    if [[ "$upstream" != github.com/*/* ]]; then
+      echo "go-replace: cannot derive a GitHub fork from '$upstream'" >&2
+      return 1
+    fi
+    fork="liouk/${${upstream#github.com/}#*/}"
+  fi
+  fork="github.com/${fork#github.com/}"
 
   version="$(go list -mod=mod -m -f '{{.Version}}' "${fork}@${ref}")" || return
-  go mod edit -replace="${upstream}=${fork}@${version}"
+  go mod edit -replace="${upstream}=${fork}@${version}" || return
+  print -r -- "replace $upstream => $fork $version"
 }
