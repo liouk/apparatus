@@ -1,0 +1,9 @@
+APPARATUS_BIN_DIR="$HOME/.local/bin"
+
+function install_apt_packages {
+  sudo apt-get update
+  sudo apt-get install -y --no-install-recommends "$@"
+}
+
+# This server profile has no personal Git or SSH credentials to manage.
+MANAGE_PERSONAL_GIT_AND_SSH=false

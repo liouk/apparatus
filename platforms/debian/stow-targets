@@ -1,0 +1,5 @@
+# Keep the server profile free of Git identity, SSH client configuration, and
+# all desktop-oriented packages.
+HOME:zsh
+HOME:powerlevel10k
+.config:nvim

@@ -1,0 +1,12 @@
+# Headless interactive environment only. Container runtime and server services
+# are provisioned separately by the homelab automation.
+fd-find
+fzf
+# Neovim's lazy.nvim bootstrap clones its plugin manager over HTTPS.
+git
+neovim
+ripgrep
+stow
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
