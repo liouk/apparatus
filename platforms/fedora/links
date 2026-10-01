@@ -1,3 +1,4 @@
 ghproj:$HOME/liouk/toolshed/ghproj/ghproj.sh
+go-replace:$HOME/liouk/toolshed/go-replace/go-replace.sh
 skratch:$HOME/liouk/toolshed/skratch/skratch.sh
 zed-picker:$HOME/liouk/toolshed/zed-picker/zed-picker.sh
