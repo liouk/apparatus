@@ -1,5 +1,8 @@
 APPARATUS_BIN_DIR="$HOME/.local/bin"
 
+# Manage personal Git and SSH credentials.
+MANAGE_PERSONAL_GIT_AND_SSH=true
+
 function install_dnf_packages {
   # Avoid pulling optional desktop/audio services into a managed installation.
   sudo dnf install -y --setopt=install_weak_deps=False "$@"

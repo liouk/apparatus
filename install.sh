@@ -318,19 +318,24 @@ function main {
     exit 1
   fi
 
+  # Platform configuration owns this opt-in flag; do not inherit it from the
+  # environment when the installer is invoked.
+  unset MANAGE_PERSONAL_GIT_AND_SSH
   source "$platform_dir/config"
 
   if [ -n "$RECOVER_KEYS_ONLY" ]; then
-    recover_ssh_keys
+    [[ "${MANAGE_PERSONAL_GIT_AND_SSH:-false}" == true ]] && recover_ssh_keys
     return
   fi
 
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
-    ensure_github_auth_key
-    recover_ssh_keys
-    configure_apparatus_remote
+    if [[ "${MANAGE_PERSONAL_GIT_AND_SSH:-false}" == true ]]; then
+      ensure_github_auth_key
+      recover_ssh_keys
+      configure_apparatus_remote
+    fi
     clone_repos "$platform_dir/repos"
     create_links "$platform_dir/links" "${APPARATUS_BIN_DIR:-/usr/local/bin}"
     [ -f "$platform_dir/post-install.sh" ] && source "$platform_dir/post-install.sh"
