@@ -11,7 +11,7 @@ quit-after-last-window-closed=true
 cursor-style = underline
 cursor-style-blink = false
 adjust-cursor-thickness = 6
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo,sudo
 
 # catppuccin mocha
 foreground = #cdd6f4
