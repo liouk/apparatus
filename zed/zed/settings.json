@@ -3,7 +3,7 @@
 	"agent_servers": {
 		"codex-acp": {
 			"default_config_options": {
-				"model": "gpt-5.6-sol",
+				"model": "gpt-5.6-terra",
 				"mode": "read-only",
 				"reasoning_effort": "medium",
 			},
@@ -146,7 +146,9 @@
 		"expand_edit_card": false,
 		"thinking_display": "always_collapsed",
 		"dock": "right",
-		"sidebar_side": "right",
+		"threads_sidebar": {
+			"position": "right",
+		},
 		"button": true,
 	},
 	"search": {
