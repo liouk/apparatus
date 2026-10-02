@@ -7,13 +7,13 @@ Originally forked from [michailpanagiotis/apparatus](https://github.com/michailp
 ## Structure
 
 ```
-platforms/<os>/          # per-platform config (packages, stow targets, repos, links)
+platforms/<os>/             # platform config, packages, Stow targets, repos, links
 platforms/<os>/bootstrap.sh # checkout defaults and bootstrap prerequisites
-platforms/<os>/zsh.zsh   # platform-specific shell settings
-platforms/<os>/stow/     # platform-local Stow packages
-<package>/               # stow packages (zsh, git, foot, sway, etc.)
-bootstrap.sh             # checks prerequisites, clones over HTTPS, runs install.sh
-install.sh               # repo-local installation driver
+platforms/<os>/zsh.zsh      # platform-specific shell settings
+platforms/<os>/stow/        # platform-local Stow packages
+<package>/                  # Stow packages (zsh, git, foot, sway, ...)
+bootstrap.sh                # prerequisite check, HTTPS clone, then install.sh
+install.sh                  # installation driver
 ```
 
 ## Usage
@@ -30,19 +30,17 @@ To bootstrap a new machine:
 curl -fsSL https://raw.githubusercontent.com/liouk/apparatus/master/bootstrap.sh | sh
 ```
 
-The bootstrap clones public apparatus over HTTPS; GitHub authentication is not
-required. It runs downloaded code, so review the script first if desired. A piped
-bootstrap also fetches the selected `platforms/<os>/bootstrap.sh` over HTTPS;
-running from a checkout uses the local platform file instead. On Fedora it offers
-to install missing Git and modern Bash with DNF before cloning. OpenSSH is
-installed later through Fedora's normal package list. Existing checkouts and custom `APPARATUS_REPO_URL` /
-`APPARATUS_INSTALL_DIR` overrides are preserved. An SSH URL override still requires
-SSH authentication in advance.
+Bootstrap uses HTTPS, so GitHub authentication is unnecessary. It executes
+downloaded code; review the script first if desired. A piped run also fetches the
+selected platform bootstrap file, while a checkout uses its local copy. Fedora
+offers to install missing Git and Bash before cloning; OpenSSH comes from its
+normal package list. Existing checkouts and `APPARATUS_REPO_URL` /
+`APPARATUS_INSTALL_DIR` overrides are preserved. An SSH repository URL requires
+SSH authentication already to work.
 
-For a fork or another bootstrap revision, `APPARATUS_RAW_URL` overrides the raw
-repository base URL used to fetch platform files (default:
-`https://raw.githubusercontent.com/liouk/apparatus/master`). Set it alongside
-`APPARATUS_REPO_URL` when bootstrapping a fork over a pipe.
+For a fork or revision, set `APPARATUS_RAW_URL` to its raw-file base URL (default:
+`https://raw.githubusercontent.com/liouk/apparatus/master`) alongside
+`APPARATUS_REPO_URL`.
 
 From an existing checkout:
 
@@ -63,54 +61,47 @@ From an existing checkout:
 ./install.sh --recover-keys-only
 ```
 
-Additional machine- or work-specific shell files can be linked into `~/.zsh/conf.d/`. Files ending in `.zsh` or `.sh` are sourced in filename order.
-
-Keep platform customizations under `platforms/<os>/`. The shared Zsh config resolves its Stow symlink to load `platforms/<os>/zsh.zsh` from the checkout.
+Machine- or work-specific `.zsh` / `.sh` files in `~/.zsh/conf.d/` are sourced in
+filename order. Keep platform customizations in `platforms/<os>/`; the shared Zsh
+config resolves its Stow symlink to load that platform's `zsh.zsh`.
 
 ## Git signing and SSH key recovery
 
-All platforms use the personal identity in `git/.config/git/personal` by default,
-with SSH commit signing enabled. The private key handle stays in `~/.ssh`, outside
-the repository. Shared signing settings live in `.gitconfig`; identity files
-contain only email and signing key. At the end, Git loads optional `platform.conf`,
-the personal identity, then optional `~/.config/git/local.conf`. Independently
-managed configuration can put settings and conditional identity overrides in
-that last file. Apparatus does not create or remove it.
+All platforms use `git/.config/git/personal` and SSH commit signing by default.
+Private key handles stay in `~/.ssh`; identity files contain only the email and
+signing-key reference. Git loads optional `platform.conf`, the personal identity,
+then optional `~/.config/git/local.conf`. Apparatus never manages `local.conf`,
+which is the place for machine-specific settings and conditional identities.
 
-Directory-based `includeIf "gitdir:..."` rules match Git's metadata location.
-Linked worktrees retain routing based on that location, even when their working
-directories are elsewhere. Repository-local Git settings can still override
-these global defaults.
+`includeIf "gitdir:..."` rules match Git metadata, so linked worktrees retain
+their identity routing. Repository-local Git settings can still override these
+global defaults.
 
-On macOS, Homebrew OpenSSH is installed for FIDO2 support. The macOS shell config
-puts it ahead of Apple's OpenSSH for SSH authentication. The platform post-install
-step writes the actual Homebrew `ssh-keygen` path to `~/.config/git/platform.conf`
-as `gpg.ssh.program`, so Git signing does not depend on shell startup. Recovery
-also explicitly uses Homebrew's `ssh-keygen`. Restart Zsh after installation.
-The generated platform setting is refreshed by full installation, not Stow-only.
+macOS installs Homebrew OpenSSH for FIDO2 support and writes its `ssh-keygen` path
+to `~/.config/git/platform.conf` as `gpg.ssh.program`. Recovery also uses that
+binary, independent of shell startup. Restart Zsh after a full installation;
+Stow-only runs do not refresh this generated setting.
 
-At the end of a full installation, apparatus offers to create a local GitHub SSH
-authentication key at `~/.ssh/id_ed25519_github`. It separately offers YubiKey
-recovery for resident signing keys, using `ssh-keygen -K` directly in
-`~/.ssh`; OpenSSH handles PIN/passphrase and existing-filename prompts.
+Platforms with `MANAGE_PERSONAL_GIT_AND_SSH=true` (Fedora and macOS) offer to
+create `~/.ssh/id_ed25519_github` and recover resident YubiKey signing keys with
+`ssh-keygen -K`. When the GitHub key is available, Apparatus's `origin` changes
+from HTTPS to SSH.
 Public fingerprints in `ssh-key.fingerprints` identify resident signing keys.
 An optional `~/.config/git/signing-key.fingerprints` can supply additional
 alias/fingerprint pairs without putting them in this repository.
 
-Existing aliases are preserved; missing or mismatched public fingerprints produce
-a warning without replacing files. There is no temporary recovery directory, key
-deletion or new credential generation. Recovery is skipped without a controlling
-terminal or with `YUBIKEY_NONINTERACTIVE=1`; alias matching still runs for existing
-files. Missing personal signing keys produce a warning, never disable signing.
-Use `--recover-keys-only` to repeat recovery without installing packages or
-restowing config. Never commit private key handles, PINs or tokens.
+Existing aliases are preserved; a missing or mismatched fingerprint only warns.
+Recovery is skipped without a controlling terminal or with
+`YUBIKEY_NONINTERACTIVE=1`. Missing signing keys never disable signing. On an
+opted-in platform, use `--recover-keys-only` to repeat recovery without installing
+packages or restowing config. Never commit private key handles, PINs, or tokens.
 
 ## Codex instructions
 
-Stow links `codex/AGENTS.md` into `~/.codex/AGENTS.md`, or into `$CODEX_HOME` when
-set. This contains the global action-authorization rules, not credentials or
-machine-local Codex settings. Restart Codex after changing it. An existing
-`AGENTS.override.md` in that directory takes precedence; see the
+Stow links `codex/AGENTS.md` into `~/.codex/AGENTS.md` (or `$CODEX_HOME`). It
+contains global action-authorization rules, not credentials or machine-local
+settings. Restart Codex after changing it. `AGENTS.override.md` in that directory
+takes precedence; see the
 [instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 
 ## Codex ACP command preview
@@ -126,35 +117,46 @@ after an update, or adapt it if the upstream code has changed.
 
 ## Fedora
 
-The `fedora` platform targets a regular, DNF-based Fedora installation. Fedora Atomic is rejected by the platform's pre-install check. Start with curl available and permission to use sudo/DNF; the bootstrap handles missing Git and Bash, and the installer supplies OpenSSH. Public repository downloads use HTTPS, so GitHub SSH access is not needed before installation.
+The `fedora` platform targets regular DNF-based Fedora; Fedora Atomic is rejected.
+Start with curl and sudo/DNF access. Bootstrap handles missing Git and Bash, and
+the installer supplies OpenSSH. Public repositories use HTTPS, so GitHub SSH
+access is not needed beforehand.
 
-On Fedora, the bootstrap defaults to `~/liouk/apparatus`, alongside `~/liouk/toolshed`. The `zap` shell alias and Sway apparatus shortcut use this location. Arch and macOS retain their existing paths.
+Fedora defaults to `~/liouk/apparatus`, alongside `~/liouk/toolshed`; the `zap`
+alias and Sway shortcut use this location. Arch and macOS retain their paths.
 
-The package list covers Apparatus tools, not base-system provisioning. Standard utilities (including curl), a working build toolchain, and graphics drivers are prerequisites. OpenSSH clients are explicitly installed; DNF supplies their FIDO2 dependencies.
+The package list covers Apparatus tools, not system provisioning. Standard
+utilities, a working build toolchain, and graphics drivers are prerequisites.
 
-- Reuses the shared dotfiles, including Foot, Sway, Waybar, Mako, Neovim and Zed. Fedora-only Sway session helpers are in `platforms/fedora/stow/sway/`.
-- Uses Fedora packages for the desktop and CLI tools. Keeps the existing desktop/login manager and audio stack; only installs PulseAudio-compatible client tools (`pulseaudio-utils`, `pavucontrol`), not an audio server.
-- Uses Fuzzel on `$mod+Space` instead of sway-launcher-desktop, with Fedora-local configuration in `platforms/fedora/stow/fuzzel/`. Tig is unchanged.
-- Clones Powerlevel10k from upstream. Installs [Zed stable](https://zed.dev/docs/linux) and [latest stable kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) only if missing, preserving existing installations. Adds a `zeditor` compatibility link when needed. Kubectl downloads are SHA-256 checked.
-- Installs Go helpers and `yamlfmt`, Maple Mono NL NF, and the same Nerd Font symbols release as Arch. No AUR/COPR setup or `fzfpac` link is added.
-- Installs [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) through npm with the same user-local prefix, placing `codex` in `~/.local/bin`. Rerunning the installer updates it to the latest release. Authentication is separate.
-- Installs [CodeRabbit CLI](https://www.coderabbit.ai/cli) with its official user-local installer when it is missing. Authentication is separate.
+- Reuses shared dotfiles; Fedora-only Sway helpers live in `platforms/fedora/stow/sway/`.
+- Uses Fedora packages without replacing the existing login manager or audio server.
+  It installs only PulseAudio-compatible clients (`pulseaudio-utils`, `pavucontrol`).
+- Uses Fuzzel on `$mod+Space`, with configuration in `platforms/fedora/stow/fuzzel/`.
+- Installs [Zed stable](https://zed.dev/docs/linux) and [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+  only when absent; kubectl downloads are SHA-256 checked, and `zeditor` is added
+  as needed. It also installs Powerlevel10k, Go helpers, `yamlfmt`, Maple Mono NL
+  NF, Nerd Font symbols, [Codex CLI](https://learn.chatgpt.com/docs/codex/cli),
+  and [CodeRabbit CLI](https://www.coderabbit.ai/cli). Authentication remains
+  separate.
 
-Personal helper links, Go binaries, and newly installed Zed/kubectl commands live in `~/.local/bin`, without sudo. Fedora's Zsh settings set `GOBIN` there for future Go installs. Both Zsh and the Fedora Sway session explicitly put this directory on `PATH`; log into Sway through the login screen (or use `start-sway`) to load its environment. Existing system-managed tool installations are left alone.
+Personal helpers, Go binaries, and newly installed Zed/kubectl commands live in
+`~/.local/bin`, which Fedora's Zsh and Sway session add to `PATH`. Existing
+system-managed tools are left alone.
 
-The installer does not overwrite conflicting dotfiles: resolve Stow conflicts explicitly. Review the shared Sway output names/scaling and `/usr/share/backgrounds/bg.png` wallpaper path for the new hardware. Slack and Spotify remain optional external installations referenced by the shared Sway config; they are not installed here. Credentials and the local Codex ACP adapter patch must be set up separately.
+The installer never overwrites Stow conflicts. Review Sway output names, scaling,
+and the `/usr/share/backgrounds/bg.png` wallpaper path. Slack, Spotify,
+credentials, and the Codex ACP patch remain separate setup.
 
-After installation, select **Sway** at the existing login screen. The installer does not change your login shell; use `zsh` explicitly, or change it through your system's account settings. Reruns skip existing upstream clones, Zed, kubectl and installed symbol fonts; update these separately when needed.
+Select **Sway** at the existing login screen. The installer does not change your
+login shell. Reruns skip existing upstream clones, Zed, kubectl, and installed
+symbol fonts; update them separately.
 
 ### GitHub authentication
 
-The shared GitHub configuration is stowed as `~/.ssh/config` on every platform.
-Existing SSH configuration is preserved; merge the GitHub block manually if
-needed. Apparatus creates the local key at `~/.ssh/id_ed25519_github` when
-requested. Add its public half to GitHub as an authentication key, then verify access with
-`ssh -T git@github.com`, checking GitHub's host fingerprint on first connection.
-
-Apparatus stops here: clone and install any private configuration yourself.
+The shared GitHub configuration is stowed as `~/.ssh/config`. Existing SSH config
+is preserved, so merge its GitHub block manually if needed. Add the requested
+`~/.ssh/id_ed25519_github.pub` key to GitHub, then verify with
+`ssh -T git@github.com` after checking GitHub's host fingerprint.
 
 ### Updating Zed
 
@@ -164,19 +166,25 @@ For the upstream Zed installation created by this platform, rerun the official i
 curl -fsSL https://zed.dev/install.sh | sh
 ```
 
-This installs or refreshes `~/.local/zed.app` and its `~/.local/bin/zed` command. The `zeditor` compatibility link continues to work. Automatic update checks remain disabled by the shared Zed settings. For a system-managed Zed installation, use its installation/update mechanism instead.
+This refreshes `~/.local/zed.app` and `~/.local/bin/zed`; `zeditor` continues to
+work. For a system-managed Zed installation, use its package manager instead.
 
 ## Adding a new platform
 
 Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-release`) with:
 
-- `config` — an `install_<manager>_packages` function for each package manager
-- `bootstrap.sh` — POSIX-shell defaults (`default_install_dir`, optional `bash_candidates` / `bash_hint`) and an optional `bootstrap_prepare` function for prerequisites needed before cloning
+- `config` — `install_<manager>_packages` functions and optional platform flags
+- `MANAGE_PERSONAL_GIT_AND_SSH` (optional, set in `config`) — set to `true` to
+  offer local GitHub authentication-key creation, recover resident signing
+  keys, and switch Apparatus's public `origin` URL to SSH; defaults to `false`
+- `bootstrap.sh` — POSIX-shell defaults (`default_install_dir`, optional
+  `bash_candidates` / `bash_hint`) and optional pre-clone prerequisites
 - `APPARATUS_BIN_DIR` (optional, set in `config`) — user-owned directory for helper links; defaults to `/usr/local/bin` with sudo
 - `packages.<N>.<manager>` — one package per line, installed in sort order
-- `stow-targets` — `TARGET:package-path[:no-folding]` per line, with package paths relative to the checkout (e.g. `.config:platforms/fedora/stow/sway:no-folding`). `HOME` targets the home directory, `CODEX` targets `${CODEX_HOME:-$HOME/.codex}`, and other targets are relative to the home directory.
+- `stow-targets` — `TARGET:package-path[:no-folding]`; paths are checkout-relative.
+  `HOME` targets the home directory, `CODEX` targets `${CODEX_HOME:-$HOME/.codex}`.
 - `zsh.zsh` — platform-specific shell settings loaded by the shared Zsh config
-- `stow/` (optional) — platform-local Stow packages; use `no-folding` on both shared and platform-local entries that merge into the same directory, so Stow links individual files rather than whole directories
+- `stow/` (optional) — platform-local packages; use `no-folding` for merged directories
 - `repos` (optional) — `target_dir git_url` per line
 - `links` (optional) — `link_name:target_path` per line
 - `pre-install.sh` / `post-install.sh` (optional) — run before/after package install
