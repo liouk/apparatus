@@ -50,7 +50,7 @@ setopt SHARE_HISTORY
 
 # keybindings
 export LC_ALL=en_US.UTF-8
-KEYTIMEOUT=1
+KEYTIMEOUT=3
 bindkey -e
 bindkey '^[' backward-word
 bindkey '^]' forward-word
