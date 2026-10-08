@@ -52,11 +52,10 @@ main() {
 	local tooltip
 	local class='[]'
 
-	sink=$(pactl get-default-sink 2>/dev/null) || return
+	sink_data=$("$HOME/.config/sway/active-sink.sh" 2>/dev/null) || return
+	sink=$(jq -r '.name // empty' <<<"$sink_data")
 	[[ -n "$sink" ]] || return
-
-	sink_data=$(pactl -f json list sinks 2>/dev/null) || return
-	description=$(jq -r --arg sink "$sink" '.[] | select(.name == $sink) | .description // $sink' <<<"$sink_data" | head -n 1)
+	description=$(jq -r '.description // .name // empty' <<<"$sink_data")
 	[[ -n "$description" && "$description" != "null" ]] || description="$sink"
 	volume=$(pactl get-sink-volume "$sink" 2>/dev/null | grep -oE '[0-9]+%' | head -n 1)
 	muted=$(pactl get-sink-mute "$sink" 2>/dev/null | awk '{print $2}')

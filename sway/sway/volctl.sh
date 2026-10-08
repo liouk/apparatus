@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-main () {
-  all_sinks=$(pactl -f json list sinks|jq '.[] | "\(.state) \(.name)"')
-  active_sink="@DEFAULT_SINK@"
-  while read -r sink; do
-    sink_status=(${sink//\"})
-    sink_state="${sink_status[0]}"
-    sink_name="${sink_status[1]}"
+main() {
+  local sink_data
+  local active_sink
+  local audio_volume
 
-    if [[ "$sink_state" == "RUNNING" ]]; then
-      active_sink="$sink_name"
-    fi
-  done <<< "$all_sinks"
+  sink_data=$("$HOME/.config/sway/active-sink.sh") || return
+  active_sink=$(jq -r '.name // empty' <<<"$sink_data")
+  [[ -n "$active_sink" ]] || return
 
   audio_volume=$(pactl get-sink-volume "$active_sink" | cut -d'/' -f2 | head -1 | xargs)
   case "$1" in
