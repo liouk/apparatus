@@ -5,3 +5,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 alias ls='ls -lahp --color=auto'
 alias fd='fdfind'
+
+# Enable fzf's Zsh widgets, including Ctrl-R reverse history search.
+if command -v fzf > /dev/null; then
+  source <(fzf --zsh)
+fi
