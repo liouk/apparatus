@@ -7,6 +7,13 @@ alias ls='ls -lahp --color=auto'
 alias fd='fdfind'
 
 # Enable fzf's Zsh widgets, including Ctrl-R reverse history search.
-if command -v fzf > /dev/null; then
-  source <(fzf --zsh)
+if command -v fzf >/dev/null; then
+  if [[ -r /usr/share/fzf/shell/key-bindings.zsh ]]; then
+    source /usr/share/fzf/shell/key-bindings.zsh
+  elif [[ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+  fi
+  if [[ -r /usr/share/doc/fzf/examples/completion.zsh ]]; then
+    source /usr/share/doc/fzf/examples/completion.zsh
+  fi
 fi
