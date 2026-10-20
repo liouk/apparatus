@@ -83,10 +83,10 @@ _git-wt() {
 compdef _git-wt git-wt
 
 # fzf
-if command -v fd > /dev/null; then
+if (( $+commands[fd] )); then
   export FZF_DEFAULT_COMMAND='fd .'
   export FZF_CTRL_T_COMMAND='fd .'
-elif command -v fdfind > /dev/null; then
+elif (( $+commands[fdfind] )); then
   # Debian ships fd as fdfind to avoid a name collision with another package.
   export FZF_DEFAULT_COMMAND='fdfind .'
   export FZF_CTRL_T_COMMAND='fdfind .'
