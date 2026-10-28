@@ -91,8 +91,8 @@
 		"bindings": {
 			"ctrl-a": ["terminal::SendKeystroke", "ctrl-a"],
 			"ctrl-e": ["terminal::SendKeystroke", "ctrl-e"],
-			"ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
-			"ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
+			"ctrl-j": "pane::ActivateNextItem",
+			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-n": "workspace::NewTerminal",
 			"ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
@@ -182,6 +182,7 @@
 		"context": "AgentPanel || (AgentPanel > Editor) || AcpThread || (AcpThread > Editor)",
 		"bindings": {
 			"ctrl-n": ["agent::NewExternalAgentThread", { "agent": "codex-acp" }],
+			"ctrl-j": "terminal_panel::ToggleFocus",
 			"ctrl-l": "multi_workspace::ToggleWorkspaceSidebar",
 			"ctrl-]": "workspace::ToggleRightDock",
 		},
