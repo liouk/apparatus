@@ -93,8 +93,8 @@
 		"bindings": {
 			"ctrl-a": ["terminal::SendKeystroke", "ctrl-a"],
 			"ctrl-e": ["terminal::SendKeystroke", "ctrl-e"],
-			"ctrl-j": "pane::ActivateNextItem",
-			"ctrl-k": "pane::ActivatePreviousItem",
+			"ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
+			"ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
 			"ctrl-n": "workspace::NewTerminal",
 			"ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
