@@ -19,6 +19,8 @@
 			"ctrl ctrl": "command_palette::Toggle",
 			"ctrl-a a": "agent::ToggleFocus",
 			"ctrl-a i": "assistant::InlineAssist",
+			"ctrl-a p": "projects::OpenRecent",
+			"ctrl-a r": "projects::OpenRemote",
 			"ctrl-a e": [
 				"task::Spawn",
 				{ "task_name": "open all git-modified files" },
@@ -53,7 +55,7 @@
 	{
 		"context": "Editor && mode == full",
 		"bindings": {
-			"ctrl-a p": ["task::Spawn", { "task_name": "copy symbol reference" }],
+			"ctrl-a s": ["task::Spawn", { "task_name": "copy symbol reference" }],
 			"ctrl-a g": "outline::Toggle",
 			"ctrl-a ctrl-a": "editor::SelectAll",
 			"ctrl-alt-e": "editor::SelectEnclosingSymbol",
