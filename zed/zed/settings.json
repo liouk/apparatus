@@ -187,6 +187,7 @@
 	"languages": {
 		"YAML": {
 			"hard_tabs": false,
+			"tab_size": 2,
 			"formatter": {
 				"external": {
 					"command": "yamlfmt", // https://github.com/google/yamlfmt
@@ -198,6 +199,10 @@
 				},
 			},
 			"format_on_save": "on",
+		},
+		"Jinja2": {
+			"hard_tabs": false,
+			"tab_size": 2,
 		},
 		"Markdown": {
 			"show_completions_on_input": false,
