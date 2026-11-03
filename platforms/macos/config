@@ -3,6 +3,13 @@ APPARATUS_BIN_DIR="$HOME/.local/bin"
 # Manage personal Git and SSH credentials.
 MANAGE_PERSONAL_GIT_AND_SSH=true
 
+# Reuse a manually created native identity; never create one during installation.
+MACOS_NATIVE_SIGNING_KEY="${MACOS_NATIVE_SIGNING_KEY:-$HOME/.ssh/macos-signing/id_ecdsa_sk_rk}"
+MANAGE_YUBIKEY_SIGNING_KEYS=true
+if [[ -r "$MACOS_NATIVE_SIGNING_KEY" && -r "$MACOS_NATIVE_SIGNING_KEY.pub" ]]; then
+  MANAGE_YUBIKEY_SIGNING_KEYS=false
+fi
+
 function install_brew_packages {
   brew install "$@"
 }

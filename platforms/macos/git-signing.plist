@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.liouk.apparatus.git-signing</string>
+  <key>LimitLoadToSessionType</key>
+  <string>Aqua</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>-c</string>
+    <string>public_key=$(/usr/bin/git config --file "$HOME/.config/git/platform.conf" --type=path --get user.signingkey) || exit 1
+case "$public_key" in
+  *.pub) signing_key=${public_key%.pub} ;;
+  *) exit 1 ;;
+esac
+if [ ! -r "$signing_key" ]; then
+  exit 1
+fi
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  SSH_AUTH_SOCK=$(/bin/launchctl getenv SSH_AUTH_SOCK)
+  export SSH_AUTH_SOCK
+fi
+exec /usr/bin/ssh-add -S /usr/lib/ssh-keychain.dylib "$signing_key"</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+</dict>
+</plist>

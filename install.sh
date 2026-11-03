@@ -369,9 +369,9 @@ function main {
     exit 1
   fi
 
-  # Platform configuration owns this opt-in flag; do not inherit it from the
+  # Platform configuration owns these opt-in flags; do not inherit them from the
   # environment when the installer is invoked.
-  unset MANAGE_PERSONAL_GIT_AND_SSH
+  unset MANAGE_PERSONAL_GIT_AND_SSH MANAGE_YUBIKEY_SIGNING_KEYS
   source "$platform_dir/config"
 
   if [ -n "$RECOVER_KEYS_ONLY" ]; then
@@ -384,7 +384,9 @@ function main {
     install_packages "$platform_dir"
     if [[ "${MANAGE_PERSONAL_GIT_AND_SSH:-false}" == true ]]; then
       ensure_github_auth_key
-      recover_ssh_keys
+      if [[ "${MANAGE_YUBIKEY_SIGNING_KEYS:-true}" == true || "${FORCE_RECOVER_KEYS:-0}" == 1 ]]; then
+        recover_ssh_keys
+      fi
       configure_apparatus_remote
     fi
     clone_repos "$platform_dir/repos"

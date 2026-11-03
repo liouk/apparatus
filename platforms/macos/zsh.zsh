@@ -9,7 +9,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 if command -v brew > /dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
-  # Use FIDO2-capable OpenSSH for authentication and Git's SSH signatures.
+  # Keep Homebrew OpenSSH available for YubiKey authentication and recovery.
   export PATH="$HOMEBREW_PREFIX/opt/openssh/bin:$PATH"
   POWERLEVEL10K_DIR="$HOMEBREW_PREFIX/share/powerlevel10k"
   ZSH_PLUGINS_DIR="$HOMEBREW_PREFIX/share"

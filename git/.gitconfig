@@ -100,7 +100,8 @@
 	prune = true
 
 [include]
-  path = ~/.config/git/platform.conf
   path = ~/.config/git/personal
-  # Optional machine-specific settings and identity routing, loaded last.
+  # Optional machine-specific settings and identity routing.
   path = ~/.config/git/local.conf
+  # Platform signing settings apply after identity routing.
+  path = ~/.config/git/platform.conf

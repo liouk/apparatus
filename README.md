@@ -72,8 +72,9 @@ config resolves its Stow symlink to load that platform's `zsh.zsh`.
 
 All platforms use `git/.config/git/personal` and SSH commit signing by default.
 Private key handles stay in `~/.ssh`; identity files contain only the email and
-signing-key reference. Git loads optional `platform.conf`, the personal identity,
-then optional `~/.config/git/local.conf`. Apparatus never manages `local.conf`,
+signing-key reference. Git loads the personal identity, optional
+`~/.config/git/local.conf`, then optional `~/.config/git/platform.conf` for
+platform signing settings. Apparatus never manages `local.conf`,
 which is the place for machine-specific settings and conditional identities.
 
 `includeIf "gitdir:..."` rules match Git metadata, so linked worktrees retain
@@ -84,6 +85,30 @@ macOS installs Homebrew OpenSSH for FIDO2 support and writes its `ssh-keygen` pa
 to `~/.config/git/platform.conf` as `gpg.ssh.program`. Recovery also uses that
 binary, independent of shell startup. Restart Zsh after a full installation;
 Stow-only runs do not refresh this generated setting.
+
+On Macs with an existing native Secure Enclave handle at
+`~/.ssh/macos-signing/id_ecdsa_sk_rk` and its `.pub` file, full installation instead
+writes `platform.conf` with Apple's `/usr/bin/ssh-keygen` and that public
+key. This final override selects the same Mac key for personal and work commits
+while preserving each identity's email. Set `MACOS_NATIVE_SIGNING_KEY` to another
+handle path when invoking the installer if your handle has a different name.
+Repository-local Git configuration still takes precedence.
+
+Apparatus installs `~/Library/LaunchAgents/com.liouk.apparatus.git-signing.plist`
+to load the native handle into Apple's SSH agent at graphical login, and starts
+it for the current GUI session during installation. It uses
+`/usr/bin/ssh-add -S /usr/lib/ssh-keychain.dylib`; no custom SSH agent or socket is
+created. Key loading does not bypass biometric approval when signing. Without a
+GUI session, loading waits until the next graphical login. Stow-only runs do not
+install or start this login task.
+
+Native identities must be created manually and their public keys registered as
+signing keys with your Git hosting service. Apparatus never creates or recovers
+them. Native signing skips automatic YubiKey recovery; `--force-recover-keys` and
+`--recover-keys-only` still explicitly offer YubiKey recovery. Macs without the
+native key pair retain the Homebrew/YubiKey setup. If a native handle is later
+removed, existing platform signing settings are preserved and a warning is shown;
+review that override before switching back to YubiKey signing.
 
 Platforms with `MANAGE_PERSONAL_GIT_AND_SSH=true` (Fedora and macOS) offer to
 create `~/.ssh/id_ed25519_github` and recover resident YubiKey signing keys with
