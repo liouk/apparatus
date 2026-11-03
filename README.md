@@ -56,91 +56,47 @@ From an existing checkout:
 
 # unstow dotfiles
 ./install.sh --unstow-only
-
-# full install, offering recovery even when signing handles already exist
-./install.sh --force-recover-keys
-
-# force resident SSH key recovery and create their configured aliases only
-./install.sh --recover-keys-only
 ```
 
 Machine- or work-specific `.zsh` / `.sh` files in `~/.zsh/conf.d/` are sourced in
 filename order. Keep platform customizations in `platforms/<os>/`; the shared Zsh
 config resolves its Stow symlink to load that platform's `zsh.zsh`.
 
-## Git signing and SSH key recovery
+## Git signing
 
-All platforms use `git/.config/git/personal` and SSH commit signing by default.
-Private key handles stay in `~/.ssh`; identity files contain only the email and
-signing-key reference. Git loads the personal identity, optional
-`~/.config/git/local.conf`, then optional `~/.config/git/platform.conf` for
-platform signing settings. Apparatus never manages `local.conf`,
-which is the place for machine-specific settings and conditional identities.
+Git uses SSH commit signing by default. The shared identity lives in
+`git/.config/git/personal`; `.gitconfig` includes platform settings from
+`~/.config/git/signing.conf` after the optional, user-managed
+`~/.config/git/local.conf`. Repository-local settings can override these values.
+`includeIf "gitdir:..."` rules continue to work for linked worktrees.
 
-`includeIf "gitdir:..."` rules match Git metadata, so linked worktrees retain
-their identity routing. Repository-local Git settings can still override these
-global defaults.
+Full `./install.sh` runs the platform signing script. On a new machine, the
+first run recovers the handle from the YubiKey or Secure Enclave and configures
+Git; it may prompt for the authenticator PIN, handle passphrase, and approval.
+Later full installs reuse the local handle and refresh the same Git settings.
+`--stow-only` does not recover signing keys. To run signing setup by itself:
 
-macOS installs Homebrew OpenSSH for FIDO2 support and writes its `ssh-keygen` path
-to `~/.config/git/platform.conf` as `gpg.ssh.program`. Recovery also uses that
-binary, independent of shell startup. Restart Zsh after a full installation;
-Stow-only runs do not refresh this generated setting.
+```sh
+# Fedora: insert the YubiKey, then recover the resident SSH handle
+bash platforms/fedora/git-signing.sh
 
-On Macs with an existing native Secure Enclave handle at
-`~/.ssh/macos-signing/id_ecdsa_sk_rk` and its `.pub` file, full installation instead
-writes `platform.conf` with Apple's `/usr/bin/ssh-keygen` and that public
-key. This final override selects the same Mac key for personal and work commits
-while preserving each identity's email. Set `MACOS_NATIVE_SIGNING_KEY` to another
-handle path when invoking the installer if your handle has a different name.
-Repository-local Git configuration still takes precedence.
+# macOS: recover the Secure Enclave handle and register it with Apple's SSH agent
+bash platforms/macos/git-signing.sh
+```
 
-Apparatus installs `~/Library/LaunchAgents/com.liouk.apparatus.git-signing.plist`
-to load the native handle into Apple's SSH agent at graphical login, and starts
-it for the current GUI session during installation. It uses
-`/usr/bin/ssh-add -S /usr/lib/ssh-keychain.dylib`; no custom SSH agent or socket is
-created. Key loading does not bypass biometric approval when signing. Without a
-GUI session, loading waits until the next graphical login. Stow-only runs do not
-install or start this login task.
+Fedora uses `ssh-keygen -K` and expects the recovered handle at
+`~/.ssh/id_ed25519_sk_git_signing_personal`. If OpenSSH restores it under another
+filename, rename that key and its `.pub` file to the expected name and rerun the
+script. macOS uses `/usr/bin/ssh-keygen` with Apple's
+`/usr/lib/ssh-keychain.dylib` provider and expects the handle at
+`~/.ssh/macos-signing/id_ecdsa_sk_rk`. It loads the handle into Apple's SSH agent;
+the full macOS installer installs and starts a small LaunchAgent to reload it at
+graphical login. Register each platform's public key with the Git hosting service
+as a signing key. Never commit private key handles, PINs, or tokens.
 
-Native identities must be created manually and their public keys registered as
-signing keys with your Git hosting service. Apparatus never creates or recovers
-them. Native signing skips automatic YubiKey recovery; `--force-recover-keys` and
-`--recover-keys-only` still explicitly offer YubiKey recovery. Macs without the
-native key pair retain the Homebrew/YubiKey setup. If a native handle is later
-removed, existing platform signing settings are preserved and a warning is shown;
-review that override before switching back to YubiKey signing.
-
-Platforms with `MANAGE_PERSONAL_GIT_AND_SSH=true` (Fedora and macOS) offer to
-create `~/.ssh/id_ed25519_github` and recover resident YubiKey signing keys with
-`ssh-keygen -K`. When the GitHub key is available, Apparatus's `origin` changes
-from HTTPS to SSH.
-Public fingerprints in `ssh-key.fingerprints` identify resident signing keys.
-An optional `~/.config/git/signing-key.fingerprints` can supply additional
-alias/fingerprint pairs without putting them in this repository.
-
-Normal installation offers YubiKey recovery only when a configured signing
-handle is missing locally. Already-downloaded handles are matched by fingerprint
-and renamed to their configured aliases first. Recovery downloads credentials
-into a temporary directory and imports only missing configured handles, preserving
-existing handles and their touch settings. `--force-recover-keys` offers recovery
-even when all handles exist and allows replacing configured handles;
-`--recover-keys-only` also forces recovery. Both retain the recovery confirmation.
-Unlisted credentials are not imported, and existing unlisted local files are left
-alone. Incomplete local key pairs are preserved rather than overwritten during
-normal recovery; use forced recovery to replace them.
-
-After recovery, Apparatus disables touch only for newly imported FIDO signing
-handles, including those in the optional manifest. This requires OpenSSH
-10.5 or newer; older versions warn and leave the touch policy unchanged. The
-interactive step asks for the handle's old and new passphrase; reuse the same
-passphrase to preserve it. It changes only the local handle, so recovery on each
-machine must repeat it. GitHub authentication keys are unaffected. If a handle
-is already loaded in an SSH agent, remove and reload it to use the changed policy.
-
-Recovery is skipped without a controlling terminal or with
-`YUBIKEY_NONINTERACTIVE=1`. Missing signing keys never disable signing. On an
-opted-in platform, use `--recover-keys-only` to repeat recovery without installing
-packages or restowing config. Never commit private key handles, PINs, or tokens.
+The installer still manages GitHub SSH authentication separately: on Fedora and
+macOS it can create `~/.ssh/id_ed25519_github` and switch Apparatus's remote to
+SSH when that key exists.
 
 ## Codex instructions
 
@@ -220,9 +176,9 @@ work. For a system-managed Zed installation, use its package manager instead.
 Create `platforms/<os-id>/` (where `<os-id>` matches the `ID` field in `/etc/os-release`) with:
 
 - `config` — `install_<manager>_packages` functions and optional platform flags
-- `MANAGE_PERSONAL_GIT_AND_SSH` (optional, set in `config`) — set to `true` to
-  offer local GitHub authentication-key creation, recover resident signing
-  keys, and switch Apparatus's public `origin` URL to SSH; defaults to `false`
+- `MANAGE_GITHUB_SSH_AUTH` (optional, set in `config`) — set to `true` to
+  offer GitHub SSH authentication-key creation and switch Apparatus's public
+  `origin` URL to SSH; defaults to `false`
 - `bootstrap.sh` — POSIX-shell defaults (`default_install_dir`, optional
   `bash_candidates` / `bash_hint`) and optional pre-clone prerequisites
 - `APPARATUS_BIN_DIR` (optional, set in `config`) — user-owned directory for helper links; defaults to `/usr/local/bin` with sudo

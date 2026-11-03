@@ -1,14 +1,7 @@
 APPARATUS_BIN_DIR="$HOME/.local/bin"
 
-# Manage personal Git and SSH credentials.
-MANAGE_PERSONAL_GIT_AND_SSH=true
-
-# Reuse a manually created native identity; never create one during installation.
-MACOS_NATIVE_SIGNING_KEY="${MACOS_NATIVE_SIGNING_KEY:-$HOME/.ssh/macos-signing/id_ecdsa_sk_rk}"
-MANAGE_YUBIKEY_SIGNING_KEYS=true
-if [[ -r "$MACOS_NATIVE_SIGNING_KEY" && -r "$MACOS_NATIVE_SIGNING_KEY.pub" ]]; then
-  MANAGE_YUBIKEY_SIGNING_KEYS=false
-fi
+# Manage GitHub SSH authentication.
+MANAGE_GITHUB_SSH_AUTH=true
 
 function install_brew_packages {
   brew install "$@"
@@ -20,13 +13,4 @@ function install_cask_packages {
 
 function install_npm_packages {
   npm install --global "$@"
-}
-
-# Apple's OpenSSH does not support FIDO2 key recovery.
-function ssh_keygen {
-  "$(brew --prefix openssh)/bin/ssh-keygen" "$@"
-}
-
-function ssh_version {
-  "$(brew --prefix openssh)/bin/ssh" -V
 }

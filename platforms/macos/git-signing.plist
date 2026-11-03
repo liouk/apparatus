@@ -10,19 +10,19 @@
   <array>
     <string>/bin/sh</string>
     <string>-c</string>
-    <string>public_key=$(/usr/bin/git config --file "$HOME/.config/git/platform.conf" --type=path --get user.signingkey) || exit 1
-case "$public_key" in
-  *.pub) signing_key=${public_key%.pub} ;;
-  *) exit 1 ;;
-esac
-if [ ! -r "$signing_key" ]; then
-  exit 1
+    <string>key="$HOME/.ssh/macos-signing/id_ecdsa_sk_rk"
+if [ ! -r "$key" ]; then
+  exit 0
 fi
 if [ -z "$SSH_AUTH_SOCK" ]; then
   SSH_AUTH_SOCK=$(/bin/launchctl getenv SSH_AUTH_SOCK)
   export SSH_AUTH_SOCK
 fi
-exec /usr/bin/ssh-add -S /usr/lib/ssh-keychain.dylib "$signing_key"</string>
+fingerprint=$(/usr/bin/ssh-keygen -lf "$key.pub" -E sha256 | /usr/bin/awk '{print $2}') || exit 1
+if /usr/bin/ssh-add -l -E sha256 2>/dev/null | /usr/bin/grep -Fq "$fingerprint"; then
+  exit 0
+fi
+exec /usr/bin/ssh-add -S /usr/lib/ssh-keychain.dylib "$key"</string>
   </array>
   <key>RunAtLoad</key>
   <true/>

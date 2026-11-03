@@ -68,125 +68,6 @@ function detect_os {
   fi
 }
 
-function ssh_keygen {
-  command ssh-keygen "$@"
-}
-
-# Keep this paired with ssh_keygen when a platform selects another OpenSSH.
-function ssh_version {
-  command ssh -V
-}
-
-function ssh_supports_touch_policy {
-  local version
-  version="$(ssh_version 2>&1)"
-  [[ "$version" =~ OpenSSH_([0-9]+)\.([0-9]+) ]] || return 1
-  (( BASH_REMATCH[1] > 10 || (BASH_REMATCH[1] == 10 && BASH_REMATCH[2] >= 5) ))
-}
-
-function signing_key_fingerprints {
-  cat "$SCRIPT_DIR/ssh-key.fingerprints"
-  local extra="$HOME/.config/git/signing-key.fingerprints"
-  if [[ -r "$extra" ]]; then
-    printf '\n'
-    cat "$extra"
-  fi
-}
-
-function recover_ssh_keys (
-  local answer pub fingerprint name key recovery_dir expected key_type
-  local needs_recovery=false
-  local -a recovered_keys=()
-  umask 077
-  mkdir -p "$HOME/.ssh"
-  cd "$HOME/.ssh"
-
-  # Recognize handles already downloaded locally before considering recovery.
-  for pub in *.pub; do
-    [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
-    fingerprint="$(ssh_keygen -lf "$pub" -E sha256 2>/dev/null | awk '{print $2}')" || continue
-    name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' < <(signing_key_fingerprints))"
-    [[ -n "$name" ]] || continue
-    key="${pub%.pub}"
-    [[ "$key" == "$name" ]] && continue
-    # Preserve existing aliases and their local signing policy.
-    [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]] && continue
-    mv "$key" "$name"
-    mv "$pub" "$name.pub"
-  done
-
-  while read -r name fingerprint; do
-    [[ -z "$name" || "$name" == \#* ]] && continue
-    if [[ ! -e "$name" && ! -L "$name" ]]; then
-      needs_recovery=true
-    elif [[ ! -r "$name" ]]; then
-      apparatus_warning "warning: signing handle $name is unreadable; existing files preserved."
-    fi
-    if [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]]; then
-      expected="$fingerprint"
-      fingerprint="$(ssh_keygen -lf "$name.pub" -E sha256 2>/dev/null | awk '{print $2}')" || fingerprint=
-      if [[ "$fingerprint" != "$expected" ]]; then
-        apparatus_warning "warning: $name has a missing or mismatched public fingerprint; existing files preserved."
-      fi
-    fi
-  done < <(signing_key_fingerprints)
-
-  if [[ "$needs_recovery" != true && "${FORCE_RECOVER_KEYS:-0}" != 1 ]]; then
-    apparatus_message 'Signing handles already exist locally; skipping YubiKey recovery.'
-    return 0
-  fi
-  if [[ "${YUBIKEY_NONINTERACTIVE:-0}" == 1 ]] || ! { exec 3<> /dev/tty; } 2> /dev/null; then
-    apparatus_warning 'warning: YubiKey recovery requires a terminal; rerun --recover-keys-only interactively.'
-    return 0
-  fi
-  apparatus_prompt 'Recover SSH keys from your YubiKey? [y/N] '
-  read -r answer <&3 2>&3 || return 0
-  [[ "$answer" == y || "$answer" == Y || "$answer" == yes ]] || return 0
-  apparatus_prompt 'Plug in your YubiKey and press Enter when ready. '
-  read -r answer <&3 2>&3 || return 0
-
-  # Download all resident credentials in isolation, then import only configured
-  # handles. Missing-key recovery must not replace existing local handles.
-  recovery_dir="$(mktemp -d)"
-  trap 'rm -rf -- "$recovery_dir"' EXIT
-  (cd "$recovery_dir" && ssh_keygen -K <&3 >&3 2>&3) || return 1
-  for pub in "$recovery_dir"/*.pub; do
-    [[ -f "$pub" && -f "${pub%.pub}" ]] || continue
-    fingerprint="$(ssh_keygen -lf "$pub" -E sha256 2>/dev/null | awk '{print $2}')" || continue
-    name="$(awk -v fp="$fingerprint" '$2 == fp {print $1; exit}' < <(signing_key_fingerprints))"
-    [[ -n "$name" ]] || continue
-    if [[ "${FORCE_RECOVER_KEYS:-0}" != 1 ]] && { [[ -e "$name" || -L "$name" || -e "$name.pub" || -L "$name.pub" ]]; }; then
-      apparatus_message "Preserving existing signing files for $name."
-      continue
-    fi
-    mv -f "${pub%.pub}" "$name"
-    mv -f "$pub" "$name.pub"
-    recovered_keys+=("$name")
-  done
-
-  if (( ${#recovered_keys[@]} )); then
-    if ! ssh_supports_touch_policy; then
-      apparatus_warning 'warning: disabling signing-key touch requires OpenSSH 10.5 or newer; recovered handles still require touch.'
-    else
-      for name in "${recovered_keys[@]}"; do
-        key_type="$(awk 'NR == 1 {print $1}' "$name.pub")"
-        [[ "$key_type" == sk-* ]] || continue
-        apparatus_message "Disabling touch for signing handle $name; reuse its passphrase when prompted to keep it."
-        if ! ssh_keygen -p -O no-touch-required -f "$name" <&3 >&3 2>&3; then
-          apparatus_warning "warning: could not disable touch for $name."
-          return 1
-        fi
-      done
-    fi
-  fi
-  while read -r name fingerprint; do
-    [[ -z "$name" || "$name" == \#* ]] && continue
-    if [[ ! -r "$name" ]]; then
-      apparatus_warning "warning: signing handle $name is missing or unreadable. Signing remains enabled."
-    fi
-  done < <(signing_key_fingerprints)
-)
-
 function ensure_github_auth_key {
   local key_path="${HOME}/.ssh/id_ed25519_github"
   local answer
@@ -324,16 +205,6 @@ function parse_opts {
         ALL=
         shift
         ;;
-      --force-recover-keys)
-        FORCE_RECOVER_KEYS=1
-        shift
-        ;;
-      --recover-keys-only)
-        RECOVER_KEYS_ONLY=1
-        FORCE_RECOVER_KEYS=1
-        ALL=
-        shift
-        ;;
       --unstow-only)
         UNSTOW_ONLY=1
         ALL=
@@ -371,23 +242,20 @@ function main {
 
   # Platform configuration owns these opt-in flags; do not inherit them from the
   # environment when the installer is invoked.
-  unset MANAGE_PERSONAL_GIT_AND_SSH MANAGE_YUBIKEY_SIGNING_KEYS
+  MANAGE_GITHUB_SSH_AUTH=false
   source "$platform_dir/config"
-
-  if [ -n "$RECOVER_KEYS_ONLY" ]; then
-    [[ "${MANAGE_PERSONAL_GIT_AND_SSH:-false}" == true ]] && recover_ssh_keys
-    return
-  fi
 
   if [ -n "$ALL" ]; then
     [ -f "$platform_dir/pre-install.sh" ] && source "$platform_dir/pre-install.sh"
     install_packages "$platform_dir"
-    if [[ "${MANAGE_PERSONAL_GIT_AND_SSH:-false}" == true ]]; then
+    if [[ "$MANAGE_GITHUB_SSH_AUTH" == true ]]; then
       ensure_github_auth_key
-      if [[ "${MANAGE_YUBIKEY_SIGNING_KEYS:-true}" == true || "${FORCE_RECOVER_KEYS:-0}" == 1 ]]; then
-        recover_ssh_keys
-      fi
       configure_apparatus_remote
+    fi
+    if [[ -f "$platform_dir/git-signing.sh" ]]; then
+      if ! bash "$platform_dir/git-signing.sh"; then
+        apparatus_warning "warning: Git signing setup failed; rerun bash platforms/$DETECTED_OS/git-signing.sh."
+      fi
     fi
     clone_repos "$platform_dir/repos"
     create_links "$platform_dir/links" "${APPARATUS_BIN_DIR:-/usr/local/bin}"
