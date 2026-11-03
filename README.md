@@ -57,7 +57,10 @@ From an existing checkout:
 # unstow dotfiles
 ./install.sh --unstow-only
 
-# recover resident SSH keys and create their configured aliases only
+# full install, offering recovery even when signing handles already exist
+./install.sh --force-recover-keys
+
+# force resident SSH key recovery and create their configured aliases only
 ./install.sh --recover-keys-only
 ```
 
@@ -90,7 +93,25 @@ Public fingerprints in `ssh-key.fingerprints` identify resident signing keys.
 An optional `~/.config/git/signing-key.fingerprints` can supply additional
 alias/fingerprint pairs without putting them in this repository.
 
-Existing aliases are preserved; a missing or mismatched fingerprint only warns.
+Normal installation offers YubiKey recovery only when a configured signing
+handle is missing locally. Already-downloaded handles are matched by fingerprint
+and renamed to their configured aliases first. Recovery downloads credentials
+into a temporary directory and imports only missing configured handles, preserving
+existing handles and their touch settings. `--force-recover-keys` offers recovery
+even when all handles exist and allows replacing configured handles;
+`--recover-keys-only` also forces recovery. Both retain the recovery confirmation.
+Unlisted credentials are not imported, and existing unlisted local files are left
+alone. Incomplete local key pairs are preserved rather than overwritten during
+normal recovery; use forced recovery to replace them.
+
+After recovery, Apparatus disables touch only for newly imported FIDO signing
+handles, including those in the optional manifest. This requires OpenSSH
+10.5 or newer; older versions warn and leave the touch policy unchanged. The
+interactive step asks for the handle's old and new passphrase; reuse the same
+passphrase to preserve it. It changes only the local handle, so recovery on each
+machine must repeat it. GitHub authentication keys are unaffected. If a handle
+is already loaded in an SSH agent, remove and reload it to use the changed policy.
+
 Recovery is skipped without a controlling terminal or with
 `YUBIKEY_NONINTERACTIVE=1`. Missing signing keys never disable signing. On an
 opted-in platform, use `--recover-keys-only` to repeat recovery without installing

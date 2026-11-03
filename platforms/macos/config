@@ -19,3 +19,7 @@ function install_npm_packages {
 function ssh_keygen {
   "$(brew --prefix openssh)/bin/ssh-keygen" "$@"
 }
+
+function ssh_version {
+  "$(brew --prefix openssh)/bin/ssh" -V
+}
