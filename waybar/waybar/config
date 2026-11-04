@@ -99,6 +99,7 @@
   },
   "custom/kerberos-status": {
     "exec": "$HOME/.config/waybar/custom/kerberos-status/kerberos-status.sh",
+    "on-click": "$HOME/.config/waybar/custom/kerberos-status/kerberos-status.sh",
     "return-type": "json",
     "interval": "once",
     "signal": 8,
