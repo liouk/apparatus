@@ -120,3 +120,4 @@ for conf in "$HOME"/.zsh/conf.d/*.(zsh|sh)(N); do
 done
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$(go env GOPATH)/bin:$PATH"
