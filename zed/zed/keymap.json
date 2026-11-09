@@ -2,7 +2,8 @@
 	{
 		"bindings": {
 			"cmd-enter": null,
-			"ctrl-h": [
+			"ctrl-h": "agent::ToggleFocus",
+			"ctrl-shift-h": [
 				"action::Sequence",
 				[
 					["agent::SelectAgent", { "agent": "codex-acp" }],
@@ -36,7 +37,6 @@
 			"ctrl-a d": "diagnostics::Deploy",
 			"ctrl-a l": "project_symbols::Toggle",
 			"ctrl-a m": "terminal_panel::ToggleFocus",
-			"ctrl-a t": "workspace::NewCenterTerminal",
 			"ctrl-a [": "editor::MoveToEndOfPreviousExcerpt",
 			"ctrl-a ]": "editor::MoveToStartOfNextExcerpt",
 			"ctrl-f": "workspace::ToggleZoom",
@@ -91,6 +91,7 @@
 	{
 		"context": "Terminal",
 		"bindings": {
+			"ctrl-h": "agent::ToggleFocus",
 			"ctrl-a": ["terminal::SendKeystroke", "ctrl-a"],
 			"ctrl-e": ["terminal::SendKeystroke", "ctrl-e"],
 			"ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
@@ -176,6 +177,7 @@
 		"bindings": {
 			"shift-alt-a": null,
 			"shift-alt-o": "agent::AllowOnce",
+			"ctrl-enter": "agent::AllowOnce",
 			"shift-alt-q": "agent::AllowAlways",
 			"shift-alt-x": "agent::RejectOnce",
 		},
@@ -184,8 +186,7 @@
 		"context": "AgentPanel || (AgentPanel > Editor) || AcpThread || (AcpThread > Editor)",
 		"bindings": {
 			"ctrl-n": ["agent::NewExternalAgentThread", { "agent": "codex-acp" }],
-			"ctrl-j": "terminal_panel::ToggleFocus",
-			"ctrl-l": "multi_workspace::ToggleWorkspaceSidebar",
+			"ctrl-h": "agent::ToggleFocus",
 			"ctrl-]": "workspace::ToggleRightDock",
 		},
 	},
@@ -193,14 +194,41 @@
 		"context": "((AcpThread > Editor) || (MessageEditor > Editor)) && !Picker && !menu",
 		"bindings": {
 			"enter": ["action::Sequence", ["agent::Chat", "workspace::Unfollow"]],
-			"ctrl-enter": "agent::ChatWithFollow",
+			"ctrl-enter": "agent::AllowOnce",
 		},
 	},
 	{
 		"context": "ThreadsSidebar || (ThreadsSidebar > Editor)",
 		"bindings": {
-			"ctrl-l": "multi_workspace::ToggleWorkspaceSidebar",
 			"escape": "multi_workspace::ToggleWorkspaceSidebar",
+		},
+	},
+	{
+		"context": "AgentPanel",
+		"bindings": {
+			"ctrl-shift-n": "agent::NewTerminalThread",
+			"ctrl-a t": "agents_sidebar::ToggleThreadSwitcher",
+		},
+	},
+	{
+		"context": "ThreadSwitcher",
+		"bindings": {
+			"down": "agents_sidebar::ToggleThreadSwitcher",
+			"up": ["agents_sidebar::ToggleThreadSwitcher", { "select_last": true }],
+			"ctrl-j": "agents_sidebar::ToggleThreadSwitcher",
+			"ctrl-k": ["agents_sidebar::ToggleThreadSwitcher", { "select_last": true }],
+		},
+	},
+	{
+		"context": "AgentPanel > Terminal",
+		"bindings": {
+			"ctrl-h": "agent::ToggleFocus",
+		},
+	},
+	{
+		"context": "(left_dock == TerminalPanel || right_dock == TerminalPanel || bottom_dock == TerminalPanel) > (AgentPanel || AcpThread || ((AgentPanel || AcpThread) > (Editor || Terminal)))",
+		"bindings": {
+			"ctrl-h": "terminal_panel::ToggleFocus",
 		},
 	},
 ]
