@@ -211,6 +211,12 @@
 		},
 	},
 	{
+		"context": "AgentPanel > Editor",
+		"bindings": {
+			"ctrl-shift-n": "agent::NewTerminalThread",
+		},
+	},
+	{
 		"context": "ThreadSwitcher",
 		"bindings": {
 			"down": "agents_sidebar::ToggleThreadSwitcher",
