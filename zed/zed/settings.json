@@ -132,7 +132,7 @@
 	},
 	"agent": {
 		"enabled": true,
-		"terminal_init_command": "codex",
+		"terminal_init_command": "codex resume",
 		"expand_terminal_card": false,
 		"expand_edit_card": false,
 		"thinking_display": "always_collapsed",
