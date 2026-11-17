@@ -38,11 +38,9 @@ them. `--stow-only` does not install packages or recover signing keys.
 
 ## Git and SSH keys
 
-Git commit signing uses SSH keys. The shared personal identity is in
-`git/.config/git/personal`. The main Git config includes optional
-`~/.config/git/local.conf` for machine-specific settings and
-`~/.config/git/signing.conf` for platform signing settings. Repository-local
-config can override these defaults.
+Git's shared name and email are in `git/.gitconfig`. Platform setup writes the
+signing key path and SSH program to `~/.config/git/signing.conf`, which the main
+Git config includes. Repository-local config can override these defaults.
 
 On Fedora, the full installer recovers the resident signing key from the YubiKey.
 On macOS, it recovers the Secure Enclave handle and loads it into Apple's SSH
@@ -60,12 +58,13 @@ bash platforms/macos/git-signing.sh   # Secure Enclave
 The Fedora handle is expected at
 `~/.ssh/id_ed25519_sk_git_signing_personal`; rename the recovered key and its
 `.pub` file if OpenSSH uses another name. The macOS handle is expected at
-`~/.ssh/macos-signing/id_ecdsa_sk_rk`. Register each public key with your Git
+`~/.ssh/id_ecdsa_sk_rk_git-signing-airball`. Register each public key with your Git
 hosting service for commit signing. Never commit private handles, PINs, or tokens.
 
-GitHub SSH authentication is separate from commit signing. On Fedora and macOS,
-the full installer offers to create `~/.ssh/id_ed25519_github`. Add its public key
-to GitHub. When the key exists, Apparatus switches its own remote to SSH. SSH
+GitHub SSH authentication is separate from commit signing. Fedora can create
+`~/.ssh/id_ed25519_github`; on macOS, use the Secure Enclave handle at
+`~/.ssh/id_ecdsa_sk_rk_ssh-auth-airball`. Add the corresponding public key to
+GitHub. When the key exists, Apparatus switches its own remote to SSH. SSH
 configs are platform-specific under `platforms/<platform>/stow/ssh/.ssh/config`;
 merge any existing `~/.ssh/config` settings into the relevant platform config
 before stowing it. Re-running `./install.sh --stow-only` replaces the previous

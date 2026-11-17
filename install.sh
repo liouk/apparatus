@@ -68,9 +68,24 @@ function detect_os {
   fi
 }
 
+function github_auth_key_path {
+  if [[ "$DETECTED_OS" == "macos" ]]; then
+    printf '%s\n' "$HOME/.ssh/id_ecdsa_sk_rk_ssh-auth-airball"
+  else
+    printf '%s\n' "$HOME/.ssh/id_ed25519_github"
+  fi
+}
+
 function ensure_github_auth_key {
-  local key_path="${HOME}/.ssh/id_ed25519_github"
-  local answer
+  local key_path answer
+  key_path="$(github_auth_key_path)"
+  if [[ "$DETECTED_OS" == "macos" ]]; then
+    if [[ -r "$key_path" && -r "$key_path.pub" ]]; then
+      return 0
+    fi
+    apparatus_warning "macOS Secure Enclave GitHub auth key is missing; create $key_path and add its public key to GitHub."
+    return 0
+  fi
   [[ -r "$key_path" && -r "$key_path.pub" ]] && return 0
   if [[ -e "$key_path" || -e "$key_path.pub" ]]; then
     apparatus_warning "GitHub SSH key files are incomplete; existing files preserved."
@@ -89,11 +104,12 @@ function ensure_github_auth_key {
 }
 
 function configure_apparatus_remote {
-  local remote_url
+  local remote_url key_path
+  key_path="$(github_auth_key_path)"
   remote_url="$(git -C "$SCRIPT_DIR" remote get-url origin 2>/dev/null || true)"
   case "$remote_url" in
     https://github.com/liouk/apparatus|https://github.com/liouk/apparatus.git)
-      [[ -r "$HOME/.ssh/id_ed25519_github" ]] || return 0
+      [[ -r "$key_path" && -r "$key_path.pub" ]] || return 0
       git -C "$SCRIPT_DIR" remote set-url origin git@github.com:liouk/apparatus.git
       apparatus_message "Switched the Apparatus remote to SSH."
       ;;
@@ -147,13 +163,25 @@ function do_stow {
 
 function remove_legacy_shared_ssh_config_link {
   local config_path="$HOME/.ssh/config"
-  local link_target link_dir target_dir resolved_target apparatus_dir
+  local link_target link_dir target_parent target_dir missing_suffix resolved_target apparatus_dir parent
 
   [[ -L "$config_path" ]] || return 0
   link_target="$(readlink "$config_path")"
   link_dir="$(cd "$(dirname "$config_path")" && pwd -P)"
-  target_dir="$(cd "$link_dir" && cd "$(dirname "$link_target")" && pwd -P 2>/dev/null)" || return 0
-  resolved_target="$target_dir/$(basename "$link_target")"
+  if [[ "$link_target" == /* ]]; then
+    target_parent="$(dirname "$link_target")"
+  else
+    target_parent="$link_dir/$(dirname "$link_target")"
+  fi
+  missing_suffix=''
+  while [[ ! -d "$target_parent" ]]; do
+    parent="$(dirname "$target_parent")"
+    [[ "$parent" == "$target_parent" ]] && return 0
+    missing_suffix="/$(basename "$target_parent")$missing_suffix"
+    target_parent="$parent"
+  done
+  target_dir="$(cd "$target_parent" && pwd -P 2>/dev/null)" || return 0
+  resolved_target="$target_dir$missing_suffix/$(basename "$link_target")"
   apparatus_dir="$(cd "$SCRIPT_DIR" && pwd -P)"
 
   if [[ "$resolved_target" == "$apparatus_dir/ssh/.ssh/config" ]]; then

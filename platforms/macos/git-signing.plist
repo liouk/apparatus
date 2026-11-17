@@ -10,7 +10,7 @@
   <array>
     <string>/bin/sh</string>
     <string>-c</string>
-    <string>key="$HOME/.ssh/macos-signing/id_ecdsa_sk_rk"
+    <string>key="$HOME/.ssh/id_ecdsa_sk_rk_git-signing-airball"
 if [ ! -r "$key" ]; then
   exit 0
 fi

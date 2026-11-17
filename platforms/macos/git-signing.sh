@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-key="$HOME/.ssh/macos-signing/id_ecdsa_sk_rk"
+key="$HOME/.ssh/id_ecdsa_sk_rk_git-signing-airball"
 config="$HOME/.config/git/signing.conf"
 
 mkdir -p "$(dirname "$key")" "$HOME/.config/git"

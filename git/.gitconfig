@@ -1,5 +1,6 @@
 [user]
   name = Ilias Rinis
+  email = iliasr@gmail.com
 
 [core]
   editor = nvim
@@ -100,8 +101,5 @@
 	prune = true
 
 [include]
-  path = ~/.config/git/personal
-  # Optional machine-specific settings and identity routing.
-  path = ~/.config/git/local.conf
-  # Platform signing settings apply after identity routing.
+  # Signing key and SSH provider are written by the platform setup script.
   path = ~/.config/git/signing.conf
