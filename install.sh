@@ -146,6 +146,23 @@ function do_stow {
   popd > /dev/null
 }
 
+function remove_legacy_shared_ssh_config_link {
+  local config_path="$HOME/.ssh/config"
+  local link_target link_dir target_dir resolved_target apparatus_dir
+
+  [[ -L "$config_path" ]] || return 0
+  link_target="$(readlink "$config_path")"
+  link_dir="$(cd "$(dirname "$config_path")" && pwd -P)"
+  target_dir="$(cd "$link_dir" && cd "$(dirname "$link_target")" && pwd -P 2>/dev/null)" || return 0
+  resolved_target="$target_dir/$(basename "$link_target")"
+  apparatus_dir="$(cd "$SCRIPT_DIR" && pwd -P)"
+
+  if [[ "$resolved_target" == "$apparatus_dir/ssh/.ssh/config" ]]; then
+    rm "$config_path"
+    apparatus_message "replacing the legacy shared SSH config link"
+  fi
+}
+
 function clone_repos {
   local repos_file="$1"
   local target_spec target_dir git_url remainder
@@ -263,10 +280,12 @@ function main {
   fi
 
   if [ -n "$ALL" ] || [ -n "$STOW_ONLY" ]; then
+    remove_legacy_shared_ssh_config_link
     do_stow --restow "$SCRIPT_DIR" "$platform_dir/stow-targets"
   fi
 
   if [ -n "$UNSTOW_ONLY" ]; then
+    remove_legacy_shared_ssh_config_link
     do_stow --delete "$SCRIPT_DIR" "$platform_dir/stow-targets"
   fi
 

@@ -65,9 +65,11 @@ hosting service for commit signing. Never commit private handles, PINs, or token
 
 GitHub SSH authentication is separate from commit signing. On Fedora and macOS,
 the full installer offers to create `~/.ssh/id_ed25519_github`. Add its public key
-to GitHub. When the key exists, Apparatus switches its own remote to SSH. The
-shared SSH config is in `ssh/`; if you already have `~/.ssh/config`, merge its
-GitHub block manually.
+to GitHub. When the key exists, Apparatus switches its own remote to SSH. SSH
+configs are platform-specific under `platforms/<platform>/stow/ssh/.ssh/config`;
+merge any existing `~/.ssh/config` settings into the relevant platform config
+before stowing it. Re-running `./install.sh --stow-only` replaces the previous
+shared SSH config link with the selected platform config.
 
 ## Fedora
 
