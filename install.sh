@@ -130,7 +130,6 @@ function do_stow {
   while IFS=: read -r target package layout; do
     case "$target" in
       HOME) target="$HOME" ;;
-      CODEX) target="${CODEX_HOME:-$HOME/.codex}"; mkdir -p "$target" ;;
       *) target="$HOME/$target" ;;
     esac
     stow_options=()

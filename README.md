@@ -95,22 +95,6 @@ as your normal user and restart Zed:
 curl -fsSL https://zed.dev/install.sh | sh
 ```
 
-## Codex and Zed
-
-Stow links `codex/AGENTS.md` into `~/.codex/AGENTS.md` (or `$CODEX_HOME`). Restart
-Codex after changing it. `AGENTS.override.md` in that directory takes precedence;
-see the [instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
-
-Zed uses the registry-managed Codex ACP adapter. To apply Apparatus's local
-command-title patch, run:
-
-```sh
-bash ~/.config/zed/apply-codex-acp-show-command-patch.sh
-```
-
-Restart Zed afterwards. Registry updates can overwrite the patch; reapply it
-after an update, or adapt it if upstream has changed.
-
 ## Adding a platform
 
 Create `platforms/<os-id>/`, using the Linux `ID` from `/etc/os-release` or

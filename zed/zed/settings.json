@@ -1,15 +1,5 @@
 {
 	// general
-	"agent_servers": {
-		"codex-acp": {
-			"default_config_options": {
-				"model": "gpt-5.6-terra",
-				"mode": "read-only",
-				"reasoning_effort": "medium",
-			},
-			"type": "registry",
-		},
-	},
 	"diff_view_style": "unified",
 	"cli_default_open_behavior": "new_window",
 	"git_panel": {
@@ -142,6 +132,7 @@
 	},
 	"agent": {
 		"enabled": true,
+		"terminal_init_command": "codex",
 		"expand_terminal_card": false,
 		"expand_edit_card": false,
 		"thinking_display": "always_collapsed",

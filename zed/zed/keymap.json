@@ -3,13 +3,6 @@
 		"bindings": {
 			"cmd-enter": null,
 			"ctrl-h": "agent::ToggleFocus",
-			"ctrl-shift-h": [
-				"action::Sequence",
-				[
-					["agent::SelectAgent", { "agent": "codex-acp" }],
-					"agent::ToggleFocus",
-				],
-			],
 			"ctrl-m": "workspace::ToggleBottomDock",
 			"ctrl-p": "file_finder::Toggle",
 			"ctrl-s": "workspace::SaveWithoutFormat",
@@ -185,7 +178,6 @@
 	{
 		"context": "AgentPanel || (AgentPanel > Editor) || AcpThread || (AcpThread > Editor)",
 		"bindings": {
-			"ctrl-n": ["agent::NewExternalAgentThread", { "agent": "codex-acp" }],
 			"ctrl-h": "agent::ToggleFocus",
 			"ctrl-]": "workspace::ToggleRightDock",
 		},
