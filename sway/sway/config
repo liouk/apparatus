@@ -45,7 +45,7 @@ set $skratch $term --app-id=skratch -e env TERMINAL_COMMAND='$term -e' $local_bi
 
 # glone
 for_window [app_id="^glone$"] floating enable, sticky enable, resize set 50 ppt 70 ppt
-set $glone $term --app-id=glone -e env TERMINAL_COMMAND='$term -e' $local_bin/glone
+set $glone $term --app-id=glone -e zsh -lic '$local_bin/glone'
 
 # rename-workspace
 for_window [app_id="^rename-ws$"] floating enable, sticky enable, resize set 30 ppt 10 ppt
