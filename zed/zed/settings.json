@@ -160,11 +160,6 @@
 			},
 			"initialization_options": {
 				"diagnosticsTrigger": "Save",
-				"codelenses": {
-					"test": false,
-					"generate": true,
-					"tidy": true,
-				},
 				"analyses": {
 					"unusedparams": false,
 					"shadow": false,
