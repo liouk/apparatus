@@ -11,7 +11,7 @@ set main-view = \
 set main-view-date-format = "%Y-%m-%d %H:%M"
 
 # Copy Commit SHA to clipboard
-bind generic 9 !@bash -c "echo -n %(commit) | wl-copy"
+bind generic 9 !@bash -c "echo -n %(commit) | case $(uname -s) in Darwin) pbcopy ;; *) wl-copy ;; esac"
 
 # Open commit on GitHub
 bind generic ( !@bash -c "gh browse %(commit)"
