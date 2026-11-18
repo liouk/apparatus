@@ -27,6 +27,7 @@
 	{
 		"context": "Workspace",
 		"bindings": {
+			"ctrl-shift-n": "agent::NewTerminalThread",
 			"ctrl-a d": "diagnostics::Deploy",
 			"ctrl-a l": "project_symbols::Toggle",
 			"ctrl-a m": "terminal_panel::ToggleFocus",
@@ -196,31 +197,23 @@
 		},
 	},
 	{
-		"context": "AgentPanel",
-		"bindings": {
-			"ctrl-shift-n": "agent::NewTerminalThread",
-			"ctrl-a t": "agents_sidebar::ToggleThreadSwitcher",
-		},
-	},
-	{
-		"context": "AgentPanel > Editor",
-		"bindings": {
-			"ctrl-shift-n": "agent::NewTerminalThread",
-		},
-	},
-	{
 		"context": "ThreadSwitcher",
 		"bindings": {
 			"down": "agents_sidebar::ToggleThreadSwitcher",
 			"up": ["agents_sidebar::ToggleThreadSwitcher", { "select_last": true }],
 			"ctrl-j": "agents_sidebar::ToggleThreadSwitcher",
-			"ctrl-k": ["agents_sidebar::ToggleThreadSwitcher", { "select_last": true }],
+			"ctrl-k": [
+				"agents_sidebar::ToggleThreadSwitcher",
+				{ "select_last": true },
+			],
 		},
 	},
 	{
 		"context": "AgentPanel > Terminal",
 		"bindings": {
 			"ctrl-h": "agent::ToggleFocus",
+			"ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+			"ctrl-]": "workspace::ToggleRightDock",
 		},
 	},
 	{
