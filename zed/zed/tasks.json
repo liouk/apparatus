@@ -1,7 +1,7 @@
 [
 	{
 		"label": "open all git-modified files",
-		"command": "zed $(git status -s | awk '{ if ($1 == \"M\") print $2 }')",
+		"command": "set -o pipefail\nroot=$(git rev-parse --show-toplevel) && cd -- \"$root\" || exit 1\ngit status --porcelain=v1 -z --no-renames --untracked-files=no | (\n  files=()\n  while IFS= read -r -d '' entry; do\n    filename=${entry:3}\n    if [[ ${entry:0:2} == *M* && -f \"$filename\" ]]; then\n      files+=(\"$filename\")\n    fi\n  done\n  if (( ${#files[@]} )); then\n    zed -- \"${files[@]}\"\n  fi\n)",
 		"use_new_terminal": true,
 		"reveal": "never",
 		"hide": "always",
@@ -9,7 +9,7 @@
 	},
 	{
 		"label": "github: open commit",
-		"command": "repo=$(git remote get-url origin | sed -E 's#^(https?://|ssh://git@|git@)github\\.com[:/]##; s#\\.git$##') && sha=$(git blame -L $ZED_ROW,$ZED_ROW --porcelain $ZED_FILE | head -1 | awk '{print $1}') && gh browse --repo \"$repo\" \"$sha\"",
+		"command": "set -o pipefail\nblame=$(git blame -L \"$ZED_ROW,$ZED_ROW\" --porcelain -- \"$ZED_FILE\") || exit 1\nsha=${blame%% *}\nif [[ $sha != *[!0]* ]]; then\n  printf '%s\\n' 'The selected line is uncommitted.' >&2\n  exit 1\nfi\nrepo=$(git remote get-url origin | sed -E 's#^(https?://|ssh://git@|git@)github\\.com[:/]##; s#\\.git$##') || exit 1\ngh browse --repo \"$repo\" \"$sha\"",
 		"use_new_terminal": true,
 		"reveal": "never",
 		"hide": "on_success",
@@ -17,7 +17,7 @@
 	},
 	{
 		"label": "github: open PR",
-		"command": "repo=$(git remote get-url origin | sed -E 's#^(https?://|ssh://git@|git@)github\\.com[:/]##; s#\\.git$##') && sha=$(git blame -L $ZED_ROW,$ZED_ROW --porcelain $ZED_FILE | head -1 | awk '{print $1}') && url=$(gh api \"repos/$repo/commits/$sha/pulls\" --jq '.[0].html_url') && if [ -n \"$url\" ]; then xdg-open \"$url\"; else echo \"No pull request found for commit $sha\" >&2; exit 1; fi",
+		"command": "set -o pipefail\nblame=$(git blame -L \"$ZED_ROW,$ZED_ROW\" --porcelain -- \"$ZED_FILE\") || exit 1\nsha=${blame%% *}\nif [[ $sha != *[!0]* ]]; then\n  printf '%s\\n' 'The selected line is uncommitted.' >&2\n  exit 1\nfi\nrepo=$(git remote get-url origin | sed -E 's#^(https?://|ssh://git@|git@)github\\.com[:/]##; s#\\.git$##') || exit 1\nurl=$(gh api \"repos/$repo/commits/$sha/pulls\" --jq '.[0].html_url') || exit 1\nif [ -z \"$url\" ] || [ \"$url\" = null ]; then\n  printf 'No pull request found for commit %s\\n' \"$sha\" >&2\n  exit 1\nfi\ncase $(uname -s) in\n  Darwin) open \"$url\" ;;\n  *) xdg-open \"$url\" ;;\nesac",
 		"use_new_terminal": true,
 		"reveal": "never",
 		"hide": "on_success",
@@ -33,7 +33,7 @@
 	},
 	{
 		"label": "copy symbol reference",
-		"command": "echo -n \"$ZED_RELATIVE_FILE:$ZED_ROW:$ZED_SYMBOL\" | wl-copy",
+		"command": "printf '%s' \"$ZED_RELATIVE_FILE:$ZED_ROW:$ZED_SYMBOL\" | case $(uname -s) in Darwin) pbcopy ;; *) wl-copy ;; esac",
 		"use_new_terminal": true,
 		"reveal": "never",
 		"hide": "always",

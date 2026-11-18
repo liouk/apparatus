@@ -65,14 +65,9 @@
 		},
 	},
 	{
-		"context": "ProjectPanel",
-		"bindings": {
-			"escape": "workspace::ToggleLeftDock",
-		},
-	},
-	{
 		"context": "ProjectPanel && not_editing",
 		"bindings": {
+			"escape": "workspace::ToggleLeftDock",
 			", d": "project_panel::Toggle",
 			"q": "workspace::ToggleLeftDock",
 			"a": "project_panel::NewFile",
@@ -97,7 +92,6 @@
 			"ctrl-[": ["terminal::SendKeystroke", "ctrl-["],
 			"ctrl-]": ["terminal::SendKeystroke", "ctrl-]"],
 			"ctrl-a m": "terminal_panel::ToggleFocus",
-			"ctrl-a e": "pane::SplitAndMoveRight",
 		},
 	},
 	{
@@ -119,7 +113,6 @@
 			"ctrl-k": "pane::ActivatePreviousItem",
 			"ctrl-j": "pane::ActivateNextItem",
 			"ctrl-e": "pane::SplitAndMoveRight",
-			"ctrl-a e": "pane::JoinIntoNext",
 			"ctrl-enter": "markdown::OpenPreviewToTheSide",
 			"ctrl-shift-e": "pane::JoinIntoNext",
 			"ctrl-shift-w": "pane::JoinAll",
